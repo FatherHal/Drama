@@ -1,5 +1,8 @@
 {% extends "default.html" %}
 
+<div class="w-full overflow-y-auto">
+	<div class="container mx-auto grid grid-cols-12" id="main-content-row">
+
 {% block desktopBanner %}
 
 <div class="row" style="overflow: visible;padding-top:5px;">
@@ -131,6 +134,9 @@
 	</ul>
 </nav>
 {% endif %}
+
+</div>
+</div>
 
 {% if v %}
 	<script src="https://js.pusher.com/beams/1.0/push-notifications-cdn.js"></script>
