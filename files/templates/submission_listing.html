@@ -114,7 +114,7 @@
 	</div>
 {% endif %}
 
-<div id="post-{{p.id}}" class="card{% if p.is_banned %} banned{% endif %}{% if p.deleted_utc %} deleted{% endif %}{% if p.stickied %} stickied{% endif %}{% if voted==1 %} upvoted{% elif voted==-1 %} downvoted{% endif %}{% if p.over_18 %} nsfw{% endif %}{% if p.award_count('stab') %} blood{% endif %}{% if p.award_count('upsidedown') %} upsidedown{% endif %}{% if p.award_count('haunt') %} haunt{% endif %}">
+<li id="post-{{p.id}}" class="card{% if p.is_banned %} banned{% endif %}{% if p.deleted_utc %} deleted{% endif %}{% if p.stickied %} stickied{% endif %}{% if voted==1 %} upvoted{% elif voted==-1 %} downvoted{% endif %}{% if p.over_18 %} nsfw{% endif %}{% if p.award_count('stab') %} blood{% endif %}{% if p.award_count('upsidedown') %} upsidedown{% endif %}{% if p.award_count('haunt') %} haunt{% endif %}">
 
 	{% if p.award_count('upsidedown') %}
 		<div class="lights"></div>
@@ -489,7 +489,7 @@
 	</div>
 </div>
 
-</div>
+</li>
 
 {% if not p.club or v and v.paid_dues %}
 	{% if p.realbody(v) %}
