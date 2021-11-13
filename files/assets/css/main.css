@@ -5652,9 +5652,19 @@ blockquote p {
   color: #ffabab !important;
 }
 
-/*@media (min-width: 992px) {
-  .banner {
-    margin-top: 10px !important;
+.mirrored {
+  transform: scaleX(-1);-webkit-transform: scaleX(-1);
+}
+
+@media (max-width: 768px) {
+  .popover-bio * {
+    font-size: 0.8rem !important;
   }
-}*/
+}
+
+@media (min-width: 768px) {
+  .popover-bio * {
+    font-size: 1rem !important;
+  }
+}
 
