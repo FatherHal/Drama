@@ -794,28 +794,28 @@ fieldset:disabled a.btn {
 .btn-secondary {
   color: #fff;
   background-color: var(--secondary);
-  border-color: var(--gray-400)
+  border-color: var(--gray-400);
 }
 .btn-secondary:hover {
   color: #fff;
-  background-color: var(--gray-200)
-  border-color: var(--gray-300)
+  background-color: var(--gray-200);
+  border-color: var(--gray-300);
 }
 .btn-secondary:focus, .btn-secondary.focus {
   color: #fff;
-  background-color: var(--gray-200)
-  border-color: var(--gray-300)
+  background-color: var(--gray-200);
+  border-color: var(--gray-300);
   box-shadow: 0 0 0 0.2rem rgba(130, 138, 145, 0.5);
 }
 .btn-secondary.disabled, .btn-secondary:disabled {
   color: #fff;
-  background-color: var(--gray-100)
-  border-color: var(--gray-200)
+  background-color: var(--gray-100);
+  border-color: var(--gray-200);
 }
 .btn-secondary:not(:disabled):not(.disabled):active, .btn-secondary:not(:disabled):not(.disabled).active, .show > .btn-secondary.dropdown-toggle {
   color: #fff;
-  background-color: var(--gray-200)
-  border-color: var(--gray-300)
+  background-color: var(--gray-200);
+  border-color: var(--gray-300);
 }
 .btn-secondary:not(:disabled):not(.disabled):active:focus, .btn-secondary:not(:disabled):not(.disabled).active:focus, .show > .btn-secondary.dropdown-toggle:focus {
   box-shadow: 0 0 0 0.2rem rgba(130, 138, 145, 0.5);
@@ -2389,46 +2389,6 @@ a.close.disabled {
   vertical-align: middle !important;
 }
 
-.bg-gray-100 {
-  background-color: var(--gray-100) !important;
-}
-
-.bg-gray-200 {
-  background-color: var(--gray-200) !important;
-}
-
-.bg-gray-300 {
-  background-color: var(--gray-300) !important;
-}
-
-.bg-gray-400 {
-  background-color: var(--gray-400) !important;
-}
-
-.bg-gray-500 {
-  background-color: var(--gray-500) !important;
-}
-
-.bg-gray-600 {
-  background-color: var(--gray-600) !important;
-}
-
-.bg-gray-700 {
-  background-color: var(--gray-700) !important;
-}
-
-.bg-gray-800 {
-  background-color: var(--gray-800) !important;
-}
-
-.bg-gray-900 {
-  background-color: var(--gray-900) !important;
-}
-
-.bg-primary {
-  background-color: var(--primary) !important;
-}
-
 a.bg-primary:hover, a.bg-primary:focus,
 button.bg-primary:hover,
 button.bg-primary:focus {
@@ -3391,13 +3351,13 @@ html {
    font-family: "Inter var", sans-serif;
  }
 }
-body {
+/*body {
   color: var(--black);
   padding-top: 49px;
   background-color: var(--gray-700);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-}
+}*/
 
 @media (min-width: 1200px) {
   .container {
