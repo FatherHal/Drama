@@ -2,7 +2,7 @@
 
 {% block desktopBanner %}
 
-<div class="hidden md:flex items-center justify-between col-span-full gap-6 sm:py-6 my-2.5 sm:my-0">
+<div class="flex items-center justify-between col-span-full gap-6 sm:py-6 my-2.5 sm:my-0">
 
 			{% block navbar %}
 			<div class="font-bold py-3">‎</div>
@@ -17,7 +17,7 @@
 						{% if t=="all" %}<i class="fas fa-infinity mr-1"></i>{% endif %}
 						{{t | capitalize}}
 					</button>
-					<div class="dropdown-menu bg-black" aria-labelledby="dropdownMenuButton" x-placement="bottom-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 31px, 0px);">
+					<div class="dropdown-menu bg-black border-white border-opacity-10 shadow-md" aria-labelledby="dropdownMenuButton" x-placement="bottom-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 31px, 0px);">
 						{% if not t=="hour" %}<a class="dropdown-item" href="?sort={{sort}}&t=hour"><i class="fas fa-clock mr-2"></i>Hour</a>{% endif %}
 						{% if not t=="day" %}<a class="dropdown-item" href="?sort={{sort}}&t=day"><i class="fas fa-calendar-day mr-2"></i>Day</a>{% endif %}
 						{% if not t=="week" %}<a class="dropdown-item" href="?sort={{sort}}&t=week"><i class="fas fa-calendar-week mr-2"></i>Week</a>{% endif %}
@@ -37,7 +37,7 @@
 						{% if sort=="comments" %}<i class="fas fa-comments mr-1"></i>{% endif %}
 						{{sort | capitalize}}
 					</button>
-					<div class="dropdown-menu bg-black border-white border-opacity-10" aria-labelledby="dropdownMenuButton" x-placement="bottom-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 31px, 0px);">
+					<div class="dropdown-menu bg-black border-white border-opacity-10 shadow-md" aria-labelledby="dropdownMenuButton" x-placement="bottom-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 31px, 0px);">
 						{% if sort != "hot" %}<a class="dropdown-item" href="?sort=hot&t={{t}}"><i class="fas fa-fire mr-2"></i>Hot</a>{% endif %}
 						{% if sort != "top" %}<a class="dropdown-item" href="?sort=top&t={{t}}"><i class="fas fa-arrow-alt-circle-up mr-2"></i>Top</a>{% endif %}
 						{% if sort != "bottom" %}<a class="dropdown-item" href="?sort=bottom&t={{t}}"><i class="fas fa-arrow-alt-circle-down mr-2"></i>Bottom</a>{% endif %}
@@ -88,7 +88,7 @@
 
 {% block content %}
 
-		<ul class="hidden md:flex flex-col col-span-full sm:py-6 my-2.5 sm:my-0" id="posts">
+		<ul class="flex flex-col col-span-full sm:py-6 my-2.5 sm:my-0" id="posts">
 
 			{% include "submission_listing.html" %}
 
