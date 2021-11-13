@@ -2425,7 +2425,7 @@ button.bg-light:focus {
   background-color: #dae0e5 !important;
 }
 
-.bg-white {
+/*.bg-white {
   background-color: #fff !important;
 }
 
@@ -2447,9 +2447,9 @@ button.bg-light:focus {
 
 .border-left {
   border-left: 1px solid var(--gray-400) !important;
-}
+}*/
 
-.border-0 {
+/*.border-0 {
   border: 0 !important;
 }
 
@@ -2521,7 +2521,7 @@ button.bg-light:focus {
 
 .rounded-circle {
   border-radius: 50% !important;
-}
+}*/
 
 .d-none {
   display: none !important;

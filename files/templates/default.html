@@ -220,7 +220,7 @@
 
  </head>
 
- <body id="{% if request.path != '/comments' %}{% block pagetype %}frontpage{% endblock %}{% endif %}" class="bg-cover bg-center bg-black" style="{% if v and v.background %} background:url(/assets/images/backgrounds/{{v.background}}){% endif %}">
+ <body id="{% if request.path != '/comments' %}{% block pagetype %}frontpage{% endblock %}{% endif %}" class="bg-cover bg-center bg-black text-white antialiased" style="{% if v and v.background %} background:url(/assets/images/backgrounds/{{v.background}}){% endif %}">
 
 {% block Banner %}
 	{% if '@' not in request.path %}
@@ -244,7 +244,7 @@
 {% block postNav %}
 {% endblock %}
 
-<div class="flex h-screen pt-12 sm:pt-16 bg-gray-50 sm:bg-gray-100 dark:bg-gray-950">
+<div class="flex h-screen pt-12 sm:pt-16 bg-black">
 	<div class="w-full overflow-y-auto">
 		<div class="container mx-auto grid grid-cols-12" id="main-content-row">
 
