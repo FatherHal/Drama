@@ -13,12 +13,10 @@
 	</li>
 	{% endif %}
 
-	{% if v and v.id==p.author_id %}
-	{% if p.private %}
+	{% if v and v.id==p.author_id and if p.private %}
 	<li>
 		<button onclick="post_toast('/publish/{{p.id}}')"><i class="fas fa-globe fa-fw mr-2"></i>Publish</button>
 	<li>
-	{% endif %}
 	{% endif %}
 
 	<li>
