@@ -202,7 +202,7 @@
 
 		{% if v %}
 			<style>:root{--primary:#{{v.themecolor}}}</style>
-			<link rel="stylesheet" href="/assets/css/main.css?v=99">
+			<link rel="stylesheet" href="/assets/css/main.css?v=100">
 			<link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
 			{% if v.agendaposter %}<link rel="stylesheet" href="/assets/css/agendaposter.css?v=99">{% elif v.css %}<link rel="stylesheet" href="/@{{v.username}}/css">{% endif %}
 		{% else %}
@@ -244,10 +244,8 @@
 {% block postNav %}
 {% endblock %}
 
-<div class="container {% if request.path=='/' or '/post/' in request.path or '/comment/' in request.path %} transparent {% endif %}">
-	<div class="row justify-content-around" id="main-content-row">
-
-		<div class="col h-100" id="main-content-col">
+<div class="w-full overflow-y-auto">
+	<div class="container mx-auto grid grid-cols-12" id="main-content-row">
 
 			{% block desktopUserBanner %}
 			{% endblock %}
@@ -267,7 +265,6 @@
 			{% block pagenav %}
 			{% endblock %}
 
-		</div>
 	</div>
 </div>
 
