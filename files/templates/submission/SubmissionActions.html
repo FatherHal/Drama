@@ -35,8 +35,10 @@
 	</li>
 	{% endif %}
 
-	<li class="copy-link" href="javascript:void(0);" role="button" data-clipboard-text="{% if 'rama' in request.host %}https://dogpill.life{{p.permalink}}{% else %}{{p.permalink | full_link}}{% endif %}">
-		<i class="fas fa-copy fa-fw mr-2"></i>Copy link
+	<li>
+		<button class="copy-link" role="button" data-clipboard-text="{% if 'rama' in request.host %}https://dogpill.life{{p.permalink}}{% else %}{{p.permalink | full_link}}{% endif %}">
+			<i class="fas fa-copy fa-fw mr-2"></i>Copy link
+		</button>
 	</li>
 
 	{% if v %}
