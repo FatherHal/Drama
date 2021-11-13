@@ -21,11 +21,17 @@
 	{% endif %}
 	{% endif %}
 
-	<li href="/votes?link={{p.fullname}}"><i class="fas fa-arrows-v fa-fw mr-2"></i>Votes</li>
+	<li>
+		<a href="/votes?link={{p.fullname}}">
+			<i class="fas fa-arrows-v fa-fw mr-2"></i>Votes
+		</a>
+	</li>
 
 	{% if v %}
-	<li class="text-muted hidden md:inline-block" href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#awardModal" onclick="awardModal('/post/{{p.id}}/awards')">
-		<i class="fas fa-gift fa-fw mr-2"></i>Give Award
+	<li>
+		<button class="text-muted hidden md:inline-block" data-bs-toggle="modal" data-bs-target="#awardModal" onclick="awardModal('/post/{{p.id}}/awards')">
+			<i class="fas fa-gift fa-fw mr-2"></i>Give Award
+		</button>
 	</li>
 	{% endif %}
 
