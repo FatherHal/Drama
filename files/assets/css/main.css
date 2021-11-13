@@ -5484,10 +5484,10 @@ img.emoji {
     color: white !important;
   }
 
-  .container, .container-fluid {
+  /*.container, .container-fluid {
     background-color: var(--gray-700) !important;
     border-radius: 5px !important;
-  }
+  }*/
 
   .btn {
     background-color: var(--gray-700) !important;
@@ -5541,9 +5541,9 @@ img.emoji {
    column-count: 5 !important;
  }
 }
-.container, .container-fluid {
+/*.container, .container-fluid {
   padding-bottom: 30px;
-}
+}*/
 
 .navbar {
   padding: 0.5rem 0.5rem 0.3rem 0.5rem;
