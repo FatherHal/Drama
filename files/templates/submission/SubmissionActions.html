@@ -75,17 +75,41 @@
 	</li>
 
 	{% if p.deleted_utc > 0 %}
-	<a class="list-inline-item" href="javascript:void(0)" onclick="post_toast('/undelete_post/{{p.id}}')"><i class="fas fa-trash-alt fa-fw mr-2"></i>Undelete</a>
+	<li>
+		<button class="list-inline-item" onclick="post_toast('/undelete_post/{{p.id}}')">
+			<i class="fas fa-trash-alt fa-fw mr-2"></i>Undelete
+		</button>
+	<li>
 	{% else %}
-	<a class="list-inline-item" href="javascript:void(0)" data-bs-toggle="modal" data-bs-dismiss="modal" data-bs-target="#deletePostModal" onclick="delete_postModal('{{p.id}}')"><i class="fas fa-trash-alt fa-fw mr-2"></i>Delete</a>
+	<li>
+		<button data-bs-toggle="modal" data-bs-dismiss="modal" data-bs-target="#deletePostModal" onclick="delete_postModal('{{p.id}}')">
+			<i class="fas fa-trash-alt fa-fw mr-2"></i>Delete
+		</button>
+	<li>
 	{% endif %}
 	{% endif %}
 	{% if v and v.admin_level>=3 %}
-	<a id="pin-{{p.id}}" class="{% if p.stickied %}d-none{% endif %} list-inline-item text-info" href="javascript:void(0)" onclick="post_toast2('/sticky/{{p.id}}','pin-{{p.id}}','unpin-{{p.id}}')"><i class="fas fa-thumbtack fa-rotate--45 fa-fw mr-2"></i>Pin</a>
-	<a id="unpin-{{p.id}}" class="{% if not p.stickied %}d-none{% endif %} list-inline-item text-info" href="javascript:void(0)" onclick="post_toast2('/sticky/{{p.id}}','/sticky/{{p.id}}','pin-{{p.id}}','unpin-{{p.id}}')"><i class="fas fa-thumbtack fa-rotate--45 fa-fw mr-2"></i>Unpin</a>
+	<li>
+		<button id="pin-{{p.id}}" class="{% if p.stickied %}d-none{% endif %} text-info" onclick="post_toast2('/sticky/{{p.id}}','pin-{{p.id}}','unpin-{{p.id}}')">
+			<i class="fas fa-thumbtack fa-rotate--45 fa-fw mr-2"></i>Pin
+		</button>
+	</li>
+	<li>
+		<button id="unpin-{{p.id}}" class="{% if not p.stickied %}d-none{% endif %} list-inline-item text-info" href="javascript:void(0)" onclick="post_toast2('/sticky/{{p.id}}','/sticky/{{p.id}}','pin-{{p.id}}','unpin-{{p.id}}')">
+			<i class="fas fa-thumbtack fa-rotate--45 fa-fw mr-2"></i>Unpin
+		</button>
+	</li>
 	{% if v==p.author %}
-	<a id="distinguish-{{p.id}}" class="{% if p.distinguish_level %}d-none{% endif %} list-inline-item text-info" href="javascript:void(0)" onclick="post_toast2('/distinguish/{{p.id}}','distinguish-{{p.id}}','undistinguish-{{p.id}}')"><i class="fas fa-crown fa-fw mr-2"></i>Distinguish</a>
-	<a id="undistinguish-{{p.id}}" class="{% if not p.distinguish_level %}d-none{% endif %} list-inline-item text-info" href="javascript:void(0)" onclick="post_toast2('/distinguish/{{p.id}}','distinguish-{{p.id}}','undistinguish-{{p.id}}')"><i class="fas fa-crown fa-fw mr-2"></i>Undistinguish</a>
+	<li>
+		<button id="distinguish-{{p.id}}" class="{% if p.distinguish_level %}d-none{% endif %} text-info" onclick="post_toast2('/distinguish/{{p.id}}','distinguish-{{p.id}}','undistinguish-{{p.id}}')">
+			<i class="fas fa-crown fa-fw mr-2"></i>Distinguish
+		</button>
+	</li>
+	<li>
+		<button id="undistinguish-{{p.id}}" class="{% if not p.distinguish_level %}d-none{% endif %} text-info" onclick="post_toast2('/distinguish/{{p.id}}','distinguish-{{p.id}}','undistinguish-{{p.id}}')">
+			<i class="fas fa-crown fa-fw mr-2"></i>Undistinguish
+		</button>
+	</li>
 	{% endif %}
 	{% endif %}
 
