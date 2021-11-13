@@ -245,6 +245,8 @@
 {% endblock %}
 
 <div class="flex h-screen pt-12 sm:pt-14 bg-gray-50 sm:bg-gray-100 dark:bg-gray-950">
+	<div class="w-full overflow-y-auto">
+		<div class="container mx-auto grid grid-cols-12" id="main-content-row">
 
 			{% block desktopUserBanner %}
 			{% endblock %}
@@ -263,7 +265,8 @@
 
 			{% block pagenav %}
 			{% endblock %}
-
+		</div>
+	</div>
 </div>
 
 {% block mobilenavbar %}
