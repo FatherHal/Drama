@@ -1,0 +1,98 @@
+:root {
+    --primary: #E83941;
+	--dark: #170535;
+	--secondary: #F7F0E9;
+	--white: #F7EFED;
+	--black: #F7EFED;
+	--light: #F7EFED;
+	--muted: #B2C7BC;
+	--gray: #383838;
+	--gray-100: #91B6A8;
+	--gray-200: #5C7C70;
+	--gray-300: #F7EFED;
+	--gray-400: #007F66;
+	--gray-500: #077d65;
+	--gray-600: #057760;
+	--gray-700: #007750;
+	--gray-800: #006C42;
+	--gray-900: #00482B;
+}
+
+body {
+   background-image: url('https://i.ibb.co/hLn35N4/kieran-white-SBdm-Qc-W8qag-unsplash.jpg');
+   background-attachment: fixed;
+}
+
+.btn {
+	font-size: 11px;
+	text-shadow: 0 1px 0 rgba(0, 0, 0, 0.1);
+	border-radius: 4px;
+}
+
+.form-control {
+	box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1) inset
+	border-radius: 4px;
+}
+
+.card {
+	border-radius: 4px;
+}
+
+#frontpage .posts .card, #userpage .posts .card, #search .posts .card {
+	background: linear-gradient(var(--gray-700), var(--gray-800));
+	border-color: var(--gray-900);
+	box-shadow: 0 1px 0 #518E77 inset;
+}
+
+#frontpage .posts .card:hover, #userpage .posts .card:hover, #search .posts .card:hover {
+	background: var(--gray-600);
+	border-color: var(--gray-900);
+	box-shadow: 0 1px 0 #518E77 inset;
+}
+
+.post-title a:visited {
+	color: var(--gray-900)!important;
+}
+
+.post-title {
+	font-size: 14px;
+}
+
+.post-meta {
+	font-size: 11px;
+}
+
+.post-img {
+	background-color: var(--gray-100);
+	border: 1px solid var(--gray-800);
+	box-shadow: 0 1px 2px -1px var(--gray-900);
+	border-radius: 4px;
+	padding: 2px;
+}
+
+.post-actions a {
+	font-size: 11px;
+	text-shadow: 0 1px 0 rgba(0, 0, 0, 0.1);
+}
+
+/* Plaid */
+
+.bg-plaid  {
+  background-attachment: fixed;
+  background-color: #E83941;
+  background-image: 
+    repeating-linear-gradient(
+      45deg,
+      rgba(0,0,0,0.8),
+      rgba(0,0,0,0.8) 80px,
+      transparent 0px,
+      transparent 160px
+    ),
+    repeating-linear-gradient(
+      -45deg,
+      rgba(0,0,0,0.5),
+      rgba(0,0,0,0.5) 80px,
+      transparent 0px,
+      transparent 160px
+    );
+}
