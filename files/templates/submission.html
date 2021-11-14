@@ -278,7 +278,7 @@
 				{% endif %}
 
 				<!-- Meta information -->
-				<div class="flex items-center mb-2 text-sm text-gray-500 leading-normal">
+				<div class="flex items-center space-x-1 mb-2 text-sm text-gray-500 leading-normal">
 					{% if v and v.admin_level==6 and p.author.shadowbanned %}
 					<i class="fas fa-user-times text-admin" data-bs-toggle="tooltip" data-bs-placement="bottom" title="" data-bs-original-title="Shadowbanned by @{{p.author.shadowbanned}}"></i>
 					{% endif %}
@@ -312,18 +312,18 @@
 					</bdi>
 					{% endif %}
 					<span data-bs-toggle="tooltip" data-bs-placement="bottom" id="timestamp">{{p.age_string}}</span>
-					({% if p.realurl(v) %}
-					<a href="/search/posts/?q=domain%3A{{p.domain}}&sort=new&t=all" {% if not v or v.newtabexternal %}target="_blank"{% endif %}>{{p.domain}}
+					{% if p.realurl(v) %}
+					<a href="/search/posts/?q=domain%3A{{p.domain}}&sort=new&t=all" {% if not v or v.newtabexternal %}target="_blank"{% endif %}>({{p.domain}})
 					</a>
 					{% else %}
-					text post
-					{% endif %})
+					(text post)
+					{% endif %}
 
 					{% if p.edited_utc %}
 					Edited
 					<span data-bs-toggle="tooltip" data-bs-placement="bottom" id="edited_timestamp">{{p.edited_string}}</span>
 					{% endif %}
-					&nbsp;&nbsp;{{p.views}} views
+					{{p.views}} views
 				</div>
 
 				<!-- Title -->
