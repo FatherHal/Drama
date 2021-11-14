@@ -203,11 +203,13 @@
 		{% if v %}
 			<style>:root{--primary:#{{v.themecolor}}}</style>
 			<link rel="stylesheet" href="/assets/css/main.css?v=101">
+			<link rel="stylesheet" href="/assets/css/default.css?v=101">
 			<link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
 			{% if v.agendaposter %}<link rel="stylesheet" href="/assets/css/agendaposter.css?v=99">{% elif v.css %}<link rel="stylesheet" href="/@{{v.username}}/css">{% endif %}
 		{% else %}
 			<style>:root{--primary:#{{'DEFAULT_COLOR' | app_config}}</style>
 			<!-- <link rel="stylesheet" href="/assets/css/main.css?v=99"><link rel="stylesheet" href="/assets/css/spooky.css?v=99"> -->
+			<link rel="stylesheet" href="/assets/css/default.css?v=101">
 			<link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
 		{% endif %}
 
@@ -220,7 +222,7 @@
 
  </head>
 
- <body id="{% if request.path != '/comments' %}{% block pagetype %}frontpage{% endblock %}{% endif %}" class="bg-cover bg-center bg-black text-white antialiased" style="{% if v and v.background %} background:url(/assets/images/backgrounds/{{v.background}}){% endif %}">
+ <body id="{% if request.path != '/comments' %}{% block pagetype %}frontpage{% endblock %}{% endif %}" class="bg-cover bg-center bg-gray-800 text-gray-100 antialiased" style="{% if v and v.background %} background:url(/assets/images/backgrounds/{{v.background}}){% endif %}">
 
 {% block Banner %}
 {% endblock %}
@@ -238,7 +240,7 @@
 
 <div class="flex h-screen pt-12 sm:pt-16 bg-black">
 	<div class="w-full overflow-y-auto">
-		<div class="container mx-auto grid grid-cols-12" id="main-content-row">
+		<div class="container mx-auto grid grid-cols-12 bg-gray-900 rounded-xl shadow-inner" id="main-content-row">
 
 			{% block desktopUserBanner %}
 			{% endblock %}

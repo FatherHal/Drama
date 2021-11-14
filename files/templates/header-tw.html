@@ -1,7 +1,7 @@
 <!-- This example requires Tailwind CSS v2.0+ -->
-<nav class="fixed w-full bg-black sm:border-b border-white border-opacity-20 z-100">
+<nav class="fixed w-full bg-gray-800 sm:border-b border-white border-opacity-20 z-100">
   <div class="container mx-auto grid grid-cols-12">
-    <div class="relative col-span-full flex items-center justify-between h-16">
+    <div class="relative col-span-full flex items-end justify-between h-16">
       <div class="absolute inset-y-0 left-0 flex items-center sm:hidden">
         <!-- Mobile menu button-->
         <button type="button" class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white" aria-controls="mobile-menu" aria-expanded="false">
@@ -30,19 +30,36 @@
       </div>
       <div class="flex-1 flex items-center justify-center sm:items-stretch sm:justify-start">
         <div class="flex-shrink-0 flex items-center">
-          <img class="block lg:hidden h-8 w-auto" src="https://tailwindui.com/img/logos/workflow-mark-indigo-500.svg" alt="Workflow">
-          <img class="hidden lg:block h-8 w-auto" src="https://tailwindui.com/img/logos/workflow-logo-indigo-500-mark-white-text.svg" alt="Workflow">
+          <img class="block lg:hidden h-7 w-auto" src="https://rdrama.net/assets/images/Drama/logo.webp" alt="Workflow">
+          <img class="hidden lg:block h-7 w-auto" src="https://rdrama.net/assets/images/Drama/logo.webp" alt="Workflow">
         </div>
         <div class="hidden sm:block sm:ml-6">
-          <div class="flex space-x-4">
+          <div class="flex space-x-2">
             <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
-            <a href="#" class="bg-gray-900 text-white px-3 py-2 rounded-md text-sm font-medium" aria-current="page">Dashboard</a>
+            <a href="#" class="bg-gray-700 text-white px-3 py-2 rounded text-sm font-medium" aria-current="page">
+              <i class="fas fa-comments-alt fa-fw text-gray-300 mr-2"></i>
+              Discussion
+            </a>
 
-            <a href="#" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Team</a>
+            <a href="#" class="bg-transparent text-gray-200 px-3 py-2 rounded text-sm font-medium">
+              <i class="fas fa-store fa-fw text-gray-300 mr-2"></i>
+              Shop
+            </a>
 
-            <a href="#" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Projects</a>
+            <a href="#" class="bg-transparent text-gray-200 px-3 py-2 rounded text-sm font-medium">
+              <i class="fas fa-trophy fa-fw text-gray-300 mr-2"></i>
+              Leaderboards
+            </a>
 
-            <a href="#" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Calendar</a>
+            <a href="#" class="bg-transparent text-gray-200 px-3 py-2 rounded text-sm font-medium">
+              <i class="fas fa-inbox fa-fw text-gray-300 mr-2"></i>
+              Inbox
+            </a>
+
+            <a href="#" class="bg-transparent text-gray-200 px-3 py-2 rounded text-sm font-medium">
+              <i class="fas fa-cog fa-fw text-gray-300 mr-2"></i>
+              My account
+            </a>
           </div>
         </div>
       </div>
