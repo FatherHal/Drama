@@ -316,7 +316,7 @@
 					<a href="/search/posts/?q=domain%3A{{p.domain}}&sort=new&t=all" {% if not v or v.newtabexternal %}target="_blank"{% endif %}>({{p.domain}})
 					</a>
 					{% else %}
-					(text post)
+					<span>(text post)</span>
 					{% endif %}
 
 					{% if p.edited_utc %}
