@@ -220,256 +220,278 @@
 			</div>
 			{% endif %}
 
-			<!-- Content -->
-			<div id="post-content" class="{% if p.deleted_utc > 0 %}deleted {% endif %}card-block w-100 my-md-auto">
+			<div class="w-full">
+				<!-- Content -->
+				<div id="post-content" class="{% if p.deleted_utc > 0 %}deleted {% endif %}card-block w-100 my-md-auto">
 
-				<!-- Icons -->
-				<ul class="flex space-x-2 items-center mb-3">
-					<!-- Awards -->
-					{% if p.awards %}
-					{% for a in p.awards %}
-					<li>
-						<i class="{{a.class_list}}" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-original-title="{{a.title}} Award given by @{{a.user.username}}"></i>
-					</li>
-					{% endfor %}
-					{% endif %}
-					<!-- Banned -->
-					{% if p.bannedfor and p.author.banned_by %}
-					<li>
-						<i class="fad fa-gavel text-danger" data-bs-toggle="tooltip" data-bs-placement="bottom" title="" data-bs-original-title="User was banned for this post by @{{p.author.banned_by.username}}"></i>
-					</li>
-					{% endif %}	
-					<!-- Stickied -->
-					{% if p.stickied %}
-					<li>
-						<i id="pinned-{{p.id}}" class="fas fa-thumbtack fa-rotate--45 fa-fw text-admin" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-original-title="Pinned {% if p.stickied.startswith('t:') %}until {{p.stickied[2:]}}{% else %}by @{{p.stickied}}{%endif%}"></i>
-					</li>
-					{% endif %}
-					<!-- Pinned -->
-					{% if p.is_pinned %}
-					<li>
-						<i class="fas fa-thumbtack fa-rotate--45 fa-fw text-admin" data-bs-toggle="tooltip" data-bs-placement="bottom"data-bs-original-title="Pinned to profile"></i>
-					</li>
-					{% endif %}
-					<!-- NSFW -->
-					{% if p.over_18 %}
-					<li>
-						<span class="px-2 py-1 rounded-sm bg-gradient-to-t from-red-700 to-red-500 shadow-inner text-xs text-white">+18</span>
-					</li>
-					{% endif %}
-					<!-- Private -->
-					{% if p.private %}
-					<li>
-						<span class="badge border-warning border-1 text-small-extra">Draft</span>
-					</li>
-					{% endif %}
-				</ul>
-
-				{% if p.active_flags %}
-				<div id="flaggers" class="flaggers hidden">
-					<strong><i class="far fa-fw fa-flag"></i> Reported by:</strong>
-					<pre></pre>
-					<ul style="padding-left:20px; margin-bottom: 0;">
-						{% for f in p.ordered_flags %}
-						<li><a style="font-weight:bold" href="{{f.user.url}}">{{f.user.username}}</a>{% if f.reason %}: {{f.reason | safe}}{% endif %} {% if v.admin_level==6 %}<a href="javascript:void(0)" onclick="post_toast('/del_report/p{{ f.id }}')">[remove]</a>{% endif %}</li>
+					<!-- Icons -->
+					<ul class="flex space-x-2 items-center mb-3">
+						<!-- Awards -->
+						{% if p.awards %}
+						{% for a in p.awards %}
+						<li>
+							<i class="{{a.class_list}}" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-original-title="{{a.title}} Award given by @{{a.user.username}}"></i>
+						</li>
 						{% endfor %}
+						{% endif %}
+						<!-- Banned -->
+						{% if p.bannedfor and p.author.banned_by %}
+						<li>
+							<i class="fad fa-gavel text-danger" data-bs-toggle="tooltip" data-bs-placement="bottom" title="" data-bs-original-title="User was banned for this post by @{{p.author.banned_by.username}}"></i>
+						</li>
+						{% endif %}	
+						<!-- Stickied -->
+						{% if p.stickied %}
+						<li>
+							<i id="pinned-{{p.id}}" class="fas fa-thumbtack fa-rotate--45 fa-fw text-admin" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-original-title="Pinned {% if p.stickied.startswith('t:') %}until {{p.stickied[2:]}}{% else %}by @{{p.stickied}}{%endif%}"></i>
+						</li>
+						{% endif %}
+						<!-- Pinned -->
+						{% if p.is_pinned %}
+						<li>
+							<i class="fas fa-thumbtack fa-rotate--45 fa-fw text-admin" data-bs-toggle="tooltip" data-bs-placement="bottom"data-bs-original-title="Pinned to profile"></i>
+						</li>
+						{% endif %}
+						<!-- NSFW -->
+						{% if p.over_18 %}
+						<li>
+							<span class="px-2 py-1 rounded-sm bg-gradient-to-t from-red-700 to-red-500 shadow-inner text-xs text-white">+18</span>
+						</li>
+						{% endif %}
+						<!-- Private -->
+						{% if p.private %}
+						<li>
+							<span class="badge border-warning border-1 text-small-extra">Draft</span>
+						</li>
+						{% endif %}
 					</ul>
-				</div>
-				{% endif %}
 
-				<!-- Meta information -->
-				<div class="flex items-center space-x-1 mb-2 text-sm text-gray-500 leading-normal">
-					{% if v and v.admin_level==6 and p.author.shadowbanned %}
-					<i class="fas fa-user-times text-admin" data-bs-toggle="tooltip" data-bs-placement="bottom" title="" data-bs-original-title="Shadowbanned by @{{p.author.shadowbanned}}"></i>
-					{% endif %}
-					{% if p.distinguish_level %}
-					<i class="fas fa-broom text-admin" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-original-title="{{'SITE_NAME' | app_config}} Admin, speaking officially"></i>
-					{% endif %}
-					{% if p.is_bot %}
-					<i class="fad fa-robot text-info" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-original-title="Bot"></i>
-					{% endif %}
-					{% if p.author.verified %}
-					<i class="fas fa-badge-check align-middle ml-1" style="color:{% if p.author.verifiedcolor %}#{{p.author.verifiedcolor}}{% else %}#1DA1F2{% endif %}" data-bs-toggle="tooltip" data-bs-placement="bottom" title="" data-bs-original-title="{{p.author.verified}}"></i>
-					{% endif %}
-					<a class="flex items-center" data-bs-placement="bottom" data-bs-toggle="popover" data-bs-trigger="focus" data-content-id="popover-{{p.id}}" href="javascript:void(0)" tabindex="0" style="color: #{{p.author.namecolor}}; font-weight: bold;" class="user-name">
-						<img loading="lazy" src="{{p.author.profile_url}}" class="w-8 h-8 object-cover rounded-sm mr-2">
-						<span {% if p.author.patron and not p.distinguish_level %}class="patron" style="background-color:#{{p.author.namecolor}};"{% elif p.distinguish_level and 'rama' in request.host %}class="mod"{% endif %}>
-							{{p.author.username}}
-						</span>
-					</a>
-
-					{% if p.author.customtitle %}
-					<bdi style="color: #{{p.author.titlecolor}}">
-						{% if p.author.quadrant %}
-							<img loading="lazy" height="20" src="/assets/images/PCM/quadrants/{{p.author.quadrant}}.gif">
-						{% endif %}
-						{{p.author.customtitle | safe}}
-					</bdi>
-					{% endif %}
-
-					<span data-bs-toggle="tooltip" data-bs-placement="bottom" id="timestamp">{{p.age_string}}</span>
-
-					{% if p.realurl(v) %}
-					<a href="/search/posts/?q=domain%3A{{p.domain}}&sort=new&t=all" {% if not v or v.newtabexternal %}target="_blank"{% endif %}>({{p.domain}})
-					</a>
-					{% else %}
-					<span>(text post)</span>
-					{% endif %}
-
-					{% if p.edited_utc %}
-					Edited
-					<span data-bs-toggle="tooltip" data-bs-placement="bottom" id="edited_timestamp">{{p.edited_string}}</span>
-					{% endif %}
-					<span>{{p.views}} views</span>
-				</div>
-
-				<!-- Title -->
-				{% if p.realurl(v) %}
-				<h1 id="post-title" class="font-bold text-lg md:text-2xl leading-normal mb-2">
-					<a {% if not v or v.newtabexternal %}target="_blank"{% endif %} rel="nofollow noopener noreferrer" href="{{p.realurl(v)}}">
-						{% if p.club %}
-							<span class="patron font-bolder mr-1" style="background-color:red; font-size:10px; line-height:2;">COUNTRY CLUB</span>
-						{% endif %}
-						{{p.realtitle(v) | safe}}
-					</a>
-				</h1>					
-				{% else %}
-				<h1 id="post-title" class="font-bold text-lg md:text-2xl leading-normal mb-2">
-					{% if p.club %}<span class="patron font-bolder mr-1" style="background-color:red; font-size:10px; line-height:2;">COUNTRY CLUB</span>{% endif %}
-					{{p.realtitle(v) | safe}}
-				</h1>
-				{% endif %}
-
-				<!-- Body content -->
-				<div id="post-body" class="post-body mb-3">
-					{% if p.realurl(v) %}
-					{% if "streamable.com/" in p.realurl(v) %}
-					<div style="width: 100%; height: 0px; position: relative; padding-bottom: 56.250%;"><iframe loading="lazy" src="{{p.realurl(v)}}" frameborder="0" width="100%" height="100%" allowfullscreen="" style="width: 100%; height: 100%; position: absolute;"></iframe></div>
-					<pre></pre>
-					{% elif "spotify.com/" in p.realurl(v) %}
-					{% if "spotify.com/embed/" in p.realurl(v) %}
-					{% set streamurl=p.realurl(v) %}
-					{% else %}
-					{% set streamurl=p.realurl(v).replace("spotify.com", "spotify.com/embed") %}
-					{% endif %}
-					<iframe loading="lazy" src="{{streamurl}}" width="100%" height="160" frameBorder="0" allowtransparency="true" allow="encrypted-media"></iframe>
-					<pre></pre>
-
-					{% elif not p.embed_url and not p.is_image and not (p.url and p.url.lower().endswith('.mp4')) %}
-					<a rel="nofollow noopener noreferrer" href="{{p.realurl(v)}}" {% if not v or v.newtabexternal %}target="_blank"{% endif %}>
-						<div class="d-flex md:hidden justify-content-between align-items-center border rounded p-2{% if p.realbody(v) %} mb-3{% endif %}">
-							<span>{{p.domain|truncate(30, True)}}</span>
-							<i class="fas fa-external-link-alt text-small"></i>
-						</div>
-					</a>
-					{% endif %}
-					{% endif %}
-					<div id="post-text">
-						{% if p.is_image %}
-						<div class="row no-gutters">
-							<div class="col">
-								<a {% if not v or v.newtabexternal %}target="_blank"{% endif %} rel="nofollow noopener noreferrer" href="{{p.realurl(v)}}">
-									<img loading="lazy" src="{{p.realurl(v)}}" class="img-fluid" style="max-height:500px;" alt="Unable to load image">
-								</a>
-							</div>
-						</div>
+					{% if p.active_flags %}
+					<div id="flaggers" class="flaggers hidden">
+						<strong><i class="far fa-fw fa-flag"></i> Reported by:</strong>
 						<pre></pre>
-						{% elif p.url and p.url.lower().endswith('.mp4') %}
-						<div class="row no-gutters">
-							<div class="col">
-								<video controls loop preload="metadata" style="max-width: 100%">
-									<source src="{{ p.realurl(v) }}" type="video/mp4">
-									</video>
+						<ul style="padding-left:20px; margin-bottom: 0;">
+							{% for f in p.ordered_flags %}
+							<li><a style="font-weight:bold" href="{{f.user.url}}">{{f.user.username}}</a>{% if f.reason %}: {{f.reason | safe}}{% endif %} {% if v.admin_level==6 %}<a href="javascript:void(0)" onclick="post_toast('/del_report/p{{ f.id }}')">[remove]</a>{% endif %}</li>
+							{% endfor %}
+						</ul>
+					</div>
+					{% endif %}
+
+					<!-- Meta information -->
+					<div class="flex items-center space-x-1 mb-2 text-sm text-gray-500 leading-normal">
+						{% if v and v.admin_level==6 and p.author.shadowbanned %}
+						<i class="fas fa-user-times text-admin" data-bs-toggle="tooltip" data-bs-placement="bottom" title="" data-bs-original-title="Shadowbanned by @{{p.author.shadowbanned}}"></i>
+						{% endif %}
+						{% if p.distinguish_level %}
+						<i class="fas fa-broom text-admin" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-original-title="{{'SITE_NAME' | app_config}} Admin, speaking officially"></i>
+						{% endif %}
+						{% if p.is_bot %}
+						<i class="fad fa-robot text-info" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-original-title="Bot"></i>
+						{% endif %}
+						{% if p.author.verified %}
+						<i class="fas fa-badge-check align-middle ml-1" style="color:{% if p.author.verifiedcolor %}#{{p.author.verifiedcolor}}{% else %}#1DA1F2{% endif %}" data-bs-toggle="tooltip" data-bs-placement="bottom" title="" data-bs-original-title="{{p.author.verified}}"></i>
+						{% endif %}
+						<a class="flex items-center" data-bs-placement="bottom" data-bs-toggle="popover" data-bs-trigger="focus" data-content-id="popover-{{p.id}}" href="javascript:void(0)" tabindex="0" style="color: #{{p.author.namecolor}}; font-weight: bold;" class="user-name">
+							<img loading="lazy" src="{{p.author.profile_url}}" class="w-8 h-8 object-cover rounded-sm mr-2">
+							<span {% if p.author.patron and not p.distinguish_level %}class="patron" style="background-color:#{{p.author.namecolor}};"{% elif p.distinguish_level and 'rama' in request.host %}class="mod"{% endif %}>
+								{{p.author.username}}
+							</span>
+						</a>
+
+						{% if p.author.customtitle %}
+						<bdi style="color: #{{p.author.titlecolor}}">
+							{% if p.author.quadrant %}
+								<img loading="lazy" height="20" src="/assets/images/PCM/quadrants/{{p.author.quadrant}}.gif">
+							{% endif %}
+							{{p.author.customtitle | safe}}
+						</bdi>
+						{% endif %}
+
+						<span data-bs-toggle="tooltip" data-bs-placement="bottom" id="timestamp">{{p.age_string}}</span>
+
+						{% if p.realurl(v) %}
+						<a href="/search/posts/?q=domain%3A{{p.domain}}&sort=new&t=all" {% if not v or v.newtabexternal %}target="_blank"{% endif %}>({{p.domain}})
+						</a>
+						{% else %}
+						<span>(text post)</span>
+						{% endif %}
+
+						{% if p.edited_utc %}
+						Edited
+						<span data-bs-toggle="tooltip" data-bs-placement="bottom" id="edited_timestamp">{{p.edited_string}}</span>
+						{% endif %}
+						<span>{{p.views}} views</span>
+					</div>
+
+					<!-- Title -->
+					{% if p.realurl(v) %}
+					<h1 id="post-title" class="font-bold text-lg md:text-2xl leading-normal mb-2">
+						<a {% if not v or v.newtabexternal %}target="_blank"{% endif %} rel="nofollow noopener noreferrer" href="{{p.realurl(v)}}">
+							{% if p.club %}
+								<span class="patron font-bolder mr-1" style="background-color:red; font-size:10px; line-height:2;">COUNTRY CLUB</span>
+							{% endif %}
+							{{p.realtitle(v) | safe}}
+						</a>
+					</h1>					
+					{% else %}
+					<h1 id="post-title" class="font-bold text-lg md:text-2xl leading-normal mb-2">
+						{% if p.club %}<span class="patron font-bolder mr-1" style="background-color:red; font-size:10px; line-height:2;">COUNTRY CLUB</span>{% endif %}
+						{{p.realtitle(v) | safe}}
+					</h1>
+					{% endif %}
+
+					<!-- Body content -->
+					<div id="post-body" class="post-body mb-3">
+						{% if p.realurl(v) %}
+						{% if "streamable.com/" in p.realurl(v) %}
+						<div style="width: 100%; height: 0px; position: relative; padding-bottom: 56.250%;"><iframe loading="lazy" src="{{p.realurl(v)}}" frameborder="0" width="100%" height="100%" allowfullscreen="" style="width: 100%; height: 100%; position: absolute;"></iframe></div>
+						<pre></pre>
+						{% elif "spotify.com/" in p.realurl(v) %}
+						{% if "spotify.com/embed/" in p.realurl(v) %}
+						{% set streamurl=p.realurl(v) %}
+						{% else %}
+						{% set streamurl=p.realurl(v).replace("spotify.com", "spotify.com/embed") %}
+						{% endif %}
+						<iframe loading="lazy" src="{{streamurl}}" width="100%" height="160" frameBorder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+						<pre></pre>
+
+						{% elif not p.embed_url and not p.is_image and not (p.url and p.url.lower().endswith('.mp4')) %}
+						<a rel="nofollow noopener noreferrer" href="{{p.realurl(v)}}" {% if not v or v.newtabexternal %}target="_blank"{% endif %}>
+							<div class="d-flex md:hidden justify-content-between align-items-center border rounded p-2{% if p.realbody(v) %} mb-3{% endif %}">
+								<span>{{p.domain|truncate(30, True)}}</span>
+								<i class="fas fa-external-link-alt text-small"></i>
+							</div>
+						</a>
+						{% endif %}
+						{% endif %}
+						<div id="post-text">
+							{% if p.is_image %}
+							<div class="row no-gutters">
+								<div class="col">
+									<a {% if not v or v.newtabexternal %}target="_blank"{% endif %} rel="nofollow noopener noreferrer" href="{{p.realurl(v)}}">
+										<img loading="lazy" src="{{p.realurl(v)}}" class="img-fluid" style="max-height:500px;" alt="Unable to load image">
+									</a>
 								</div>
 							</div>
 							<pre></pre>
-							{% endif %}
-							{{p.realbody(v) | safe}}
+							{% elif p.url and p.url.lower().endswith('.mp4') %}
+							<div class="row no-gutters">
+								<div class="col">
+									<video controls loop preload="metadata" style="max-width: 100%">
+										<source src="{{ p.realurl(v) }}" type="video/mp4">
+										</video>
+									</div>
+								</div>
+								<pre></pre>
+								{% endif %}
+								{{p.realbody(v) | safe}}
 
-							{% for c in p.options %}
-							<div class="custom-control">								
-								<input type="checkbox" class="custom-control-input" id="{{c.id}}" name="option" {% if c.poll_voted(v) %}checked{% endif %} onchange="poll_vote('{{c.id}}')">
-								<label class="custom-control-label" for="{{c.id}}">{{c.body_html | safe}} - <a href="/votes?link=t3_{{c.id}}"><span id="poll-{{c.id}}">{{c.upvotes}}</span> votes</a></label>
+								{% for c in p.options %}
+								<div class="custom-control">								
+									<input type="checkbox" class="custom-control-input" id="{{c.id}}" name="option" {% if c.poll_voted(v) %}checked{% endif %} onchange="poll_vote('{{c.id}}')">
+									<label class="custom-control-label" for="{{c.id}}">{{c.body_html | safe}} - <a href="/votes?link=t3_{{c.id}}"><span id="poll-{{c.id}}">{{c.upvotes}}</span> votes</a></label>
+								</div>
+								{% endfor %}
+
+								{% if p.is_banned and p.ban_reason %}
+								<div class="text-removed mb-0">removed by @{{p.ban_reason}}</div>
+								{% endif %}
+
+
+
+
 							</div>
-							{% endfor %}
 
-							{% if p.is_banned and p.ban_reason %}
-							<div class="text-removed mb-0">removed by @{{p.ban_reason}}</div>
+							{% if p.embed_url %}
+							{% if p.domain == "twitter.com" and (v and v.theme.split("_")[0] in ["light", "coffee", "4chan"]) %}
+							{% include "embeds/twitterlight.html" %}
+							{% elif "twitter.com" in p.domain %}
+							{% include "embeds/twitter.html" %}
+							{% elif "youtu" in p.domain %}
+							{% include "embeds/youtube.html" %}
 							{% endif %}
-
-
-
-
+							{% endif %}
 						</div>
 
-						{% if p.embed_url %}
-						{% if p.domain == "twitter.com" and (v and v.theme.split("_")[0] in ["light", "coffee", "4chan"]) %}
-						{% include "embeds/twitterlight.html" %}
-						{% elif "twitter.com" in p.domain %}
-						{% include "embeds/twitter.html" %}
-						{% elif "youtu" in p.domain %}
-						{% include "embeds/youtube.html" %}
+						{% if v and (v.id==p.author_id or v.admin_level==6 and v.id in [1,28,995,2513]) and not v.is_suspended %}
+						<div id="edit-post-body-{{p.id}}" class="hidden comment-write collapsed child">
+							<form id="post-edit-form-{{p.id}}" class="d-flex flex-column input-group" action="/edit_post/{{p.id}}" method="post">
+								<input type="hidden" name="formkey" value="{{v.formkey}}">
+								<input type="hidden" name="current_page" value="{{request.path}}">
+								<input name="title" required placeholder="title" value="{{p.title}}" >
+								<textarea name="body" maxlength="10000" id="post-edit-box-{{p.id}}" form="post-edit-form-{{p.id}}" class="comment-box rounded-sm border border-gray-700 border-opacity-40 bg-gray-700 bg-opacity-20 focus:bg-opacity-100 focus:bg-white hover:bg-opacity-30 shadow-inner w-full p-2" aria-label="With textarea" placeholder="Add text to your post..." rows="10">{{p.body}}</textarea> 
+								<div class="comment-format"> 
+									<small class="format pl-0"><i class="fas fa-bold" aria-hidden="true" onclick="makeBold('post-edit-box-{{p.id}}')" data-bs-toggle="tooltip" data-bs-placement="bottom" title="" data-bs-original-title="Bold"></i></small> 
+									<a class="format" href="javascript:void(0)"><i class="fas fa-italic" aria-hidden="true" onclick="makeItalics('post-edit-box-{{p.id}}')" data-bs-toggle="tooltip" data-bs-placement="bottom" title="" data-bs-original-title="Italicize"></i></a> 
+									<a class="format" href="javascript:void(0)"><i class="fas fa-quote-right" aria-hidden="true" onclick="makeQuote('post-edit-box-{{p.id}}')" data-bs-toggle="tooltip" data-bs-placement="bottom" title="" data-bs-original-title="Quote"></i></a>
+									<a class="format" href="javascript:void(0)"><span class="font-weight-bolder text-uppercase" onclick="commentForm('post-edit-box-{{p.id}}');getGif()" aria-hidden="true" data-bs-toggle="modal" data-bs-target="#gifModal" data-bs-toggle="tooltip" data-bs-placement="bottom"  title="" data-bs-original-title="Add GIF">GIF</span></a>
+									<a class="format" href="javascript:void(0)"><i class="fas fa-smile-beam" onclick="loadEmojis('post-edit-box-{{p.id}}')" aria-hidden="true" data-bs-toggle="modal" data-bs-target="#emojiModal" data-bs-toggle="tooltip" data-bs-placement="bottom"  title="" data-bs-original-title="Add Emoji"></i></a>
+									<small class="format hidden"><i class="fas fa-link" aria-hidden="true"></i></small> 
+									<a href="javascript:void(0)" onclick="togglePostEdit('{{p.id}}')" class="btn btn-link text-muted ml-auto cancel-form">Cancel</a> 
+									<button form="post-edit-form-{{p.id}}" class="btn btn-primary ml-2">Save Edit</button>
+								</div>
+							</form>
+							<div class="form-text text-small p-0 m-0"><a href="/formatting" target="_blank">Formatting help</a></div>
+						</div>
 						{% endif %}
-						{% endif %}
-					</div>
 
-					{% if v and (v.id==p.author_id or v.admin_level==6 and v.id in [1,28,995,2513]) and not v.is_suspended %}
-					<div id="edit-post-body-{{p.id}}" class="hidden comment-write collapsed child">
-						<form id="post-edit-form-{{p.id}}" class="d-flex flex-column input-group" action="/edit_post/{{p.id}}" method="post">
-							<input type="hidden" name="formkey" value="{{v.formkey}}">
-							<input type="hidden" name="current_page" value="{{request.path}}">
-							<input name="title" required placeholder="title" value="{{p.title}}" >
-							<textarea name="body" maxlength="10000" id="post-edit-box-{{p.id}}" form="post-edit-form-{{p.id}}" class="comment-box rounded-sm border border-gray-700 border-opacity-40 bg-gray-700 bg-opacity-20 focus:bg-opacity-100 focus:bg-white hover:bg-opacity-30 shadow-inner w-full p-2" aria-label="With textarea" placeholder="Add text to your post..." rows="10">{{p.body}}</textarea> 
-							<div class="comment-format"> 
-								<small class="format pl-0"><i class="fas fa-bold" aria-hidden="true" onclick="makeBold('post-edit-box-{{p.id}}')" data-bs-toggle="tooltip" data-bs-placement="bottom" title="" data-bs-original-title="Bold"></i></small> 
-								<a class="format" href="javascript:void(0)"><i class="fas fa-italic" aria-hidden="true" onclick="makeItalics('post-edit-box-{{p.id}}')" data-bs-toggle="tooltip" data-bs-placement="bottom" title="" data-bs-original-title="Italicize"></i></a> 
-								<a class="format" href="javascript:void(0)"><i class="fas fa-quote-right" aria-hidden="true" onclick="makeQuote('post-edit-box-{{p.id}}')" data-bs-toggle="tooltip" data-bs-placement="bottom" title="" data-bs-original-title="Quote"></i></a>
-								<a class="format" href="javascript:void(0)"><span class="font-weight-bolder text-uppercase" onclick="commentForm('post-edit-box-{{p.id}}');getGif()" aria-hidden="true" data-bs-toggle="modal" data-bs-target="#gifModal" data-bs-toggle="tooltip" data-bs-placement="bottom"  title="" data-bs-original-title="Add GIF">GIF</span></a>
-								<a class="format" href="javascript:void(0)"><i class="fas fa-smile-beam" onclick="loadEmojis('post-edit-box-{{p.id}}')" aria-hidden="true" data-bs-toggle="modal" data-bs-target="#emojiModal" data-bs-toggle="tooltip" data-bs-placement="bottom"  title="" data-bs-original-title="Add Emoji"></i></a>
-								<small class="format hidden"><i class="fas fa-link" aria-hidden="true"></i></small> 
-								<a href="javascript:void(0)" onclick="togglePostEdit('{{p.id}}')" class="btn btn-link text-muted ml-auto cancel-form">Cancel</a> 
-								<button form="post-edit-form-{{p.id}}" class="btn btn-primary ml-2">Save Edit</button>
-							</div>
-						</form>
-						<div class="form-text text-small p-0 m-0"><a href="/formatting" target="_blank">Formatting help</a></div>
-					</div>
-					{% endif %}
-
-					{% if p.embed_url and "http" not in p.embed_url %}
-					<div id="crosspost-embed">
-						<div class="row no-gutters">
-							<div id="frontpage" class="col-12 pt-0">
-								<div class="posts" id="posts">
-									{{ p.embed_url | post_embed(v) | safe }}
+						{% if p.embed_url and "http" not in p.embed_url %}
+						<div id="crosspost-embed">
+							<div class="row no-gutters">
+								<div id="frontpage" class="col-12 pt-0">
+									<div class="posts" id="posts">
+										{{ p.embed_url | post_embed(v) | safe }}
+									</div>
 								</div>
 							</div>
 						</div>
+						{% endif %}
+
 					</div>
-					{% endif %}
-					<div class="hidden md:block mt-2">
+
+					<!-- Post actions -->
+					<div class="hidden md:block col-span-full pt-4">
 						{% include "/submission/SubmissionActions.html" %}
 					</div>
 
 				</div>
 
-				{% if v %}
+				<!-- Author avatar, post score, and voting buttons -->
+				<div class="flex flex-col items-center mr-4">
 
-				<div id="voting" class="hidden flex-col mb-auto mr-3 py-2 items-center w-20 border border-gray-800 rounded-md shadow-inner shadow-md">
-					<div id="post-{{p.id}}-up" tabindex="0" href="javascript:void(0)" onclick="vote('post', '{{p.id}}', '1')" class="mx-auto arrow-up upvote-button post-{{p.id}}-up {% if voted==1 %}active{% endif %}"></div>
-					<span id="post-score-{{p.id}}" class="score post-score-{{p.id}} {% if voted==1 %}score-up{% elif voted==-1%}score-down{% endif %}" data-bs-toggle="tooltip" data-bs-placement="right" title="" data-bs-original-title="+{{ups}} | -{{downs}}">{{score}}</span>
-					<div {% if environ.get('DISABLE_DOWNVOTES') == '1' %}style="display:None!important"{% endif %} id="post-{{p.id}}-down" tabindex="0" href="javascript:void(0)" onclick="vote('post', '{{p.id}}', '-1')" class="text-muted mx-auto arrow-down downvote-button post-{{p.id}}-down {% if voted==-1 %}active{% endif %}"></div>
-				</div>
+					<img src="{{p.author.profile_url}}" class="w-16 h-16 object-cover rounded-sm mb-2" alt="author avatar"/>
 
-				{% else %}
+					{% if v %}
 
-				<div id="voting" class="hidden flex-col mb-auto mr-3 py-2 items-center w-20 border border-gray-800 rounded-md shadow-inner shadow-md">
-					<div id="post-{{p.id}}-up" tabindex="0" href="javascript:void(0)" onclick="vote('post', '{{p.id}}', '1')" class="arrow-up mx-auto" onclick="location.href='/login?redirect={{request.path | urlencode}}';">
+					<div id="voting" class="shadow-inner shadow-md rounded-md flex flex-col mb-1 py-2 items-center w-16 border-opacity-40 border border-gray-700 bg-gray-800 text-gray-500">
+						<!-- <button id="post-{{p.id}}-up" tabindex="0" onclick="vote('post', '{{p.id}}', '1')" class="mx-auto arrow-up upvote-button post-{{p.id}}-up {% if voted==1 %}active{% endif %}"></button> -->
+						<span id="post-score-{{p.id}}" class="font-bold text-lg post-score-{{p.id}} {% if voted==1 %}score-up{% elif voted==-1%}score-down{% endif %}" data-bs-toggle="tooltip" data-bs-placement="right" title="" data-bs-original-title="+{{ups}} | -{{downs}}">{{score}}</span>
+						<!-- <div {% if environ.get('DISABLE_DOWNVOTES') == '1' %}style="display:None!important"{% endif %} id="post-{{p.id}}-down" tabindex="0" href="javascript:void(0)" onclick="vote('post', '{{p.id}}', '-1')" class="text-muted mx-auto arrow-down downvote-button post-{{p.id}}-down {% if voted==-1 %}active{% endif %}"></div> -->
 					</div>
-					<span id="post-{{p.id}}-score-none" class="score text-muted"{% if not p.is_banned %} data-bs-toggle="tooltip" data-bs-placement="right" title="" data-bs-original-title="+{{ups}} | -{{downs}}"{% endif %}>{{score}}</span>
-					<div {% if environ.get('DISABLE_DOWNVOTES') == '1' %}style="display:None!important"{% endif %} id="post-{{p.id}}-down" tabindex="0" href="javascript:void(0)" onclick="vote('post', '{{p.id}}', '-1')" class="arrow-down mx-auto" onclick="location.href='/login?redirect={{request.path | urlencode}}';"></div>
-				</div>
 
-				{% endif %}
+					<button id="post-{{p.id}}-up" class="flex items-center justify-center text-xs font-bold mb-1 rounded-md w-full border p-1 border-gray-800 post-{{p.id}}-up {% if voted==1 %}text-pink-500{% else %}text-gray-500{% endif %}" onclick="vote('post', '{{p.id}}', '1')">
+						+&nbsp;<i class="fas fa-heart fa-sm fa-fw pl-1"></i>
+					</button>
+
+					{% if environ.get('DISABLE_DOWNVOTES') != '1' %}
+					<button id="post-{{p.id}}-down" class="text-gray-600 text-center text-xs post-{{p.id}}-down {% if voted==-1 %}active{% endif %}" onclick="vote('post', '{{p.id}}', '-1')">
+						Dislike
+					</button>
+					{% endif %}
+
+					{% else %}
+
+					<div id="voting" class="flex-col mb-auto mr-3 py-2 items-center w-20 border border-gray-800 rounded-md shadow-inner shadow-md">
+						<div id="post-{{p.id}}-up" tabindex="0" href="javascript:void(0)" onclick="vote('post', '{{p.id}}', '1')" class="arrow-up mx-auto" onclick="location.href='/login?redirect={{request.path | urlencode}}';">
+						</div>
+						<span id="post-{{p.id}}-score-none" class="score text-muted"{% if not p.is_banned %} data-bs-toggle="tooltip" data-bs-placement="right" title="" data-bs-original-title="+{{ups}} | -{{downs}}"{% endif %}>{{score}}</span>
+						<div {% if environ.get('DISABLE_DOWNVOTES') == '1' %}style="display:None!important"{% endif %} id="post-{{p.id}}-down" tabindex="0" href="javascript:void(0)" onclick="vote('post', '{{p.id}}', '-1')" class="arrow-down mx-auto" onclick="location.href='/login?redirect={{request.path | urlencode}}';"></div>
+					</div>
+
+					{% endif %}
+
+				</div>
 
 			</div>
 
@@ -669,3 +691,5 @@
 		{% endif %}
 
 		{% endblock %}
+
+<!-- Add sidebar block here -->
