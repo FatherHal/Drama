@@ -422,7 +422,7 @@
 							<input type="hidden" name="formkey" value="{{v.formkey}}">
 							<input type="hidden" name="current_page" value="{{request.path}}">
 							<input name="title" required placeholder="title" value="{{p.title}}" >
-							<textarea name="body" maxlength="10000" id="post-edit-box-{{p.id}}" form="post-edit-form-{{p.id}}" class="comment-box rounded-sm border border-gray-700 border-opacity-40 bg-gray-700 bg-opacity-20 focus:bg-opacity-100 hover:bg-opacity-30 shadow-inner w-full p-2" aria-label="With textarea" placeholder="Add text to your post..." rows="10">{{p.body}}</textarea> 
+							<textarea name="body" maxlength="10000" id="post-edit-box-{{p.id}}" form="post-edit-form-{{p.id}}" class="comment-box rounded-sm border border-gray-700 border-opacity-40 bg-gray-700 bg-opacity-20 focus:bg-opacity-100 focus:bg-white hover:bg-opacity-30 shadow-inner w-full p-2" aria-label="With textarea" placeholder="Add text to your post..." rows="10">{{p.body}}</textarea> 
 							<div class="comment-format"> 
 								<small class="format pl-0"><i class="fas fa-bold" aria-hidden="true" onclick="makeBold('post-edit-box-{{p.id}}')" data-bs-toggle="tooltip" data-bs-placement="bottom" title="" data-bs-original-title="Bold"></i></small> 
 								<a class="format" href="javascript:void(0)"><i class="fas fa-italic" aria-hidden="true" onclick="makeItalics('post-edit-box-{{p.id}}')" data-bs-toggle="tooltip" data-bs-placement="bottom" title="" data-bs-original-title="Italicize"></i></a> 
@@ -562,7 +562,7 @@
 					<input type="hidden" name="parent_fullname" value="t2_{{p.id}}">
 					<input id="reply-form-submission-{{p.fullname}}" type="hidden" name="submission" value="{{p.id}}">
 					{% if v %}
-					<textarea maxlength="10000" id="reply-form-body-{{p.fullname}}" data-fullname="{{p.fullname}}" class="comment-box rounded-sm border border-gray-700 border-opacity-40 bg-gray-700 bg-opacity-20 focus:bg-opacity-100 hover:bg-opacity-30 shadow-inner w-full p-2" id="comment-form" name="body" form="reply-to-{{p.fullname}}" aria-label="With textarea" placeholder="Add your comment..." rows="3"></textarea>
+					<textarea maxlength="10000" id="reply-form-body-{{p.fullname}}" data-fullname="{{p.fullname}}" class="comment-box rounded-sm border border-gray-700 border-opacity-40 bg-gray-700 bg-opacity-20 focus:bg-opacity-100 focus:bg-white hover:bg-opacity-30 shadow-inner w-full p-2" id="comment-form" name="body" form="reply-to-{{p.fullname}}" aria-label="With textarea" placeholder="Add your comment..." rows="3"></textarea>
 					{% endif %}
 					<div class="comment-format">
 						<a class="btn btn-secondary format d-inline-block m-0" href="javascript:void(0)"><i class="fas fa-bold" onclick="makeBold('reply-form-body-{{p.fullname}}')" data-bs-toggle="tooltip" data-bs-placement="bottom"  title="" data-bs-original-title="Bold"></i></a>
@@ -582,17 +582,19 @@
 							<div id="filename-show-reply-{{p.fullname}}"><i class="far fa-image"></i></div>
 							<input id="file-upload-reply-{{p.fullname}}" type="file" name="file" accept="image/*" onchange="document.getElementById('filename-show-reply-{{p.fullname}}').innerHTML='image';" hidden>
 						</label>
-						<button id="save-reply-to-{{p.fullname}}" form="reply-to-{{p.fullname}}" class="ml-auto flex items-center justify-center px-3 py-2 rounded font-bold text-white text-sm text-shadow bg-gradient-to-t from-pink-600 to-pink-400 border border-pink-700" onclick="post_comment('{{p.fullname}}', '{{p.id}}')">
+						<button id="save-reply-to-{{p.fullname}}" form="reply-to-{{p.fullname}}" class="ml-auto flex items-center justify-center px-3 py-2 rounded font-bold text-white text-sm text-shadow bg-gradient-to-t from-pink-600 to-pink-400 border border-pink-600" onclick="post_comment('{{p.fullname}}', '{{p.id}}')">
 							Comment
 						</button>
 					</div>
 				</form>
-				<div class="form-text text-small p-0 m-0"><a href="/formatting" target="_blank">Formatting help</a></div>
+				<a href="/formatting" target="_blank" class="block text-xs text-gray-600">
+					Formatting help
+				</a>
 			</div>
 
 			{% if not v and not p.is_banned %}
 			<div class="comment-write mb-3">
-				<textarea maxlength="10000" class="comment-box rounded-sm border border-gray-700 border-opacity-40 bg-gray-700 bg-opacity-20 focus:bg-opacity-100 hover:bg-opacity-30 shadow-inner w-full p-2" name="body" aria-label="With textarea" placeholder="Add your comment..." rows="3" onclick="location.href='/login?redirect={{request.path | urlencode}}';"></textarea>
+				<textarea maxlength="10000" class="comment-box rounded-sm border border-gray-700 border-opacity-40 bg-gray-700 bg-opacity-20 focus:bg-opacity-100 focus:bg-white hover:bg-opacity-30 shadow-inner w-full p-2" name="body" aria-label="With textarea" placeholder="Add your comment..." rows="3" onclick="location.href='/login?redirect={{request.path | urlencode}}';"></textarea>
 			</div>
 			{% if p.comment_count >= 2 %}
 			<div class="card border-0 mt-4">
