@@ -240,8 +240,7 @@
 
 <div class="flex h-screen pt-12 sm:pt-20 bg-gray-800">
 	<div class="w-full overflow-y-auto">
-		<div class="container mx-auto grid grid-cols-12 gap-6 bg-gray-900 rounded-xl shadow-inner" id="main-content-row">
-
+		<div class="container mx-auto flex gap-6 bg-gray-900 rounded-xl shadow-inner" id="main-content-row">
 			{% block desktopUserBanner %}
 			{% endblock %}
 
@@ -261,6 +260,9 @@
 				{% block pagenav %}
 				{% endblock %}
 			</div>
+
+			{% block sidebar %}
+			{% endblock %}
 		</div>
 	</div>
 </div>
