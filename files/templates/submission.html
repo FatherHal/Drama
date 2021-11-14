@@ -27,9 +27,9 @@
 		form=document.getElementById("edit-post-body-"+id);
 		box=document.getElementById("post-edit-box-"+id);
 
-		body.classList.toggle("d-none");
-		title.classList.toggle("d-none");
-		form.classList.toggle("d-none");
+		body.classList.toggle("hidden");
+		title.classList.toggle("hidden");
+		form.classList.toggle("hidden");
 		autoExpand(box);
 	};
 </script>
@@ -266,7 +266,7 @@
 				</ul>
 
 				{% if p.active_flags %}
-				<div id="flaggers" class="flaggers d-none">
+				<div id="flaggers" class="flaggers hidden">
 					<strong><i class="far fa-fw fa-flag"></i> Reported by:</strong>
 					<pre></pre>
 					<ul style="padding-left:20px; margin-bottom: 0;">
@@ -291,7 +291,7 @@
 					{% if p.over_18 %}<span class="badge badge-danger text-small-extra mr-1">+18</span>{% endif %}
 					{% if p.private %}<span class="badge border-warning border-1 text-small-extra">Draft</span>{% endif %}
 					{% if p.active_flags %}
-					<a class="btn btn-primary" href="javascript:void(0)" style="padding:1px 5px; font-size:10px;" onclick="document.getElementById('flaggers').classList.toggle('d-none')">
+					<a class="btn btn-primary" href="javascript:void(0)" style="padding:1px 5px; font-size:10px;" onclick="document.getElementById('flaggers').classList.toggle('hidden')">
 					{{p.active_flags}} Reports</a>
 					{% endif %}
 					{% if p.author.verified %}
@@ -360,7 +360,7 @@
 
 					{% elif not p.embed_url and not p.is_image and not (p.url and p.url.lower().endswith('.mp4')) %}
 					<a rel="nofollow noopener noreferrer" href="{{p.realurl(v)}}" {% if not v or v.newtabexternal %}target="_blank"{% endif %}>
-						<div class="d-flex d-md-none justify-content-between align-items-center border rounded p-2{% if p.realbody(v) %} mb-3{% endif %}">
+						<div class="d-flex md:hidden justify-content-between align-items-center border rounded p-2{% if p.realbody(v) %} mb-3{% endif %}">
 							<span>{{p.domain|truncate(30, True)}}</span>
 							<i class="fas fa-external-link-alt text-small"></i>
 						</div>
@@ -417,7 +417,7 @@
 					</div>
 
 					{% if v and (v.id==p.author_id or v.admin_level==6 and v.id in [1,28,995,2513]) and not v.is_suspended %}
-					<div id="edit-post-body-{{p.id}}" class="d-none comment-write collapsed child">
+					<div id="edit-post-body-{{p.id}}" class="hidden comment-write collapsed child">
 						<form id="post-edit-form-{{p.id}}" class="d-flex flex-column input-group" action="/edit_post/{{p.id}}" method="post">
 							<input type="hidden" name="formkey" value="{{v.formkey}}">
 							<input type="hidden" name="current_page" value="{{request.path}}">
@@ -429,7 +429,7 @@
 								<a class="format" href="javascript:void(0)"><i class="fas fa-quote-right" aria-hidden="true" onclick="makeQuote('post-edit-box-{{p.id}}')" data-bs-toggle="tooltip" data-bs-placement="bottom" title="" data-bs-original-title="Quote"></i></a>
 								<a class="format" href="javascript:void(0)"><span class="font-weight-bolder text-uppercase" onclick="commentForm('post-edit-box-{{p.id}}');getGif()" aria-hidden="true" data-bs-toggle="modal" data-bs-target="#gifModal" data-bs-toggle="tooltip" data-bs-placement="bottom"  title="" data-bs-original-title="Add GIF">GIF</span></a>
 								<a class="format" href="javascript:void(0)"><i class="fas fa-smile-beam" onclick="loadEmojis('post-edit-box-{{p.id}}')" aria-hidden="true" data-bs-toggle="modal" data-bs-target="#emojiModal" data-bs-toggle="tooltip" data-bs-placement="bottom"  title="" data-bs-original-title="Add Emoji"></i></a>
-								<small class="format d-none"><i class="fas fa-link" aria-hidden="true"></i></small> 
+								<small class="format hidden"><i class="fas fa-link" aria-hidden="true"></i></small> 
 								<a href="javascript:void(0)" onclick="togglePostEdit('{{p.id}}')" class="btn btn-link text-muted ml-auto cancel-form">Cancel</a> 
 								<button form="post-edit-form-{{p.id}}" class="btn btn-primary ml-2">Save Edit</button>
 							</div>
@@ -449,7 +449,7 @@
 						</div>
 					</div>
 					{% endif %}
-					<div class="d-none d-md-flex justify-content-between align-items-center mt-2">
+					<div class="hidden d-md-flex justify-content-between align-items-center mt-2">
 						{% include "/submission/SubmissionActions.html" %}
 					</div>
 
@@ -495,7 +495,7 @@
 				<li class="list-inline-item mr-auto">
 					<a {% if v %}href="{{p.permalink}}"{% else %}href="/logged_out{{p.permalink}}"{% endif %}>
 						<i class="fas fa-comment-dots"></i>{{p.comment_count}}
-						<span class="text-info d-none new-comments"></span>
+						<span class="text-info hidden new-comments"></span>
 					</a>
 				</li>
 
@@ -507,7 +507,7 @@
 					</a>
 				</li>
 				{% endif %}
-				<li id="voting-{{p.id}}-mobile" class="voting list-inline-item d-md-none{% if voted==1 %} upvoted{% elif voted==-1 %} downvoted{% endif %}">
+				<li id="voting-{{p.id}}-mobile" class="voting list-inline-item md:hidden{% if voted==1 %} upvoted{% elif voted==-1 %} downvoted{% endif %}">
 					{% if v %}
 					<span id="post-mobile-{{p.id}}-up" tabindex="0" href="javascript:void(0)" onclick="vote('post-mobile', '{{p.id}}', '1')" class="mx-0 pr-1 arrow-up upvote-button post-{{p.id}}-up {% if voted==1 %}active{% endif %}">
 					</span>
@@ -578,7 +578,7 @@
 						<label class="btn btn-secondary format d-inline-block m-0" for="emoji-reply-btn-{{p.fullname}}">
 							<div id="emoji-reply-btn-{{p.fullname}}" onclick="loadEmojis('reply-form-body-{{p.fullname}}')" aria-hidden="true" data-bs-toggle="modal" data-bs-target="#emojiModal" data-bs-toggle="tooltip" data-bs-placement="bottom" title="" data-bs-original-title="Add Emoji"><i class="fas fa-smile-beam"></i></div>
 						</label> 
-						<label class="format btn btn-secondary m-0 ml-1 {% if v %}d-inline-block{% else %}d-none{% endif %}" for="file-upload-reply-{{p.fullname}}">
+						<label class="format btn btn-secondary m-0 ml-1 {% if v %}d-inline-block{% else %}hidden{% endif %}" for="file-upload-reply-{{p.fullname}}">
 							<div id="filename-show-reply-{{p.fullname}}"><i class="far fa-image"></i></div>
 							<input id="file-upload-reply-{{p.fullname}}" type="file" name="file" accept="image/*" onchange="document.getElementById('filename-show-reply-{{p.fullname}}').innerHTML='image';" hidden>
 						</label>
