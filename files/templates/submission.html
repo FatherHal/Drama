@@ -540,7 +540,8 @@
 							<div id="filename-show-reply-{{p.fullname}}"><i class="far fa-image"></i></div>
 							<input id="file-upload-reply-{{p.fullname}}" type="file" name="file" accept="image/*" onchange="document.getElementById('filename-show-reply-{{p.fullname}}').innerHTML='image';" hidden>
 						</label>
-						<button id="save-reply-to-{{p.fullname}}" form="reply-to-{{p.fullname}}" class="flex items-center justify-center px-3 py-2 rounded font-bold text-white text-sm ml-auto bg-gradient-to-t from-pink-600 to-pink-500 border border-pink-700" onclick="post_comment('{{p.fullname}}', '{{p.id}}')">Comment
+						<button id="save-reply-to-{{p.fullname}}" form="reply-to-{{p.fullname}}" class="ml-auto flex items-center justify-center px-3 py-2 rounded font-bold text-white text-sm text-shadow bg-gradient-to-t from-pink-600 to-pink-400 border border-pink-700" onclick="post_comment('{{p.fullname}}', '{{p.id}}')">
+							Comment
 						</button>
 					</div>
 				</form>

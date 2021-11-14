@@ -3434,7 +3434,7 @@ pre {
   z-index: 4;
 }
 
-.text-lg {
+/*.text-lg {
   font-size: 1.25rem !important;
 }
 
@@ -3448,7 +3448,7 @@ pre {
 
 .text-small-extra {
   font-size: 10.1px !important;
-}
+}*/
 
 #page p {
   font-size: 16px;
