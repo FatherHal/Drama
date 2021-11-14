@@ -457,7 +457,7 @@
 
 				{% if v %}
 
-				<div id="voting" class="hidden md:flex flex-col mb-auto mr-4 py-2 items-center w-20 border border-gray-800 rounded-md shadow-inner shadow-md">
+				<div id="voting" class="hidden md:flex flex-col mb-auto mr-3 py-2 items-center w-20 border border-gray-800 rounded-md shadow-inner shadow-md">
 					<div id="post-{{p.id}}-up" tabindex="0" href="javascript:void(0)" onclick="vote('post', '{{p.id}}', '1')" class="mx-auto arrow-up upvote-button post-{{p.id}}-up {% if voted==1 %}active{% endif %}"></div>
 
 					<span id="post-score-{{p.id}}" class="score post-score-{{p.id}} {% if voted==1 %}score-up{% elif voted==-1%}score-down{% endif %}" data-bs-toggle="tooltip" data-bs-placement="right" title="" data-bs-original-title="+{{ups}} | -{{downs}}">{{score}}</span>
@@ -466,7 +466,7 @@
 
 				{% else %}
 
-				<div id="voting" class="hidden md:flex flex-col mb-auto mr-4 py-2 items-center w-20 border border-gray-800 rounded-md shadow-inner shadow-md">
+				<div id="voting" class="hidden md:flex flex-col mb-auto mr-3 py-2 items-center w-20 border border-gray-800 rounded-md shadow-inner shadow-md">
 					<div id="post-{{p.id}}-up" tabindex="0" href="javascript:void(0)" onclick="vote('post', '{{p.id}}', '1')" class="arrow-up mx-auto" onclick="location.href='/login?redirect={{request.path | urlencode}}';">
 					</div>
 					<span id="post-{{p.id}}-score-none" class="score text-muted"{% if not p.is_banned %} data-bs-toggle="tooltip" data-bs-placement="right" title="" data-bs-original-title="+{{ups}} | -{{downs}}"{% endif %}>{{score}}</span>
