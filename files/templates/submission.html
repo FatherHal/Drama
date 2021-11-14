@@ -237,7 +237,7 @@
 					{% endif %}
 
 					<!-- Meta information -->
-					<div class="flex items-center space-x-1 mb-2 text-sm text-gray-500 leading-normal">
+					<div class="flex items-center space-x-1 mb-1 text-sm text-gray-500 leading-normal">
 						{% if v and v.admin_level==6 and p.author.shadowbanned %}
 						<i class="fas fa-user-times text-admin" data-bs-toggle="tooltip" data-bs-placement="bottom" title="" data-bs-original-title="Shadowbanned by @{{p.author.shadowbanned}}"></i>
 						{% endif %}
@@ -251,7 +251,7 @@
 						<i class="fas fa-badge-check align-middle ml-1" style="color:{% if p.author.verifiedcolor %}#{{p.author.verifiedcolor}}{% else %}#1DA1F2{% endif %}" data-bs-toggle="tooltip" data-bs-placement="bottom" title="" data-bs-original-title="{{p.author.verified}}"></i>
 						{% endif %}
 						<a class="flex items-center" data-bs-placement="bottom" data-bs-toggle="popover" data-bs-trigger="focus" data-content-id="popover-{{p.id}}" href="javascript:void(0)" tabindex="0" style="color: #{{p.author.namecolor}}; font-weight: bold;" class="user-name">
-							<span {% if p.author.patron and not p.distinguish_level %}class="patron" style="background-color:#{{p.author.namecolor}};"{% elif p.distinguish_level and 'rama' in request.host %}class="mod"{% endif %}>
+							<span {% if p.author.patron and not p.distinguish_level %}class="font-heading patron" style="background-color:#{{p.author.namecolor}};"{% elif p.distinguish_level and 'rama' in request.host %}class="mod"{% endif %}>
 								{{p.author.username}}
 							</span>
 						</a>
@@ -283,7 +283,7 @@
 
 					<!-- Title -->
 					{% if p.realurl(v) %}
-					<h1 id="post-title" class="font-bold text-lg md:text-2xl leading-normal mb-2">
+					<h1 id="post-title" class="font-bold font-heading text-lg md:text-2xl leading-normal mb-2">
 						<a {% if not v or v.newtabexternal %}target="_blank"{% endif %} rel="nofollow noopener noreferrer" href="{{p.realurl(v)}}">
 							{% if p.club %}
 								<span class="patron font-bolder mr-1" style="background-color:red; font-size:10px; line-height:2;">COUNTRY CLUB</span>
