@@ -1,10 +1,10 @@
 <ul class="flex items-center space-x-5 text-sm text-gray-500">
 
-	<li class="flex">
+	<!-- <li class="flex">
 		<button id="post-{{p.id}}-up" tabindex="0" href="javascript:void(0)" onclick="vote('post', '{{p.id}}', '1')" class="mx-auto arrow-up upvote-button post-{{p.id}}-up {% if voted==1 %}active{% endif %}"></button>
 		<span id="post-score-{{p.id}}" class="mx-2 score post-score-{{p.id}} {% if voted==1 %}score-up{% elif voted==-1%}score-down{% endif %}" data-bs-toggle="tooltip" data-bs-placement="right" title="" data-bs-original-title="+{{ups}} | -{{downs}}">{{score}}</span>
 		<button {% if environ.get('DISABLE_DOWNVOTES') == '1' %}style="display:None!important"{% endif %} id="post-{{p.id}}-down" tabindex="0" href="javascript:void(0)" onclick="vote('post', '{{p.id}}', '-1')" class="text-muted mx-auto arrow-down downvote-button post-{{p.id}}-down {% if voted==-1 %}active{% endif %}"></button>
-	</li>
+	</li> -->
 
 	<li>
 		<a {% if v %}href="{{p.permalink}}"{% else %}href="/logged_out{{p.permalink}}"{% endif %}>
