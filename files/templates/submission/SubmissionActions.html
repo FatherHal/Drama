@@ -27,12 +27,6 @@
 	{% endif %}
 	{% endif %}
 
-	<li>
-		<a href="/votes?link={{p.fullname}}">
-			<i class="fas fa-arrows-v fa-fw mr-2"></i>Votes
-		</a>
-	</li>
-
 	{% if v %}
 	<li class="hidden md:inline-block">
 		<button class="hover:text-gray-400" data-bs-toggle="modal" data-bs-target="#awardModal" onclick="awardModal('/post/{{p.id}}/awards')">
@@ -47,29 +41,6 @@
 		</button>
 	</li>
 
-	{% if v %}
-	<li class="{% if p.id in v.subscribed_idlist() %}hidden{% endif %}">
-		<button id="subscribe-{{p.id}}" onclick="post_toast2('/subscribe/{{p.id}}','subscribe-{{p.id}}','unsubscribe-{{p.id}}')">
-			<i class="fas fa-eye fa-fw mr-2"></i>Subscribe
-		</button>
-	</li>
-	<li class="{% if p.id not in v.subscribed_idlist() %}hidden{% endif %}">
-		<button id="unsubscribe-{{p.id}}" onclick="post_toast2('/unsubscribe/{{p.id}}','subscribe-{{p.id}}','unsubscribe-{{p.id}}')">
-			<i class="fas fa-eye-slash fa-fw mr-2"></i>Unsubscribe
-		</button>
-	</li>
-	<li class="{% if p.id in v.saved_idlist() %}hidden{% endif %}">
-		<button id="save-{{p.id}}" onclick="post_toast2('/save_post/{{p.id}}','save-{{p.id}}','unsave-{{p.id}}')">
-			<i class="fas fa-save"></i>Save
-		</button>
-	</li>
-	<li class="{% if not p.id in v.saved_idlist() %}hidden{% endif %}">
-		<button id="unsave-{{p.id}}" href="javascript:void(0)" onclick="post_toast2('/unsave_post/{{p.id}}','save-{{p.id}}','unsave-{{p.id}}')">
-			<i class="fas fa-save fa-fw mr-2"></i>Unsave
-		</button>
-	</li>
-	{% endif %}
-
 	<li>
 		<button data-bs-toggle="modal" data-bs-dismiss="modal" data-bs-target="#reportPostModal" onclick="report_postModal('{{p.id}}')">
 			<i class="fas fa-flag fa-fw mr-2"></i>Report
@@ -82,6 +53,36 @@
 				<i class="fas fa-ellipsis-h fa-fw"></i>
 			</button>
 			<ul class="dropdown-menu" aria-labelledby="dropdownPostActions">
+			{% if v %}
+			<li class="{% if p.id in v.subscribed_idlist() %}hidden{% endif %}">
+				<button id="subscribe-{{p.id}}" onclick="post_toast2('/subscribe/{{p.id}}','subscribe-{{p.id}}','unsubscribe-{{p.id}}')">
+					<i class="fas fa-eye fa-fw mr-2"></i>Subscribe
+				</button>
+			</li>
+			<li class="{% if p.id not in v.subscribed_idlist() %}hidden{% endif %}">
+				<button id="unsubscribe-{{p.id}}" onclick="post_toast2('/unsubscribe/{{p.id}}','subscribe-{{p.id}}','unsubscribe-{{p.id}}')">
+					<i class="fas fa-eye-slash fa-fw mr-2"></i>Unsubscribe
+				</button>
+			</li>
+			<li class="{% if p.id in v.saved_idlist() %}hidden{% endif %}">
+				<button id="save-{{p.id}}" onclick="post_toast2('/save_post/{{p.id}}','save-{{p.id}}','unsave-{{p.id}}')">
+					<i class="fas fa-save"></i>Save
+				</button>
+			</li>
+			<li class="{% if not p.id in v.saved_idlist() %}hidden{% endif %}">
+				<button id="unsave-{{p.id}}" href="javascript:void(0)" onclick="post_toast2('/unsave_post/{{p.id}}','save-{{p.id}}','unsave-{{p.id}}')">
+					<i class="fas fa-save fa-fw mr-2"></i>Unsave
+				</button>
+			</li>
+			{% endif %}
+			<li>
+				<a href="/votes?link={{p.fullname}}">
+					<i class="fas fa-arrows-v fa-fw mr-2"></i>Votes
+				</a>
+			</li>
+			<li>
+				<hr class="my-2 border-t border-gray-800"/>
+			</li>
 			{% if v and v.id==p.author_id %}
 			<li class="{% if p.is_stickied %}hidden{% endif %}">
 				<button id="pin-profile-{{p.id}}" class="hover:text-gray-400" onclick="post_toast2('/pin/{{p.id}}','unpin-profile-{{p.id}}','pin-profile-{{p.id}}')">
@@ -107,6 +108,9 @@
 			<li>
 			{% endif %}
 			{% endif %}
+			<li>
+				<hr class="my-2 border-t border-gray-800"/>
+			</li>
 			{% if v and v.admin_level>=3 %}
 			<li class="{% if p.stickied %}hidden{% endif %}">
 				<button id="pin-{{p.id}}" onclick="post_toast2('/sticky/{{p.id}}','pin-{{p.id}}','unpin-{{p.id}}')">
