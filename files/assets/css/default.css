@@ -15,8 +15,8 @@ p:last-of-type {
 	box-shadow: 0 1px 0 rgba(255, 255, 255, 0.05) inset
 }
 
-.shadow-inset-white-15 {
-    box-shadow: 0 1px 0 rgba(255, 255, 255, 0.15) inset
+.shadow-inset-white-10 {
+    box-shadow: 0 1px 0 rgba(255, 255, 255, 0.10) inset
 }
 
 .text-shadow {
