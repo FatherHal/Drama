@@ -52,7 +52,7 @@
 			<button type="button" id="dropdownPostActions" data-bs-toggle="dropdown" aria-expanded="false">
 				<i class="fas fa-ellipsis-h fa-fw"></i>
 			</button>
-			<ul class="dropdown-menu" aria-labelledby="dropdownPostActions">
+			<ul class="dropdown-menu bg-gray-800 rounded-md shadow-lg" aria-labelledby="dropdownPostActions">
 			{% if v %}
 			<li class="p-2 text-sm hover:bg-gray-900 hover:shadow-inner focus:bg-gray-900 focus:shadow-inner rounded {% if p.id in v.subscribed_idlist() %}hidden{% endif %}">
 				<button id="subscribe-{{p.id}}" onclick="post_toast2('/subscribe/{{p.id}}','subscribe-{{p.id}}','unsubscribe-{{p.id}}')">
@@ -101,7 +101,7 @@
 				</button>
 			<li>
 			{% else %}
-			<li class="p-2 text-sm hover:bg-red-700 hover:shadow-inner focus:bg-red-700 focus:shadow-inner rounded">
+			<li class="p-2 text-sm hover:text-gray-100 focus:text-gray-100 hover:bg-red-700 hover:shadow-inner focus:bg-red-700 focus:shadow-inner rounded">
 				<button data-bs-toggle="modal" data-bs-dismiss="modal" data-bs-target="#deletePostModal" onclick="delete_postModal('{{p.id}}')">
 					<i class="fas fa-trash-alt fa-fw mr-2"></i>Delete
 				</button>
