@@ -1,3 +1,11 @@
+p {
+    margin-bottom: 1rem;
+}
+
+p:last-of-type {
+    margin-bottom: 0;
+}
+
 .font-heading {
 	font-family: 'Trebuchet MS';
 	letter-spacing: -0.05rem;
