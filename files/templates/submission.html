@@ -292,7 +292,7 @@
 						</a>
 					</h1>					
 					{% else %}
-					<h1 id="post-title" class="font-bold text-lg md:text-2xl leading-normal mb-2">
+					<h1 id="post-title" class="font-bold font-heading text-lg md:text-2xl leading-normal mb-2">
 						{% if p.club %}<span class="patron font-bolder mr-1" style="background-color:red; font-size:10px; line-height:2;">COUNTRY CLUB</span>{% endif %}
 						{{p.realtitle(v) | safe}}
 					</h1>
@@ -533,9 +533,6 @@
 
 			<div id="comment-form-space-{{p.fullname}}" class="comment-write mb-3">
 				{% include "/comments/CommentForm.html" %}
-				<a href="/formatting" target="_blank" class="inline-block text-sm text-gray-600">
-					Formatting help
-				</a>
 			</div>
 
 			{% if not v and not p.is_banned %}

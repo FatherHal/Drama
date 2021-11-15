@@ -73,7 +73,7 @@
 			</li>
 			<li class="{% if p.id in v.saved_idlist() %}hidden{% endif %}">
 				<button id="save-{{p.id}}" class="w-full text-left p-2 text-sm hover:bg-gray-800 hover:shadow-inner focus:bg-gray-800 focus:shadow-inner rounded" onclick="post_toast2('/save_post/{{p.id}}','save-{{p.id}}','unsave-{{p.id}}')">
-					<i class="fas fa-save"></i>Save
+					<i class="fas fa-save fa-fw mr-2"></i>Save
 				</button>
 			</li>
 			<li class="{% if not p.id in v.saved_idlist() %}hidden{% endif %}">

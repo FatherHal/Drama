@@ -42,7 +42,10 @@
 			{% endif %}
 		</ul>
 	</div>
-	<div class="flex w-full justify-end mt-2">
+	<div class="flex w-full justify-between mt-2">
+		<a href="/formatting" target="_blank" class="inline-block text-sm text-gray-600">
+			Formatting help
+		</a>
 		<button id="save-reply-to-{{p.fullname}}" form="reply-to-{{p.fullname}}" class="ml-auto flex items-center justify-center px-3 py-2 rounded font-bold text-white text-sm text-shadow bg-gradient-to-t from-pink-700 to-pink-500 border border-pink-600" onclick="post_comment('{{p.fullname}}', '{{p.id}}')">
 			Comment
 		</button>
