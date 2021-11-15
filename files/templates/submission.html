@@ -531,10 +531,37 @@
 				</div>
 			</div>
 
-			<div class="flex justify-between">
+			<div class="flex justify-between mb-3">
 				<div class="text-lg text-gray-200 font-bold font-heading">
 					{{ p.comment_count }} {{ 'Comment' if p.comment_count == 1 else 'Comments' }}
 				</div>
+				<ul class="flex space-x-3 text-sm text-gray-500">
+					<li>
+						<a href="?sort=top" class="{% if sort == 'top' %}font-bold text-gray-200{% endif %}">
+							Top
+						</a>
+					</li>
+					<li>
+						<a href="?sort=new" class="{% if sort == 'new' %}font-bold text-gray-200{% endif %}">
+							Latest
+						</a>
+					</li>
+					<li>
+						<a href="?sort=old" class="{% if sort == 'old' %}font-bold text-gray-200{% endif %}">
+							Oldest
+						</a>
+					</li>
+					<li>
+						<a href="?sort=controversial" class="{% if sort == 'controversial' %}font-bold text-gray-200{% endif %}">
+							Controversial
+						</a>
+					</li>
+					<li>
+						<a href="?sort=bottom" class="{% if sort == 'bottom' %}font-bold text-gray-200{% endif %}">
+							Controversial
+						</a>
+					</li>
+				</ul>
 			</div>
 
 			<div id="comment-form-space-{{p.fullname}}" class="comment-write mb-3">
