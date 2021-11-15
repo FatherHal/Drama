@@ -102,11 +102,17 @@
         </div>
 
         <!-- Notifications -->
-        <button type="button" class="bg-gray-800 p-1 rounded-full text-gray-500 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">
+        <a" class="block bg-gray-800 p-1 rounded-full text-gray-500 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white" href="/notifications{% if v.notifications_count and v.notifications_count == v.post_notifications_count %}?posts=true{% endif %}">
           <span class="sr-only">View notifications</span>
           <!-- Heroicon name: outline/bell -->
-          <i class="fas fa-envelope fa-fw text-base"></i>
-        </button>
+          <div class="relative">
+            <i class="fas fa-envelope fa-fw text-base"></i>
+            <!-- Counter -->
+            <div class="absolute top-2 -right-4 w-5 h-5 rounded flex items-center justify-center bg-red-500">
+              <span class="text-xs text-gray-100 font-bold">{{ v.notifications_count }}</span>
+            </div>
+          </div>
+        </a>
 
         <!-- Notifications -->
         <button type="button" class="bg-gray-800 p-1 rounded-full text-gray-500 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">
