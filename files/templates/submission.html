@@ -376,8 +376,8 @@
 							<form id="post-edit-form-{{p.id}}" class="d-flex flex-column input-group" action="/edit_post/{{p.id}}" method="post">
 								<input type="hidden" name="formkey" value="{{v.formkey}}">
 								<input type="hidden" name="current_page" value="{{request.path}}">
-								<input name="title" required placeholder="title" value="{{p.title}}" >
-								<textarea name="body" maxlength="10000" id="post-edit-box-{{p.id}}" form="post-edit-form-{{p.id}}" class="comment-box rounded-sm border border-gray-700 border-opacity-40 bg-gray-700 bg-opacity-20 focus:bg-opacity-100 focus:bg-white hover:bg-opacity-30 shadow-inner w-full p-2" aria-label="With textarea" placeholder="Add text to your post..." rows="10">{{p.body}}</textarea> 
+								<input name="title" class="shadow-inner rounded mb-2 p-2 bg-gray-800 border border-gray-700 border-dashed text-gray-200" required placeholder="title" value="{{p.title}}" >
+								<textarea name="body" maxlength="10000" id="post-edit-box-{{p.id}}" form="post-edit-form-{{p.id}}" class="comment-box shadow-inner rounded mb-2 p-2 bg-gray-800 border border-gray-700 border-dashed text-gray-200" aria-label="With textarea" placeholder="Add text to your post..." rows="10">{{p.body}}</textarea> 
 								<div class="comment-format"> 
 									<small class="format pl-0"><i class="fas fa-bold" aria-hidden="true" onclick="makeBold('post-edit-box-{{p.id}}')" data-bs-toggle="tooltip" data-bs-placement="bottom" title="" data-bs-original-title="Bold"></i></small> 
 									<a class="format" href="javascript:void(0)"><i class="fas fa-italic" aria-hidden="true" onclick="makeItalics('post-edit-box-{{p.id}}')" data-bs-toggle="tooltip" data-bs-placement="bottom" title="" data-bs-original-title="Italicize"></i></a> 
@@ -420,7 +420,6 @@
 					<img src="{{p.author.profile_url}}" class="w-16 h-16 object-cover rounded-sm mb-2" alt="author avatar"/>
 
 					{% if v %}
-
 					<div id="voting" class="shadow-inner shadow-md rounded-md flex flex-col mb-1 py-2 items-center w-16 border-opacity-40 border border-gray-700 bg-gray-800 text-gray-500">
 						<!-- <button id="post-{{p.id}}-up" tabindex="0" onclick="vote('post', '{{p.id}}', '1')" class="mx-auto arrow-up upvote-button post-{{p.id}}-up {% if voted==1 %}active{% endif %}"></button> -->
 						<span id="post-score-{{p.id}}" class="font-bold text-lg post-score-{{p.id}} {% if voted==1 %}score-up{% elif voted==-1%}score-down{% endif %}" data-bs-toggle="tooltip" data-bs-placement="right" title="" data-bs-original-title="+{{ups}} | -{{downs}}">{{score}}</span>
