@@ -222,7 +222,7 @@
 
  </head>
 
- <body id="{% if request.path != '/comments' %}{% block pagetype %}frontpage{% endblock %}{% endif %}" class="bg-cover bg-center bg-gray-800 text-gray-100 antialiased" style="{% if v and v.background %} background:url(/assets/images/backgrounds/{{v.background}}){% endif %}">
+ <body id="{% if request.path != '/comments' %}{% block pagetype %}frontpage{% endblock %}{% endif %}" class="overflow-hidden antialiased bg-cover bg-center bg-gray-800 text-gray-200" style="{% if v and v.background %} background:url(/assets/images/backgrounds/{{v.background}}){% endif %}">
 
 {% block Banner %}
 {% endblock %}
