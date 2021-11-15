@@ -108,7 +108,7 @@
           <div class="relative">
             <i class="fas fa-envelope fa-fw fa-lg"></i>
             <!-- Counter -->
-            <div class="absolute -top-1.5 -right-3 w-6 h-6 rounded-full border-2 border-gray-800 flex items-center justify-center bg-red-500">
+            <div class="absolute -top-1.5 -right-3 {{ w-10 if v.notifications_count > 99 w-8 }} h-6 rounded-full border-2 border-gray-800 flex items-center justify-center bg-red-500">
               <span class="text-xs text-gray-100 font-bold leading-none">{{ v.notifications_count }}</span>
             </div>
           </div>
