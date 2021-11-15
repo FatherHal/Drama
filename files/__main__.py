@@ -3,6 +3,7 @@ gevent.monkey.patch_all()
 from os import environ
 import secrets
 from flask import *
+from flask_assets import Bundle, Environment
 from flask_caching import Cache
 from flask_limiter import Limiter
 from flask_compress import Compress
@@ -70,6 +71,13 @@ app.config['MAIL_PASSWORD'] = environ.get("MAIL_PASSWORD", "").strip()
 
 r=redis.Redis(host=environ.get("REDIS_URL", "redis://0.0.0.0"),  decode_responses=True, ssl_cert_reqs=None)
 
+# Bundling src/main.css files into dist/main.css'
+css = Bundle('assets/css/main.css', output='dist/main.css', filters='postcss')
+
+assets = Environment(app)
+assets.register('main_css', css)
+css.build()
+
 limiter = Limiter(
 	app,
 	key_func=get_ipaddr,
@@ -114,6 +122,10 @@ def before_request():
 	elif "Safari/" in ua: g.system="ios/safari"
 	elif "Mobile/" in ua: g.system="ios/webview"
 	else: g.system="other/other"
+
+@app.get('/_tw')
+def test_tailwind():
+	return render_template('tailwind.html')
 
 @app.teardown_appcontext
 def teardown_request(error):
