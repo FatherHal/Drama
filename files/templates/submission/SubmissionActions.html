@@ -53,125 +53,130 @@
 				<i class="fas fa-ellipsis-h fa-fw"></i>
 			</button>
 			<ul class="dropdown-menu w-56 bg-gray-900 rounded-md shadow-lg" aria-labelledby="dropdownPostActions">
-			{% if v %}
-			<li class="p-2 text-sm hover:bg-gray-800 hover:shadow-inner focus:bg-gray-800 focus:shadow-inner rounded {% if p.id in v.subscribed_idlist() %}hidden{% endif %}">
-				<button id="subscribe-{{p.id}}" onclick="post_toast2('/subscribe/{{p.id}}','subscribe-{{p.id}}','unsubscribe-{{p.id}}')">
-					<i class="fas fa-eye fa-fw mr-2"></i>Subscribe
-				</button>
-			</li>
-			<li class="p-2 text-sm hover:bg-gray-800 hover:shadow-inner focus:bg-gray-800 focus:shadow-inner rounded {% if p.id not in v.subscribed_idlist() %}hidden{% endif %}">
-				<button id="unsubscribe-{{p.id}}" onclick="post_toast2('/unsubscribe/{{p.id}}','subscribe-{{p.id}}','unsubscribe-{{p.id}}')">
-					<i class="fas fa-eye-slash fa-fw mr-2"></i>Unsubscribe
-				</button>
-			</li>
-			<li class="p-2 text-sm hover:bg-gray-800 hover:shadow-inner focus:bg-gray-800 focus:shadow-inner rounded {% if p.id in v.saved_idlist() %}hidden{% endif %}">
-				<button id="save-{{p.id}}" onclick="post_toast2('/save_post/{{p.id}}','save-{{p.id}}','unsave-{{p.id}}')">
-					<i class="fas fa-save"></i>Save
-				</button>
-			</li>
-			<li class="p-2 text-sm hover:bg-gray-800 hover:shadow-inner focus:bg-gray-800 focus:shadow-inner rounded {% if not p.id in v.saved_idlist() %}hidden{% endif %}">
-				<button id="unsave-{{p.id}}" href="javascript:void(0)" onclick="post_toast2('/unsave_post/{{p.id}}','save-{{p.id}}','unsave-{{p.id}}')">
-					<i class="fas fa-save fa-fw mr-2"></i>Unsave
-				</button>
-			</li>
-			{% endif %}
+			<!-- Does not require auth -->
 			<li class="p-2 text-sm hover:bg-gray-900 hover:shadow-inner focus:bg-gray-900 focus:shadow-inner rounded">
 				<a href="/votes?link={{p.fullname}}">
 					<i class="fas fa-arrows-v fa-fw mr-2"></i>Votes
 				</a>
 			</li>
+			<!-- Requires auth -->
+			{% if v %}
+			<li class="{% if p.id in v.subscribed_idlist() %}hidden{% endif %}">
+				<button id="subscribe-{{p.id}}" class="w-full text-left p-2 text-sm hover:bg-gray-800 hover:shadow-inner focus:bg-gray-800 focus:shadow-inner rounded" onclick="post_toast2('/subscribe/{{p.id}}','subscribe-{{p.id}}','unsubscribe-{{p.id}}')">
+					<i class="fas fa-eye fa-fw mr-2"></i>Subscribe
+				</button>
+			</li>
+			<li class="{% if p.id not in v.subscribed_idlist() %}hidden{% endif %}">
+				<button id="unsubscribe-{{p.id}}" class="w-full text-left p-2 text-sm hover:bg-gray-800 hover:shadow-inner focus:bg-gray-800 focus:shadow-inner rounded" onclick="post_toast2('/unsubscribe/{{p.id}}','subscribe-{{p.id}}','unsubscribe-{{p.id}}')">
+					<i class="fas fa-eye-slash fa-fw mr-2"></i>Unsubscribe
+				</button>
+			</li>
+			<li class="{% if p.id in v.saved_idlist() %}hidden{% endif %}">
+				<button id="save-{{p.id}}" class="w-full text-left p-2 text-sm hover:bg-gray-800 hover:shadow-inner focus:bg-gray-800 focus:shadow-inner rounded" onclick="post_toast2('/save_post/{{p.id}}','save-{{p.id}}','unsave-{{p.id}}')">
+					<i class="fas fa-save"></i>Save
+				</button>
+			</li>
+			<li class="{% if not p.id in v.saved_idlist() %}hidden{% endif %}">
+				<button id="unsave-{{p.id}}" class="w-full text-left p-2 text-sm hover:bg-gray-800 hover:shadow-inner focus:bg-gray-800 focus:shadow-inner rounded" href="javascript:void(0)" onclick="post_toast2('/unsave_post/{{p.id}}','save-{{p.id}}','unsave-{{p.id}}')">
+					<i class="fas fa-save fa-fw mr-2"></i>Unsave
+				</button>
+			</li>
+			{% endif %}
+			<!-- Requires author -->
+			{% if v and v.id==p.author_id %}
 			<li>
 				<hr class="my-2 -mx-2 border-t border-gray-800 border-opacity-40"/>
 			</li>
-			{% if v and v.id==p.author_id %}
-			<li class="p-2 text-sm hover:bg-gray-800 hover:shadow-inner focus:bg-gray-800 focus:shadow-inner rounded {% if p.is_stickied %}hidden{% endif %}">
-				<button id="pin-profile-{{p.id}}" class="hover:text-gray-400" onclick="post_toast2('/pin/{{p.id}}','unpin-profile-{{p.id}}','pin-profile-{{p.id}}')">
+			<li class="{% if p.is_stickied %}hidden{% endif %}">
+				<button id="pin-profile-{{p.id}}" class="w-full text-left p-2 text-sm hover:bg-gray-800 hover:shadow-inner focus:bg-gray-800 focus:shadow-inner rounded" onclick="post_toast2('/pin/{{p.id}}','unpin-profile-{{p.id}}','pin-profile-{{p.id}}')">
 					<i class="fas fa-thumbtack fa-rotate--45 fa-fw mr-2"></i>Pin to profile
 				</button>
 			</li>
-			<li class="p-2 text-sm hover:bg-gray-800 hover:shadow-inner focus:bg-gray-800 focus:shadow-inner rounded {% if not p.is_stickied %}hidden{% endif %}">
-				<button id="unpin-profile-{{p.id}}" onclick="post_toast2('/pin/{{p.id}}','unpin-profile-{{p.id}}','pin-profile-{{p.id}}')">
+			<li class="{% if not p.is_stickied %}hidden{% endif %}">
+				<button id="unpin-profile-{{p.id}}" class="w-full text-left p-2 text-sm hover:bg-gray-800 hover:shadow-inner focus:bg-gray-800 focus:shadow-inner rounded" onclick="post_toast2('/pin/{{p.id}}','unpin-profile-{{p.id}}','pin-profile-{{p.id}}')">
 					<i class="fas fa-thumbtack fa-rotate--45 fa-fw mr-2"></i>Unpin from profile
 				</button>
 			</li>
 			{% if p.deleted_utc > 0 %}
-			<li class="p-2 text-sm hover:bg-red-700 hover:shadow-inner focus:bg-red-700 focus:shadow-inner rounded">
-				<button class="list-inline-item" onclick="post_toast('/undelete_post/{{p.id}}')">
+			<li>
+				<button class="w-full text-left p-2 text-sm hover:bg-gray-800 hover:shadow-inner focus:bg-gray-800 focus:shadow-inner rounded" onclick="post_toast('/undelete_post/{{p.id}}')">
 					<i class="fas fa-trash-alt fa-fw mr-2"></i>Undelete
 				</button>
 			<li>
 			{% else %}
-			<li class="p-2 text-sm hover:text-gray-100 focus:text-gray-100 hover:bg-red-700 hover:shadow-inner focus:bg-red-700 focus:shadow-inner rounded">
-				<button data-bs-toggle="modal" data-bs-dismiss="modal" data-bs-target="#deletePostModal" onclick="delete_postModal('{{p.id}}')">
+			<li>
+				<button class="w-full text-left p-2 text-sm hover:bg-gray-800 hover:shadow-inner focus:bg-gray-800 focus:shadow-inner rounded" data-bs-toggle="modal" data-bs-dismiss="modal" data-bs-target="#deletePostModal" onclick="delete_postModal('{{p.id}}')">
 					<i class="fas fa-trash-alt fa-fw mr-2"></i>Delete
 				</button>
 			<li>
 			{% endif %}
 			{% endif %}
+			<!-- Requires admin -->
+			{% if v and v.admin_level>=3 %}
 			<li>
 				<hr class="my-2 -mx-2 border-t border-gray-800 border-opacity-40"/>
 			</li>
-			{% if v and v.admin_level>=3 %}
-			<li class="p-2 text-sm hover:bg-gray-800 hover:shadow-inner focus:bg-gray-800 focus:shadow-inner rounded {% if p.stickied %}hidden{% endif %}">
-				<button id="pin-{{p.id}}" onclick="post_toast2('/sticky/{{p.id}}','pin-{{p.id}}','unpin-{{p.id}}')">
+			<li class="{% if p.stickied %}hidden{% endif %}">
+				<button id="pin-{{p.id}}" class="w-full text-left p-2 text-sm hover:bg-gray-800 hover:shadow-inner focus:bg-gray-800 focus:shadow-inner rounded" onclick="post_toast2('/sticky/{{p.id}}','pin-{{p.id}}','unpin-{{p.id}}')">
 					<i class="fas fa-thumbtack fa-rotate--45 fa-fw mr-2"></i>Pin
 				</button>
 			</li>
-			<li class="p-2 text-sm hover:bg-gray-800 hover:shadow-inner focus:bg-gray-800 focus:shadow-inner rounded {% if not p.stickied %}hidden{% endif %}">
-				<button id="unpin-{{p.id}}" href="javascript:void(0)" onclick="post_toast2('/sticky/{{p.id}}','/sticky/{{p.id}}','pin-{{p.id}}','unpin-{{p.id}}')">
+			<li class="{% if not p.stickied %}hidden{% endif %}">
+				<button id="unpin-{{p.id}}" class="w-full text-left p-2 text-sm hover:bg-gray-800 hover:shadow-inner focus:bg-gray-800 focus:shadow-inner rounded" onclick="post_toast2('/sticky/{{p.id}}','/sticky/{{p.id}}','pin-{{p.id}}','unpin-{{p.id}}')">
 					<i class="fas fa-thumbtack fa-rotate--45 fa-fw mr-2"></i>Unpin
 				</button>
 			</li>
 			{% if v==p.author %}
-			<li class="p-2 text-sm hover:bg-gray-800 hover:shadow-inner focus:bg-gray-800 focus:shadow-inner rounded {% if p.distinguish_level %}hidden{% endif %}">
-				<button id="distinguish-{{p.id}}" onclick="post_toast2('/distinguish/{{p.id}}','distinguish-{{p.id}}','undistinguish-{{p.id}}')">
+			<li class="{% if p.distinguish_level %}hidden{% endif %}">
+				<button id="distinguish-{{p.id}}" class="w-full text-left p-2 text-sm hover:bg-gray-800 hover:shadow-inner focus:bg-gray-800 focus:shadow-inner rounded" onclick="post_toast2('/distinguish/{{p.id}}','distinguish-{{p.id}}','undistinguish-{{p.id}}')">
 					<i class="fas fa-crown fa-fw mr-2"></i>Distinguish
 				</button>
 			</li>
-			<li class="p-2 text-sm hover:bg-gray-800 hover:shadow-inner focus:bg-gray-800 focus:shadow-inner rounded {% if not p.distinguish_level %}hidden{% endif %}">
-				<button id="undistinguish-{{p.id}}" onclick="post_toast2('/distinguish/{{p.id}}','distinguish-{{p.id}}','undistinguish-{{p.id}}')">
+			<li class="{% if not p.distinguish_level %}hidden{% endif %}">
+				<button id="undistinguish-{{p.id}}" class="w-full text-left p-2 text-sm hover:bg-gray-800 hover:shadow-inner focus:bg-gray-800 focus:shadow-inner rounded" onclick="post_toast2('/distinguish/{{p.id}}','distinguish-{{p.id}}','undistinguish-{{p.id}}')">
 					<i class="fas fa-crown fa-fw mr-2"></i>Undistinguish
 				</button>
 			</li>
 			{% endif %}
 			{% endif %}
 			{% if v %}
+			<!-- Requires admin and author -->
 			{% if v.admin_level >=3 or v.id == p.author.id and v.paid_dues %}
-			<li class="p-2 text-sm hover:bg-gray-800 hover:shadow-inner focus:bg-gray-800 focus:shadow-inner rounded {% if p.club %}hidden{% endif %}">
-				<button id="club-{{p.id}}" onclick="post_toast2('/toggle_club/{{p.id}}','club-{{p.id}}','unclub-{{p.id}}')">
+			<li class="{% if p.club %}hidden{% endif %}">
+				<button id="club-{{p.id}}" class="w-full text-left p-2 text-sm hover:bg-gray-800 hover:shadow-inner focus:bg-gray-800 focus:shadow-inner rounded" onclick="post_toast2('/toggle_club/{{p.id}}','club-{{p.id}}','unclub-{{p.id}}')">
 					<i class="fas fa-eye-slash fa-fw mr-2"></i>Mark club
 				</button>
 			</li>
-			<li class="p-2 text-sm hover:bg-gray-800 hover:shadow-inner focus:bg-gray-800 focus:shadow-inner rounded {% if not p.club %}hidden{% endif %}">
-				<button id="unclub-{{p.id}}" onclick="post_toast2('/toggle_club/{{p.id}}','club-{{p.id}}','unclub-{{p.id}}')"><i class="fas fa-eye fa-fw mr-2"></i>Unmark club
+			<li class="{% if not p.club %}hidden{% endif %}">
+				<button id="unclub-{{p.id}}" class="w-full text-left p-2 text-sm hover:bg-gray-800 hover:shadow-inner focus:bg-gray-800 focus:shadow-inner rounded" onclick="post_toast2('/toggle_club/{{p.id}}','club-{{p.id}}','unclub-{{p.id}}')"><i class="fas fa-eye fa-fw mr-2"></i>Unmark club
 				</button>
 			</li>
 			{% endif %}
-
+			<!-- Requires admin and post has been reported -->
 			{% if v.admin_level >=3 %}
 			{% if "/reported/" in request.path %}
 			{% if v.id != p.author.id %}
-			<li class="p-2 text-sm hover:bg-red-700 hover:shadow-inner focus:bg-red-700 focus:shadow-inner rounded">
-				<button class="list-inline-item text-red-500" onclick="post_toast('/ban_post/{{p.id}}')">
+			<li>
+				<button class="list-inline-item text-red-500" class="w-full text-left p-2 text-sm hover:bg-gray-800 hover:shadow-inner focus:bg-gray-800 focus:shadow-inner rounded" onclick="post_toast('/ban_post/{{p.id}}')">
 					<i class="fas fa-ban"></i>Remove
 				</button>
 			</li>
 			{% endif %}
-			<li class="p-2 text-sm hover:bg-green-700 hover:shadow-inner focus:bg-green-700 focus:shadow-inner rounded">
-				<button class="list-inline-item text-success" onclick="post_toast('/unban_post/{{p.id}}')">
+			<li>
+				<button class="w-full text-left p-2 text-sm hover:bg-gray-800 hover:shadow-inner focus:bg-gray-800 focus:shadow-inner rounded" onclick="post_toast('/unban_post/{{p.id}}')">
 					<i class="fas fa-check fa-fw mr-2"></i>Approve
 				</button>
 			</li>
 			{% else %}
 			{% if v.id != p.author.id %}
-			<li class="p-2 text-sm hover:bg-red-700 hover:shadow-inner focus:bg-red-700 focus:shadow-inner rounded">
-				<button id="remove-{{p.id}}" class="{% if p.is_banned %}hidden{% endif %} text-red-500" onclick="post_toast2('/ban_post/{{p.id}}','remove-{{p.id}}','approve-{{p.id}}')">
+			<li class="{% if p.is_banned %}hidden{% endif %}">
+				<button id="remove-{{p.id}}" class="w-full text-left p-2 text-sm hover:bg-gray-800 hover:shadow-inner focus:bg-gray-800 focus:shadow-inner rounded" onclick="post_toast2('/ban_post/{{p.id}}','remove-{{p.id}}','approve-{{p.id}}')">
 					<i class="fas fa-ban fa-fw mr-2"></i>Remove
 				</button>
 			</li>
 			{% endif %}
-			<li class="p-2 text-sm hover:bg-green-700 hover:shadow-inner focus:bg-green-700 focus:shadow-inner rounded">
-				<button id="approve-{{p.id}}" class="{% if not p.is_banned %}hidden{% endif %} text-success" onclick="post_toast2('/unban_post/{{p.id}}','remove-{{p.id}}','approve-{{p.id}}')"><i class="fas fa-check fa-fw mr-2"></i>Approve
+			<li class="{% if not p.is_banned %}hidden{% endif %}">
+				<button id="approve-{{p.id}}" class="w-full text-left p-2 text-sm hover:bg-gray-800 hover:shadow-inner focus:bg-gray-800 focus:shadow-inner rounded" onclick="post_toast2('/unban_post/{{p.id}}','remove-{{p.id}}','approve-{{p.id}}')"><i class="fas fa-check fa-fw mr-2"></i>Approve
 				</button>
 			</li>
 			{% endif %}
@@ -180,15 +185,18 @@
 		</div>
 	</li>
 
+	<!-- Requires admin or author -->
 	{% if v.id == p.author_id or v.admin_level >= 3 %}
 	<a id="mark-{{p.id}}" class="{% if p.over_18 %}hidden{% endif %} list-inline-item text-red-500" href="javascript:void(0)" onclick="post_toast2('/toggle_post_nsfw/{{p.id}}','mark-{{p.id}}','unmark-{{p.id}}')"><i class="fas fa-eye-evil"></i>Mark +18</a>
 	<a id="unmark-{{p.id}}" class="{% if not p.over_18 %}hidden{% endif %} list-inline-item text-red-500" href="javascript:void(0)" onclick="post_toast2('/toggle_post_nsfw/{{p.id}}','mark-{{p.id}}','unmark-{{p.id}}')"><i class="fas fa-eye-evil fa-fw mr-2"></i>Unmark +18</a>
 	{% endif %}
 
+	<!-- Requires super admin -->
 	{% if v.admin_level >= 4 and p.oauth_app %}
 	<a class="list-inline-item" href="{{p.oauth_app.permalink}}" ><i class="fas fa-code fa-fw mr-2"></i>API App</a>
 	{% endif %}
 
+	<!-- Requires not author -->
 	{% if not v.id==p.author_id and not p.award_count('ghosts') %}								
 	<a id="unblock-{{p.id}}" class="text-success list-inline-item {% if not p.is_blocking %} hidden{% endif %}" href="javascript:void(0)" onclick="post_toast2('/settings/unblock?username={{p.author.username}}','block-{{p.id}}','unblock-{{p.id}}')"><i class="fas fa-eye text-success"></i>Unblock user</a>
 
