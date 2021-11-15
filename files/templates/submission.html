@@ -207,9 +207,17 @@
 {% block subHeader %}
 	<div class="container mx-auto px-4 grid grid-cols-12 h-16 rounded-t-md bg-gradient-to-t from-gray-800 to-gray-700 shadow-inset-white-10">
 		<div class="col-span-full flex items-center">
-			<div class="">
-				test
-			</div>
+			<ul class="flex space-x-2 text-sm text-gray-400 text-shadow">
+				<li>
+					<a href="/" class="hover:underline">Home</a>
+				<li>
+				<li>
+					<i class="fal fa-long-arrow-right fa-fw fa-sm"></i>
+				</li>
+				<li>
+					<a href="#" class="hover:underline">{{p.author.username}}'s post</a>
+				<li>
+			</ul>
 		</div>
 	</div>
 {% endblock %}
