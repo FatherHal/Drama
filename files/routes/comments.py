@@ -38,7 +38,7 @@ def post_pid_comment_cid(cid, pid=None, anything=None, v=None):
 	comment = get_comment(cid, v=v)
 	
 	if v and request.values.get("read"):
-		notif = g.db.query(Notification).options(lazyload('*')).filter_by(comment_id=cid, user_id=v.id, read=False).first()
+		notif = g.db.query(Notification).filter_by(comment_id=cid, user_id=v.id, read=False).first()
 		if notif:
 			notif.read = True
 			g.db.add(notif)
@@ -46,12 +46,12 @@ def post_pid_comment_cid(cid, pid=None, anything=None, v=None):
 
 	if comment.post and comment.post.club and not (v and v.paid_dues): abort(403)
 
-	if not comment.parent_submission and not (v and (comment.author.id == v.id or comment.sentto == v.id)) and not (v and v.admin_level == 6) : abort(403)
+	if not comment.parent_submission and not (v and (comment.author.id == v.id or comment.sentto == v.id)) and not (v and v.admin_level > 1) : abort(403)
 	
 	if not pid:
 		if comment.parent_submission: pid = comment.parent_submission
 		elif "rama" in request.host: pid = 6489
-		elif 'pcmemes.net' in request.host: pid = 382
+		elif 'pcmemes.net' in request.host: pid = 2487
 		else: pid = 1
 	
 	try: pid = int(pid)
@@ -77,7 +77,7 @@ def post_pid_comment_cid(cid, pid=None, anything=None, v=None):
 	sort=request.values.get("sort", defaultsortingcomments)
 
 	if v:
-		votes = g.db.query(CommentVote).options(lazyload('*')).filter_by(user_id=v.id).subquery()
+		votes = g.db.query(CommentVote).filter_by(user_id=v.id).subquery()
 
 		blocking = v.blocking.subquery()
 
@@ -90,9 +90,8 @@ def post_pid_comment_cid(cid, pid=None, anything=None, v=None):
 			blocked.c.id,
 		)
 
-		if not (v and v.shadowbanned) and not (v and v.admin_level == 6):
-			shadowbanned = [x[0] for x in g.db.query(User.id).options(lazyload('*')).filter(User.shadowbanned != None).all()]
-			comments = comments.filter(Comment.author_id.notin_(shadowbanned))
+		if not (v and v.shadowbanned) and not (v and v.admin_level > 1):
+			comments = comments.join(User, User.id == Comment.author_id).filter(User.shadowbanned == None)
 		 
 		comments=comments.filter(
 			Comment.parent_submission == post.id,
@@ -123,7 +122,7 @@ def post_pid_comment_cid(cid, pid=None, anything=None, v=None):
 			
 	if request.headers.get("Authorization"): return top_comment.json
 	else: 
-		if post.is_banned and not (v and (v.admin_level >= 3 or post.author_id == v.id)): template = "submission_banned.html"
+		if post.is_banned and not (v and (v.admin_level > 1 or post.author_id == v.id)): template = "submission_banned.html"
 		else: template = "submission.html"
 		return render_template(template, v=v, p=post, sort=sort, linked_comment=comment, comment_info=comment_info, render_replies=True)
 
@@ -134,7 +133,9 @@ def post_pid_comment_cid(cid, pid=None, anything=None, v=None):
 @is_not_banned
 @validate_formkey
 def api_comment(v):
-	if request.content_length > 4 * 1024 * 1024: return "Max file size is 4 MB.", 413
+	if v and v.patron:
+		if request.content_length > 8 * 1024 * 1024: return "Max file size is 8 MB.", 413
+	elif request.content_length > 4 * 1024 * 1024: return "Max file size is 4 MB.", 413
 
 	parent_submission = request.values.get("submission").strip()
 	parent_fullname = request.values.get("parent_fullname").strip()
@@ -153,7 +154,6 @@ def api_comment(v):
 	else: abort(400)
 
 	body = request.values.get("body", "").strip()[:10000]
-	body = body.strip()
 
 	if v.marseyawarded:
 		if time.time() > v.marseyawarded:
@@ -167,29 +167,23 @@ def api_comment(v):
 	
 	for i in re.finditer('^(https:\/\/.*\.(png|jpg|jpeg|gif|webp|PNG|JPG|JPEG|GIF|WEBP|9999))', body, re.MULTILINE):
 		if "wikipedia" not in i.group(1): body = body.replace(i.group(1), f'![]({i.group(1)})')
-	body = re.sub('([^\n])\n([^\n])', r'\1\n\n\2', body)
 
-	body_md = body
 	options = []
-	for i in re.finditer('\s*\$\$([^\$\n]+)\$\$\s*', body_md):
+	for i in re.finditer('\s*\$\$([^\$\n]+)\$\$\s*', body):
 		options.append(i.group(1))
-		body_md = body_md.replace(i.group(0), "")
+		body = body.replace(i.group(0), "")
 
 	if request.files.get("file") and request.headers.get("cf-ipcountry") != "T1":
 		file=request.files["file"]
 		if not file.content_type.startswith('image/'): return {"error": "That wasn't an image!"}, 400
 
-		name = f'/images/{int(time.time())}{secrets.token_urlsafe(2)}.gif'
+		name = f'/images/{int(time.time())}{secrets.token_urlsafe(2)}.webp'
 		file.save(name)
 		url = request.host_url[:-1] + process_image(name)
 		
-		body = request.values.get("body") + f"\n![]({url})"
-		body = re.sub('([^\n])\n([^\n])', r'\1\n\n\2', body)
-		body_md = CustomRenderer().render(mistletoe.Document(body))
-		body_html = sanitize(body_md)
-	else:
-		body_md = CustomRenderer().render(mistletoe.Document(body_md))
-		body_html = sanitize(body_md)
+		body += f"\n\n![]({url})"
+
+	body_html = sanitize(CustomRenderer().render(mistletoe.Document(body)))
 
 	if v.marseyawarded and len(list(re.finditer('>[^<\s+]|[^>\s+]<', body_html))) > 0: return {"error":"You can only type marseys!"}, 403
 
@@ -201,15 +195,15 @@ def api_comment(v):
 		if ban.reason: reason += f" {ban.reason}"
 		return {"error": reason}, 401
 
-	existing = g.db.query(Comment).options(lazyload('*')).filter(Comment.author_id == v.id,
+	existing = g.db.query(Comment.id).filter(Comment.author_id == v.id,
 															 Comment.deleted_utc == 0,
 															 Comment.parent_comment_id == parent_comment_id,
 															 Comment.parent_submission == parent_submission,
 															 Comment.body == body
 															 ).first()
-	if existing: return {"error": f"You already made that comment: {existing.permalink}"}, 409
+	if existing: return {"error": f"You already made that comment: /comment/{existing.id}"}, 409
 
-	if parent.author.any_block_exists(v) and not v.admin_level>=3: return {"error": "You can't reply to users who have blocked you, or users you have blocked."}, 403
+	if parent.author.any_block_exists(v) and v.admin_level < 2: return {"error": "You can't reply to users who have blocked you, or users you have blocked."}, 403
 
 	is_bot = request.headers.get("Authorization")
 
@@ -217,10 +211,7 @@ def api_comment(v):
 		now = int(time.time())
 		cutoff = now - 60 * 60 * 24
 
-		similar_comments = g.db.query(Comment
-										).options(
-			lazyload('*')
-		).filter(
+		similar_comments = g.db.query(Comment).filter(
 			Comment.author_id == v.id,
 			Comment.body.op(
 				'<->')(body) < app.config["COMMENT_SPAM_SIMILAR_THRESHOLD"],
@@ -246,7 +237,7 @@ def api_comment(v):
 
 			for comment in similar_comments:
 				comment.is_banned = True
-				comment.ban_reason = "Automatic spam removal. This happened because the post's creator submitted too much similar content too quickly."
+				comment.ban_reason = "AutoJanny"
 				g.db.add(comment)
 				ma=ModAction(
 					user_id=AUTOJANNY_ACCOUNT,
@@ -293,11 +284,14 @@ def api_comment(v):
 		if level == 1: basedguy = get_account(c.post.author_id)
 		else: basedguy = get_account(c.parent_comment.author_id)
 		basedguy.basedcount += 1
-		if pill: basedguy.pills += f"{pill.group(1)}, "
+		if pill:
+			if basedguy.pills: basedguy.pills += f", {pill.group(1)}"
+			else: basedguy.pills += f"{pill.group(1)}"
 		g.db.add(basedguy)
 
-		body2 = BASED_MSG.format(username=basedguy.username, basedcount=basedguy.basedcount, pills=basedguy.pills)
-
+		body2 = f"@{basedguy.username}'s Based Count has increased by 1. Their Based Count is now {basedguy.basedcount}."
+		if basedguy.pills: body2 += f"\n\nPills: {basedguy.pills}"
+		
 		body_md = CustomRenderer().render(mistletoe.Document(body2))
 
 		body_based_html = sanitize(body_md)
@@ -309,7 +303,6 @@ def api_comment(v):
 			level=level+1,
 			is_bot=True,
 			body_html=body_based_html,
-			body=body2
 			)
 
 		g.db.add(c_based)
@@ -322,7 +315,7 @@ def api_comment(v):
 	if "rama" in request.host and "ivermectin" in c.body.lower():
 
 		c.is_banned = True
-		c.ban_reason = "ToS Violation"
+		c.ban_reason = "AutoJanny"
 
 		g.db.add(c)
 
@@ -341,7 +334,6 @@ def api_comment(v):
 			level=level+1,
 			is_bot=True,
 			body_html=body_jannied_html,
-			body=body2
 			)
 
 		g.db.add(c_jannied)
@@ -355,7 +347,7 @@ def api_comment(v):
 	if v.agendaposter and not v.marseyawarded and "trans lives matter" not in c.body_html.lower():
 
 		c.is_banned = True
-		c.ban_reason = "ToS Violation"
+		c.ban_reason = "AutoJanny"
 
 		g.db.add(c)
 
@@ -375,7 +367,6 @@ def api_comment(v):
 			level=level+1,
 			is_bot=True,
 			body_html=body_jannied_html,
-			body=body
 			)
 
 		g.db.add(c_jannied)
@@ -399,7 +390,6 @@ def api_comment(v):
 	if "rama" in request.host and len(c.body) >= 1000 and "<" not in body and "</blockquote>" not in body_html:
 	
 		body = random.choice(LONGPOST_REPLIES)
-		body = re.sub('([^\n])\n([^\n])', r'\1\n\n\2', body)
 		body_md = CustomRenderer().render(mistletoe.Document(body))
 		body_html2 = sanitize(body_md)
 
@@ -411,12 +401,11 @@ def api_comment(v):
 			level=level+1,
 			is_bot=True,
 			body_html=body_html2,
-			body=body
 			)
 
 		g.db.add(c2)
 
-		longpostbot = g.db.query(User).options(lazyload('*')).filter_by(id = LONGPOSTBOT_ACCOUNT).first()
+		longpostbot = g.db.query(User).filter_by(id = LONGPOSTBOT_ACCOUNT).first()
 		longpostbot.comment_count += 1
 		longpostbot.coins += 1
 		g.db.add(longpostbot)
@@ -449,7 +438,6 @@ def api_comment(v):
 			level=level+1,
 			is_bot=True,
 			body_html=body_html2,
-			body=body
 			)
 
 		g.db.add(c2)
@@ -476,7 +464,6 @@ def api_comment(v):
 			level=level+2,
 			is_bot=True,
 			body_html=body_html2,
-			body=body,
 			)
 
 		g.db.add(c3)
@@ -499,12 +486,11 @@ def api_comment(v):
 			level=level+3,
 			is_bot=True,
 			body_html=body_html2,
-			body=body
 			)
 
 		g.db.add(c4)
 
-		zozbot = g.db.query(User).options(lazyload('*')).filter_by(id = ZOZBOT_ACCOUNT).first()
+		zozbot = g.db.query(User).filter_by(id = ZOZBOT_ACCOUNT).first()
 		zozbot.comment_count += 3
 		zozbot.coins += 3
 		g.db.add(zozbot)
@@ -523,7 +509,7 @@ def api_comment(v):
 	if not v.shadowbanned:
 		notify_users = set()
 		
-		for x in g.db.query(Subscription.user_id).options(lazyload('*')).filter_by(submission_id=c.parent_submission).all(): notify_users.add(x[0])
+		for x in g.db.query(Subscription.user_id).filter_by(submission_id=c.parent_submission).all(): notify_users.add(x[0])
 		
 		if parent.author.id != v.id: notify_users.add(parent.author.id)
 
@@ -533,13 +519,17 @@ def api_comment(v):
 		for mention in mentions:
 			username = mention["href"].split("@")[1]
 
-			user = g.db.query(User).options(lazyload('*')).filter_by(username=username).first()
+			user = g.db.query(User).filter_by(username=username).first()
 
 			if user:
 				if v.any_block_exists(user): continue
 				if user.id != v.id: notify_users.add(user.id)
 
-		if request.host == 'rdrama.net' and 'aevann' in body_html.lower() and 1 not in notify_users: notify_users.add(1)
+		if request.host == 'rdrama.net':
+			if 'aevann' in body_html.lower() and 1 not in notify_users: notify_users.add(1)
+			if 'joan' in body_html.lower() and 28 not in notify_users: notify_users.add(28)
+			if 'carp' in body_html.lower() and 995 not in notify_users: notify_users.add(995)
+			if ('idio3' in body_html.lower() or 'idio ' in body_html.lower()) and 30 not in notify_users: notify_users.add(30)
 
 		for x in notify_users:
 			n = Notification(comment_id=c.id, user_id=x)
@@ -555,7 +545,7 @@ def api_comment(v):
 					  'notification': {
 							'title': f'New reply by @{v.username}',
 							'body': c.body,
-							'deep_link': f'http://{site}{c.permalink}?context=10&read=true#context',
+							'deep_link': f'http://{site}{c.permalink}?context=9&read=true#context',
 					  },
 					},
 				  },
@@ -575,7 +565,7 @@ def api_comment(v):
 
 	cache.delete_memoized(comment_idlist)
 
-	v.comment_count = g.db.query(Comment.id).options(lazyload('*')).filter(Comment.author_id == v.id, Comment.parent_submission != None).filter_by(is_banned=False, deleted_utc=0).count()
+	v.comment_count = g.db.query(Comment.id).filter(Comment.author_id == v.id, Comment.parent_submission != None).filter_by(is_banned=False, deleted_utc=0).count()
 	g.db.add(v)
 
 	parent_post.comment_count += 1
@@ -595,7 +585,9 @@ def api_comment(v):
 @auth_required
 @validate_formkey
 def edit_comment(cid, v):
-	if request.content_length > 4 * 1024 * 1024: return "Max file size is 4 MB.", 413
+	if v and v.patron:
+		if request.content_length > 8 * 1024 * 1024: return "Max file size is 8 MB.", 413
+	elif request.content_length > 4 * 1024 * 1024: return "Max file size is 4 MB.", 413
 
 	c = get_comment(cid, v=v)
 
@@ -642,8 +634,6 @@ def edit_comment(cid, v):
 			cutoff = now - 60 * 60 * 24
 
 			similar_comments = g.db.query(Comment
-											).options(
-				lazyload('*')
 			).filter(
 				Comment.author_id == v.id,
 				Comment.body.op(
@@ -668,7 +658,7 @@ def edit_comment(cid, v):
 
 				for comment in similar_comments:
 					comment.is_banned = True
-					comment.ban_reason = "Automatic spam removal. This happened because the post's creator submitted too much similar content too quickly."
+					comment.ban_reason = "AutoJanny"
 					g.db.add(comment)
 
 				return {"error": "Too much spam!"}, 403
@@ -677,11 +667,11 @@ def edit_comment(cid, v):
 			file=request.files["file"]
 			if not file.content_type.startswith('image/'): return {"error": "That wasn't an image!"}, 400
 
-			name = f'/images/{int(time.time())}{secrets.token_urlsafe(2)}.gif'
+			name = f'/images/{int(time.time())}{secrets.token_urlsafe(2)}.webp'
 			file.save(name)
 			url = request.host_url[:-1] + process_image(name)
 
-			body += f"\n![]({url})"
+			body += f"\n\n![]({url})"
 			body_md = CustomRenderer().render(mistletoe.Document(body))
 			body_html = sanitize(body_md)
 
@@ -693,7 +683,7 @@ def edit_comment(cid, v):
 		if "rama" in request.host and "ivermectin" in c.body_html.lower():
 
 			c.is_banned = True
-			c.ban_reason = "ToS Violation"
+			c.ban_reason = "AutoJanny"
 
 			g.db.add(c)
 
@@ -712,7 +702,6 @@ def edit_comment(cid, v):
 				level=c.level+1,
 				is_bot=True,
 				body_html=body_jannied_html,
-				body=body
 				)
 
 			g.db.add(c_jannied)
@@ -727,7 +716,7 @@ def edit_comment(cid, v):
 		if v.agendaposter and not v.marseyawarded and "trans lives matter" not in c.body_html.lower():
 
 			c.is_banned = True
-			c.ban_reason = "ToS Violation"
+			c.ban_reason = "AutoJanny"
 
 			g.db.add(c)
 
@@ -747,7 +736,6 @@ def edit_comment(cid, v):
 				level=c.level+1,
 				is_bot=True,
 				body_html=body_jannied_html,
-				body=body,
 				)
 
 			g.db.add(c_jannied)
@@ -769,23 +757,26 @@ def edit_comment(cid, v):
 		mentions = soup.find_all("a", href=re.compile("^/@(\w+)"))
 		
 		if len(mentions) > 0:
-			notifs = g.db.query(Notification)
 			for mention in mentions:
 				username = mention["href"].split("@")[1]
 
-				user = g.db.query(User).options(lazyload('*')).filter_by(username=username).first()
+				user = g.db.query(User).filter_by(username=username).first()
 
 				if user:
 					if v.any_block_exists(user): continue
 					if user.id != v.id: notify_users.add(user.id)
 
-			if request.host == 'rdrama.net' and 'aevann' in body_html.lower() and 1 not in notify_users: notify_users.add(1)
+		if request.host == 'rdrama.net':
+			if 'aevann' in body_html.lower() and 1 not in notify_users: notify_users.add(1)
+			if 'joan' in body_html.lower() and 28 not in notify_users: notify_users.add(28)
+			if 'carp' in body_html.lower() and 995 not in notify_users: notify_users.add(995)
+			if ('idio3' in body_html.lower() or 'idio ' in body_html.lower()) and 30 not in notify_users: notify_users.add(30)
 
-			for x in notify_users:
-				notif = notifs.filter_by(comment_id=c.id, user_id=x).first()
-				if not notif:
-					n = Notification(comment_id=c.id, user_id=x)
-					g.db.add(n)
+		for x in notify_users:
+			notif = g.db.query(Notification).filter_by(comment_id=c.id, user_id=x).first()
+			if not notif:
+				n = Notification(comment_id=c.id, user_id=x)
+				g.db.add(n)
 
 		g.db.commit()
 
@@ -798,7 +789,7 @@ def edit_comment(cid, v):
 @validate_formkey
 def delete_comment(cid, v):
 
-	c = g.db.query(Comment).options(lazyload('*')).filter_by(id=cid).first()
+	c = g.db.query(Comment).filter_by(id=cid).first()
 
 	if not c: abort(404)
 
@@ -820,7 +811,7 @@ def delete_comment(cid, v):
 @validate_formkey
 def undelete_comment(cid, v):
 
-	c = g.db.query(Comment).options(lazyload('*')).filter_by(id=cid).first()
+	c = g.db.query(Comment).filter_by(id=cid).first()
 
 	if not c:
 		abort(404)
@@ -851,16 +842,16 @@ def toggle_pin_comment(cid, v):
 	if comment.is_pinned:
 		if comment.is_pinned.startswith("t:"): abort(403)
 		else:
-			if v.admin_level == 6 or comment.is_pinned.endswith(" (OP)"): comment.is_pinned = None
+			if v.admin_level > 1 or comment.is_pinned.endswith(" (OP)"): comment.is_pinned = None
 			else: abort(403)
 	else:
-		if v.admin_level == 6: comment.is_pinned = v.username
+		if v.admin_level > 1: comment.is_pinned = v.username
 		else: comment.is_pinned = v.username + " (OP)"
 
 	g.db.add(comment)
 	g.db.flush()
 
-	if v.admin_level == 6:
+	if v.admin_level > 1:
 		ma=ModAction(
 			kind="pin_comment" if comment.is_pinned else "unpin_comment",
 			user_id=v.id,
@@ -870,8 +861,18 @@ def toggle_pin_comment(cid, v):
 
 	g.db.commit()
 
-	if comment.is_pinned: return {"message": "Comment pinned!"}
-	else: return {"message": "Comment unpinned!"}
+	if comment.is_pinned:
+		message = f"@{v.username} has pinned your [comment]({comment.permalink})!"
+		existing = g.db.query(Comment.id).filter(Comment.author_id == NOTIFICATIONS_ACCOUNT, Comment.body == message).first()
+		if not existing: send_notification(comment.author_id, message)
+		g.db.commit()
+		return {"message": "Comment pinned!"}
+	else:
+		message = f"@{v.username} has unpinned your [comment]({comment.permalink})!"
+		existing = g.db.query(Comment.id).filter(Comment.author_id == NOTIFICATIONS_ACCOUNT, Comment.body == message).first()
+		if not existing: send_notification(comment.author_id, message)
+		g.db.commit()
+		return {"message": "Comment unpinned!"}
 	
 	
 @app.post("/save_comment/<cid>")
@@ -882,11 +883,12 @@ def save_comment(cid, v):
 
 	comment=get_comment(cid)
 
-	save=g.db.query(SaveRelationship).options(lazyload('*')).filter_by(user_id=v.id, comment_id=comment.id, type=2).first()
+	save=g.db.query(SaveRelationship).filter_by(user_id=v.id, comment_id=comment.id, type=2).first()
 
 	if not save:
 		new_save=SaveRelationship(user_id=v.id, comment_id=comment.id, type=2)
 		g.db.add(new_save)
+
 		try: g.db.commit()
 		except: g.db.rollback()
 
@@ -900,7 +902,7 @@ def unsave_comment(cid, v):
 
 	comment=get_comment(cid)
 
-	save=g.db.query(SaveRelationship).options(lazyload('*')).filter_by(user_id=v.id, comment_id=comment.id, type=2).first()
+	save=g.db.query(SaveRelationship).filter_by(user_id=v.id, comment_id=comment.id, type=2).first()
 
 	if save:
 		g.db.delete(save)

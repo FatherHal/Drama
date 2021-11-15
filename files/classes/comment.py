@@ -2,19 +2,17 @@ from os import environ
 import re
 import time
 from urllib.parse import urlencode, urlparse, parse_qs
-
 from flask import *
 from sqlalchemy import *
-from sqlalchemy.orm import relationship, deferred, lazyload
-
+from sqlalchemy.orm import relationship
 from files.__main__ import Base
 from files.classes.votes import CommentVote
 from files.helpers.const import AUTOPOLLER_ACCOUNT, censor_slurs
 from files.helpers.lazy import lazy
 from .flags import CommentFlag
+from random import randint
 
 site = environ.get("DOMAIN").strip()
-
 
 class Comment(Base):
 
@@ -42,12 +40,11 @@ class Comment(Base):
 	oauth_app = relationship("OauthApp", viewonly=True)
 	upvotes = Column(Integer, default=1)
 	downvotes = Column(Integer, default=0)
-	body = deferred(Column(String))
-	body_html = deferred(Column(String))
+	body = Column(String)
+	body_html = Column(String)
 	ban_reason = Column(String)
 
 	post = relationship("Submission", viewonly=True)
-	flags = relationship("CommentFlag", lazy="dynamic", viewonly=True)
 	author = relationship("User", primaryjoin="User.id==Comment.author_id")
 	senttouser = relationship("User", primaryjoin="User.id==Comment.sentto", viewonly=True)
 	parent_comment = relationship("Comment", remote_side=[id], viewonly=True)
@@ -65,9 +62,15 @@ class Comment(Base):
 
 		return f"<Comment(id={self.id})>"
 
+	@property
+	@lazy
+	def flags(self):
+		return g.db.query(CommentFlag).filter_by(comment_id=self.id)
+
+	@lazy
 	def poll_voted(self, v):
 		if v:
-			vote = g.db.query(CommentVote).options(lazyload('*')).filter_by(user_id=v.id, comment_id=self.id).first()
+			vote = g.db.query(CommentVote).filter_by(user_id=v.id, comment_id=self.id).first()
 			if vote: return vote.vote_type
 			else: return None
 		else: return None
@@ -76,6 +79,12 @@ class Comment(Base):
 	@lazy
 	def options(self):
 		return [x for x in self.child_comments if x.author_id == AUTOPOLLER_ACCOUNT]
+
+	def total_poll_voted(self, v):
+		if v:
+			for option in self.options:
+				if option.poll_voted(v): return True
+		return False
 
 	@property
 	@lazy
@@ -203,10 +212,10 @@ class Comment(Base):
 	@property
 	@lazy
 	def permalink(self):
-		if self.post and self.post.club: return f"/comment/{self.id}/"
+		if self.post and self.post.club: return f"/comment/{self.id}?context=9#context"
 
-		if self.post: return f"{self.post.permalink}/{self.id}/"
-		else: return f"/comment/{self.id}/"
+		if self.post: return f"{self.post.permalink}/{self.id}?context=9#context"
+		else: return f"/comment/{self.id}?context=9#context"
 
 	@property
 	@lazy
@@ -316,6 +325,13 @@ class Comment(Base):
 				url_noquery = url.split('?')[0]
 				body = body.replace(url, f"{url_noquery}?{urlencode(p, True)}")
 
+		if v and v.shadowbanned and v.id == self.author_id and 86400 > time.time() - self.created_utc > 600:
+			rand = randint(1,16)
+			if self.upvotes < rand:
+				self.upvotes = rand
+				g.db.add(self)
+				g.db.commit()
+
 		return body
 
 	def plainbody(self, v):
@@ -347,13 +363,13 @@ class Comment(Base):
 	@lazy
 	def collapse_for_user(self, v):
 
-		if self.over_18 and not (v and v.over_18) and not self.post.over_18: return True
+		if self.over_18 and not (v and v.over_18) and not (self.post and self.post.over_18): return True
 
 		if not v: return False
 			
 		if v.filter_words and self.body and any([x in self.body for x in v.filter_words]): return True
 		
-		if self.is_banned or (self.author and self.author.shadowbanned): return True
+		if self.is_banned: return True
 		
 		return False
 

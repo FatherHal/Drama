@@ -113,8 +113,6 @@ def send_unblock_notif(vid, user, text):
 
 def send_admin(vid, text):
 
-	text = re.sub('([^\n])\n([^\n])', r'\1\n\n\2', text)
-
 	text_html = Renderer().render(mistletoe.Document(text))
 
 	text_html = sanitize(text_html, True)
@@ -129,7 +127,7 @@ def send_admin(vid, text):
 	g.db.add(new_comment)
 	g.db.flush()
 
-	admins = g.db.query(User).options(lazyload('*')).filter(User.admin_level > 0).all()
+	admins = g.db.query(User).filter(User.admin_level > 0).all()
 	for admin in admins:
 		notif = Notification(comment_id=new_comment.id, user_id=admin.id)
 		g.db.add(notif)
