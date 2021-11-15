@@ -353,7 +353,7 @@ mark,
   background-color: #fcf8e3;
 }
 
-.list-inline {
+/*.list-inline {
   padding-left: 0;
   list-style: none;
 }
@@ -1003,7 +1003,7 @@ fieldset:disabled a.btn {
 }
 .btn-block + .btn-block {
   margin-top: 0.5rem;
-}
+}*/
 
 input[type=submit].btn-block,
 input[type=reset].btn-block,
