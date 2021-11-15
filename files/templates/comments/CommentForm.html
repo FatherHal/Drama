@@ -1,47 +1,51 @@
+{% if v %}
 <form id="reply-to-{{p.fullname}}" class="input-group" action="/comment" method="post">
 	<input type="hidden" name="formkey" value="{{v.formkey}}">
 	<input type="hidden" name="parent_fullname" value="t2_{{p.id}}">
 	<input id="reply-form-submission-{{p.fullname}}" type="hidden" name="submission" value="{{p.id}}">
-	{% if v %}
-	<textarea maxlength="10000" id="reply-form-body-{{p.fullname}}" data-fullname="{{p.fullname}}" class="comment-box rounded-sm border border-gray-700 border-opacity-40 bg-gray-700 bg-opacity-20 focus:bg-opacity-100 focus:bg-white hover:bg-opacity-30 shadow-inner w-full p-2" id="comment-form" name="body" form="reply-to-{{p.fullname}}" aria-label="With textarea" placeholder="Add your comment..." rows="3"></textarea>
-	{% endif %}
-	<div class="flex">
-		<ul class="flex space-x-2">
+	<div class="comment-box rounded-sm border border-gray-800 bg-gray-700 bg-opacity-20 hover:bg-opacity-30 shadow-inner w-full">
+		<textarea maxlength="10000" id="reply-form-body-{{p.fullname}}" data-fullname="{{p.fullname}}" class="w-full p-3 text-gray-900 bg-transparent focus:bg-white" id="comment-form" name="body" form="reply-to-{{p.fullname}}" aria-label="With textarea" placeholder="Add your comment..." rows="3"></textarea>
+		<ul class="flex space-x-3 px-3 py-2 border-t border-dashed border-gray-700">
 			<li>
-				<button class="btn btn-secondary format d-inline-block m-0" onclick="makeBold('reply-form-body-{{p.fullname}}')">
-					<i class="fas fa-bold" data-bs-toggle="tooltip" data-bs-placement="bottom"  title="" data-bs-original-title="Bold"></i>
+				<button class="text-gray-500 hover:text-gray-400" onclick="makeBold('reply-form-body-{{p.fullname}}')">
+					<i class="fas fa-bold fa-fw fa-sm" data-bs-toggle="tooltip" data-bs-placement="bottom"  title="" data-bs-original-title="Bold"></i>
 				</button>
 			</li>
 			<li>
-				<button class="btn btn-secondary format d-inline-block m-0" onclick="makeItalics('reply-form-body-{{p.fullname}}')">
-					<i class="fas fa-italic" data-bs-toggle="tooltip" data-bs-placement="bottom"  title="" data-bs-original-title="Italicize"></i>
+				<button class="text-gray-500 hover:text-gray-400" onclick="makeItalics('reply-form-body-{{p.fullname}}')">
+					<i class="fas fa-italic fa-fw fa-sm" data-bs-toggle="tooltip" data-bs-placement="bottom"  title="" data-bs-original-title="Italicize"></i>
 				</button>
 			</li>
 			<li>
-				<button class="btn btn-secondary format d-inline-block m-0" onclick="makeQuote('reply-form-body-{{p.fullname}}')">
-					<i class="fas fa-quote-right" data-bs-toggle="tooltip" data-bs-placement="bottom"  title="" data-bs-original-title="Quote"></i>
+				<button class="text-gray-500 hover:text-gray-400" onclick="makeQuote('reply-form-body-{{p.fullname}}')">
+					<i class="fas fa-quote-right fa-fw fa-sm" data-bs-toggle="tooltip" data-bs-placement="bottom"  title="" data-bs-original-title="Quote"></i>
 				</button>
 			</li>
 			<li>
-				<button id="gif-reply-btn-{{p.fullname}}" class="btn btn-secondary format d-inline-block m-0" onclick="commentForm('reply-form-body-{{p.fullname}}');getGif()">
-					<span class="font-weight-bolder text-uppercase" aria-hidden="true" data-bs-toggle="modal" data-bs-target="#gifModal" data-bs-toggle="tooltip" data-bs-placement="bottom" title="" data-bs-original-title="Add GIF">GIF</span>
+				<button id="gif-reply-btn-{{p.fullname}}" class="text-gray-500 hover:text-gray-400" onclick="commentForm('reply-form-body-{{p.fullname}}');getGif()">
+					<span class="font-bold text-uppercase" aria-hidden="true" data-bs-toggle="modal" data-bs-target="#gifModal" data-bs-toggle="tooltip" data-bs-placement="bottom" title="" data-bs-original-title="Add GIF">GIF</span>
 				</button>
 			</li>
 			<li>
-				<button id="emoji-reply-btn-{{p.fullname}}" onclick="loadEmojis('reply-form-body-{{p.fullname}}')" aria-hidden="true" data-bs-toggle="modal" data-bs-target="#emojiModal" data-bs-toggle="tooltip" data-bs-placement="bottom" title="" data-bs-original-title="Add Emoji">	<i class="fas fa-smile-beam"></i>
+				<button id="emoji-reply-btn-{{p.fullname}}" class="text-gray-500 hover:text-gray-400" onclick="loadEmojis('reply-form-body-{{p.fullname}}')" aria-hidden="true" data-bs-toggle="modal" data-bs-target="#emojiModal" data-bs-toggle="tooltip" data-bs-placement="bottom" title="" data-bs-original-title="Add Emoji">	<i class="fas fa-smile-beam fa-fw fa-sm"></i>
 				</button>
 			</li>
 			{% if v %}
 			<li>
-				<button>
-					<div id="filename-show-reply-{{p.fullname}}"><i class="far fa-image"></i></div>
+				<button class="text-gray-500 hover:text-gray-400">
+					<div id="filename-show-reply-{{p.fullname}}">
+						<i class="far fa-image"></i>
+					</div>
 					<input id="file-upload-reply-{{p.fullname}}" type="file" name="file" accept="image/*" onchange="document.getElementById('filename-show-reply-{{p.fullname}}').innerHTML='image';" hidden>
 				</button>
 			</li>
 			{% endif %}
 		</ul>
+	</div>
+	<div class="flex w-full justify-end">
 		<button id="save-reply-to-{{p.fullname}}" form="reply-to-{{p.fullname}}" class="ml-auto flex items-center justify-center px-3 py-2 rounded font-bold text-white text-sm text-shadow bg-gradient-to-t from-pink-700 to-pink-500 border border-pink-600" onclick="post_comment('{{p.fullname}}', '{{p.id}}')">
 			Comment
 		</button>
 	</div>
 </form>
+{% endif %}
