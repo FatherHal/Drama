@@ -3,19 +3,18 @@ import random
 import re
 import time
 from urllib.parse import urlparse
-
 from flask import render_template
 from sqlalchemy import *
-from sqlalchemy.orm import relationship, deferred
-
+from sqlalchemy.orm import relationship
 from files.__main__ import Base
 from files.helpers.const import AUTOPOLLER_ACCOUNT, censor_slurs, TROLLTITLES
 from files.helpers.lazy import lazy
 from .flags import Flag
+from .comment import Comment
+from flask import g
 
 site = environ.get("DOMAIN").strip()
 site_name = environ.get("SITE_NAME").strip()
-
 
 class Submission(Base):
 	__tablename__ = "submissions"
@@ -46,13 +45,11 @@ class Submission(Base):
 	title = Column(String)
 	title_html = Column(String)
 	url = Column(String)
-	body = deferred(Column(String))
-	body_html = deferred(Column(String))
+	body = Column(String)
+	body_html = Column(String)
 	ban_reason = Column(String)
 	embed_url = Column(String)
 
-	comments = relationship("Comment", lazy="dynamic", primaryjoin="Comment.parent_submission==Submission.id", viewonly=True)
-	flags = relationship("Flag", lazy="dynamic", viewonly=True)
 	author = relationship("User", primaryjoin="Submission.author_id==User.id")
 	oauth_app = relationship("OauthApp", viewonly=True)
 	approved_by = relationship("User", uselist=False, primaryjoin="Submission.is_approved==User.id", viewonly=True)
@@ -75,8 +72,19 @@ class Submission(Base):
 
 	@property
 	@lazy
+	def flags(self):
+		return g.db.query(Flag).filter_by(post_id=self.id)
+
+	@property
+	@lazy
 	def options(self):
-		return self.comments.filter_by(author_id = AUTOPOLLER_ACCOUNT, level=1)
+		return g.db.query(Comment).filter_by(parent_submission = self.id, author_id = AUTOPOLLER_ACCOUNT, level=1)
+
+	def total_poll_voted(self, v):
+		if v:
+			for option in self.options:
+				if option.poll_voted(v): return True
+		return False
 
 	@property
 	@lazy
@@ -202,11 +210,11 @@ class Submission(Base):
 	@property
 	@lazy
 	def thumb_url(self):
-		if self.over_18: return f"http://{site}/assets/images/nsfw.gif"
-		elif not self.url: return f"http://{site}/assets/images/{site_name}/default_text.gif"
+		if self.over_18: return f"http://{site}/assets/images/nsfw.webp"
+		elif not self.url: return f"http://{site}/assets/images/{site_name}/default_text.webp"
 		elif self.thumburl: return self.thumburl
-		elif "youtu.be" in self.domain or "youtube.com" in self.domain: return f"http://{site}/assets/images/default_thumb_yt.gif"
-		else: return f"http://{site}/assets/images/default_thumb_link.gif"
+		elif "youtu.be" in self.domain or "youtube.com" in self.domain: return f"http://{site}/assets/images/default_thumb_yt.webp"
+		else: return f"http://{site}/assets/images/default_thumb_link.webp"
 
 	@property
 	@lazy
@@ -316,6 +324,14 @@ class Submission(Base):
 
 		if v and not v.oldreddit: body = body.replace("old.reddit.com", "reddit.com")
 		if v and v.nitter: body = body.replace("www.twitter.com", "nitter.net").replace("twitter.com", "nitter.net")
+
+		if v and v.shadowbanned and v.id == self.author_id and 86400 > time.time() - self.created_utc > 600:
+			rand = random.randint(1,16)
+			if self.upvotes < rand:
+				self.upvotes = rand
+				g.db.add(self)
+				g.db.commit()
+
 		return body
 
 	def plainbody(self, v):
@@ -330,7 +346,7 @@ class Submission(Base):
 
 	@lazy
 	def realtitle(self, v):
-		if self.club and not (v and v.paid_dues) and not (v and v.admin_level == 6):
+		if self.club and not (v and v.paid_dues) and not (v and v.admin_level > 1):
 			if v: return random.choice(TROLLTITLES).format(username=v.username)
 			else: return 'COUNTRY CLUB MEMBERS ONLY'
 		elif self.title_html: title = self.title_html
@@ -342,7 +358,7 @@ class Submission(Base):
 
 	@lazy
 	def plaintitle(self, v):
-		if self.club and not (v and v.paid_dues) and not (v and v.admin_level == 6):
+		if self.club and not (v and v.paid_dues) and not (v and v.admin_level > 1):
 			if v: return random.choice(TROLLTITLES).format(username=v.username)
 			else: return 'COUNTRY CLUB MEMBERS ONLY'
 		else: title = self.title

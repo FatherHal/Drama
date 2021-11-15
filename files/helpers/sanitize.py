@@ -75,15 +75,27 @@ no_images = ['b',
 						'span',
 						]
 
-allowed_attributes = {'*': ['href', 'style', 'src', 'class', 'title', 'rel', 'data-bs-original-name', 'direction']}
+def sanitize_marquee(tag, name, value):
+	if name in allowed_attributes['*'] or name in ['direction', 'behavior', 'scrollamount']: return True
+
+	if name in ['height', 'width']:
+		try: value = int(value.replace('px', ''))
+		except: return False
+		if 0 < value <= 250: return True
+
+	return False
+
+allowed_attributes = {
+		'*': ['href', 'style', 'src', 'class', 'title', 'rel', 'data-bs-original-name'],
+		'marquee': sanitize_marquee}
 
 allowed_protocols = ['http', 'https']
 
-allowed_styles = ['color', 'font-weight', 'transform', '-webkit-transform']
+allowed_styles = ['color', 'background-color', 'font-weight', 'transform', '-webkit-transform']
 
 def sanitize(sanitized, noimages=False):
 
-	sanitized = sanitized.replace("\ufeff", "").replace("m.youtube.com", "youtube.com")
+	sanitized = sanitized.replace("\ufeff", "").replace("m.youtube.com", "youtube.com").replace("𒐪","")
 
 	for i in re.finditer('https://i.imgur.com/(([^_]*?)\.(jpg|png|jpeg))', sanitized):
 		sanitized = sanitized.replace(i.group(1), i.group(2) + "_d." + i.group(3) + "?maxwidth=9999")
@@ -115,17 +127,17 @@ def sanitize(sanitized, noimages=False):
 
 	for tag in soup.find_all("img"):
 
-		if tag.get("src") and "profile-pic-20" not in tag.get("class", ""):
+		if tag.get("src") and "pp20" not in tag.get("class", ""):
 
-			tag["rel"] = "nofollow noopener noreferrer"
+			if site not in tag["src"] and not tag["src"].startswith('/'): tag["rel"] = "nofollow noopener noreferrer"
 			tag["class"] = "in-comment-image"
 			tag["loading"] = "lazy"
 			tag["data-src"] = tag["src"]
-			tag["src"] = "/assets/images/loading.gif"
+			tag["src"] = "/assets/images/loading.webp"
 
 			link = soup.new_tag("a")
 			link["href"] = tag["data-src"]
-			link["rel"] = "nofollow noopener noreferrer"
+			if site not in link["href"] and not link["href"].startswith('/'): link["rel"] = "nofollow noopener noreferrer"
 			link["target"] = "_blank"
 			link["onclick"] = f"expandDesktopImage('{tag['data-src']}');"
 			link["data-bs-toggle"] = "modal"
@@ -134,9 +146,9 @@ def sanitize(sanitized, noimages=False):
 			tag.wrap(link)
 
 	for tag in soup.find_all("a"):
-		if tag["href"]:
+		if tag.get("href"):
 			tag["target"] = "_blank"
-			if site not in tag["href"]: tag["rel"] = "nofollow noopener noreferrer"
+			if site not in tag["href"] and not tag["href"].startswith('/'): tag["rel"] = "nofollow noopener noreferrer"
 
 			if re.match("https?://\S+", str(tag.string)):
 				try: tag.string = tag["href"]
@@ -157,7 +169,7 @@ def sanitize(sanitized, noimages=False):
 	
 	for i in re.finditer("[^a]>\s*(:!?\w+:\s*)+<\/", sanitized):
 		old = i.group(0)
-		if 'marseylong1' in old or 'marseylong2' in old: new = old.lower().replace(">", " class='mb-0'>")
+		if 'marseylong1' in old or 'marseylong2' in old or 'marseyllama1' in old or 'marseyllama2' in old: new = old.lower().replace(">", " class='mb-0'>")
 		else: new = old.lower()
 		for i in re.finditer('(?<!"):([^ ]{1,30}?):', new):
 			emoji = i.group(1).lower()
@@ -225,8 +237,8 @@ def sanitize(sanitized, noimages=False):
 		sanitized = sanitized.replace(rd, "https://old.reddit.com/")
 
 	sanitized = sanitized.replace("old.reddit.com/gallery", "new.reddit.com/gallery")
-	sanitized = re.sub(' (https:\/\/[^ <>]*)', r' <a target="_blank"  rel="nofollow noopener noreferrer" href="\1">\1</a>', sanitized)
-	sanitized = re.sub('<p>(https:\/\/[^ <>]*)', r'<p><a target="_blank"  rel="nofollow noopener noreferrer" href="\1">\1</a></p>', sanitized)
+	sanitized = re.sub(' (https:\/\/[^ <>]*)', r' <a target="_blank" rel="nofollow noopener noreferrer" href="\1">\1</a>', sanitized)
+	sanitized = re.sub('<p>(https:\/\/[^ <>]*)', r'<p><a target="_blank" rel="nofollow noopener noreferrer" href="\1">\1</a></p>', sanitized)
 
 	return sanitized
 

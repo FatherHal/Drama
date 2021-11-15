@@ -8,9 +8,9 @@ services:
       - "./:/service"
     environment:
       - DATABASE_URL=postgresql://postgres@postgres:5432
-      - MASTER_KEY=${MASTER_KEY:-KTVciAUQFpFh2WdJ/oiHJlxl6FvzRZp8kYzAAv3l2OA=}
+      - MASTER_KEY=XuxGqp5NyygJrM24b5gt3YgyvFVGdQnwVDwLzLwpu3eQwY
       - REDIS_URL=redis://redis
-      - DOMAIN=0.0.0.0
+      - DOMAIN=127.0.0.1
       - SITE_NAME=Drama
       - GIPHY_KEY=3435tdfsdudebussylmaoxxt43
       - FORCE_HTTPS=0
@@ -58,9 +58,11 @@ services:
 
   postgres:
     image: postgres:12.3
+    # command: ["postgres", "-c", "log_statement=all"]
+    # uncomment this if u wanna output all SQL queries to the console
     volumes:
       - "./schema.sql:/docker-entrypoint-initdb.d/00-schema.sql"
-      - "./seed-db.sql:/docker-entrypoint-initdb.d/01-schema.sql"
+      - "./seed-db.sql:/docker-entrypoint-initdb.d/10-seed-db.sql"
     environment:
       - POSTGRES_HOST_AUTH_METHOD=trust
     ports:
