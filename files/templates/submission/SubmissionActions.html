@@ -52,7 +52,7 @@
 			<button type="button" id="dropdownPostActions" data-bs-toggle="dropdown" aria-expanded="false">
 				<i class="fas fa-ellipsis-h fa-fw"></i>
 			</button>
-			<ul class="dropdown-menu bg-gray-800 rounded-md shadow-lg" aria-labelledby="dropdownPostActions">
+			<ul class="dropdown-menu w-56 bg-gray-800 rounded-md shadow-lg" aria-labelledby="dropdownPostActions">
 			{% if v %}
 			<li class="p-2 text-sm hover:bg-gray-900 hover:shadow-inner focus:bg-gray-900 focus:shadow-inner rounded {% if p.id in v.subscribed_idlist() %}hidden{% endif %}">
 				<button id="subscribe-{{p.id}}" onclick="post_toast2('/subscribe/{{p.id}}','subscribe-{{p.id}}','unsubscribe-{{p.id}}')">
@@ -81,7 +81,7 @@
 				</a>
 			</li>
 			<li>
-				<hr class="my-2 border-t border-gray-800"/>
+				<hr class="my-2 border-t border-gray-900"/>
 			</li>
 			{% if v and v.id==p.author_id %}
 			<li class="p-2 text-sm hover:bg-gray-900 hover:shadow-inner focus:bg-gray-900 focus:shadow-inner rounded {% if p.is_stickied %}hidden{% endif %}">
@@ -109,7 +109,7 @@
 			{% endif %}
 			{% endif %}
 			<li>
-				<hr class="my-2 border-t border-gray-800"/>
+				<hr class="my-2 border-t border-gray-900"/>
 			</li>
 			{% if v and v.admin_level>=3 %}
 			<li class="p-2 text-sm hover:bg-gray-900 hover:shadow-inner focus:bg-gray-900 focus:shadow-inner rounded {% if p.stickied %}hidden{% endif %}">
