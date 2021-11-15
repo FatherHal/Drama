@@ -5678,9 +5678,9 @@ img.emoji {
     background: None !important;
   }
 
-  textarea {
+  /*textarea {
     resize: both !important;
-  }
+  }*/
 
   .jumbotron-guild {
     position: relative;
