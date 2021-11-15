@@ -533,7 +533,7 @@
 
 			<div class="flex justify-between">
 				<div class="text-lg text-gray-200 font-bold font-heading">
-					{{ p.comment_count }} {% 'Comment' if p.comment_count == 1 else 'Comments' %}
+					{{ p.comment_count }} {{ 'Comment' if p.comment_count == 1 else 'Comments' }}
 				</div>
 			</div>
 
