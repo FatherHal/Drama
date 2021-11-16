@@ -48,7 +48,7 @@
 
             <a href="#" class="relative text-gray-500 px-3 py-2.5 rounded text-sm font-medium" aria-current="page">
               <i class="fas fa-comments-alt fa-fw fa-lg text-gray-500 mr-2"></i>
-              Comments {% 'page2' if request.path == '/comments' else 'page' %}
+              Comments {{ 'page2' if request.path == '/comments' else 'page' }}
             </a>
 
             <a href="#" class="relative text-gray-500 px-3 py-2.5 rounded text-sm font-medium">
