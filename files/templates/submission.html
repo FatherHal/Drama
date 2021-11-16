@@ -205,22 +205,24 @@
 {% endblock %}
 
 {% block subHeader %}
-	<div class="container mx-auto px-4 h-16 grid grid-cols-12 rounded-t-md bg-gradient-to-t from-gray-800 to-gray-700 sub-header-shadow">
+	<div class="container mx-auto px-4 py-4 grid grid-cols-12 rounded-t-md bg-gradient-to-t from-gray-800 to-gray-700 sub-header-shadow">
 		<div class="col-span-full flex items-center">
-			<h1 class="font-bold text-xl font-heading leading-normal">
+			<div>
+				<h1 class="font-bold text-xl font-heading leading-normal">
 					Thread
-			</h1>
-			<ul class="ml-4 flex space-x-2 text-sm text-gray-400 text-shadow mt-1">
-				<li>
-					<a href="/" class="hover:underline">Home</a>
-				</li>
-				<li>
-					<i class="fal fa-long-arrow-right fa-fw fa-sm"></i>
-				</li>
-				<li>
-					<a href="#" class="text-gray-300 hover:underline">{{p.author.username}}'s post</a>
-				<li>
-			</ul>
+				</h1>
+				<ul class="flex space-x-2 text-sm text-gray-400 text-shadow mt-1">
+					<li>
+						<a href="/" class="hover:underline">Home</a>
+					</li>
+					<li>
+						<i class="fal fa-long-arrow-right fa-fw fa-sm"></i>
+					</li>
+					<li>
+						<a href="#" class="text-gray-300 hover:underline">{{p.author.username}}'s post</a>
+					<li>
+				</ul>
+			</div>
 		</div>
 	</div>
 {% endblock %}
