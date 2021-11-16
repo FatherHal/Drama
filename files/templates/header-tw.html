@@ -76,7 +76,7 @@
         <!-- Profile dropdown -->
         <div class="ml-3 relative">
           <div>
-            <button type="button" class="bg-gray-800 flex items-center text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white" id="user-menu-button" aria-expanded="false" aria-haspopup="true">
+            <button type="button" class="bg-transparent flex items-center text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white" id="user-menu-button" aria-expanded="false" aria-haspopup="true">
               <span class="sr-only">Open user menu</span>
               <img class="h-8 w-8 rounded-sm" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="">
               <div style="color: #{{v.namecolor}}" class="text-sm font-heading pl-2 ">
@@ -108,7 +108,7 @@
         </div>
 
         <!-- Notifications -->
-        <a class="block bg-gray-800 p-1 rounded-full text-gray-500 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white" href="/notifications{% if v.notifications_count and v.notifications_count == v.post_notifications_count %}?posts=true{% endif %}">
+        <a class="block bg-transparent p-1 rounded-full text-gray-500 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white" href="/notifications{% if v.notifications_count and v.notifications_count == v.post_notifications_count %}?posts=true{% endif %}">
           <span class="sr-only">View notifications</span>
           <!-- Heroicon name: outline/bell -->
           <div class="relative">
@@ -123,7 +123,7 @@
         </a>
 
         <!-- Notifications -->
-        <button type="button" class="bg-gray-800 p-1 rounded-full text-gray-500 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">
+        <button type="button" class="bg-transparent p-1 rounded-full text-gray-500 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">
           <span class="sr-only">View notifications</span>
           <!-- Heroicon name: outline/bell -->
           <i class="fas fa-user-friends fa-fw fa-lg"></i>
