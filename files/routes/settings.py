@@ -793,7 +793,7 @@ def settings_css(v):
 @auth_required
 def settings_profilecss_get(v):
 
-	if v.truecoins < 1000 and not v.patron and v.admin_level < 6: return f"You must have +1000 {COINS_NAME} or be a patron to set profile css."
+	if v.truecoins < 1000 and not v.patron and v.admin_level == 0 : return f"You must have +1000 {COINS_NAME} or be a patron to set profile css."
 	return render_template("settings_profilecss.html", v=v)
 
 @app.post("/settings/profilecss")
@@ -907,6 +907,8 @@ def settings_content_get(v):
 @auth_required
 @validate_formkey
 def settings_name_change(v):
+
+	if v.is_banned and not v.unban_utc: return {"error": "forbidden."}, 403
 
 	new_name=request.values.get("name").strip()
 
