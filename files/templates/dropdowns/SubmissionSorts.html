@@ -1,6 +1,6 @@
 			<div class="flex items-center space-x-2">
-				<div class="dropdown dropdown-actions">
-					<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+				<div class="dropdown">
+					<button class="block px-4 py-2 bg-gradient-to-t active:bg-gradient-to-b from-gray-800 to-gray-700 border border-gray-900 rounded-md text-shadow shadow-inset-white-10 text-sm font-bold text-gray-300 active:text-gray-500 active:shadow-inner dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 						{% if t=="day" %}<i class="fas fa-calendar-day mr-1"></i>{% endif %}
 						{% if t=="week" %}<i class="fas fa-calendar-week mr-1"></i>{% endif %}
 						{% if t=="month" %}<i class="fas fa-calendar-alt mr-1"></i>{% endif %}
@@ -11,32 +11,32 @@
 					<ul class="dropdown-menu w-56 bg-gray-900 rounded-md shadow-lg" aria-labelledby="dropdownMenuButton" x-placement="bottom-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 31px, 0px);">
 						<li class="{% if t=='hour' %}hidden{% endif %}">
 							<a class="dropdown-item block w-full text-left p-2 text-sm hover:bg-gray-800 hover:shadow-inner focus:bg-gray-800 focus:shadow-inner rounded" href="?sort={{sort}}&t=hour">
-								<i class="fas fa-clock fa-fw mr-2"></i>Hour
+								<i class="fas fa-clock text-gray-500 fa-sm text-gray-500 fa-sm fa-fw mr-2"></i>Hour
 							</a>
 						</li>
 						<li class="{% if t=='day' %}hidden{% endif %}">
 							<a class="dropdown-item block w-full text-left p-2 text-sm hover:bg-gray-800 hover:shadow-inner focus:bg-gray-800 focus:shadow-inner rounded" href="?sort={{sort}}&t=day">
-								<i class="fas fa-calendar-day fa-fw mr-2"></i>Day
+								<i class="fas fa-calendar-day text-gray-500 fa-sm fa-fw mr-2"></i>Day
 							</a>
 						</li>
 						<li class="{% if t=='week' %}hidden{% endif %}">
 							<a class="dropdown-item block w-full text-left p-2 text-sm hover:bg-gray-800 hover:shadow-inner focus:bg-gray-800 focus:shadow-inner rounded" href="?sort={{sort}}&t=week">
-								<i class="fas fa-calendar-week fa-fw mr-2"></i>Week
+								<i class="fas fa-calendar-week text-gray-500 fa-sm fa-fw mr-2"></i>Week
 							</a>
 						</li>
 						<li class="{% if t=='month' %}hidden{% endif %}">
 							<a class="dropdown-item block w-full text-left p-2 text-sm hover:bg-gray-800 hover:shadow-inner focus:bg-gray-800 focus:shadow-inner rounded" href="?sort={{sort}}&t=month">
-								<i class="fas fa-calendar-alt fa-fw mr-2"></i>Month
+								<i class="fas fa-calendar-alt text-gray-500 fa-sm fa-fw mr-2"></i>Month
 							</a>
 						</li>
 						<li class="{% if t=='year' %}hidden{% endif %}">
 							<a class="dropdown-item block w-full text-left p-2 text-sm hover:bg-gray-800 hover:shadow-inner focus:bg-gray-800 focus:shadow-inner rounded" href="?sort={{sort}}&t=year">
-								<i class="fas fa-calendar fa-fw mr-2"></i>Year
+								<i class="fas fa-calendar text-gray-500 fa-sm fa-fw mr-2"></i>Year
 							</a>
 						</li>
 						<li class="{% if t=='all' %}hidden{% endif %}">
 							<a class="dropdown-item block w-full text-left p-2 text-sm hover:bg-gray-800 hover:shadow-inner focus:bg-gray-800 focus:shadow-inner rounded" href="?sort={{sort}}&t=all">
-								<i class="fas fa-infinity fa-fw mr-2"></i>All
+								<i class="fas fa-infinity text-gray-500 fa-sm fa-fw mr-2"></i>All
 							</a>
 						</li>
 					</ul>
@@ -55,37 +55,37 @@
 					<div class="dropdown-menu w-56 bg-gray-900 rounded-md shadow-lg" aria-labelledby="dropdownMenuButton" x-placement="bottom-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 31px, 0px);">
 						{% if sort != "hot" %}
 						<a class="dropdown-item block w-full text-left p-2 text-sm hover:bg-gray-800 hover:shadow-inner focus:bg-gray-800 focus:shadow-inner rounded" href="?sort=hot&t={{t}}">
-							<i class="fas fa-fire fa-fw mr-2"></i>Hot
+							<i class="fas fa-fire text-gray-500 fa-sm fa-fw mr-2"></i>Hot
 						</a>
 						{% endif %}
 						{% if sort != "top" %}
 						<a class="dropdown-item block w-full text-left p-2 text-sm hover:bg-gray-800 hover:shadow-inner focus:bg-gray-800 focus:shadow-inner rounded" href="?sort=top&t={{t}}">
-							<i class="fas fa-arrow-alt-circle-up fa-fw mr-2"></i>Top
+							<i class="fas fa-arrow-alt-circle-up text-gray-500 fa-sm fa-fw mr-2"></i>Top
 						</a>
 						{% endif %}
 						{% if sort != "bottom" %}
 						<a class="dropdown-item block w-full text-left p-2 text-sm hover:bg-gray-800 hover:shadow-inner focus:bg-gray-800 focus:shadow-inner rounded" href="?sort=bottom&t={{t}}">
-							<i class="fas fa-arrow-alt-circle-down fa-fw mr-2"></i>Bottom
+							<i class="fas fa-arrow-alt-circle-down text-gray-500 fa-sm fa-fw mr-2"></i>Bottom
 						</a>
 						{% endif %}
 						{% if sort != "new" %}
 						<a class="dropdown-item block w-full text-left p-2 text-sm hover:bg-gray-800 hover:shadow-inner focus:bg-gray-800 focus:shadow-inner rounded" href="?sort=new&t={{t}}">
-							<i class="fas fa-sparkles fa-fw mr-2"></i>New
+							<i class="fas fa-sparkles text-gray-500 fa-sm fa-fw mr-2"></i>New
 						</a>
 						{% endif %}
 						{% if sort != "old" %}
 						<a class="dropdown-item block w-full text-left p-2 text-sm hover:bg-gray-800 hover:shadow-inner focus:bg-gray-800 focus:shadow-inner rounded" href="?sort=old&t={{t}}">
-							<i class="fas fa-book fa-fw mr-2"></i>Old
+							<i class="fas fa-book text-gray-500 fa-sm fa-fw mr-2"></i>Old
 						</a>
 						{% endif %}
 						{% if sort != "controversial" %}
 						<a class="dropdown-item block w-full text-left p-2 text-sm hover:bg-gray-800 hover:shadow-inner focus:bg-gray-800 focus:shadow-inner rounded" href="?sort=controversial&t={{t}}">
-							<i class="fas fa-bullhorn fa-fw mr-2"></i>Controversial
+							<i class="fas fa-bullhorn text-gray-500 fa-sm fa-fw mr-2"></i>Controversial
 						</a>
 						{% endif %}
 						{% if sort != "comments" %}
 						<a class="dropdown-item block w-full text-left p-2 text-sm hover:bg-gray-800 hover:shadow-inner focus:bg-gray-800 focus:shadow-inner rounded" href="?sort=comments&t={{t}}">
-							<i class="fas fa-comments fa-fw mr-2"></i>Comments
+							<i class="fas fa-comments text-gray-500 fa-sm fa-fw mr-2"></i>Comments
 						</a>
 						{% endif %}
 					</div>
