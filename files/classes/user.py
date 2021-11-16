@@ -1,4 +1,4 @@
-from sqlalchemy.orm import deferred, aliased
+from sqlalchemy.orm import deferred, aliased, lazyload
 from secrets import token_hex
 import pyotp
 from files.helpers.discord import remove_user
