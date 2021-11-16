@@ -512,7 +512,7 @@ def buy(v, award):
 @auth_required
 def award_post(pid, v):
 
-	if v.is_suspended and v.unban_utc == 0: return {"error": "forbidden."}, 403
+	if v.is_banned and not v.unban_utc: return {"error": "forbidden."}, 403
 
 	kind = request.values.get("kind", "").strip()
 	
@@ -756,11 +756,9 @@ def admin_userawards_get(v):
 
 @app.post("/admin/awards")
 @limiter.limit("1/second")
-@auth_required
+@admin_level_required(2)
 @validate_formkey
 def admin_userawards_post(v):
-
-	if v.admin_level < 6: abort(403)
 
 	try: u = request.values.get("username").strip()
 	except: abort(404)

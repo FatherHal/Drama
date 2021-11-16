@@ -27,9 +27,9 @@ def check_for_alts(current_id):
 	session["history"] = list(past_accs)
 
 	for past_id in session["history"]:
-
-		if past_id == current_id:
-			continue
+		
+		if past_id == DAD_ID or current_id == DAD_ID: break
+		if past_id == current_id: continue
 
 		check1 = g.db.query(Alt).filter_by(
 			user1=current_id, user2=past_id).first()
@@ -71,8 +71,6 @@ def check_for_alts(current_id):
 				new_alt = Alt(user1=a.user2, user2=current_id)
 				g.db.add(new_alt)
 				g.db.flush()
-
-# login post procedure
 
 
 @app.post("/login")
@@ -332,7 +330,7 @@ def sign_up_post(v):
 		email=email,
 		created_utc=int(time.time()),
 		referred_by=ref_id or None,
-		ban_evade =  int(any([x.is_banned and not x.unban_utc for x in g.db.query(User).filter(User.id.in_(tuple(session.get("history", [])))).all() if x])),
+		ban_evade =  int(any([(x.is_banned or x.shadowbanned) and not x.unban_utc for x in g.db.query(User).filter(User.id.in_(tuple(session.get("history", [])))).all() if x])),
 		agendaposter = any([x.agendaposter for x in g.db.query(User).filter(User.id.in_(tuple(session.get("history", [])))).all() if x]),
 		club_banned=any([x.club_banned for x in g.db.query(User).filter(User.id.in_(tuple(session.get("history", [])))).all() if x])
 		)
