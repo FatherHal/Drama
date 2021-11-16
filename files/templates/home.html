@@ -7,6 +7,9 @@
 				<h1 class="font-bold text-xl font-heading leading-normal">
 					Home
 				</h1>
+				<small class="mt-1 text-gray-400">
+					{{ sort }} posts {{ 'in the last {{ t }}' if t=='all' 'from all time'  }}
+				</small>
 			</div>
 			<div class="ml-auto">
 				{% include "/dropdowns/SubmissionSorts.html" %}
