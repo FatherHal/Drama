@@ -57,9 +57,9 @@ def searchposts(v):
 
 
 
-	posts = g.db.query(Submission.id).options(lazyload('*'))
+	posts = g.db.query(Submission.id)
 	
-	if not (v and v.admin_level == 6): posts = posts.filter(Submission.private == False)
+	if not (v and v.admin_level > 1): posts = posts.filter(Submission.private == False)
 	
 	if 'q' in criteria:
 		words=criteria['q'].split()
@@ -90,13 +90,10 @@ def searchposts(v):
 				)
 			)
 
-	if not(v and v.admin_level >= 3):
-		posts = posts.filter(
-			Submission.deleted_utc == 0,
-			Submission.is_banned == False,
-			)
+	if not(v and v.admin_level > 1):
+		posts = posts.join(User, User.id==Submission.author_id).filter(User.is_private == False, Submission.deleted_utc == 0, Submission.is_banned == False)
 
-	if v and v.admin_level >= 4:
+	if v and v.admin_level > 1:
 		pass
 	elif v:
 		blocking = [x[0] for x in g.db.query(
@@ -193,9 +190,7 @@ def searchcomments(v):
 
 
 
-
-
-	comments = g.db.query(Comment.id).options(lazyload('*')).filter(Comment.parent_submission != None)
+	comments = g.db.query(Comment.id).filter(Comment.parent_submission != None)
 
 	if 'q' in criteria:
 		words=criteria['q'].split()
@@ -207,10 +202,8 @@ def searchcomments(v):
 
 	if 'author' in criteria: comments = comments.filter(Comment.author_id == get_user(criteria['author']).id)
 
-	if not(v and v.admin_level >= 3):
-		comments = comments.filter(
-			Comment.deleted_utc == 0,
-			Comment.is_banned == False)
+	if not(v and v.admin_level > 1):
+		comments = comments.join(User, User.id==Comment.author_id).filter(User.is_private == False, Comment.deleted_utc == 0, Comment.is_banned == False)
 
 	if t:
 		now = int(time.time())
@@ -272,7 +265,7 @@ def searchusers(v):
 	term=term.replace('\\','')
 	term=term.replace('_','\_')
 	
-	users=g.db.query(User).options(lazyload('*')).filter(User.username.ilike(f'%{term}%'))
+	users=g.db.query(User).filter(User.username.ilike(f'%{term}%'))
 	
 	users=users.order_by(User.username.ilike(term).desc(), User.stored_subscriber_count.desc())
 	

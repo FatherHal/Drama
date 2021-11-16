@@ -11,13 +11,87 @@ from files.mail import *
 from flask import *
 from files.__main__ import app, limiter
 from pusher_push_notifications import PushNotifications
+from collections import Counter
 
 site = environ.get("DOMAIN").strip()
 
-beams_client = PushNotifications(
-		instance_id=PUSHER_INSTANCE_ID,
-		secret_key=PUSHER_KEY,
-)
+beams_client = PushNotifications(instance_id=PUSHER_INSTANCE_ID, secret_key=PUSHER_KEY)
+
+@app.get("/@<username>/upvoters")
+@auth_desired
+def upvoters(v, username):
+	id = get_user(username).id
+
+	votes = g.db.query(Vote.user_id, func.count(Vote.user_id)).join(Submission, Vote.submission_id==Submission.id).filter(Vote.vote_type==1, Submission.author_id==id).group_by(Vote.user_id).order_by(func.count(Vote.user_id).desc()).limit(25).all()
+
+	votes2 = g.db.query(CommentVote.user_id, func.count(CommentVote.user_id)).join(Comment, CommentVote.comment_id==Comment.id).filter(CommentVote.vote_type==1, Comment.author_id==id).group_by(CommentVote.user_id).order_by(func.count(CommentVote.user_id).desc()).limit(25).all()
+
+	votes = Counter(dict(votes)) + Counter(dict(votes2))
+
+	users = g.db.query(User).filter(User.id.in_(votes.keys())).all()
+	users2 = []
+	for user in users: users2.append((user, votes[user.id]))
+
+	users = sorted(users2, key=lambda x: x[1], reverse=True)[:25]
+
+	return render_template("voters.html", v=v, users=users, name='Up', name2=f'@{username} biggest simps')
+
+@app.get("/@<username>/downvoters")
+@auth_desired
+def downvoters(v, username):
+	id = get_user(username).id
+
+	votes = g.db.query(Vote.user_id, func.count(Vote.user_id)).join(Submission, Vote.submission_id==Submission.id).filter(Vote.vote_type==-1, Submission.author_id==id).group_by(Vote.user_id).order_by(func.count(Vote.user_id).desc()).limit(25).all()
+
+	votes2 = g.db.query(CommentVote.user_id, func.count(CommentVote.user_id)).join(Comment, CommentVote.comment_id==Comment.id).filter(CommentVote.vote_type==-1, Comment.author_id==id).group_by(CommentVote.user_id).order_by(func.count(CommentVote.user_id).desc()).limit(25).all()
+
+	votes = Counter(dict(votes)) + Counter(dict(votes2))
+
+	users = g.db.query(User).filter(User.id.in_(votes.keys())).all()
+	users2 = []
+	for user in users: users2.append((user, votes[user.id]))
+
+	users = sorted(users2, key=lambda x: x[1], reverse=True)[:25]
+
+	return render_template("voters.html", v=v, users=users, name='Down', name2=f'@{username} biggest haters')
+
+@app.get("/@<username>/upvoting")
+@auth_desired
+def upvoting(v, username):
+	id = get_user(username).id
+
+	votes = g.db.query(Submission.author_id, func.count(Submission.author_id)).join(Vote, Vote.submission_id==Submission.id).filter(Vote.vote_type==1, Vote.user_id==id).group_by(Submission.author_id).order_by(func.count(Submission.author_id).desc()).limit(25).all()
+
+	votes2 = g.db.query(Comment.author_id, func.count(Comment.author_id)).join(CommentVote, CommentVote.comment_id==Comment.id).filter(CommentVote.vote_type==1, CommentVote.user_id==id).group_by(Comment.author_id).order_by(func.count(Comment.author_id).desc()).limit(25).all()
+
+	votes = Counter(dict(votes)) + Counter(dict(votes2))
+
+	users = g.db.query(User).filter(User.id.in_(votes.keys())).all()
+	users2 = []
+	for user in users: users2.append((user, votes[user.id]))
+
+	users = sorted(users2, key=lambda x: x[1], reverse=True)[:25]
+
+	return render_template("voters.html", v=v, users=users, name='Up', name2=f'Who @{username} simps for')
+
+@app.get("/@<username>/downvoting")
+@auth_desired
+def downvoting(v, username):
+	id = get_user(username).id
+
+	votes = g.db.query(Submission.author_id, func.count(Submission.author_id)).join(Vote, Vote.submission_id==Submission.id).filter(Vote.vote_type==-1, Vote.user_id==id).group_by(Submission.author_id).order_by(func.count(Submission.author_id).desc()).limit(25).all()
+
+	votes2 = g.db.query(Comment.author_id, func.count(Comment.author_id)).join(CommentVote, CommentVote.comment_id==Comment.id).filter(CommentVote.vote_type==-1, CommentVote.user_id==id).group_by(Comment.author_id).order_by(func.count(Comment.author_id).desc()).limit(25).all()
+
+	votes = Counter(dict(votes)) + Counter(dict(votes2))
+
+	users = g.db.query(User).filter(User.id.in_(votes.keys())).all()
+	users2 = []
+	for user in users: users2.append((user, votes[user.id]))
+
+	users = sorted(users2, key=lambda x: x[1], reverse=True)[:25]
+
+	return render_template("voters.html", v=v, users=users, name='Down', name2=f'Who @{username} hates')
 
 @app.post("/pay_rent")
 @limiter.limit("1/second")
@@ -76,16 +150,16 @@ def steal(v):
 @app.get("/rentoids")
 @auth_desired
 def rentoids(v):
-	users = g.db.query(User).options(lazyload('*')).filter(User.rent_utc > 0).all()
+	users = g.db.query(User).filter(User.rent_utc > 0).all()
 	return render_template("rentoids.html", v=v, users=users)
 
 
 @app.get("/thiefs")
 @auth_desired
 def thiefs(v):
-	successful = g.db.query(User).options(lazyload('*')).filter(User.steal_utc > 0).all()
-	failed = g.db.query(User).options(lazyload('*')).filter(User.fail_utc > 0).all()
-	failed2 = g.db.query(User).options(lazyload('*')).filter(User.fail2_utc > 0).all()
+	successful = g.db.query(User).filter(User.steal_utc > 0).all()
+	failed = g.db.query(User).filter(User.fail_utc > 0).all()
+	failed2 = g.db.query(User).filter(User.fail2_utc > 0).all()
 	return render_template("thiefs.html", v=v, successful=successful, failed=failed, failed2=failed2)
 
 
@@ -128,20 +202,15 @@ def transfer_coins(v, username):
 		if v.coins < amount: return {"error": f"You don't have enough {app.config['COINS_NAME']}"}, 400
 		if amount < 100: return {"error": f"You have to gift at least 100 {app.config['COINS_NAME']}."}, 400
 
-		if TAX_RATE and TAX_RECEIVER_ID:
-			tax = math.ceil(amount*TAX_RATE)
-			tax_receiver = g.db.query(User).filter_by(id=TAX_RECEIVER_ID).first()
-			tax_receiver.coins += tax
-			log_message = f"[@{v.username}]({v.url}) has transferred {amount} {app.config['COINS_NAME']} to [@{receiver.username}]({receiver.url})"
-			send_notification(TAX_RECEIVER_ID, log_message)
-			g.db.add(tax_receiver)
-			receiver.coins += amount-tax
-
+		tax = math.ceil(amount*0.015)
+		tax_receiver = g.db.query(User).filter_by(id=TAX_RECEIVER_ID).first()
+		tax_receiver.coins += tax
+		log_message = f"[@{v.username}]({v.url}) has transferred {amount} {app.config['COINS_NAME']} to [@{receiver.username}]({receiver.url})"
+		send_notification(TAX_RECEIVER_ID, log_message)
+		g.db.add(tax_receiver)
+		receiver.coins += amount-tax
 		v.coins -= amount
-
-		transfer_message = f"🤑 [@{v.username}]({v.url}) has gifted you {amount} {app.config['COINS_NAME']}!"
-		send_notification(receiver.id, transfer_message)
-
+		send_notification(receiver.id, f"🤑 [@{v.username}]({v.url}) has gifted you {amount-tax} {app.config['COINS_NAME']}!")
 		g.db.add(receiver)
 		g.db.add(v)
 
@@ -154,13 +223,13 @@ def transfer_coins(v, username):
 @app.get("/leaderboard")
 @auth_desired
 def leaderboard(v):
-	users = g.db.query(User).options(lazyload('*'))
+	users = g.db.query(User)
 	users1 = users.order_by(User.coins.desc()).limit(25).all()
-	users2 = users.order_by(User.stored_subscriber_count.desc()).limit(10).all()
+	users2 = users.order_by(User.stored_subscriber_count.desc()).limit(15).all()
 	users3 = users.order_by(User.post_count.desc()).limit(10).all()
 	users4 = users.order_by(User.comment_count.desc()).limit(10).all()
 	users5 = users.order_by(User.received_award_count.desc()).limit(10).all()
-	users7 = users.order_by(User.coins_spent.desc()).limit(10).all()
+	users7 = users.order_by(User.coins_spent.desc()).limit(20).all()
 	if 'pcmemes.net' in request.host:
 		users6 = users.order_by(User.basedcount.desc()).limit(10).all()
 		return render_template("leaderboard.html", v=v, users1=users1, users2=users2, users3=users3, users4=users4, users5=users5, users6=users6, users7=users7)
@@ -189,7 +258,7 @@ def get_profilecss(username):
 def songs(id):
 	try: id = int(id)
 	except: return "", 400
-	user = g.db.query(User).options(lazyload('*')).filter_by(id=id).first()
+	user = g.db.query(User).filter_by(id=id).first()
 	if user and user.song: return redirect(f"/song/{user.song}.mp3")
 	else: abort(404)
 
@@ -213,7 +282,7 @@ def subscribe(v, post_id):
 @limiter.limit("1/second")
 @auth_required
 def unsubscribe(v, post_id):
-	sub=g.db.query(Subscription).options(lazyload('*')).filter_by(user_id=v.id, submission_id=post_id).first()
+	sub=g.db.query(Subscription).filter_by(user_id=v.id, submission_id=post_id).first()
 	if sub:
 		g.db.delete(sub)
 		g.db.commit()
@@ -232,15 +301,13 @@ def message2(v, username):
 
 	message = request.values.get("message", "").strip()[:1000].strip()
 
-	existing = g.db.query(Comment).options(lazyload('*')).filter(Comment.author_id == v.id,
+	existing = g.db.query(Comment.id).filter(Comment.author_id == v.id,
 															Comment.sentto == user.id,
 															Comment.body == message,
 															).first()
 	if existing: return redirect('/notifications?messages=true')
 
-	text = re.sub('([^\n])\n([^\n])', r'\1\n\n\2', message)
-
-	text_html = Renderer().render(mistletoe.Document(text))
+	text_html = Renderer().render(mistletoe.Document(message))
 
 	text_html = sanitize(text_html, True)
 
@@ -248,7 +315,7 @@ def message2(v, username):
 						  parent_submission=None,
 						  level=1,
 						  sentto=user.id,
-						  body=text,
+						  body=message,
 						  body_html=text_html,
 						  )
 	g.db.add(new_comment)
@@ -291,7 +358,6 @@ def messagereply(v):
 	id = int(request.values.get("parent_id"))
 	parent = get_comment(id, v=v)
 	user = parent.author
-	message = re.sub('([^\n])\n([^\n])', r'\1\n\n\2', message)
 
 	text_html = Renderer().render(mistletoe.Document(message))
 	text_html = sanitize(text_html, True)
@@ -341,9 +407,7 @@ def api_is_available(name, v):
 		
 	name=name.replace('_','\_')
 
-	x= g.db.query(User).options(
-		lazyload('*')
-		).filter(
+	x= g.db.query(User).filter(
 		or_(
 			User.username.ilike(name),
 			User.original_username.ilike(name)
@@ -371,8 +435,8 @@ def redditor_moment_redirect(username):
 def followers(username, v):
 	u = get_user(username, v=v)
 	# if request.host == 'rdrama.net' and u.id == 147: abort(404)
-	ids = [x[0] for x in g.db.query(Follow.user_id).options(lazyload('*')).filter_by(target_id=u.id).all()]
-	users = g.db.query(User).options(lazyload('*')).filter(User.id.in_(ids)).all()
+	ids = [x[0] for x in g.db.query(Follow.user_id).filter_by(target_id=u.id).all()]
+	users = g.db.query(User).filter(User.id.in_(ids)).all()
 	return render_template("followers.html", v=v, u=u, users=users)
 
 @app.get("/@<username>/following")
@@ -380,14 +444,14 @@ def followers(username, v):
 def following(username, v):
 	u = get_user(username, v=v)
 	# if request.host == 'rdrama.net' and u.id == 147: abort(404)
-	ids = [x[0] for x in g.db.query(Follow.target_id).options(lazyload('*')).filter_by(user_id=u.id).all()]
-	users = g.db.query(User).options(lazyload('*')).filter(User.id.in_(ids)).all()
+	ids = [x[0] for x in g.db.query(Follow.target_id).filter_by(user_id=u.id).all()]
+	users = g.db.query(User).filter(User.id.in_(ids)).all()
 	return render_template("following.html", v=v, u=u, users=users)
 
 @app.get("/views")
 @auth_required
 def visitors(v):
-	if v.admin_level < 1 and not v.patron: return render_template("errors/patron.html", v=v)
+	if request.host == 'rdrama.net' and v.admin_level < 1 and not v.patron: return render_template("errors/patron.html", v=v)
 	viewers=sorted(v.viewers, key = lambda x: x.last_view_utc, reverse=True)
 	return render_template("viewers.html", v=v, viewers=viewers)
 
@@ -415,7 +479,7 @@ def u_username(username, v=None):
 		else: return render_template("userpage_reserved.html", u=u, v=v)
 
 	if v and u.id != v.id:
-		view = g.db.query(ViewerRelationship).options(lazyload('*')).filter(
+		view = g.db.query(ViewerRelationship).filter(
 			and_(
 				ViewerRelationship.viewer_id == v.id,
 				ViewerRelationship.user_id == u.id
@@ -463,10 +527,9 @@ def u_username(username, v=None):
 	next_exists = (len(ids) > 25)
 	ids = ids[:25]
 
-   # If page 1, check for sticky
 	if page == 1:
 		sticky = []
-		sticky = g.db.query(Submission).options(lazyload('*')).filter_by(is_pinned=True, author_id=u.id).all()
+		sticky = g.db.query(Submission).filter_by(is_pinned=True, author_id=u.id).all()
 		if sticky:
 			for p in sticky:
 				ids = [p.id] + ids
@@ -553,7 +616,7 @@ def u_username_comments(username, v=None):
 	t=request.values.get("t","all")
 
 
-	comments = g.db.query(Comment.id).options(lazyload('*')).filter(Comment.author_id == u.id, Comment.parent_submission != None)
+	comments = g.db.query(Comment.id).filter(Comment.author_id == u.id, Comment.parent_submission != None)
 
 	if (not v) or (v.id != u.id and v.admin_level == 0):
 		comments = comments.filter(Comment.deleted_utc == 0)
@@ -622,16 +685,16 @@ def follow_user(username, v):
 
 	if target.id==v.id: return {"error": "You can't follow yourself!"}, 400
 
-	if g.db.query(Follow).options(lazyload('*')).filter_by(user_id=v.id, target_id=target.id).first(): return {"message": "User followed!"}
+	if g.db.query(Follow).filter_by(user_id=v.id, target_id=target.id).first(): return {"message": "User followed!"}
 
 	new_follow = Follow(user_id=v.id, target_id=target.id)
 	g.db.add(new_follow)
 
 	g.db.flush()
-	target.stored_subscriber_count = g.db.query(Follow.id).options(lazyload('*')).filter_by(target_id=target.id).count()
+	target.stored_subscriber_count = g.db.query(Follow.id).filter_by(target_id=target.id).count()
 	g.db.add(target)
 
-	existing = g.db.query(Notification).options(lazyload('*')).filter_by(followsender=v.id, user_id=target.id).first()
+	existing = g.db.query(Notification.id).filter_by(followsender=v.id, user_id=target.id).first()
 	if not existing: send_follow_notif(v.id, target.id, f"@{v.username} has followed you!")
 
 	g.db.commit()
@@ -647,17 +710,17 @@ def unfollow_user(username, v):
 
 	if target.id == CARP_ID: abort(403)
 
-	follow = g.db.query(Follow).options(lazyload('*')).filter_by(user_id=v.id, target_id=target.id).first()
+	follow = g.db.query(Follow).filter_by(user_id=v.id, target_id=target.id).first()
 
 	if not follow: return {"message": "User unfollowed!"}
 
 	g.db.delete(follow)
 	
 	g.db.flush()
-	target.stored_subscriber_count = g.db.query(Follow.id).options(lazyload('*')).filter_by(target_id=target.id).count()
+	target.stored_subscriber_count = g.db.query(Follow.id).filter_by(target_id=target.id).count()
 	g.db.add(target)
 
-	existing = g.db.query(Notification).options(lazyload('*')).filter_by(unfollowsender=v.id, user_id=target.id).first()
+	existing = g.db.query(Notification.id).filter_by(unfollowsender=v.id, user_id=target.id).first()
 	if not existing: send_unfollow_notif(v.id, target.id, f"@{v.username} has unfollowed you!")
 
 	g.db.commit()
@@ -670,23 +733,24 @@ def unfollow_user(username, v):
 def remove_follow(username, v):
 	target = get_user(username)
 
-	follow = g.db.query(Follow).options(lazyload('*')).filter_by(user_id=target.id, target_id=v.id).first()
+	follow = g.db.query(Follow).filter_by(user_id=target.id, target_id=v.id).first()
 
 	if not follow: return {"message": "Follower removed!"}
 
 	g.db.delete(follow)
 	
 	g.db.flush()
-	v.stored_subscriber_count = g.db.query(Follow.id).options(lazyload('*')).filter_by(target_id=v.id).count()
+	v.stored_subscriber_count = g.db.query(Follow.id).filter_by(target_id=v.id).count()
 	g.db.add(v)
 
-	existing = g.db.query(Notification).options(lazyload('*')).filter_by(removefollowsender=v.id, user_id=target.id).first()
+	existing = g.db.query(Notification.id).filter_by(removefollowsender=v.id, user_id=target.id).first()
 	if not existing: send_unfollow_notif(v.id, target.id, f"@{v.username} has removed your follow!")
 
 	g.db.commit()
 
 	return {"message": "Follower removed!"}
 
+@app.get("/uid/<id>/pic")
 @app.get("/uid/<id>/pic/profile")
 @limiter.exempt
 def user_profile_uid(id):

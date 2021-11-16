@@ -328,10 +328,10 @@ CREATE TABLE public.comments (
     sentto integer,
     bannedfor boolean,
     removed_by integer,
-    is_pinned character varying(25),
+    is_pinned character varying(30),
     body character varying(10000),
     body_html character varying(40000),
-    ban_reason character varying(256),
+    ban_reason character varying(25),
     notifiedto integer
 );
 
@@ -646,8 +646,8 @@ CREATE TABLE public.submissions (
     url character varying(2083),
     body character varying(10000),
     body_html character varying(20000),
-    embed_url character varying(10000),
-    ban_reason character varying(128),
+    embed_url character varying(1500),
+    ban_reason character varying(25),
     title_html character varying(1500)
 );
 
@@ -752,7 +752,7 @@ CREATE TABLE public.users (
     bio_html character varying(10000),
     referred_by integer,
     is_banned integer,
-    ban_reason character varying(128),
+    ban_reason character varying(256),
     login_nonce integer,
     reserved character varying(256),
     mfa_secret character varying(32),
@@ -815,7 +815,14 @@ CREATE TABLE public.users (
     mute boolean,
     unmutable boolean,
     verifiedcolor character varying(6),
-    marseyawarded integer
+    marseyawarded integer,
+    sig character varying(200),
+    sig_html character varying(1000),
+    friends character varying(500),
+    friends_html character varying(2000),
+    sigs_disabled boolean,
+    enemies character varying(500),
+    enemies_html character varying(2000)
 );
 
 
@@ -1841,7 +1848,6 @@ ALTER TABLE ONLY public.flags
 
 ALTER TABLE ONLY public.notifications
     ADD CONSTRAINT notifications_comment_id_fkey FOREIGN KEY (comment_id) REFERENCES public.comments(id);
-
 
 --
 -- PostgreSQL database dump complete
