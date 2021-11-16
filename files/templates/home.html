@@ -8,7 +8,8 @@
 					Home
 				</h1>
 				<small class="mt-1 text-gray-400">
-					<span class="capitalize">{{ sort }}</span> posts {{ 'from all time' if t=='all' else 'in the last' }}
+					<span class="capitalize">{{ sort }}</span>
+					posts {{ 'from all time' if t=='all' else 'in the last' }}
 					{% if t != 'all' %} {{ t }}{% endif %}
 				</small>
 			</div>
