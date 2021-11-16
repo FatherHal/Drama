@@ -52,7 +52,7 @@
 						{% if sort=="comments" %}<i class="fas fa-comments mr-1"></i>{% endif %}
 						{{sort | capitalize}}
 					</button>
-					<ul class="dropdown-menu w-56 bg-gray-900 rounded-md shadow-lg" aria-labelledby="dropdownMenuButton" x-placement="bottom-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 31px, 0px);">
+					<ul class="dropdown-menu w-56 bg-gray-900 rounded-md shadow-lg" aria-labelledby="dropdownMenuButton" x-placement="bottom-start">
 						<li class="{% if sort == 'hot' %}hidden{% endif %}">
 							<a class="dropdown-item block w-full text-left p-2 text-sm hover:bg-gray-800 hover:shadow-inner focus:bg-gray-800 focus:shadow-inner rounded" href="?sort=hot&t={{t}}">
 								<i class="fas fa-fire text-gray-500 fa-sm fa-fw mr-2"></i>Hot
