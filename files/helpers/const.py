@@ -106,6 +106,7 @@ if SITE == 'rdrama.net':
 	CARP_ID = 995
 	LAWLZ_ID = 3833
 	LLM_ID = 253
+	DAD_ID = 2513
 elif SITE == "pcmemes.net":
 	BASEDBOT_ACCOUNT = 800
 	NOTIFICATIONS_ACCOUNT = 1046

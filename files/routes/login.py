@@ -3,6 +3,7 @@ from files.mail import *
 from files.__main__ import app, limiter
 from files.helpers.const import *
 import requests
+from files.helpers.const import *
 
 valid_username_regex = re.compile("^[a-zA-Z0-9_\-]{3,25}$")
 valid_password_regex = re.compile("^.{8,100}$")
@@ -27,8 +28,9 @@ def check_for_alts(current_id):
 	session["history"] = list(past_accs)
 
 	for past_id in session["history"]:
-		
-		if past_id == DAD_ID or current_id == DAD_ID: break
+
+		if 'DAD_ID' in dir():		
+			if past_id == DAD_ID or current_id == DAD_ID: break
 		if past_id == current_id: continue
 
 		check1 = g.db.query(Alt).filter_by(
