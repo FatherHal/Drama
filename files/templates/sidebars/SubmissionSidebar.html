@@ -1,0 +1,54 @@
+<div class="hidden xl:block xl:col-start-10 xl:col-end-13 flex-shrink-0 py-4">
+	<div>
+		<h2 class="font-bold text-xl font-heading leading-normal pb-2 mb-2 border-b-2 border-gray-800">
+			DramaMeter™
+		</h2>
+		<!-- Icons -->
+		<ul class="flex space-x-2 items-center mb-3">
+			<!-- Awards -->
+			{% if p.awards %}
+			{% for a in p.awards %}
+			<li>
+				<i class="{{a.class_list}}" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-original-title="{{a.title}} Award given by @{{a.user.username}}"></i>
+			</li>
+			{% endfor %}
+			{% endif %}
+			<!-- Banned -->
+			{% if p.bannedfor and p.author.banned_by %}
+			<li>
+				<i class="fad fa-gavel text-danger" data-bs-toggle="tooltip" data-bs-placement="bottom" title="" data-bs-original-title="User was banned for this post by @{{p.author.banned_by.username}}"></i>
+			</li>
+			{% endif %}	
+			<!-- Stickied -->
+			{% if p.stickied %}
+			<li>
+				<i id="pinned-{{p.id}}" class="fas fa-thumbtack fa-rotate--45 fa-fw text-admin" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-original-title="Pinned {% if p.stickied.startswith('t:') %}until {{p.stickied[2:]}}{% else %}by @{{p.stickied}}{%endif%}"></i>
+			</li>
+			{% endif %}
+			<!-- Pinned -->
+			{% if p.is_pinned %}
+			<li>
+				<i class="fas fa-thumbtack fa-rotate--45 fa-fw text-admin" data-bs-toggle="tooltip" data-bs-placement="bottom"data-bs-original-title="Pinned to profile"></i>
+			</li>
+			{% endif %}
+			<!-- NSFW -->
+			{% if p.over_18 %}
+			<li>
+				<span class="px-2 py-1 rounded-sm bg-gradient-to-t from-red-700 to-red-500 shadow-inner text-xs text-white">+18</span>
+			</li>
+			{% endif %}
+			<!-- Private -->
+			{% if p.private %}
+			<li>
+				<span class="badge border-warning border-1 text-small-extra">Draft</span>
+			</li>
+			{% endif %}
+		</ul>
+	</div>
+	<div>
+		<h2 class="font-bold text-xl font-heading leading-normal pb-2 mb-2 border-b-2 border-gray-800">
+			Link
+		</h2>
+		<input disabled type="text" onclick="this.select()" value="https://rdrama.net/post/{{ p.id }}">
+	</div>
+</div>
