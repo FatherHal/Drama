@@ -6,6 +6,10 @@ p:last-of-type {
     margin-bottom: 0;
 }
 
+[v-cloak] {
+    display: none;
+}
+
 .font-heading {
 	font-family: 'Trebuchet MS';
 	letter-spacing: -0.05rem;
