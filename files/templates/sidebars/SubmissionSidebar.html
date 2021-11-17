@@ -12,7 +12,7 @@
 					[[ store.voteType === 1 ? store.ups + 1 : store.ups ]]
 				</span>
 			</button>
-			<button v-cloak @click="store.vote(-1)" class="group flex justify-between w-full px-4 py-3 bg-gradient-to-t hover:from-pink-600 hover:to-pink-700 border border-gray-900 border-b-0 rounded-t-md text-shadow-t shadow-inset-t-white-10 text-base font-medium text-gray-300 active:text-pink-500 active:shadow-inner active:outline-none" v-bind:class="[[ store.voteType === -1 ? 'from-pink-700 to-pink-600' : 'from-gray-700 to-gray-600']]">
+			<button v-cloak @click="store.vote(-1)" class="group flex justify-between w-full px-4 py-3 bg-gradient-to-t hover:from-pink-600 hover:to-pink-700 border border-gray-900 border-b-0 rounded-b-md text-shadow-t shadow-inset-t-white-10 text-base font-medium text-gray-300 active:text-pink-500 active:shadow-inner active:outline-none" v-bind:class="[[ store.voteType === -1 ? 'from-pink-700 to-pink-600' : 'from-gray-700 to-gray-600']]">
 				<span>
 					🐷 Haram
 				</span>
