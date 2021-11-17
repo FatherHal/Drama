@@ -85,7 +85,7 @@
 		vote(type) {
 			this.voteType = this.voteType === type ? 0 : type;
 			const xhr = new XMLHttpRequest();
-			xhr.open("POST", "/vote/" + {{ p.id }} + "/" + this.voteType, true);
+			xhr.open("POST", "/vote/post" + {{ p.id }} + "/" + this.voteType, true);
 			const form = new FormData()
 			form.append("formkey", formkey());
 			xhr.withCredentials=true;
