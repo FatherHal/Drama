@@ -3,7 +3,7 @@
 		<h2 class="ml-2 font-bold text-xl font-heading leading-normal pb-2 mb-2 border-b-2 border-gray-800">
 			DramaMeter™
 		</h2>
-		<div class="flex flex-col">
+		<div class="flex flex-col rounded-md overflow-hidden">
 			<button v-cloak @click="store.vote(1)" class="group flex justify-between w-full px-4 py-3 bg-gradient-to-t hover:from-yellow-500 hover:to-yellow-600 border border-gray-900 border-b-0 rounded-t-md text-shadow-t shadow-inset-t-white-10 text-base font-medium text-gray-300 active:text-yellow-500 active:shadow-inner active:outline-none" v-bind:class="[[ store.voteType === 1 ? 'from-yellow-600 to-yellow-500' : 'from-gray-700 to-gray-600']]">
 				<span>
 					🕋 Halal
@@ -12,6 +12,7 @@
 					[[ store.voteType === 1 ? store.ups + 1 : store.ups ]]
 				</span>
 			</button>
+			{% if environ.get('DISABLE_DOWNVOTES') != '1' %}
 			<button v-cloak @click="store.vote(-1)" class="group flex justify-between w-full px-4 py-3 bg-gradient-to-t hover:from-pink-600 hover:to-pink-700 border border-gray-900 border-b-0 rounded-b-md text-shadow-t shadow-inset-t-white-10 text-base font-medium text-gray-300 active:text-pink-500 active:shadow-inner active:outline-none" v-bind:class="[[ store.voteType === -1 ? 'from-pink-700 to-pink-600' : 'from-gray-700 to-gray-600']]">
 				<span>
 					🐷 Haram
@@ -20,6 +21,7 @@
 					[[ store.voteType === -1 ? store.downs - 1 : store.downs ]]
 				</span>
 			</button>
+			{% endif %}
 		</div>
 		<!-- Icons -->
 		<ul class="flex space-x-2 items-center mb-3">
