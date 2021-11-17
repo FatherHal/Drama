@@ -4,6 +4,7 @@
 			DramaMeter™
 		</h2>
 		<div class="flex flex-col rounded-md overflow-hidden">
+			{% if v %}
 			<button v-cloak @click="store.vote(1)" class="group flex justify-between w-full px-4 py-3 bg-gradient-to-t hover:from-yellow-500 hover:to-yellow-600 border border-gray-900 border-b-0 rounded-t-md text-shadow-t shadow-inset-t-white-10 text-base font-medium text-gray-300 active:text-yellow-500 active:shadow-inner active:outline-none" v-bind:class="[[ store.voteType === 1 ? 'from-yellow-600 to-yellow-500' : 'from-gray-700 to-gray-600']]">
 				<span>
 					🕋 Halal
