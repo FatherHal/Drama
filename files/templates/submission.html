@@ -578,7 +578,7 @@
 			</div> -->
 
 			<div class="flex justify-between mb-2">
-				<div class="ml-20 text-lg text-gray-200 font-bold font-heading">
+				<div class="ml-16 pl-2 text-lg text-gray-200 font-bold font-heading">
 					{{ p.comment_count }} {{ 'Comment' if p.comment_count == 1 else 'Comments' }}
 				</div>
 				<ul class="flex space-x-3 text-sm text-gray-500">
@@ -611,7 +611,7 @@
 			</div>
 
 			<div id="comment-form-space-{{p.fullname}}" class="comment-write flex">
-				<img src="{{v.profile_url}}" class="w-16 h-16 object-cover rounded-sm mr-4" alt="my avatar"/>
+				<img loading="lazy" src="{{v.profile_url}}" class="w-14 h-14 object-cover rounded-sm mr-4" alt="my avatar"/>
 				{% include "/comments/CommentForm.html" %}
 			</div>
 
