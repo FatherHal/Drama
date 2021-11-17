@@ -17,7 +17,7 @@ p:last-of-type {
 .shadow-inset-b-white-07 {
     box-shadow: -1px -1px 1px rgba(255, 255, 255, 0.07) inset;
 }
-.shadow-inset-b-white-05 {
+.shadow-inset-t-white-05 {
 	box-shadow: 0 1px 0 rgba(255, 255, 255, 0.05) inset;
 }
 .shadow-inset-t-white-10 {
