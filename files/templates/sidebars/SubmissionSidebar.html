@@ -6,7 +6,7 @@
 		<div class="flex flex-col">
 			<button id="post-{{p.id}}-up" class="flex justify-between w-full px-4 py-3 bg-gradient-to-t from-pink-700 to-pink-600 hover:from-pink-600 hover:to-pink-700 border border-gray-900 border-b-0 rounded-t-md text-shadow-t shadow-inset-t-white-10 text-base font-medium text-gray-300 active:text-pink-500 active:shadow-inner active:outline-none post-{{p.id}}-up" onclick="vote('post', '{{p.id}}', '1')">
 				<span>
-					<i class="fas fa-thumbs-up fa-fw fa-sm mr-2"></i>Dramatic?
+					🕋  Halal
 				</span>
 				<span id="post-score-{{p.id}}" class="leading-none ml-3 px-2 py-1 border border-pink-700 rounded text-sm font-bold bg-pink-700 post-score-{{p.id}}" style="border-top-color: rgba(0, 0, 0, 0.07);">
 					{{score-downs}}
@@ -14,7 +14,7 @@
 			</button>
 			<button id="post-{{p.id}}-down" class="flex justify-between w-full px-4 py-3 bg-gradient-to-t from-gray-800 to-gray-700 hover:from-gray-700 hover:to-gray-800 border border-gray-900 rounded-b-md text-shadow-t shadow-inset-t-white-10 text-base font-medium text-gray-300 active:text-gray-500 active:shadow-inner active:outline-none" onclick="vote('post', '{{p.id}}', '-1')">
 				<span>
-					<i class="fas fa-thumbs-down fa-flip-horizontal fa-fw fa-sm mr-2"></i>Melodramatic
+					🐷  Haram
 				</span>
 				<span id="post-score-{{p.id}}" class="leading-none ml-3 px-2 py-1 border border-gray-800 rounded text-sm font-bold bg-gray-800 post-score-{{p.id}}" style="border-top-color: rgba(0, 0, 0, 0.07);">
 					{{score-ups}}
