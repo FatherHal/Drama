@@ -84,9 +84,9 @@
 		count: {{ score }},
 		vote(type) {
 			this.voteType = this.voteType === type ? 0 : type;
-			var xhr = new XMLHttpRequest();
+			const xhr = new XMLHttpRequest();
 			xhr.open("POST", "/vote/" + type.replace('-mobile','') + "/" + {{ p.id }} + "/" + voteType, true);
-			var form = new FormData()
+			const form = new FormData()
 			form.append("formkey", formkey());
 			xhr.withCredentials=true;
 			xhr.send(form);
