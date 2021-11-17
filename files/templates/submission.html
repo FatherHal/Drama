@@ -275,10 +275,20 @@
 						{% if p.author.verified %}
 						<i class="fas fa-badge-check align-middle ml-1" style="color:{% if p.author.verifiedcolor %}#{{p.author.verifiedcolor}}{% else %}#1DA1F2{% endif %}" data-bs-toggle="tooltip" data-bs-placement="bottom" title="" data-bs-original-title="{{p.author.verified}}"></i>
 						{% endif %}
-						<a class="flex items-center" data-bs-placement="bottom" data-bs-toggle="popover" data-bs-trigger="focus" data-content-id="popover-{{p.id}}" href="javascript:void(0)" tabindex="0" style="color: #{{p.author.namecolor}}; font-weight: bold;" class="user-name">
-							<span {% if p.author.patron and not p.distinguish_level %}class="font-heading patron" style="background-color:#{{p.author.namecolor}};"{% elif p.distinguish_level and 'rama' in request.host %}class="mod"{% endif %}>
+						<a class="flex items-center font-heading" data-bs-placement="bottom" data-bs-toggle="popover" data-bs-trigger="focus" data-content-id="popover-{{p.id}}" href="javascript:void(0)" tabindex="0" style="color: #{{p.author.namecolor}}; font-weight: bold;" class="user-name">
+							{% if p.author.patron and not p.distinguish_level %}
+							<span class="patron" style="background-color:#{{p.author.namecolor}};">
 								{{p.author.username}}
 							</span>
+							{% elif p.distinguish_level and 'rama' in request.host %}
+							<span class="mod">
+								{{p.author.username}}
+							</span>
+							{% else %}
+							<span>
+								{{p.author.username}}
+							</span>
+							{% endif %}
 						</a>
 
 						{% if p.author.customtitle %}
