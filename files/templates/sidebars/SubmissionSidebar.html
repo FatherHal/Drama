@@ -78,7 +78,7 @@
 	const store = reactive({
 		ups: {{ ups }},
 		downs: {{ downs }},
-		voteType: 0,
+		voteType: {{ voted }},
 		count: {{ score }},
 		vote(type) {
 			this.voteType = this.voteType === type ? 0 : type;
