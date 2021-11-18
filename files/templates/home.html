@@ -27,34 +27,6 @@
 {% block content %}
 <div class="col-span-full xl:col-span-9">
 
-<div class="hidden md:flex col-span-full sm:py-4 my-2.5 sm:my-0">
-
-		<div class="w-full bg-transparent border border-white border-opacity-20 rounded">
-			<div class="px-4 py-2 border-b border-white border-opacity-20">
-				<div class="font-bold">Create post</div>
-				<ul class="list-inline no-bullets mb-0 d-none">
-					<li class="list-inline-item active mr-4"><i class="fas fa-align-left text-gray-400"></i></li>
-					<li class="list-inline-item"><i class="fas fa-link text-gray-400"></i></li>
-				</ul>
-			</div>
-			<div class="p-4">
-				{% if v %}
-					<a href="/submit">
-						<input type="text" class="bg-white bg-opacity-10 px-4 py-2 w-full rounded"
-						placeholder="Post..." aria-label="Username"
-						aria-describedby="basic-addon1">
-					</a>
-				{% else %}
-					<a href="/signup">
-						<input type="text" class="bg-white bg-opacity-10 px-4 py-2 w-full rounded"
-						placeholder="Post..." aria-label="Username"
-						aria-describedby="basic-addon1">
-					</a>
-				{% endif %}
-			</div>
-		</div>
-</div>
-
 	<ul class="flex flex-col col-span-full sm:py-6 my-2.5 sm:my-0" id="posts">
 		{% include "submission_listing.html" %}
 	</ul>
