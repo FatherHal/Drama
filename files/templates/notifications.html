@@ -12,12 +12,12 @@
 					Inbox
 				</h1>
 				<ul class="mt-1 text-gray-400 text-sm flex items-center divide-x divide-gray-700">
-					<li class="-ml-3 px-3">
+					<li class="mx-3">
 						<a class="{% if not '=true' in request.full_path %}font-bold text-pink-500{% endif %}" href="/notifications">
 							All
 						</a>
 					</li>
-					<li class="px-3">
+					<li class="mx-3">
 						<a class="{% if '/notifications?posts=true' in request.full_path %}font-bold text-pink-500{% endif %}" href="/notifications?posts=true">
 							Posts
 							{% if v.post_notifications_count %}
@@ -25,13 +25,13 @@
 							{% endif %}
 						</a>
 					</li>
-					<li class="px-3">
+					<li class="mx-3">
 						<a class="{% if '/notifications?messages=true' in request.full_path %}font-bold text-pink-500{% endif %}" href="/notifications?messages=true">
 							Messages
 						</a>
 					</li>
 					{% if v.admin_level > 1 %}
-					<li class="px-3">
+					<li class="mx-3">
 						<a class="{% if '/notifications?modmail=true' in request.full_path %}font-bold text-pink-500{% endif %}" href="/notifications?modmail=true">
 							Mod Mail
 						</a>
