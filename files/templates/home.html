@@ -8,9 +8,9 @@
 					Home
 				</h1>
 				<small class="block mt-1 text-gray-400">
-					<span class="capitalize">{{ sort }}</span>
+					<span class="capitalize font-bold">{{ sort }}</span>
 					posts {{ 'from all time' if t=='all' else 'in the last' }}
-					{% if t != 'all' %} {{ t }}{% endif %}
+					{% if t != 'all' %}<span class="font-bold">{{ t }}{% endif %}
 				</small>
 			</div>
 			<div class="ml-auto">
