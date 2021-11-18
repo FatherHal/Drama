@@ -23,26 +23,29 @@
 {% endfor %}
 </table>
 
-
-<div class="flex flex-col border border-gray-900 rounded-md">
-	{% for user in users1 %}
-	<div class="flex items-center odd:bg-gray-700">
-		<!-- Rank -->
-		<h2 class="text-3xl font-bold font-heading">{{users1.index(user)+1}}</h2>
-		<!-- User Details -->
-		<div>
-			<a class="block font-heading font-bold text-xl" style="color:#{{user.namecolor}}" href="/@{{user.username}}">
-				<span {% if user.patron %}class="patron" style="background-color:#{{user.namecolor}};"{% endif %}>
+<div class="col-span-full">
+	<h1 class="text-4xl font-heading font-bold">Top 25 by {{'COINS_NAME' | app_config}}</h1>
+	<div class="flex flex-col border border-gray-900 rounded-md">
+		{% for user in users1 %}
+		<div class="flex items-center border-b border-gray-900 odd:bg-gray-700 px-6 py-4">
+			<!-- Rank -->
+			<h2 class="text-3xl font-bold font-heading">{{users1.index(user)+1}}</h2>
+			<img src="{{user.profile_url}}" class="bg-white p-1 rounded w-16 h-16 object-cover shadow-md" alt="{{ user.username avatar}}"/>
+			<!-- User Details -->
+			<div class="ml-6">
+				<a class="block font-heading font-bold text-xl" href="/@{{user.username}}">
 					{{user.username}}
-				</span>
-			</a>
-			<ul class="flex items-wrap space-x-3 text-sm text-gray-500 mt-1">
-				<li>{{user.created_date}}</li>
-				<li>{{user.coins}}</li>
-			</ul>
+				</a>
+				<p class="text-sm text-gray-500">
+					{{user.created_date}}
+				</p>
+			</div>
+			<div class="ml-auto">
+				<span class="text-3xl font-heading">{{user.coins}}</span>
+			</div>
 		</div>
+		{% endfor %}
 	</div>
-	{% endfor %}
 </div>
 
 <pre>
