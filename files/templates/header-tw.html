@@ -41,7 +41,7 @@
         </div>
         <div class="hidden md:flex items-center space-x-2 sm:ml-4">
             <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
-            <a href="/" class="relative px-3 py-2.5 rounded text-sm {{ 'text-gray-200 bg-gray-800 shadow-inner font-bold text-shadow' if request.full_path == '/' else 'text-gray-500' }}" aria-current="page">
+            <a href="/" class="relative px-3 py-2.5 rounded text-sm {{ 'text-gray-200 bg-gray-800 shadow-inner font-bold text-shadow' if request.path == '/' else 'text-gray-500' }}" aria-current="page">
               <i class="fas fa-home-lg-alt fa-fw fa-lg mr-2"></i>
               Home
             </a>
