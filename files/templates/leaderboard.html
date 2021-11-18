@@ -29,8 +29,8 @@
 		{% for user in users1 %}
 		<div class="flex items-center border-b border-gray-900 odd:bg-gray-700 px-6 py-4">
 			<!-- Rank -->
-			<h2 class="text-3xl font-bold font-heading text-center w-24 -ml-6">{{users1.index(user)+1}}</h2>
-			<img src="{{user.profile_url}}" class="ml-1 p-1 rounded bg-white border border-gray-900 w-16 h-16 object-cover shadow-md" alt="{{ user.username }} avatar"/>
+			<h2 class="text-3xl font-bold font-heading text-center w-20 -ml-6">{{users1.index(user)+1}}</h2>
+			<img src="{{user.profile_url}}" class="p-1 rounded bg-white border border-gray-900 w-16 h-16 object-cover shadow-md" alt="{{ user.username }} avatar"/>
 			<!-- User Details -->
 			<div class="ml-6">
 				<a class="block font-heading font-bold text-xl" href="/@{{user.username}}">
