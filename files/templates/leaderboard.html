@@ -24,8 +24,9 @@
 </table>
 
 
-<div class="flex flex-col">
-	<div class="flex items-center">
+<div class="flex flex-col border border-gray-900 rounded-md">
+	{% for user in users1 %}
+	<div class="flex items-center odd:bg-gray-700">
 		<!-- Rank -->
 		<h2 class="text-3xl font-bold font-heading">{{users1.index(user)+1}}</h2>
 		<!-- User Details -->
@@ -41,6 +42,7 @@
 			</ul>
 		</div>
 	</div>
+	{% endfor %}
 </div>
 
 <pre>
