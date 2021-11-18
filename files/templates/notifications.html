@@ -11,14 +11,38 @@
 				<h1 class="font-bold text-xl font-heading leading-normal">
 					Inbox
 				</h1>
-				<small class="block mt-1 text-gray-400">
-					<span class="capitalize">{{ sort }}</span>
-					comments {{ 'from all time' if t=='all' else 'in the last' }}
-					{% if t != 'all' %} {{ t }}{% endif %}
-				</small>
+				<ul class="mt-1 text-gray-400 text-sm flex items-center divide-x divide-gray-700">
+					<li class="px-1">
+						<a class="{% if not '=true' in request.full_path %}text-pink-500{% endif %}" href="/notifications">
+							All
+						</a>
+					</li>
+					<li class="px-1">
+						<a class="{% if '/notifications?posts=true' in request.full_path %}text-pink-500{% endif %}" href="/notifications?posts=true">
+							Posts
+							{% if v.post_notifications_count %}
+							<span class="text-gray-600">({{v.post_notifications_count}})</span>
+							{% endif %}
+						</a>
+					</li>
+					<li class="px-1">
+						<a class="{% if '/notifications?messages=true' in request.full_path %}text-pink-500{% endif %}" href="/notifications?messages=true">
+							Messages
+						</a>
+					</li>
+					{% if v.admin_level > 1 %}
+					<li class="px-1">
+						<a class="{% if '/notifications?modmail=true' in request.full_path %}text-pink-500{% endif %}" href="/notifications?modmail=true">
+							Mod Mail
+						</a>
+					</li>
+					{% endif %}
+				</ul>
 			</div>
 			<div class="ml-auto">
-				{% include "/dropdowns/SubmissionSorts.html" %}
+				<button class="block px-4 py-2 bg-gradient-to-t from-gray-800 to-gray-700 focus:from-gray-700 focus:to-gray-800 border border-gray-900 rounded-md text-shadow shadow-inset-t-white-10 text-sm font-bold text-gray-300 focus:text-gray-500 focus:shadow-inner focus:outline-none">
+
+				</button>
 			</div>
 		</div>
 	</div>
