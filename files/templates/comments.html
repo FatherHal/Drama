@@ -254,7 +254,7 @@
 	{% if not c.parent_comment_id or standalone %}
 	<img loading="lazy" src="{{ c.author.profile_url }}" class="w-14 h-14 object-cover rounded-sm mr-4" alt="{{ c.author.username }} avatar"/>
 	{% else %}
-	<img loading="lazy" src="{{ c.author.profile_url }}" class="w-8 h-8 object-cover rounded-sm mr-4" alt="{{ c.author.username }} avatar"/>
+	<img loading="lazy" src="{{ c.author.profile_url }}" class="w-8 h-8 object-cover rounded-sm mr-3" alt="{{ c.author.username }} avatar"/>
 	{% endif %}
 
 	<div class="p-3 rounded-md bg-gray-700 shadow-inset-t-white-05 border border-gray-800">
