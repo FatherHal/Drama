@@ -1,4 +1,4 @@
-{% extends "settings2.html" %}
+{% extends "default.html" %}
 
 {% block pagetitle %}Leaderboard{% endblock %}
 
@@ -23,6 +23,25 @@
 {% endfor %}
 </table>
 
+
+<div class="flex flex-col">
+	<div class="flex items-center">
+		<!-- Rank -->
+		<h2 class="text-3xl font-bold font-heading">{{users1.index(user)+1}}</h2>
+		<!-- User Details -->
+		<div>
+			<a class="block font-heading font-bold text-xl" style="color:#{{user.namecolor}}" href="/@{{user.username}}">
+				<span {% if user.patron %}class="patron" style="background-color:#{{user.namecolor}};"{% endif %}>
+					{{user.username}}
+				</span>
+			</a>
+			<ul class="flex items-wrap space-x-3 text-sm text-gray-500 mt-1">
+				<li>{{u.created_date}}</li>
+				<li>{{u.coins}}</li>
+			</ul>
+		</div>
+	</div>
+</div>
 
 <pre>
 
