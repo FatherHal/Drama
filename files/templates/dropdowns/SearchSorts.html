@@ -1,0 +1,94 @@
+			<div class="flex items-center space-x-2">
+				<div class="dropdown">
+					<button class="block px-4 py-2 bg-gradient-to-t from-gray-800 to-gray-700 focus:from-gray-700 focus:to-gray-800 border border-gray-900 rounded-md text-shadow shadow-inset-t-white-10 text-sm font-bold text-gray-300 focus:text-gray-500 focus:shadow-inner focus:outline-none dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+						{% if t=="hour" %}<i class="fas fa-clock text-gray-500 fa-sm fa-fw mr-1"></i>{% endif %}
+						{% if t=="day" %}<i class="fas fa-calendar-day text-gray-500 fa-sm fa-fw mr-1"></i>{% endif %}
+						{% if t=="week" %}<i class="fas fa-calendar-week text-gray-500 fa-sm fa-fw mr-1"></i>{% endif %}
+						{% if t=="month" %}<i class="fas fa-calendar-alt text-gray-500 fa-sm fa-fw mr-1"></i>{% endif %}
+						{% if t=="year" %}<i class="fas fa-calendar text-gray-500 fa-sm fa-fw mr-1"></i>{% endif %}
+						{% if t=="all" %}<i class="fas fa-infinity text-gray-500 fa-sm fa-fw mr-1"></i>{% endif %}
+						{{t | capitalize}}
+					</button>
+					<ul class="dropdown-menu w-56 bg-gray-900 rounded-md shadow-lg" aria-labelledby="dropdownMenuButton" x-placement="bottom-start">
+						<li class="{% if t=='hour' %}hidden{% endif %}">
+							<a class="dropdown-item block w-full text-left p-2 text-sm hover:bg-gray-800 hover:shadow-inner focus:bg-gray-800 focus:shadow-inner rounded" href="?sort={{sort}}&t=hour">
+								<i class="fas fa-clock text-gray-500 fa-sm fa-fw mr-2"></i>Hour
+							</a>
+						</li>
+						<li class="{% if t=='day' %}hidden{% endif %}">
+							<a class="dropdown-item block w-full text-left p-2 text-sm hover:bg-gray-800 hover:shadow-inner focus:bg-gray-800 focus:shadow-inner rounded" href="?sort={{sort}}&t=day">
+								<i class="fas fa-calendar-day text-gray-500 fa-sm fa-fw mr-2"></i>Day
+							</a>
+						</li>
+						<li class="{% if t=='week' %}hidden{% endif %}">
+							<a class="dropdown-item block w-full text-left p-2 text-sm hover:bg-gray-800 hover:shadow-inner focus:bg-gray-800 focus:shadow-inner rounded" href="?sort={{sort}}&t=week">
+								<i class="fas fa-calendar-week text-gray-500 fa-sm fa-fw mr-2"></i>Week
+							</a>
+						</li>
+						<li class="{% if t=='month' %}hidden{% endif %}">
+							<a class="dropdown-item block w-full text-left p-2 text-sm hover:bg-gray-800 hover:shadow-inner focus:bg-gray-800 focus:shadow-inner rounded" href="?sort={{sort}}&t=month">
+								<i class="fas fa-calendar-alt text-gray-500 fa-sm fa-fw mr-2"></i>Month
+							</a>
+						</li>
+						<li class="{% if t=='year' %}hidden{% endif %}">
+							<a class="dropdown-item block w-full text-left p-2 text-sm hover:bg-gray-800 hover:shadow-inner focus:bg-gray-800 focus:shadow-inner rounded" href="?sort={{sort}}&t=year">
+								<i class="fas fa-calendar text-gray-500 fa-sm fa-fw mr-2"></i>Year
+							</a>
+						</li>
+						<li class="{% if t=='all' %}hidden{% endif %}">
+							<a class="dropdown-item block w-full text-left p-2 text-sm hover:bg-gray-800 hover:shadow-inner focus:bg-gray-800 focus:shadow-inner rounded" href="?sort={{sort}}&t=all">
+								<i class="fas fa-infinity text-gray-500 fa-sm fa-fw mr-2"></i>All
+							</a>
+						</li>
+					</ul>
+				</div>
+				<div class="dropdown">
+					<button class="block px-4 py-2 bg-gradient-to-t from-gray-800 to-gray-700 focus:from-gray-700 focus:to-gray-800 border border-gray-900 rounded-md text-shadow shadow-inset-t-white-10 text-sm font-bold text-gray-300 focus:text-gray-500 focus:shadow-inner focus:outline-none dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+						{% if sort=="hot" %}<i class="fas fa-fire text-gray-500 fa-sm fa-fw mr-1"></i>{% endif %}
+						{% if sort=="top" %}<i class="fas fa-arrow-alt-circle-up text-gray-500 fa-sm fa-fw mr-1"></i>{% endif %}
+						{% if sort=="bottom" %}<i class="fas fa-arrow-alt-circle-down text-gray-500 fa-sm fa-fw mr-1"></i>{% endif %}
+						{% if sort=="new" %}<i class="fas fa-sparkles text-gray-500 fa-sm fa-fw mr-1"></i>{% endif %}
+						{% if sort=="old" %}<i class="fas fa-book text-gray-500 fa-sm fa-fw mr-1"></i>{% endif %}
+						{% if sort=="controversial" %}<i class="fas fa-bullhorn text-gray-500 fa-sm fa-fw mr-1"></i>{% endif %}
+						{% if sort=="comments" %}<i class="fas fa-comments text-gray-500 fa-sm fa-fw mr-1"></i>{% endif %}
+						{{sort | capitalize}}
+					</button>
+					<ul class="dropdown-menu w-56 bg-gray-900 rounded-md shadow-lg" aria-labelledby="dropdownMenuButton" x-placement="bottom-start">
+						<li class="{% if sort == 'top' %}hidden{% endif %}">
+							<a class="dropdown-item block w-full text-left p-2 text-sm hover:bg-gray-800 hover:shadow-inner focus:bg-gray-800 focus:shadow-inner rounded" href="?sort=top&q={{query | urlencode}}&t={{t}}">
+								<i class="fas fa-arrow-alt-circle-up text-gray-500 fa-sm fa-fw mr-2"></i>Top
+							</a>
+						</li>
+						<li class="{% if sort == 'bottom' %}hidden{% endif %}">
+							<a class="dropdown-item block w-full text-left p-2 text-sm hover:bg-gray-800 hover:shadow-inner focus:bg-gray-800 focus:shadow-inner rounded" href="?sort=bottom&q={{query | urlencode}}&t={{t}}}">
+								<i class="fas fa-arrow-alt-circle-down text-gray-500 fa-sm fa-fw mr-2"></i>Bottom
+							</a>
+						</li>
+						<li class="{% if sort == 'new' %}hidden{% endif %}">
+							<a class="dropdown-item block w-full text-left p-2 text-sm hover:bg-gray-800 hover:shadow-inner focus:bg-gray-800 focus:shadow-inner rounded" href="?sort=new&q={{query | urlencode}}&t={{t}}">
+								<i class="fas fa-sparkles text-gray-500 fa-sm fa-fw mr-2"></i>New
+							</a>
+						</li>
+						<li class="{% if sort == 'old' %}hidden{% endif %}">
+							<a class="dropdown-item block w-full text-left p-2 text-sm hover:bg-gray-800 hover:shadow-inner focus:bg-gray-800 focus:shadow-inner rounded" href="?sort=old&q={{query | urlencode}}&t={{t}}">
+								<i class="fas fa-book text-gray-500 fa-sm fa-fw mr-2"></i>Old
+							</a>
+						</li>
+						<li class="{% if sort == 'controversial' %}hidden{% endif %}">
+							<a class="dropdown-item block w-full text-left p-2 text-sm hover:bg-gray-800 hover:shadow-inner focus:bg-gray-800 focus:shadow-inner rounded" href="?sort=fiery&q={{query | urlencode}}&t={{t}}">
+								<i class="fas fa-bullhorn text-gray-500 fa-sm fa-fw mr-2"></i>Controversial
+							</a>
+						</li>
+						<li class="{% if sort == 'comments' %}hidden{% endif %}">
+							<a class="dropdown-item block w-full text-left p-2 text-sm hover:bg-gray-800 hover:shadow-inner focus:bg-gray-800 focus:shadow-inner rounded" href="?sort=comments&q={{query | urlencode}}&t={{t}}">
+								<i class="fas fa-comments text-gray-500 fa-sm fa-fw mr-2"></i>Comments
+							</a>
+						</li>
+						<li class="{% if sort == 'random' %}hidden{% endif %}">
+							<a class="dropdown-item block w-full text-left p-2 text-sm hover:bg-gray-800 hover:shadow-inner focus:bg-gray-800 focus:shadow-inner rounded" href="?sort=random&q={{query | urlencode}}&t={{t}}">
+								<i class="fas fa-question text-gray-500 fa-sm fa-fw mr-2"></i>Random
+							</a>
+						</li>
+					</ul>
+				</div>
+			</div>
