@@ -24,6 +24,8 @@
 
 {% endblock %}
 
+<div class="col-span-full xl:col-span-9">
+
 {% block PseudoSubmitForm %}
 
 <div class="hidden md:flex col-span-full sm:py-4 my-2.5 sm:my-0">
@@ -58,13 +60,9 @@
 
 
 {% block content %}
-
-		<ul class="flex flex-col col-span-full sm:py-6 my-2.5 sm:my-0" id="posts">
-
-			{% include "submission_listing.html" %}
-
-		</ul>
-
+	<ul class="flex flex-col col-span-full sm:py-6 my-2.5 sm:my-0" id="posts">
+		{% include "submission_listing.html" %}
+	</ul>
 {% endblock %}
 
 {% block pagenav %}
@@ -125,6 +123,8 @@
 {% endif %}
 
 {% endblock %}
+
+</div>
 
 {% block sidebar %}
 <div class="flex-shrink-0 w-96">
