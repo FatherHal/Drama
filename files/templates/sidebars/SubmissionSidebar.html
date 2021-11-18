@@ -44,7 +44,10 @@
 			<!-- Stickied -->
 			{% if p.stickied %}
 			<li>
-				<i id="pinned-{{p.id}}" class="fas fa-thumbtack fa-rotate--45 fa-fw text-admin" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-original-title="Pinned {% if p.stickied.startswith('t:') %}until {{p.stickied[2:]}}{% else %}by @{{p.stickied}}{%endif%}"></i>
+				<i id="pinned-{{p.id}}" class="fas fa-thumbtack fa-rotate--45 fa-fw text-admin" data-bs-toggle="tooltip" data-bs-placement="bottom"></i>
+				<span class="font-heading text-xs text-pink-500">
+					Pinned {% if p.stickied.startswith('t:') %}until {{p.stickied[2:]}}{% else %}by @{{p.stickied}}{%endif%}
+				</span>
 			</li>
 			{% endif %}
 			<!-- Pinned -->
