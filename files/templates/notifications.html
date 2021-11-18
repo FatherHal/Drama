@@ -86,13 +86,13 @@
 				{% set path = request.full_path %}
 			{% endif %}
 			{% if request.full_path == "/notifications" %}
-				<small><a class="page-link" href="{{path}}?page={{page-1}}">Previous</a></small>
+				<small><a class="block px-2 py-1 text-sm font-bold text-pink-500 bg-gray-900" href="{{path}}?page={{page-1}}">Previous</a></small>
 			{% else %}
-				<small><a class="page-link" href="{{path}}&page={{page-1}}">Previous</a></small>
+				<small><a class="block px-2 py-1 text-sm font-bold text-pink-500 bg-gray-900" href="{{path}}&page={{page-1}}">Previous</a></small>
 			{% endif %}
 		</li>
 		{% else %}
-		<li class="page-item disabled"><span class="page-link">Prev</span></li>
+		<li class="block px-2 py-1 text-sm font-bold text-gray-700 bg-gray-800 disabled"><span class="page-link">Prev</span></li>
 		{% endif %}
 
 		{% if next_exists %}
@@ -105,13 +105,13 @@
 				{% set path = request.full_path %}
 			{% endif %}
 			{% if request.full_path == "/notifications" %}
-				<small><a class="page-link" href="{{path}}?page={{page+1}}">Next</a></small>
+				<small><a class="block px-2 py-1 text-sm font-bold text-pink-500 bg-gray-900" href="{{path}}?page={{page+1}}">Next</a></small>
 			{% else %}
-				<small><a class="page-link" href="{{path}}&page={{page+1}}">Next</a></small>
+				<small><a class="block px-2 py-1 text-sm font-bold text-pink-500 bg-gray-900" href="{{path}}&page={{page+1}}">Next</a></small>
 			{% endif %}
 		</li>
 		{% else %}
-		<li class="page-item disabled"><span class="page-link">Next</span></li>
+		<li class="block px-2 py-1 text-sm font-bold text-gray-700 bg-gray-800 disabled"><span class="page-link">Next</span></li>
 		{% endif %}
 	</ul>
 </nav>
