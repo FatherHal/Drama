@@ -140,8 +140,6 @@ post_reply=function(id){
 			myToast.hide();
 			var myToast = new bootstrap.Toast(document.getElementById('toast-post-error'));
 			myToast.show();
-			try {document.getElementById('toast-post-error-text').innerText = JSON.parse(xhr.response)["error"];}
-			catch {}
 		}
 	}
 	xhr.send(form)
@@ -169,8 +167,6 @@ comment_edit=function(id){
 			myToast.hide();
 			var myToast = new bootstrap.Toast(document.getElementById('toast-post-error'));
 			myToast.show();
-			try {document.getElementById('toast-post-error-text').innerText = JSON.parse(xhr.response)["error"];}
-			catch {}
 		}
 	}
 	xhr.send(form)

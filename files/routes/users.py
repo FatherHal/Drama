@@ -202,29 +202,12 @@ def transfer_coins(v, username):
 		if v.coins < amount: return {"error": f"You don't have enough {app.config['COINS_NAME']}"}, 400
 		if amount < 100: return {"error": f"You have to gift at least 100 {app.config['COINS_NAME']}."}, 400
 
-		if not v.patron and not receiver.patron:
-			tax = math.ceil(amount*0.03)
-			tax_receiver = g.db.query(User).filter_by(id=TAX_RECEIVER_ID).first()
-			if request.host == 'rdrama.net': tax_receiver.coins += tax/3
-			else: tax_receiver.coins += tax
-			log_message = f"[@{v.username}]({v.url}) has transferred {amount} {app.config['COINS_NAME']} to [@{receiver.username}]({receiver.url})"
-			send_notification(TAX_RECEIVER_ID, log_message)
-			g.db.add(tax_receiver)
-
-			if request.host == 'rdrama.net':
-				carp = g.db.query(User).filter_by(id=CARP_ID).first()
-				carp.coins += tax/3
-				log_message = f"[@{v.username}]({v.url}) has transferred {amount} {app.config['COINS_NAME']} to [@{receiver.username}]({receiver.url})"
-				send_notification(CARP_ID, log_message)
-				g.db.add(carp)
-				
-				dad = g.db.query(User).filter_by(id=DAD_ID).first()
-				dad.coins += tax/3
-				log_message = f"[@{v.username}]({v.url}) has transferred {amount} {app.config['COINS_NAME']} to [@{receiver.username}]({receiver.url})"
-				send_notification(DAD_ID, log_message)
-				g.db.add(dad)
-		else: tax = 0
-
+		tax = math.ceil(amount*0.015)
+		tax_receiver = g.db.query(User).filter_by(id=TAX_RECEIVER_ID).first()
+		tax_receiver.coins += tax
+		log_message = f"[@{v.username}]({v.url}) has transferred {amount} {app.config['COINS_NAME']} to [@{receiver.username}]({receiver.url})"
+		send_notification(TAX_RECEIVER_ID, log_message)
+		g.db.add(tax_receiver)
 		receiver.coins += amount-tax
 		v.coins -= amount
 		send_notification(receiver.id, f"🤑 [@{v.username}]({v.url}) has gifted you {amount-tax} {app.config['COINS_NAME']}!")
@@ -513,7 +496,7 @@ def u_username(username, v=None):
 		g.db.commit()
 
 		
-	if u.is_private and (not v or (v.id != u.id and v.admin_level < 2 and not v.eye)):
+	if u.is_private and (not v or (v.id != u.id and v.admin_level < 3)):
 		
 		if v and u.id == LLM_ID:
 			if int(time.time()) - v.rent_utc > 600:
@@ -524,12 +507,12 @@ def u_username(username, v=None):
 			else: return render_template("userpage_private.html", time=int(time.time()), u=u, v=v)
 
 	
-	if hasattr(u, 'is_blocking') and u.is_blocking and (not v or v.admin_level < 2):
+	if hasattr(u, 'is_blocking') and u.is_blocking and (not v or v.admin_level < 3):
 		if request.headers.get("Authorization"): return {"error": f"You are blocking @{u.username}."}
 		else: return render_template("userpage_blocking.html", u=u, v=v)
 
 
-	if hasattr(u, 'is_blocked') and u.is_blocked and (not v or v.admin_level < 2):
+	if hasattr(u, 'is_blocked') and u.is_blocked and (not v or v.admin_level < 3):
 		if request.headers.get("Authorization"): return {"error": "This person is blocking you."}
 		else: return render_template("userpage_blocked.html", u=u, v=v)
 
@@ -606,7 +589,7 @@ def u_username_comments(username, v=None):
 												v=v)
 
 
-	if u.is_private and (not v or (v.id != u.id and v.admin_level < 2 and not v.eye)):
+	if u.is_private and (not v or (v.id != u.id and v.admin_level < 3)):
 		if v and u.id == LLM_ID:
 			if int(time.time()) - v.rent_utc > 600:
 				if request.headers.get("Authorization"): return {"error": "That userpage is private"}
@@ -615,13 +598,13 @@ def u_username_comments(username, v=None):
 			if request.headers.get("Authorization"): return {"error": "That userpage is private"}
 			else: return render_template("userpage_private.html", time=int(time.time()), u=u, v=v)
 
-	if hasattr(u, 'is_blocking') and u.is_blocking and (not v or v.admin_level < 2):
+	if hasattr(u, 'is_blocking') and u.is_blocking and (not v or v.admin_level < 3):
 		if request.headers.get("Authorization"): return {"error": f"You are blocking @{u.username}."}
 		else: return render_template("userpage_blocking.html",
 													u=u,
 													v=v)
 
-	if hasattr(u, 'is_blocked') and u.is_blocked and (not v or v.admin_level < 2):
+	if hasattr(u, 'is_blocked') and u.is_blocked and (not v or v.admin_level < 3):
 		if request.headers.get("Authorization"): return {"error": "This person is blocking you."}
 		else: return render_template("userpage_blocked.html",
 													u=u,
@@ -829,22 +812,3 @@ def saved_comments(v, username):
 											page=page,
 											next_exists=next_exists,
 											standalone=True)
-
-
-@app.post("/fp/<fp>")
-@auth_required
-def fp(v, fp):
-	if v.username != fp:
-		v.fp = fp
-		users = g.db.query(User).filter(User.fp == fp, User.id != v.id).all()
-		for u in users:
-			li = [v.id, u.id]
-			existing = g.db.query(Alt).filter(Alt.user1.in_(li), Alt.user2.in_(li)).first()
-			if existing: continue
-			new_alt = Alt(user1=v.id, user2=u.id)
-			g.db.add(new_alt)
-			g.db.flush()
-			print(v.username + ' + ' + u.username)
-		g.db.add(v)
-		g.db.commit()
-	return ''

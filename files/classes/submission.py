@@ -7,7 +7,7 @@ from flask import render_template
 from sqlalchemy import *
 from sqlalchemy.orm import relationship
 from files.__main__ import Base
-from files.helpers.const import AUTOPOLLER_ID, censor_slurs, TROLLTITLES
+from files.helpers.const import AUTOPOLLER_ACCOUNT, censor_slurs, TROLLTITLES
 from files.helpers.lazy import lazy
 from .flags import Flag
 from .comment import Comment
@@ -15,8 +15,6 @@ from flask import g
 
 site = environ.get("DOMAIN").strip()
 site_name = environ.get("SITE_NAME").strip()
-if site == 'pcmemes.net': cc = "SPLASH MOUNTAIN"
-else: cc = "COUNTRY CLUB"
 
 class Submission(Base):
 	__tablename__ = "submissions"
@@ -80,7 +78,7 @@ class Submission(Base):
 	@property
 	@lazy
 	def options(self):
-		return g.db.query(Comment).filter_by(parent_submission = self.id, author_id = AUTOPOLLER_ID, level=1)
+		return g.db.query(Comment).filter_by(parent_submission = self.id, author_id = AUTOPOLLER_ACCOUNT, level=1)
 
 	def total_poll_voted(self, v):
 		if v:
@@ -319,7 +317,7 @@ class Submission(Base):
 		else: return ""
  
 	def realbody(self, v):
-		if self.club and not (v and v.paid_dues): return f"<p>{cc} ONLY</p>"
+		if self.club and not (v and v.paid_dues): return "<p>COUNTRY CLUB ONLY</p>"
 
 		body = self.body_html
 		body = censor_slurs(body, v)
@@ -337,7 +335,7 @@ class Submission(Base):
 		return body
 
 	def plainbody(self, v):
-		if self.club and not (v and v.paid_dues): return f"<p>{cc} ONLY</p>"
+		if self.club and not (v and v.paid_dues): return "<p>COUNTRY CLUB ONLY</p>"
 
 		body = self.body
 		body = censor_slurs(body, v)
@@ -350,7 +348,7 @@ class Submission(Base):
 	def realtitle(self, v):
 		if self.club and not (v and v.paid_dues) and not (v and v.admin_level > 1):
 			if v: return random.choice(TROLLTITLES).format(username=v.username)
-			else: return f'{cc} MEMBERS ONLY'
+			else: return 'COUNTRY CLUB MEMBERS ONLY'
 		elif self.title_html: title = self.title_html
 		else: title = self.title
 
@@ -362,7 +360,7 @@ class Submission(Base):
 	def plaintitle(self, v):
 		if self.club and not (v and v.paid_dues) and not (v and v.admin_level > 1):
 			if v: return random.choice(TROLLTITLES).format(username=v.username)
-			else: return f'{cc} MEMBERS ONLY'
+			else: return 'COUNTRY CLUB MEMBERS ONLY'
 		else: title = self.title
 
 		title = censor_slurs(title, v)
