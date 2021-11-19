@@ -67,7 +67,7 @@
 	</div>
 </div>
 
-<!-- 
+
 <pre>
 
 
@@ -92,11 +92,12 @@
 		<td style="font-weight:bold; text-align:right;">{{user.stored_subscriber_count}}</td>
 	</tr>
 {% endfor %}
-</table> -->
+</table>
+<pre>
 
 
-<div class="col-span-full">
-	<h1 class="text-4xl font-heading font-bold">Top 10 by followers</h1>
+<div class="col-span-full lg:col-span-2">
+	<h1 class="text-4xl font-heading font-bold">Top 20 by Coins Spent in Shop</h1>
 	<div class="flex flex-col border border-gray-900 rounded-md">
 		{% for user in users1 %}
 		<div class="flex items-center border-b border-gray-900 odd:bg-gray-700 px-6 py-4">
@@ -120,7 +121,7 @@
 				{% endif %}
 			</div>
 			<div class="ml-auto mr-4">
-				<span class="text-2xl text-gray-300 font-heading">{{user.stored_subscriber_count}}</span>
+				<span class="text-2xl text-gray-300 font-heading">{{user.coins_spent}}</span>
 			</div>
 		</div>
 		{% endfor %}
