@@ -214,83 +214,32 @@
 				</div>
 			</div>
 
-						<h2 class="h5" id="bio" name="bio">Your Profile</h2>
-
-						<p class="text-small text-muted">Edit how others see you on {{'SITE_NAME' | app_config}}.</p>
-
-						<div class="settings-section rounded mb-0">
-
-							<div class="body d-lg-flex border-bottom">
-
-								<label class="text-black w-lg-25">Username</label>
-
-								<div class="w-lg-100">
-									<p>Your original username will always stay reserved for you: <code>{{v.original_username}}</code></p>
-
-									<form action="/settings/name_change" method="post">
-										<input type="hidden" name="formkey" value="{{v.formkey}}">
-										<input type="text" name="name" class="form-control" value="{{v.username}}">
-										<small>3-25 characters, including letters, numbers, _ , and -</small>
-										<div class="flex mt-2">
-											<input class="btn btn-primary ml-auto" type="submit" value="Change Display Name">
-										</div>
-									</form>
-								</div>
-
-							</div>
-							<div class="body d-lg-flex border-bottom">
-
-								<label class="text-black w-lg-25">Profile Anthem</label>
-
-								<div class="w-lg-100">
-									<p>Must be a youtube video link.</p>
-
-									<form action="/settings/song_change" method="post">
-										<input type="hidden" name="formkey" value="{{v.formkey}}">
-										<input type="text" name="song" class="form-control" value="{% if v.song %}https://youtu.be/{{v.song}}{% endif %}" placeholder='Enter a youtube video link here' >
-										<br><small>In some browsers, users have to click at least once anywhere in the profile page for the anthem to play.</small>
-										<div class="flex mt-2">
-											<input class="btn btn-primary ml-auto" type="submit" value="Change Profile Anthem">
-										</div>
-									</form>
-								</div>
-
-							</div>
-							<div class="body d-lg-flex border-bottom">
-
-								<label class="text-black w-lg-25">Name Color</label>
-
-								<div class="flex">
-
-									<form action="/settings/namecolor" id="color-form" method="post" class="color-picker" style="line-height: 0">
-											<input type="hidden" name="formkey" value="{{v.formkey}}">
-
-											{% for color in ['ff66ac','805ad5','62ca56','38a169','80ffff','2a96f3','eb4963','ff0000','f39731','30409f','3e98a7','e4432d','7b9ae4','ec72de','7f8fa6', 'f8db58'] %}
-											<input type="radio" name="color" id="color-{{color}}" value="{{color}}" {% if v.namecolor == color %}checked{% endif %} onclick="document.getElementById('color-form').submit()">
-											<label class="color-radio" for="color-{{color}}">
-												<span style="background-color: #{{color}}">
-												{% if v.namecolor.lower() == color %}
-													<i class="fas fa-check text-white"></i>
-												{% else %}
-													&nbsp;
-												{% endif %}
-												</span>
-											</label>
-											{% endfor %}
-
-									</form>
-
-								</div>
-
-								<p class="text-small mb-2">Or type a color code:</p>
-								<div class="flex">
-								<form action="/settings/namecolor" id="color-code-form" method="post">
-									<input type="hidden" name="formkey" value="{{v.formkey}}">
-									<input class="form-control" type="text" name="color" id="color-code" maxlength="6" value="{% if v.namecolor %}{{v.namecolor}}{% endif %}">
-									<label class="btn btn-secondary text-capitalize mr-2 mt-2 mb-0">Update<input type="text" for="color-code" onclick="form.submit()" hidden=""></label>
-								</form>
-								</div>
-							</div>							
+			<!-- Name Color -->
+			<div class="rounded-lg divide-y divide-gray-800 bg-gray-700 border border-gray-900 shadow-inset-t-white-10">
+				<div class="px-4 py-4">
+					<h2 class="font-bold text-lg font-heading leading-normal mb-2">Username Color</h2>
+					<form action="/settings/namecolor" id="color-form" method="post" class="color-picker" style="line-height: 0">
+						<input type="hidden" name="formkey" value="{{v.formkey}}">
+						{% for color in ['ff66ac','805ad5','62ca56','38a169','80ffff','2a96f3','eb4963','ff0000','f39731','30409f','3e98a7','e4432d','7b9ae4','ec72de','7f8fa6', 'f8db58'] %}
+						<input type="radio" name="color" id="color-{{color}}" value="{{color}}" {% if v.namecolor == color %}checked{% endif %} onclick="document.getElementById('color-form').submit()">
+						<label class="color-radio" for="color-{{color}}">
+							<span style="background-color: #{{color}}">
+								{% if v.namecolor.lower() == color %}
+								<i class="fas fa-check text-white"></i>
+								{% else %}
+								&nbsp;
+								{% endif %}
+							</span>
+						</label>
+						{% endfor %}
+					</form>
+					<form action="/settings/namecolor" id="color-code-form" method="post">
+						<input type="hidden" name="formkey" value="{{v.formkey}}">
+						<input class="form-control" type="text" name="color" id="color-code" maxlength="6" value="{% if v.namecolor %}{{v.namecolor}}{% endif %}">
+						<label class="btn btn-secondary text-capitalize mr-2 mt-2 mb-0">Update<input type="text" for="color-code" onclick="form.submit()" hidden=""></label>
+					</form>
+				</div>
+			</div>						
 
 							{% if not v.flairchanged %}
 							<div class="body d-lg-flex border-bottom">
