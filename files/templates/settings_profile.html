@@ -48,7 +48,7 @@
 							<div>
 								<form action="/settings/delete/profile" method="post">
 									<input type="hidden" name="formkey" value="{{v.formkey}}">
-									<button type="submit" value="Delete" class="ml-auto block px-4 py-2 bg-gradient-to-t from-red-700 to-red-600 hover:from-red-600 hover:to-pred-700 active:shadow-inner border border-red-900 rounded-md text-shadow-t shadow-inset-t-white-10 text-sm font-bold text-red-200 focus:text-red-400 focus:outline-none">
+									<button type="submit" value="Delete" class="ml-auto block px-4 py-2 bg-gradient-to-t from-red-700 to-red-600 hover:from-red-600 hover:to-pred-700 active:shadow-inner border border-red-900 rounded-md text-shadow-t shadow-inset-t-white-10 text-sm font-bold text-gray-200 focus:text-gray-400 focus:outline-none">
 										<i class="fas fa-trash-alt fa-fw mr-1"></i>
 										Delete
 									</button>
@@ -58,7 +58,9 @@
 
 						</div>
 
-						<div class="text-small-extra text-muted mt-3">JPG, PNG, GIF files are supported. Max file size is {% if v and v.patron %}8{% else %}4{% endif %} MB.</div>
+						<p class="mt-3 text-sm text-gray-600 mt-3">
+						JPG, PNG, GIF files are supported. Max file size is {% if v and v.patron %}8{% else %}4{% endif %} MB.
+						</p>
 
 					</div>
 
