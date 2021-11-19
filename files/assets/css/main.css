@@ -120,15 +120,15 @@ sup {
   top: -0.5em;
 }
 
-a {
+/*a {
   color: var(--primary);
   text-decoration: none;
   background-color: transparent;
-}
-a:hover {
+}*/
+/*a:hover {
   color: var(--primary);
   text-decoration: underline;
-}
+}*/
 
 a:not([href]) {
   color: inherit;
