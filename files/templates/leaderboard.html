@@ -13,18 +13,17 @@
 					a.k.a. rdrama's biggest losers
 				</small>
 			</div>
-			<div class="ml-auto">
-				{% include "/dropdowns/SubmissionSorts.html" %}
-			</div>
 		</div>
 	</div>
 {% endblock %}
 
 {% block content %}
 <div class="col-span-full">
-	<h1 class="text-center text-4xl font-heading font-bold mb-2">
-		Top 25 by {{'COINS_NAME' | app_config}}
-	</h1>
+	<div class="flex items-center px-4 py-4 bg-gray-800 sticky top-0">
+		<h1 class="text-2xl font-heading font-bold">
+			Top 25 by {{'COINS_NAME' | app_config}}
+		</h1>
+	</div>
 	<div class="my-6 flex flex-col bg-gray-900 rounded-lg overflow-hidden">
 		{% for user in users1 %}
 		<div class="flex items-center border-b border-gray-900 shadow-inset-t-white-05 odd:bg-gray-700 px-6 py-4 {% if v.username == user.username %}text-pink-900 text-shadow-light bg-pink-500{% elif users1.index(user) % 2 != 0 %}bg-gray-700 bg-opacity-20{% endif %}">
