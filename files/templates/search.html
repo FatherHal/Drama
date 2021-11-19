@@ -14,7 +14,7 @@
 					Search Results: "{{query}}"
 				</h1>
 				<small class="block mt-1 text-gray-400">
-					<span class="capitalize font-bold">{{ sort }} {{ listinglength }} {{ total }}</span>
+					<span class="capitalize font-bold">{{ sort }} {% block listinglength %}{{listing | length}}{% endblock %} of {{total}} </span>
 					posts matching <strong>"{{query}}"</strong> {{ 'from all time' if t=='all' else 'in the last' }}
 					{% if t != 'all' %}<span class="font-bold">{{ t }}{% endif %}
 				</small>
@@ -46,7 +46,7 @@
 				<div class="pl-md-3">
 					<div class="text-muted text-small mb-1">Advanced search parameters (with examples): "author:quadnarca", "domain:reddit.com", "over18:true"<div>
 					<br>
-					<div class="text-muted text-small mb-1">Showing {% block listinglength %}{{listing | length}}{% endblock %} of {{total}} result{{'s' if total != 1 else ''}} for</div>
+					<!-- <div class="text-muted text-small mb-1">Showing {% block listinglength %}{{listing | length}}{% endblock %} of {{total}} result{{'s' if total != 1 else ''}} for</div> -->
 					<h1 class="h4 mb-0">{{query}}</h1>
 
 				</div>
