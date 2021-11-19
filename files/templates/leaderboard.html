@@ -7,7 +7,7 @@
 	<h1 class="text-4xl font-heading font-bold">Top 25 by {{'COINS_NAME' | app_config}}</h1>
 	<div class="flex flex-col border border-gray-900 rounded-md">
 		{% for user in users1 %}
-		<div class="flex items-center border-b border-gray-900 odd:bg-gray-700 px-6 py-4 {% if v.username == user.username %}bg-pink-500{% elif users1.index % 2 == 0 %}bg-gray-700 bg-opacity-30{% endif %}">
+		<div class="flex items-center border-b border-gray-900 odd:bg-gray-700 px-6 py-4 {% if v.username == user.username %}bg-pink-500{% elif users1.index(user) % 2 == 0 %}bg-gray-700 bg-opacity-30{% endif %}">
 			<!-- Rank -->
 			<h2 class="text-3xl text-gray-600 font-bold font-heading text-center w-20 -ml-6">{{users1.index(user)+1}}</h2>
 			<div class="relative">
