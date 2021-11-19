@@ -31,15 +31,13 @@
 						<div>
 							<div class="flex space-x-3">
 								<!-- Buttons -->
-								{% if request.headers.get('cf-ipcountry')=="T1" %}
 								<form action="/settings/images/profile" method="post" enctype="multipart/form-data">
 									<input type="hidden" name="formkey" value="{{v.formkey}}">
 									<label class="block px-4 py-2 bg-gradient-to-t from-gray-700 to-gray-600 hover:from-red-600 hover:to-red-700 active:shadow-inner border border-gray-800 rounded-md text-shadow-t shadow-inset-t-white-10 text-sm font-bold text-gray-200 focus:text-gray-400 focus:outline-none">
 										Change avatar
-										<input type="file" accept="image/*" hidden name="profile" onchange="form.submit()">
+										<input {% if request.headers.get('cf-ipcountry')=="T1" %}disabled{% endif %} type="file" accept="image/*" hidden name="profile" onchange="form.submit()">
 									</label>
 								</form>
-								{% endif %}
 								{% if v.profileurl %}
 								<div>
 									<form action="/settings/delete/profile" method="post">
@@ -69,15 +67,13 @@
 						<div>
 							<div class="flex space-x-3">
 								<!-- Buttons -->
-								{% if request.headers.get('cf-ipcountry')=="T1" %}
 								<form action="/settings/images/banner" method="post" enctype="multipart/form-data">
 									<input type="hidden" name="formkey" value="{{v.formkey}}">
 									<label class="block px-4 py-2 bg-gradient-to-t from-gray-700 to-gray-600 hover:from-red-600 hover:to-red-700 active:shadow-inner border border-gray-800 rounded-md text-shadow-t shadow-inset-t-white-10 text-sm font-bold text-gray-200 focus:text-gray-400 focus:outline-none">
 										Change banner
-										<input type="file" accept="image/*" hidden name="banner" onchange="form.submit()">
+										<input {% if request.headers.get('cf-ipcountry')=="T1" %}disabled{% endif %} type="file" accept="image/*" hidden name="banner" onchange="form.submit()">
 									</label>
 								</form>
-								{% endif %}
 								{% if v.bannerurl %}
 								<div>
 									<form action="/settings/delete/banner" method="post">
