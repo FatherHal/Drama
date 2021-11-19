@@ -20,53 +20,47 @@
 {% block content %}
 		<div class="sm:py-4 my-2.5 sm:my-0">
 
+			<!-- Avatar section -->
 			<div class="rounded-lg p-4 bg-gray-700 border border-gray-900 shadow-inset-t-white-10">
-
-				<h2 class="h5">Profile Picture</h2>
-
+				<h2 class="font-bold text-lg font-heading leading-normal mb-2">Profile Picture</h2>
 				<div class="flex">
-
+					<!-- Avatar -->
 					<div class="lg:w-25 md:text-center">
 						<img loading="lazy" src="{{v.profile_url}}" class="profile-pic-75">
 					</div>
-
+					<!-- Form -->
 					<div class="lg:w-full">
-
-						<div class="flex">
-
-							<div>
-								<form action="/settings/images/profile" method="post" enctype="multipart/form-data">
-									<input type="hidden" name="formkey" value="{{v.formkey}}">
-									<label class="btn btn-secondary text-capitalize mr-2 mb-0">
-										Update<input type="file" accept="image/*" {% if request.headers.get('cf-ipcountry')=="T1" %}disabled{% endif %} hidden name="profile" onchange="form.submit()">
-									</label>
-								</form>
-
-							</div>
-
+						<div class="flex space-x-3">
+							<!-- Buttons -->
+							{% if request.headers.get('cf-ipcountry')=="T1" %}
+							<form action="/settings/images/profile" method="post" enctype="multipart/form-data">
+								<input type="hidden" name="formkey" value="{{v.formkey}}">
+								<label class="block px-4 py-2 bg-gradient-to-t from-gray-700 to-gray-600 hover:from-red-600 hover:to-red-700 active:shadow-inner border border-gray-800 rounded-md text-shadow-t shadow-inset-t-white-10 text-sm font-bold text-gray-200 focus:text-gray-400 focus:outline-none">
+									Change avatar
+									<input type="file" accept="image/*" hidden name="profile" onchange="form.submit()">
+								</label>
+							</form>
+							{% endif %}
 							{% if v.profileurl %}
 							<div>
 								<form action="/settings/delete/profile" method="post">
 									<input type="hidden" name="formkey" value="{{v.formkey}}">
-									<button type="submit" value="Delete" class="ml-auto block px-4 py-2 bg-gradient-to-t from-red-700 to-red-600 hover:from-red-600 hover:to-red-700 active:shadow-inner border border-red-900 rounded-md text-shadow-t shadow-inset-t-white-10 text-sm font-bold text-gray-200 focus:text-gray-400 focus:outline-none">
+									<button type="submit" value="Delete" class="block px-4 py-2 bg-gradient-to-t from-red-700 to-red-600 hover:from-red-600 hover:to-red-700 active:shadow-inner border border-red-900 rounded-md text-shadow-t shadow-inset-t-white-10 text-sm font-bold text-gray-200 focus:text-gray-400 focus:outline-none">
 										<i class="fas fa-trash-alt fa-fw mr-1"></i>
 										Delete
 									</button>
 								</form>
 							</div>
 							{% endif %}
-
 						</div>
-
-						<p class="mt-3 text-sm text-gray-600 mt-3">
-						JPG, PNG, GIF files are supported. Max file size is {% if v and v.patron %}8{% else %}4{% endif %} MB.
+						<!-- Help text -->
+						<p class="mt-3 text-sm text-gray-400 mt-3">
+							JPG, PNG, GIF files are supported. Max file size is {% if v and v.patron %}8{% else %}4{% endif %} MB.
 						</p>
-
 					</div>
-
 				</div>
-
 			</div>
+
 			<h2 class="h5">Profile Banner</h2>
 
 			<div class="settings-section rounded">
