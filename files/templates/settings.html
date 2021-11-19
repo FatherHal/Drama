@@ -93,9 +93,9 @@
 
 			<div class="container mx-auto mb-4 px-4 grid grid-cols-12 gap-6 bg-gray-800 rounded-b-xl" id="main-content-row">
 
-				<div class="col-span-full xl:col-span-9 mt-4">
+				<div class="col-span-full xl:col-span-9">
 					{% if error %}
-					<div class="show fade rounded-lg shadow-lg p-3 bg-red-600 border border-gray-900 shadow-inset-t-white-10" role="alert">
+					<div class="alert show fade rounded-lg shadow-lg p-3 text-gray-200 bg-red-600 border border-gray-900 shadow-inset-t-white-10" role="alert">
 						<i class="fas fa-exclamation-circle fa-fw mr-1"></i>
 						<span class="font-medium font-heading">
 							{{error}}
@@ -106,7 +106,7 @@
 					</div>
 					{% endif %}
 					{% if msg %}
-					<div class="show fade rounded-lg shadow-lg p-3 bg-green-600 border border-gray-900 shadow-inset-t-white-10" role="alert">
+					<div class="alert show fade rounded-lg shadow-lg p-3 text-gray-200 bg-green-600 border border-gray-900 shadow-inset-t-white-10" role="alert">
 						<i class="fas fa-check-circle fa-fw mr-1"></i>
 						<span class="font-medium font-heading">
 							{{msg}}
