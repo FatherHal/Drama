@@ -2,6 +2,24 @@
 
 {% block pagetitle %}Leaderboard{% endblock %}
 
+{% block subHeader %}
+	<div class="container mx-auto px-4 py-4 grid grid-cols-12 rounded-t-md bg-gradient-to-t from-gray-800 to-gray-700 sub-header-shadow">
+		<div class="col-span-full flex items-center">
+			<div>
+				<h1 class="font-bold text-xl font-heading leading-normal">
+					Leaderboards
+				</h1>
+				<small class="block mt-1 text-gray-400">
+					See how dramanauts stack up.
+				</small>
+			</div>
+			<div class="ml-auto">
+				{% include "/dropdowns/SubmissionSorts.html" %}
+			</div>
+		</div>
+	</div>
+{% endblock %}
+
 {% block content %}
 <div class="col-span-full">
 	<h1 class="text-center text-4xl font-heading font-bold mb-2">
