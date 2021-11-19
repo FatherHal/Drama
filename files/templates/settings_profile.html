@@ -419,7 +419,7 @@
 					<h2 class="font-bold text-lg font-heading leading-normal mb-2">Privacy</h2>
 					<div class="mb-4">
 						<input type="checkbox" id="privateswitch" name="private"{% if v.is_private%} checked{% endif %} onchange="post_toast('/settings/profile?private='+document.getElementById('privateswitch').checked)">
-						<label for="nofollowswitch" class="inline-block pl-2 text-gray-400">Hide my posts and comments from others and search engines.</label>
+						<label for="privateswitch" class="inline-block pl-2 text-gray-400">Hide my posts and comments from others and search engines.</label>
 					</div>
 					<div>
 						<input type="checkbox" id="nofollowswitch" name="nofollow"{% if v.is_nofollow%} checked{% endif %} onchange="post_toast('/settings/profile?nofollow='+document.getElementById('nofollowswitch').checked)">
