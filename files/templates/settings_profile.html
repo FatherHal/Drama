@@ -64,7 +64,7 @@
 					<h2 class="font-bold text-lg font-heading leading-normal mb-2">Banner</h2>
 					<div class="flex flex-col md:flex-row gap-3">
 						<!-- Avatar -->
-						<img loading="lazy" src="{{v.profile_url}}" class="flex-shrink-0 w-14 h-14 rounded object-cover">
+						<img loading="lazy" src="{{v.profile_url}}" class="flex-shrink-0 w-28 h-14 rounded object-cover">
 						<!-- Form -->
 						<div>
 							<div class="flex space-x-3">
@@ -78,7 +78,7 @@
 									</label>
 								</form>
 								{% endif %}
-								{% if v.profileurl %}
+								{% if v.bannerurl %}
 								<div>
 									<form action="/settings/delete/banner" method="post">
 										<input type="hidden" name="formkey" value="{{v.formkey}}">
