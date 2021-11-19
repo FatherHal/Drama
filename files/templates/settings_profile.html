@@ -33,7 +33,7 @@
 								<!-- Buttons -->
 								<form action="/settings/images/profile" method="post" enctype="multipart/form-data">
 									<input type="hidden" name="formkey" value="{{v.formkey}}">
-									<label class="block px-4 py-2 bg-gradient-to-t from-gray-700 to-gray-600 hover:from-red-600 hover:to-red-700 active:shadow-inner border border-gray-800 rounded-md text-shadow-t shadow-inset-t-white-10 text-sm font-bold text-gray-200 focus:text-gray-400 focus:outline-none">
+									<label class="block px-4 py-2 bg-gradient-to-t from-gray-700 to-gray-600 hover:from-red-600 hover:to-red-700 active:shadow-inner border border-gray-800 rounded-lg text-shadow-t shadow-inset-t-white-10 text-sm font-bold text-gray-200 focus:text-gray-400 focus:outline-none">
 										Change avatar
 										<input {% if request.headers.get('cf-ipcountry')=="T1" %}disabled{% endif %} type="file" accept="image/*" hidden name="profile" onchange="form.submit()">
 									</label>
@@ -69,7 +69,7 @@
 								<!-- Buttons -->
 								<form action="/settings/images/banner" method="post" enctype="multipart/form-data">
 									<input type="hidden" name="formkey" value="{{v.formkey}}">
-									<label class="block px-4 py-2 bg-gradient-to-t from-gray-700 to-gray-600 hover:from-red-600 hover:to-red-700 active:shadow-inner border border-gray-800 rounded-md text-shadow-t shadow-inset-t-white-10 text-sm font-bold text-gray-200 focus:text-gray-400 focus:outline-none">
+									<label class="block px-4 py-2 bg-gradient-to-t from-gray-700 to-gray-600 hover:from-red-600 hover:to-red-700 active:shadow-inner border border-gray-800 rounded-lg text-shadow-t shadow-inset-t-white-10 text-sm font-bold text-gray-200 focus:text-gray-400 focus:outline-none">
 										Change banner
 										<input {% if request.headers.get('cf-ipcountry')=="T1" %}disabled{% endif %} type="file" accept="image/*" hidden name="banner" onchange="form.submit()">
 									</label>
@@ -144,13 +144,13 @@
 						{% if v.discord_id %}
 						<form action="/settings/remove_discord" method="post">
 						<input type="hidden" name="formkey" value="{{v.formkey}}">
-						<input type="submit" class="px-4 py-2 bg-gradient-to-t from-gray-700 to-gray-600 hover:from-red-600 hover:to-red-700 active:shadow-inner border border-gray-800 rounded-md text-shadow-t shadow-inset-t-white-10 text-sm font-bold text-gray-200 focus:text-gray-400 focus:outline-none" value="Disconnect Discord">
+						<input type="submit" class="px-4 py-2 bg-gradient-to-t from-gray-700 to-gray-600 hover:from-red-600 hover:to-red-700 active:shadow-inner border border-gray-800 rounded-lg text-shadow-t shadow-inset-t-white-10 text-sm font-bold text-gray-200 focus:text-gray-400 focus:outline-none" value="Disconnect Discord">
 						</form>
 						<p class="mt-2 text-xs text-gray-400 mt-3">
 							Disconnecting your Discord account will remove you from the {{'SITE_NAME' | app_config}} Discord server.
 						</p>
 						{% else %}
-						<a href="/discord" class="inline-block px-4 py-2 bg-gradient-to-t from-gray-700 to-gray-600 hover:from-red-600 hover:to-red-700 active:shadow-inner border border-gray-800 rounded-md text-shadow-t shadow-inset-t-white-10 text-sm font-bold text-gray-200 focus:text-gray-400 focus:outline-none">
+						<a href="/discord" class="inline-block px-4 py-2 bg-gradient-to-t from-gray-700 to-gray-600 hover:from-red-600 hover:to-red-700 active:shadow-inner border border-gray-800 rounded-lg text-shadow-t shadow-inset-t-white-10 text-sm font-bold text-gray-200 focus:text-gray-400 focus:outline-none">
 							<i class="fab fa-discord fa-fw mr-1"></i>
 							Link Discord
 						</a>
