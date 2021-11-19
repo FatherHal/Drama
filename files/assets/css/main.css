@@ -3885,19 +3885,20 @@ label.terms {
   padding: 0.1rem 0;
 }
 
+/*
 .dropdown-menu {
   padding: 0.5rem;
   color: var(--white);
   background-color: var(--gray-600);
-}
+}*/
 
-.dropdown-item {
+/*.dropdown-item {
   padding: 0.5rem 1rem;
   border-radius: 4px;
   color: var(--black);
-}
+}*/
 
-.dropdown-item:hover, .dropdown-item:focus, .dropdown-item.active {
+/*.dropdown-item:hover, .dropdown-item:focus, .dropdown-item.active {
   color: var(--black);
   text-decoration: none;
   background-color: var(--gray-300);
@@ -3907,7 +3908,7 @@ label.terms {
 .dropdown-item:focus .fa, .dropdown-item.active .fa {
   color: var(--black);
 }
-
+*/
 small, .small {
   font-size: 12px;
 }
