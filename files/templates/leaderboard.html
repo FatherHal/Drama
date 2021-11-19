@@ -30,7 +30,12 @@
 		<div class="flex items-center border-b border-gray-900 odd:bg-gray-700 px-6 py-4">
 			<!-- Rank -->
 			<h2 class="text-3xl text-gray-600 font-bold font-heading text-center w-20 -ml-6">{{users1.index(user)+1}}</h2>
-			<img src="{{user.profile_url}}" class="p-1 rounded bg-white border border-gray-900 w-16 h-16 object-cover shadow-md" alt="{{ user.username }} avatar"/>
+			<div class="relative">
+				<img src="{{user.profile_url}}" class="p-1 rounded bg-white border border-gray-900 w-16 h-16 object-cover shadow-md" alt="{{ user.username }} avatar"/>
+				{% if users1.index(user)+1 == 1 %}
+				<i class="absolute -top-3 -right-3 fas fa-star fa-lg fa-fw mr-2 text-yellow-500"></i>
+				{% endif %}
+			</div>
 			<!-- User Details -->
 			<div class="ml-6">
 				<a class="block font-heading font-bold text-xl" href="/@{{user.username}}">
@@ -41,9 +46,6 @@
 				</p>
 			</div>
 			<div class="ml-auto">
-				{% if users1.index(user)+1 == 1 %}
-				<i class="fas fa-star fa-lg fa-fw mr-2 text-yellow-500"></i>
-				{% endif %}
 				<span class="text-2xl text-gray-300 font-heading">{{user.coins}}</span>
 			</div>
 		</div>
