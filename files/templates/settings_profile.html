@@ -361,205 +361,8 @@
 								</div>
 
 							</div>
-							<div class="body d-lg-flex border-bottom">
 
-								<label class="text-black w-lg-25">Profile Anthem</label>
-
-								<div class="w-lg-100">
-									<p>Must be a youtube video link.</p>
-
-									<form action="/settings/song_change" method="post">
-										<input type="hidden" name="formkey" value="{{v.formkey}}">
-										<input type="text" name="song" class="form-control" value="{% if v.song %}https://youtu.be/{{v.song}}{% endif %}" placeholder='Enter a youtube video link here' >
-										<br><small>In some browsers, users have to click at least once anywhere in the profile page for the anthem to play.</small>
-										<div class="flex mt-2">
-											<input class="btn btn-primary ml-auto" type="submit" value="Change Profile Anthem">
-										</div>
-									</form>
-								</div>
-
-							</div>
-							<div class="body d-lg-flex border-bottom">
-
-								<label class="text-black w-lg-25">Name Color</label>
-
-								<div class="flex">
-
-									<form action="/settings/namecolor" id="color-form" method="post" class="color-picker" style="line-height: 0">
-											<input type="hidden" name="formkey" value="{{v.formkey}}">
-
-											{% for color in ['ff66ac','805ad5','62ca56','38a169','80ffff','2a96f3','eb4963','ff0000','f39731','30409f','3e98a7','e4432d','7b9ae4','ec72de','7f8fa6', 'f8db58'] %}
-											<input type="radio" name="color" id="color-{{color}}" value="{{color}}" {% if v.namecolor == color %}checked{% endif %} onclick="document.getElementById('color-form').submit()">
-											<label class="color-radio" for="color-{{color}}">
-												<span style="background-color: #{{color}}">
-												{% if v.namecolor.lower() == color %}
-													<i class="fas fa-check text-white"></i>
-												{% else %}
-													&nbsp;
-												{% endif %}
-												</span>
-											</label>
-											{% endfor %}
-
-									</form>
-
-								</div>
-
-								<p class="text-small mb-2">Or type a color code:</p>
-								<div class="flex">
-								<form action="/settings/namecolor" id="color-code-form" method="post">
-									<input type="hidden" name="formkey" value="{{v.formkey}}">
-									<input class="form-control" type="text" name="color" id="color-code" maxlength="6" value="{% if v.namecolor %}{{v.namecolor}}{% endif %}">
-									<label class="btn btn-secondary text-capitalize mr-2 mt-2 mb-0">Update<input type="text" for="color-code" onclick="form.submit()" hidden=""></label>
-								</form>
-								</div>
-							</div>							
-
-							{% if not v.flairchanged %}
-							<div class="body d-lg-flex border-bottom">
-
-								<label class="text-black w-lg-25">Flair</label>
-
-								<div class="w-lg-100">
-
-									<form id="profile-settings" action="/settings/title_change" method="post">
-										<input type="hidden" name="formkey" value="{{v.formkey}}">
-										<input id="customtitlebody" type="text" name="title" class="form-control" placeholder='Enter a flair here' value="{% if v.customtitleplain %}{{v.customtitleplain}}{% endif %}">
-										<div class="flex mt-2">
-											<a class="format" href="javascript:void(0)"><i class="btn btn-secondary format d-inline-block m-0 fas fa-smile-beam" onclick="loadEmojis('customtitlebody')" aria-hidden="true" data-bs-toggle="modal" data-bs-target="#emojiModal" data-bs-toggle="tooltip" data-bs-placement="bottom"  title="" data-bs-original-title="Add Emoji"></i></a>
-											&nbsp;&nbsp;&nbsp;
-											<small>Limit of 100 characters</small>
-											<input class="btn btn-primary ml-auto" id="titleSave" type="submit" value="Change Flair">
-										</div>
-									</form>
-								</div>
-
-							</div>
-							{% endif %}
-
-							<div class="body d-lg-flex border-bottom">
-
-								<label class="text-black w-lg-25">Flair Color</label>
-
-								<div class="flex">
-
-									<form action="/settings/titlecolor" id="titlecolor-form" method="post" class="color-picker" style="line-height: 0">
-											<input type="hidden" name="formkey" value="{{v.formkey}}">
-
-											{% for titlecolor in ['ff66ac','805ad5','62ca56','38a169','80ffff','2a96f3','eb4963','ff0000','f39731','30409f','3e98a7','e4432d','7b9ae4','ec72de','7f8fa6', 'f8db58'] %}
-											<input type="radio" name="titlecolor" id="titlecolor-{{titlecolor}}" value="{{titlecolor}}" {% if v.titlecolor == titlecolor %}checked{% endif %} onclick="document.getElementById('titlecolor-form').submit()">
-											<label class="color-radio" for="titlecolor-{{titlecolor}}">
-												<span style="background-color: #{{titlecolor}}">
-												{% if v.titlecolor.lower() == titlecolor %}
-													<i class="fas fa-check text-white"></i>
-												{% else %}
-													&nbsp;
-												{% endif %}
-												</span>
-											</label>
-											{% endfor %}
-
-									</form>
-
-								</div>
-		
-									
-
-								<p class="text-small mb-2">Or type a color code:</p>
-								<div class="flex">
-								<form action="/settings/titlecolor" id="color-code-form" method="post">
-									<input type="hidden" name="formkey" value="{{v.formkey}}">
-									<input class="form-control" type="text" name="titlecolor" id="color-code" maxlength="6" value="{% if v.titlecolor %}{{v.titlecolor}}{% endif %}">
-									<label class="btn btn-secondary text-capitalize mr-2 mt-2 mb-0">Update<input type="text" for="color-code" onclick="form.submit()" hidden=""></label>
-								</form>
-								</div>
-
-							</div>
-
-
-
-
-
-							{% if v.verified %}
-
-								<div class="body d-lg-flex border-bottom">
-
-									<label class="text-black w-lg-25">Bluecheck Color</label>
-		
-									<div class="flex">
-		
-										<form action="/settings/verifiedcolor" id="verifiedcolor-form" method="post" class="color-picker" style="line-height: 0">
-												<input type="hidden" name="formkey" value="{{v.formkey}}">
-		
-											{% for verifiedcolor in ['ff66ac','805ad5','62ca56','38a169','80ffff','2a96f3','eb4963','ff0000','f39731','30409f','3e98a7','e4432d','7b9ae4','ec72de','7f8fa6', 'f8db58'] %}
-												<input type="radio" name="verifiedcolor" id="verifiedcolor-{{verifiedcolor}}" value="{{verifiedcolor}}" {% if v.verifiedcolor == verifiedcolor %}checked{% endif %} onclick="document.getElementById('verifiedcolor-form').submit()">
-												<label class="color-radio" for="verifiedcolor-{{verifiedcolor}}">
-													<span style="background-color: #{{verifiedcolor}}">
-													{% if v.verifiedcolor and v.verifiedcolor.lower() == verifiedcolor %}
-														<i class="fas fa-check text-white"></i>
-													{% else %}
-														&nbsp;
-													{% endif %}
-													</span>
-												</label>
-											{% endfor %}
-		
-										</form>
-		
-									</div>
-
-									<p class="text-small mb-2">Or type a color code:</p>
-									<div class="flex">
-									<form action="/settings/verifiedcolor" id="color-code-form" method="post">
-										<input type="hidden" name="formkey" value="{{v.formkey}}">
-										<input class="form-control" type="text" name="verifiedcolor" id="color-code" maxlength="6" value="{% if v.verifiedcolor %}{{v.verifiedcolor}}{% endif %}">
-										<label class="btn btn-secondary text-capitalize mr-2 mt-2 mb-0">Update<input type="text" for="color-code" onclick="form.submit()" hidden=""></label>
-									</form>
-									</div>
-	
-								</div>	
-							{% endif %}
-
-
-
-							<div class="body d-lg-flex border-bottom">
-
-								<label class="text-black w-lg-25">Bio</label>
-
-								<div class="w-lg-100">						
-									<form id="profile-bio" action="/settings/profile" method="post" enctype="multipart/form-data">
-										<input type="hidden" name="formkey" value="{{v.formkey}}">
-										<div class="input-group mb-2">
-											<textarea  id="bio-text" class="form-control rounded" aria-label="With textarea" placeholder="Tell the community a bit about yourself." rows="3" name="bio" form="profile-bio" maxlength="1500">{% if v.bio %}{{v.bio}}{% endif %}</textarea>
-										</div>
-										<div class="flex">
-											<pre style="padding-top:0.7rem" class="btn btn-secondary format d-inline-block m-0 fas fa-bold" aria-hidden="true" onclick="makeBold('bio-text')" data-bs-toggle="tooltip" data-bs-placement="bottom" title="" data-bs-original-title="Bold"></pre>
-											&nbsp;
-											<pre style="padding-top:0.7rem" class="btn btn-secondary format d-inline-block m-0 fas fa-italic" aria-hidden="true" onclick="makeItalics('bio-text')" data-bs-toggle="tooltip" data-bs-placement="bottom" title="" data-bs-original-title="Italicize"></pre>
-											&nbsp;
-											<pre style="padding-top:0.7rem" class="btn btn-secondary format d-inline-block m-0 fas fa-quote-right" aria-hidden="true" onclick="makeQuote('bio-text')" data-bs-toggle="tooltip" data-bs-placement="bottom" title="" data-bs-original-title="Quote"></pre>
-											&nbsp;
-											<pre style="padding-top:0.7rem;line-height:1;" class="btn btn-secondary format d-inline-block m-0 font-weight-bolder text-uppercase" onclick="commentForm('bio-text');getGif()" aria-hidden="true" data-bs-toggle="modal" data-bs-target="#gifModal" data-bs-toggle="tooltip" data-bs-placement="bottom" title="" data-bs-original-title="Add GIF">GIF</pre>
-											&nbsp;
-											<pre style="padding-top:0.7rem" class="btn btn-secondary format d-inline-block m-0 fas fa-smile-beam" onclick="loadEmojis('bio-text')" aria-hidden="true" data-bs-toggle="modal" data-bs-target="#emojiModal" data-bs-toggle="tooltip" data-bs-placement="bottom" title="" data-bs-original-title="Add Emoji"></pre>
-											&nbsp;
-											<label class="btn btn-secondary format d-inline-block m-0">
-												<div id="filename-show"><i class="far fa-image"></i></div>
-												<input id="file-upload" type="file" name="file" {% if request.headers.get('cf-ipcountry')=="T1" %}disabled{% endif %} accept="image/*" onchange="document.getElementById('filename-show').innerHTML='image';" hidden>
-											</label>
-										</div>
-										<pre></pre>
-										<div class="flex">
-											<small>Limit of 1500 characters</small>
-											<input class="btn btn-primary ml-auto" id="bioSave" type="submit" value="Save Changes">
-										</div>
-									</form>
-								</div>
-
-							</div>
-
-
-							<div class="body d-lg-flex border-bottom">
+							<!-- <div class="body d-lg-flex border-bottom">
 
 								<label class="text-black w-lg-25">Friends</label>
 							
@@ -577,10 +380,10 @@
 									</form>
 								</div>
 							
-							</div>
+							</div> -->
 							
 
-							<div class="body d-lg-flex border-bottom">
+							<!-- <div class="body d-lg-flex border-bottom">
 
 								<label class="text-black w-lg-25">Enemies</label>
 							
@@ -598,7 +401,7 @@
 									</form>
 								</div>
 							
-							</div>
+							</div> -->
 
 
 							{% if v.patron or v.id == 1904 %}
