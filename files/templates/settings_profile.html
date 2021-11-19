@@ -22,7 +22,7 @@
 
 			<!-- Avatar section -->
 			<div class="rounded-lg divide-y divide-gray-800 bg-gray-700 border border-gray-900 shadow-inset-t-white-10">
-				<div class="px-4 py-3">
+				<div class="px-4 py-4">
 					<h2 class="font-bold text-lg font-heading leading-normal mb-2">Avatar</h2>
 					<div class="flex flex-col md:flex-row gap-3">
 						<!-- Avatar -->
@@ -58,7 +58,7 @@
 					</div>
 				</div>
 				<!-- Banner section -->
-				<div class="px-4 py-3 shadow-inset-t-white-10">
+				<div class="px-4 py-4 shadow-inset-t-white-10">
 					<h2 class="font-bold text-lg font-heading leading-normal mb-2">Banner</h2>
 					<div class="flex flex-col md:flex-row gap-3">
 						<!-- Avatar -->
@@ -137,7 +137,7 @@
 
 			</div> -->
 
-			<div class="rounded-lg px-4 py-3 bg-gray-700 border border-gray-900 shadow-inset-t-white-10">
+			<div class="rounded-lg px-4 py-4 bg-gray-700 border border-gray-900 shadow-inset-t-white-10">
 				<h2 class="font-bold text-lg font-heading leading-normal mb-2">Linked accounts</h2>
 				<div class="flex flex-col space-y-2 divide-y divide-y-800">
 					<div>
@@ -164,7 +164,7 @@
 
 			<!-- Referral & RSS -->
 			<div class="rounded-lg divide-y divide-gray-800 bg-gray-700 border border-gray-900 shadow-inset-t-white-10">
-				<div class="px-4 py-3">
+				<div class="px-4 py-4">
 					<h2 class="font-bold text-lg font-heading leading-normal mb-2">Referral code</h2>
 					<input type="text" onclick="this.select()" value="{{request.host_url}}signup?ref={{v.username}}" class="p-0.5 bg-gray-900 border border-gray-900 text-xs text-gray-300 rounded-sm w-72">
 					<small class="block mt-1 text-gray-400">
@@ -172,7 +172,7 @@
 						<a href="/badges" class="text-pink-500">Learn more</a>.
 					</small>
 				</div>
-				<div class="px-4 py-3">
+				<div class="px-4 py-4">
 					<h2 class="font-bold text-lg font-heading leading-normal mb-2">RSS Feed</h2>
 					<input type="text" onclick="this.select()" value="{{('/rss/hot/all') | full_link}}" class="p-0.5 bg-gray-900 border border-gray-900 text-xs text-gray-300 rounded-sm w-44">
 					<small class="block mt-1 text-gray-400">
@@ -183,7 +183,7 @@
 
 			<!-- Profile -->
 			<div class="rounded-lg divide-y divide-gray-800 bg-gray-700 border border-gray-900 shadow-inset-t-white-10">
-				<div class="px-4 py-3">
+				<div class="px-4 py-4">
 					<h2 class="font-bold text-lg font-heading leading-normal mb-2">Username</h2>
 					<form action="/settings/name_change" method="post">
 						<input type="hidden" name="formkey" value="{{v.formkey}}">
@@ -192,8 +192,8 @@
 						<small class="block mt-1 text-gray-400">
 							Your original username will always stay reserved for you: <strong>{{v.original_username}}</strong>
 						</small>
-						<div class="ml-auto">
-							<input class="block px-4 py-2 bg-gradient-to-t from-pink-600 to-pink-500 hover:from-pink-500 hover:to-pink-600 active:shadow-inner border border-gray-800 rounded-md text-shadow-t shadow-inset-t-white-10 text-sm font-bold text-gray-200 focus:text-gray-400 focus:outline-none" type="submit" value="Change Display Name">
+						<div class="mt-4">
+							<input class="ml-auto block px-4 py-2 bg-gradient-to-t from-pink-600 to-pink-500 hover:from-pink-500 hover:to-pink-600 active:shadow-inner border border-gray-800 rounded-md text-shadow-t shadow-inset-t-white-10 text-sm font-bold text-gray-200 focus:text-gray-400 focus:outline-none" type="submit" value="Change Display Name">
 						</div>
 					</form>
 				</div>
