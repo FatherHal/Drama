@@ -138,15 +138,6 @@
 			</div> -->
 
 			<div class="rounded-lg px-4 py-3 bg-gray-700 border border-gray-900 shadow-inset-t-white-10">
-				<h2 class="font-bold text-lg font-heading leading-normal mb-2">Referral code</h2>
-				<input type="text" onclick="this.select()" value="{{request.host_url}}signup?ref={{v.username}}" class="p-0.5 bg-gray-900 border border-gray-900 text-xs text-gray-300 rounded-sm w-72">
-				<small class="block mt-1 text-gray-400">
-					You have referred <strong>{{v.referral_count}}</strong> members.
-					<a href="/badges" class="text-pink-500">Learn more</a>.
-				</small>
-			</div>
-
-			<div class="rounded-lg px-4 py-3 bg-gray-700 border border-gray-900 shadow-inset-t-white-10">
 				<h2 class="font-bold text-lg font-heading leading-normal mb-2">Linked accounts</h2>
 				<div class="flex flex-col space-y-2 divide-y divide-y-800">
 					<div>
@@ -171,58 +162,26 @@
 				</div>
 			</div>
 
-					<h2 class="h5" name="referral">Linked Accounts</h2>
-
-					<p class="text-small text-muted">Manage your connections to other services.</p>
-
-					<div class="settings-section rounded">
-
-						<div class="d-lg-flex">
-
-						<div class="title w-lg-25">
-							<label>Discord</label>
-						</div>
-
-						<div class="body w-lg-100">
-
-							{% if v.discord_id %}
-							<form action="/settings/remove_discord" method="post">
-							<input type="hidden" name="formkey" value="{{v.formkey}}">
-							<input type="submit" class="btn btn-secondary text-capitalize mr-2 mb-0 mt-2" value="Disconnect Discord">
-							</form>
-
-							<div class="text-small-extra text-muted mt-3">Disconnecting your Discord account will remove you from the {{'SITE_NAME' | app_config}} Discord server.</div>
-							{% else %}
-							<a href="/discord" class="btn btn-primary">Link Discord</a>
-							<div class="text-small-extra text-muted mt-3">Link your Discord account to join the {{'SITE_NAME' | app_config}} Discord server.</div>
-							{% endif %}
-
-						</div>
-
-						</div>
-
-					</div>
-
-
-					<h2 class="h5" name="referral">RSS Feed</h2>
-
-					<p class="text-small text-muted">Subscribe to the {{'SITE_NAME' | app_config}} RSS feed.</p>
-
-					<div class="settings-section rounded">
-
-						<div class="d-lg-flex">
-
-							<div class="body w-lg-100">
-
-								<input type="text" readonly="" class="form-control copy-link" id="rss_feed" value="{{('/rss/hot/all') | full_link}}" data-clipboard-text="{{('/rss/hot/all') | full_link}}">
-
-								<div class="text-small-extra text-muted mt-3">You can change the feed by replacing "hot" with whatever sorting you want and "all" with whatever time filter you want.</div>
-
-							</div>
-
-						</div>
-
-					</div>
+			<!-- Referral & RSS -->
+			<div class="rounded-lg divide-y divide-gray-800 bg-gray-700 border border-gray-900 shadow-inset-t-white-10">
+				<div class="px-4 py-3">
+					<h2 class="font-bold text-lg font-heading leading-normal mb-2">Referral code</h2>
+					<input type="text" onclick="this.select()" value="{{request.host_url}}signup?ref={{v.username}}" class="p-0.5 bg-gray-900 border border-gray-900 text-xs text-gray-300 rounded-sm w-72">
+					<small class="block mt-1 text-gray-400">
+						You have referred <strong>{{v.referral_count}}</strong> members.
+						<a href="/badges" class="text-pink-500">Learn more</a>.
+					</small>
+				</div>
+				<div class="px-4 py-3">
+					<div class="px-4 py-3">
+					<h2 class="font-bold text-lg font-heading leading-normal mb-2">RSS Feed</h2>
+					<input type="text" onclick="this.select()" value="{{('/rss/hot/all') | full_link}}" class="p-0.5 bg-gray-900 border border-gray-900 text-xs text-gray-300 rounded-sm w-72">
+					<small class="block mt-1 text-gray-400">
+						You can change the feed by replacing <strong>hot</strong> with whatever sorting you want and <strong>all</strong> with whatever time filter you want.
+					</small>
+				</div>
+				</div>
+			</div>
 
 						<h2 class="h5" id="bio" name="bio">Your Profile</h2>
 
