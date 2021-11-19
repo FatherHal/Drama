@@ -44,19 +44,19 @@
         <div class="hidden md:flex items-center space-x-2 sm:ml-4">
             <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
             <a href="/" class="relative px-3 py-2.5 rounded text-sm {{ 'text-gray-200 bg-gray-800 shadow-inner font-bold text-shadow' if request.path == '/' else 'text-gray-500' }}" aria-current="page">
-              <i class="fas fa-home-lg-alt fa-fw fa-lg mr-2"></i>
+              <i class="fas fa-home-lg-alt fa-fw mr-2"></i>
               Home
             </a>
 
             <a href="/comments" class="relative px-3 py-2.5 rounded text-sm {{ 'text-gray-200 bg-gray-800 shadow-inner font-bold text-shadow' if request.path == '/comments' else 'text-gray-500' }}" aria-current="page">
-              <i class="fas fa-comments-alt fa-fw fa-lg mr-2"></i>
+              <i class="fas fa-comments-alt fa-fw mr-2"></i>
               Comments
             </a>
 
             {% include "/dropdowns/NavbarExtraLinks.html" %}
 
             <!-- <a href="/shop" class="relative px-3 py-2.5 rounded text-sm {{ 'text-gray-200 bg-gray-800 shadow-inner font-bold text-shadow' if request.path == '/shop' else 'text-gray-500' }}">
-              <i class="fas fa-store fa-fw fa-lg mr-2"></i>
+              <i class="fas fa-store fa-fw mr-2"></i>
               Shop
             </a> -->
 
@@ -93,17 +93,17 @@
         <!-- Notifications -->
         <a href="/submit" class="bg-transparent p-1 rounded-full text-gray-500 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">
           <span class="sr-only">Submit post</span>
-          <i class="fas fa-plus fa-fw fa-lg"></i>
+          <i class="fas fa-plus fa-fw"></i>
         </a>
 
         <!-- Notifications -->
         <a href="/notifications{% if v.notifications_count and v.notifications_count == v.post_notifications_count %}?posts=true{% endif %}" class="block bg-transparent p-1 rounded-full text-gray-500 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">
           <span class="sr-only">View notifications</span>
           <div class="relative">
-            <i class="fas fa-envelope fa-fw fa-lg"></i>
+            <i class="fas fa-envelope fa-fw"></i>
             <!-- Counter -->
             {% if v.notifications_count %}
-            <div class="absolute -top-1.5 -right-3 {{ 'w-10' if v.notifications_count > 99 else 'w-6' }} h-6 rounded-full border-2 border-gray-800 flex items-center justify-center bg-red-500">
+            <div class="absolute -top-1.5 -right-3 {{ 'w-10' if v.notifications_count > 99 else 'w-6' }} h-6 rounded-full border-2 border-gray-900 flex items-center justify-center bg-red-500">
               <span class="text-xs text-gray-100 font-bold leading-none">{{ v.notifications_count }}</span>
             </div>
             {% endif %}
@@ -113,7 +113,7 @@
         <!-- Notifications -->
         <button type="button" class="bg-transparent p-1 rounded-full text-gray-500 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">
           <span class="sr-only">View notifications</span>
-          <i class="fas fa-user-friends fa-fw fa-lg"></i>
+          <i class="fas fa-user-friends fa-fw"></i>
         </button>
       </div>
     </div>
