@@ -187,14 +187,14 @@
 					<h2 class="font-bold text-lg font-heading leading-normal mb-2">Username</h2>
 					<form action="/settings/name_change" method="post">
 						<input type="hidden" name="formkey" value="{{v.formkey}}">
-						<input type="text" name="name" class="form-control" value="{{v.username}}">
+						<input type="text" name="name" class="block rounded shadow-inner px-2 py-1.5 text-gray-500 bg-gray-900 border border-gray-900 focus:bg-white focus:text-gray-900" value="{{v.username}}">
 						<small>3-25 characters, including letters, numbers, _ , and -</small>
-						<div class="flex mt-2">
-							<input class="btn btn-primary ml-auto" type="submit" value="Change Display Name">
-						</div>
 						<small class="block mt-1 text-gray-400">
 							Your original username will always stay reserved for you: <strong>{{v.original_username}}</strong>
 						</small>
+						<div class="ml-auto">
+							<input class="block px-4 py-2 bg-gradient-to-t from-green-700 to-green-600 hover:from-green-600 hover:to-green-700 active:shadow-inner border border-gray-800 rounded-md text-shadow-t shadow-inset-t-white-10 text-sm font-bold text-gray-200 focus:text-gray-400 focus:outline-none" type="submit" value="Change Display Name">
+						</div>
 					</form>
 				</div>
 			</div>
