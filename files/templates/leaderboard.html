@@ -41,6 +41,9 @@
 				</p>
 			</div>
 			<div class="ml-auto">
+				{% if users1.index(user)+1 == 1 %}
+				<i class="fas fa-star fa-lg fa-fw mr-2"></i>
+				{% endif %}
 				<span class="text-2xl text-gray-300 font-heading">{{user.coins}}</span>
 			</div>
 		</div>
