@@ -214,20 +214,6 @@
 				</div>
 			</div>
 
-			<!-- Name Color -->
-			<div class="rounded-lg divide-y divide-gray-800 bg-gray-700 border border-gray-900 shadow-inset-t-white-10">
-				<div class="px-4 py-4">
-					<h2 class="font-bold text-lg font-heading leading-normal mb-2">Username Color</h2>
-					<form action="/settings/song_change" method="post">
-						<input type="hidden" name="formkey" value="{{v.formkey}}">
-						<input type="text" name="song" class="block rounded shadow-inner px-2 py-1.5 text-gray-500 bg-gray-900 border border-gray-900 focus:bg-white focus:text-gray-900" value="{% if v.song %}https://youtu.be/{{v.song}}{% endif %}" placeholder='Enter a youtube video link here'>
-						<small class="block mt-2 text-gray-400">Must be a youtube video link</small>
-						<div class="mt-4">
-							<input class="ml-auto block px-4 py-2 bg-gradient-to-t from-pink-700 to-pink-600 hover:from-pink-600 hover:to-pink-700 active:shadow-inner border border-gray-900 rounded-md text-shadow-t shadow-inset-t-white-10 text-sm font-bold text-gray-300 focus:text-gray-500 focus:outline-none" type="submit" value="Change profile anthem">
-						</div>
-					</form>
-				</div>
-			</div>
 							<div class="body d-lg-flex border-bottom">
 
 								<label class="text-black w-lg-25">Name Color</label>
@@ -236,6 +222,7 @@
 
 									<form action="/settings/namecolor" id="color-form" method="post" class="color-picker" style="line-height: 0">
 											<input type="hidden" name="formkey" value="{{v.formkey}}">
+
 											{% for color in ['ff66ac','805ad5','62ca56','38a169','80ffff','2a96f3','eb4963','ff0000','f39731','30409f','3e98a7','e4432d','7b9ae4','ec72de','7f8fa6', 'f8db58'] %}
 											<input type="radio" name="color" id="color-{{color}}" value="{{color}}" {% if v.namecolor == color %}checked{% endif %} onclick="document.getElementById('color-form').submit()">
 											<label class="color-radio" for="color-{{color}}">
@@ -248,6 +235,7 @@
 												</span>
 											</label>
 											{% endfor %}
+
 									</form>
 
 								</div>
