@@ -95,8 +95,8 @@
 </table> -->
 
 
-<div class="col-span-full lg:col-span-6">
-	<h1 class="text-4xl font-heading font-bold">Top 10 by Followers</h1>
+<div class="col-span-full">
+	<h1 class="text-4xl font-heading font-bold">Top 10 by followers</h1>
 	<div class="flex flex-col border border-gray-900 rounded-md">
 		{% for user in users1 %}
 		<div class="flex items-center border-b border-gray-900 odd:bg-gray-700 px-6 py-4">
@@ -127,40 +127,8 @@
 	</div>
 </div>
 
-<div class="col-span-full lg:col-span-6">
-	<h1 class="text-4xl font-heading font-bold">Top 10 by Post Count</h1>
-	<div class="flex flex-col border border-gray-900 rounded-md">
-		{% for user in users1 %}
-		<div class="flex items-center border-b border-gray-900 odd:bg-gray-700 px-6 py-4">
-			<!-- Rank -->
-			<h2 class="text-3xl text-gray-600 font-bold font-heading text-center w-20 -ml-6">{{users1.index(user)+1}}</h2>
-			<div class="relative">
-				<img src="{{user.profile_url}}" class="p-1 rounded bg-white border border-gray-900 w-16 h-16 object-cover shadow-md" alt="{{ user.username }} avatar"/>
-				{% if users1.index(user)+1 == 1 %}
-				<img src="https://i.ibb.co/xFgG6yf/Coinfixed.gif" width="20px" height="12px" class="absolute -top-1 -right-2.5 object-contain"/>
-				{% endif %}
-			</div>
-			<!-- User Details -->
-			<div class="ml-3">
-				<a class="block font-heading font-bold text-xl" href="/@{{user.username}}">
-					{{user.username}}
-				</a>
-				{% if user.customtitle %}
-				<p class="text-sm" style="#{{user.namecolor}}">
-					{{user.customtitle | safe}}
-				</p>
-				{% endif %}
-			</div>
-			<div class="ml-auto mr-4">
-				<span class="text-2xl text-gray-300 font-heading">{{user.post_count}}</span>
-			</div>
-		</div>
-		{% endfor %}
-	</div>
-</div>
 
-
-<!-- </pre>
+</pre>
 <h5 style="font-weight:bold;text-align: center;">Top 10 by post count</h5>
 <pre>
 
@@ -182,7 +150,7 @@
 	</tr>
 {% endfor %}
 </table>
-<pre> -->
+<pre>
 
 
 </pre>
