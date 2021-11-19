@@ -150,18 +150,23 @@
 				<h2 class="font-bold text-lg font-heading leading-normal mb-2">Linked accounts</h2>
 				<div class="flex flex-col space-y-2 divide-y divide-y-800">
 					<div class="flex">
-						<label class="text-sm font-bold font-heading">Discord</label>
 						<div class="ml-auto">
 						{% if v.discord_id %}
 						<form action="/settings/remove_discord" method="post">
 						<input type="hidden" name="formkey" value="{{v.formkey}}">
-						<input type="submit" class="btn btn-secondary text-capitalize mr-2 mb-0 mt-2" value="Disconnect Discord">
+						<input type="submit" class="block px-4 py-2 bg-gradient-to-t from-gray-700 to-gray-600 hover:from-red-600 hover:to-red-700 active:shadow-inner border border-gray-800 rounded-md text-shadow-t shadow-inset-t-white-10 text-sm font-bold text-gray-200 focus:text-gray-400 focus:outline-none" value="Disconnect Discord">
 						</form>
-
-						<div class="text-small-extra text-muted mt-3">Disconnecting your Discord account will remove you from the {{'SITE_NAME' | app_config}} Discord server.</div>
+						<p class="mt-2 text-xs text-gray-400 mt-3">
+							Disconnecting your Discord account will remove you from the {{'SITE_NAME' | app_config}} Discord server.
+						</p>
 						{% else %}
-						<a href="/discord" class="btn btn-primary">Link Discord</a>
-						<div class="text-small-extra text-muted mt-3">Link your Discord account to join the {{'SITE_NAME' | app_config}} Discord server.</div>
+						<a href="/discord" class="block px-4 py-2 bg-gradient-to-t from-gray-700 to-gray-600 hover:from-red-600 hover:to-red-700 active:shadow-inner border border-gray-800 rounded-md text-shadow-t shadow-inset-t-white-10 text-sm font-bold text-gray-200 focus:text-gray-400 focus:outline-none">
+							<i class="fab fa-discord fa-fw mr-1"></i>
+							Link Discord
+						</a>
+						<p class="mt-2 text-xs text-gray-400 mt-3">
+							Link your Discord account to join the {{'SITE_NAME' | app_config}} Discord server.
+						</p>
 						{% endif %}
 						</div>
 					</div>
