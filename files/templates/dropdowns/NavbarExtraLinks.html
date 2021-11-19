@@ -1,0 +1,20 @@
+<div class="flex items-center space-x-2">
+	<div class="dropdown">
+		<button class="relative px-3 py-2.5 rounded text-sm text-gray-500 hover:text-gray-400 focus:text-gray-200 focus:bg-gray-800 focus:shadow-inner focus:font-bold text-shadow dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+			<i class="fas fa-ellipsis-h fa-fw fa-lg mr-2"></i>
+			More
+		</button>
+		<ul class="dropdown-menu w-56 bg-gray-900 rounded-md shadow-lg divide-y divide-gray-800" aria-labelledby="dropdownMenuButton" x-placement="bottom-start">
+			<li class="{% if t=='hour' %}hidden{% endif %}">
+				<a class="dropdown-item block w-full text-left p-2 text-sm hover:bg-gray-800 hover:shadow-inner focus:bg-gray-800 focus:shadow-inner rounded" href="/shop">
+					<i class="fas fa-store text-gray-500 fa-sm fa-fw mr-2"></i>Shop
+				</a>
+			</li>
+			<li class="{% if t=='day' %}hidden{% endif %} shadow-inset-t-white-10">
+				<a class="dropdown-item block w-full text-left p-2 text-sm hover:bg-gradient-to-t hover:from-pink-700 hover:to-pink-600 hover:shadow-inner focus:shadow-inner focus:bg-gradient-to-t focus:from-pink-700 focus:to-pink-600 " href="/leaderboards">
+					<i class="fas fa-trophy text-gray-500 fa-sm fa-fw mr-2"></i>Leaderboards
+				</a>
+			</li>
+		</ul>
+	</div>
+</div>
