@@ -337,6 +337,21 @@
 				</div>
 			</div>
 
+			<!-- Privacy -->
+			<div class="rounded-lg divide-y divide-gray-800 bg-gray-700 border border-gray-900 shadow-inset-t-white-10">
+				<div class="px-4 py-4">
+					<h2 class="font-bold text-lg font-heading leading-normal mb-2">Privacy</h2>
+					<div class="mb-4">
+						<input type="checkbox" id="privateswitch" name="private"{% if v.is_private%} checked{% endif %} onchange="post_toast('/settings/profile?private='+document.getElementById('privateswitch').checked)">
+						<label for="privateswitch" class="inline-block pl-2 text-gray-400">Hide my posts and comments from others and search engines.</label>
+					</div>
+					<div>
+						<input type="checkbox" id="nofollowswitch" name="nofollow"{% if v.is_nofollow%} checked{% endif %} onchange="post_toast('/settings/profile?nofollow='+document.getElementById('nofollowswitch').checked)">
+						<label for="nofollowswitch" class="inline-block pl-2 text-gray-400">Prevent other users from following you.</label>
+					</div>
+				</div>
+			</div>
+
 
 						<div class="settings-section rounded mb-0">
 
@@ -414,19 +429,6 @@
 							</div>
 							{% endif %}
 
-			<div class="rounded-lg divide-y divide-gray-800 bg-gray-700 border border-gray-900 shadow-inset-t-white-10">
-				<div class="px-4 py-4">
-					<h2 class="font-bold text-lg font-heading leading-normal mb-2">Privacy</h2>
-					<div class="mb-4">
-						<input type="checkbox" id="privateswitch" name="private"{% if v.is_private%} checked{% endif %} onchange="post_toast('/settings/profile?private='+document.getElementById('privateswitch').checked)">
-						<label for="privateswitch" class="inline-block pl-2 text-gray-400">Hide my posts and comments from others and search engines.</label>
-					</div>
-					<div>
-						<input type="checkbox" id="nofollowswitch" name="nofollow"{% if v.is_nofollow%} checked{% endif %} onchange="post_toast('/settings/profile?nofollow='+document.getElementById('nofollowswitch').checked)">
-						<label for="nofollowswitch" class="inline-block pl-2 text-gray-400">Prevent other users from following you.</label>
-					</div>
-				</div>
-			</div>
 					</div>
 					</div>
 {% endblock %}
