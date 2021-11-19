@@ -22,7 +22,7 @@ SITE_NAME = environ.get("SITE_NAME", "").strip()
 
 @app.get("/kek/users")
 @auth_required
-def users_list(v):
+def kek(v):
 	users = g.db.query(User).order_by(User.id.desc()).limit(12).all()
 	return [x.json for x in users]
 
