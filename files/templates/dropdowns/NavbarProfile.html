@@ -1,10 +1,10 @@
 <div class="dropdown">
-	<button class="relative flex items-center px-3 py-2.5 rounded text-sm text-gray-500 hover:text-gray-400 focus:text-gray-200 focus:bg-gray-800 focus:shadow-inner focus:font-bold text-shadow focus:outline-none" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+	<button class="relative flex items-center px-3 py-2.5 rounded text-sm text-gray-500 hover:text-gray-400 focus:text-gray-200 focus:bg-gray-800 focus:shadow-inner focus:font-bold text-shadow focus:outline-none dropdown-toggle" type="button" id="dropdownProfileMenuButton" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 		<span class="sr-only">Open user menu</span>
         <img class="h-8 w-8 rounded-sm" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="">
         <span class="text-sm font-heading pl-2">{{ v.username }}</span>
 	</button>
-	<ul class="dropdown-menu w-56 bg-gray-900 rounded-md rounded-t-none shadow-lg" aria-labelledby="dropdownMenuButton" x-placement="bottom-start">
+	<ul class="dropdown-menu w-56 bg-gray-900 rounded-md rounded-t-none shadow-lg" aria-labelledby="dropdownProfileMenuButton" x-placement="bottom-start">
 		<li class="{% if t=='hour' %}hidden{% endif %}">
 			<a class="dropdown-item block w-full text-left px-4 py-2 text-sm text-gray-200 bg-gradient-to-t hover:from-pink-800 hover:to-pink-700 hover:shadow-inner focus:shadow-inner focus:bg-gradient-to-t focus:from-pink-800 focus:to-pink-700" href="/shop">
 				<i class="fas fa-store fa-sm fa-fw mr-4"></i>Shop
