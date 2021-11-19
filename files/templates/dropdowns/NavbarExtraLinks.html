@@ -1,6 +1,7 @@
 <div class="flex items-center space-x-2">
 	<div class="dropdown">
 		<button class="relative px-3 py-2.5 rounded text-sm text-gray-500 hover:text-gray-400 focus:text-gray-200 focus:bg-gray-800 focus:shadow-inner focus:font-bold text-shadow dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+			<i class="fas fa-circle-info fa-fw fa-lg mr-2"></i>
 			More
 		</button>
 		<ul class="dropdown-menu w-56 bg-gray-900 rounded-md rounded-t-none shadow-lg" aria-labelledby="dropdownMenuButton" x-placement="bottom-start">
@@ -13,7 +14,7 @@
 				<hr class="mt-2 mb-1.5 border-t border-black h-1 shadow-inset-t-white-05"/>
 			</li>
 			<li class="{% if t=='day' %}hidden{% endif %}">
-				<a class="dropdown-item block w-full text-left px-4 py-2 text-sm text-gray-200 bg-gradient-to-t hover:from-pink-800 hover:to-pink-700 hover:shadow-inner focus:shadow-inner focus:bg-gradient-to-t focus:from-pink-800 focus:to-pink-700" href="/leaderboards">
+				<a class="dropdown-item block w-full text-left px-4 py-2 text-sm text-gray-200 bg-gradient-to-t hover:from-pink-800 hover:to-pink-700 hover:shadow-inner focus:shadow-inner focus:bg-gradient-to-t focus:from-pink-800 focus:to-pink-700" href="/leaderboard">
 					<i class="fas fa-trophy fa-sm fa-fw mr-2"></i>Leaderboards
 				</a>
 			</li>
