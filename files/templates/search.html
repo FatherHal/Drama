@@ -14,8 +14,8 @@
 					Search Results: "{{query}}"
 				</h1>
 				<small class="block mt-1 text-gray-400">
-					<span class="capitalize font-bold">{{ sort }} {{ total }}</span>
-					posts matching <strong>"{{query}}"</strong> {{ 'from all time' if t=='all' else 'in the last' }}
+					<strong>{{ total }}</strong>
+					{{ sort }} posts matching <strong>"{{query}}"</strong> {{ 'from all time' if t=='all' else 'in the last' }}
 					{% if t != 'all' %}<span class="font-bold">{{ t }}{% endif %}
 				</small>
 			</div>
