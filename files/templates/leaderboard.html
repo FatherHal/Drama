@@ -41,9 +41,11 @@
 				<a class="block font-heading font-bold text-xl" href="/@{{user.username}}">
 					{{user.username}}
 				</a>
-				<p class="text-sm text-gray-500">
-					Member since {{user.created_date}}
+				{% if user.customtitle %}
+				<p class="text-sm">
+					{{user.customtitle | safe}}
 				</p>
+				{% endif %}
 			</div>
 			<div class="ml-auto mr-4">
 				<span class="text-2xl text-gray-300 font-heading">{{user.coins}}</span>
