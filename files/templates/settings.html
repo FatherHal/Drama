@@ -94,7 +94,7 @@
 
 			<div class="container mx-auto mb-4 px-4 grid grid-cols-12 gap-6 bg-gray-800 rounded-b-xl" id="main-content-row">
 
-				<div class="col-span-full xl:col-span-9">
+				<div class="col-span-full xl:col-span-10">
 
 					{% if error %}
 					<div class="alert alert-danger alert-dismissible fade show my-3" role="alert">
@@ -181,9 +181,7 @@
 					{% endblock %}
 				</div>
 
-				<div>
-					{% include "/sidebars/HomeSidebar.html" %}
-				</div>
+				{% include "/sidebars/HomeSidebar.html" %}
 
 			</div>
 
