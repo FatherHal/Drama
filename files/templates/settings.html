@@ -93,11 +93,11 @@
 
 			<div class="container mx-auto mb-4 px-4 grid grid-cols-12 gap-6 bg-gray-800 rounded-b-xl" id="main-content-row">
 
-				<div class="col-span-full xl:col-span-9">
+				<div class="col-span-full xl:col-span-9 mt-4">
 					{% if error %}
-					<div class="alert alert-danger alert-dismissible fade show my-3" role="alert">
-						<i class="fas fa-exclamation-circle my-auto"></i>
-						<span>
+					<div class="fade rounded-lg shadow-lg p-3 bg-red-600 border border-gray-900 shadow-inset-t-white-10" role="alert">
+						<i class="fas fa-exclamation-circle fa-fw mr-1"></i>
+						<span class="font-medium font-heading">
 							{{error}}
 						</span>
 						<button type="button" class="close" data-bs-dismiss="alert" aria-label="Close">
@@ -106,9 +106,9 @@
 					</div>
 					{% endif %}
 					{% if msg %}
-					<div class="alert alert-success alert-dismissible fade show my-3" role="alert">
-						<i class="fas fa-check-circle my-auto" aria-hidden="true"></i>
-						<span>
+					<div class="fade rounded-lg shadow-lg p-3 bg-green-600 border border-gray-900 shadow-inset-t-white-10" role="alert">
+						<i class="fas fa-check-circle fa-fw mr-1"></i>
+						<span class="font-medium font-heading">
 							{{msg}}
 						</span>
 						<button type="button" class="close" data-bs-dismiss="alert" aria-label="Close">
@@ -148,7 +148,7 @@
 		</div>
 	</div>
 
-	
+
 	{% if v %}
 	{% include "/modals/Modal2FA.html" %}
 	{% endif %}
