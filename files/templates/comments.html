@@ -257,7 +257,7 @@
 	<img loading="lazy" src="{{ c.author.profile_url }}" class="w-8 h-8 object-cover rounded-sm mr-3" alt="{{ c.author.username }} avatar"/>
 	{% endif %}
 
-	<div class="relative rounded-lg w-full bg-gray-800 border border-gray-900 bg-opacity-40 p-3">
+	<div class="relative rounded-lg w-full bg-gray-800 border border-gray-900 border-opacity-40 p-3">
 		<div class="absolute top-0 left-0 w-full h-full rounded-lg bg-gray-700 bg-opacity-20"></div>
 
 		<div id="{% if comment_info and comment_info.id == c.id %}context{%else%}comment-{{c.id}}-only{% endif %}" class="comment-anchor {% if comment_info and comment_info.id == c.id %}context{%endif%}{% if c.is_banned %} banned{% endif %}{% if c.deleted_utc %} deleted{% endif %}">
