@@ -104,16 +104,6 @@
 						<button type="button" class="text-gray-500 hover:text-gray-400" onclick="loadEmojis('post-text')" aria-hidden="true" data-bs-toggle="modal" data-bs-target="#emojiModal" data-bs-toggle="tooltip" data-bs-placement="bottom" title="" data-bs-original-title="Add Emoji">	<i class="fas fa-smile-beam fa-fw fa-sm"></i>
 						</button>
 					</li>
-					{% if v %}
-					<li>
-						<button type="button" class="text-gray-500 hover:text-gray-400">
-							<div id="filename-show-reply-{{p.fullname}}">
-								<i class="fas fa-camera fa-fw fa-sm"></i>
-							</div>
-							<input id="file-upload-reply-{{p.fullname}}" type="file" name="file" accept="image/*" onchange="document.getElementById('filename-show-reply-{{p.fullname}}').innerHTML='image';" hidden>
-						</button>
-					</li>
-					{% endif %}
 				</ul>
 			</div>
 		</div>
