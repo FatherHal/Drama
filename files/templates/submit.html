@@ -40,7 +40,7 @@
 		<div class="flex flex-col">
 			<label for="post-URL" class="font-bold text-lg font-heading leading-normal mb-2">
 				Link
-				<span class="italic text-sm font-normal text-gray-500">(optional)</span>
+				<span class="italic text-sm font-normal text-gray-500">(optional if you have text)</span>
 			</label>
 			<div>
 				<!-- Input field -->
@@ -60,10 +60,25 @@
 			<div>
 				<!-- Input field -->
 				<label class="inline-block px-4 py-2 bg-gradient-to-t from-gray-700 to-gray-600 hover:from-red-600 hover:to-red-700 active:shadow-inner border border-gray-800 rounded-lg text-shadow-t shadow-inset-t-white-10 text-sm font-bold text-gray-200 focus:text-gray-400 focus:outline-none" for="file-upload">
-				<i class="fas fa-file fa-fw fa-sm mr-1"></i>
-				<span id="filename-show">Select file</span>
-				<input id="file-upload" type="file" name="file" accept="image/*, video/*" hidden>
+					<i class="fas fa-file fa-fw fa-sm mr-1"></i>
+					<span id="filename-show">Select file</span>
+					<input id="file-upload" type="file" name="file" accept="image/*, video/*" hidden>
 				</label>
+				<small class="block mt-1 text-gray-400">
+					You may upload videos up to 1 minute long.
+				</small>
+			</div>
+		</div>
+
+		<!-- Link field section -->
+		<div class="flex flex-col">
+			<label for="post-URL" class="font-bold text-lg font-heading leading-normal mb-2">
+				Post
+				<span class="italic text-sm font-normal text-gray-500">(optional if you have a link)</span>
+			</label>
+			<div>
+				<!-- Input field -->
+				<textarea form="submitform" id="post-text" class="rounded-lg p-2 border border-gray-900 bg-gray-700 bg-opacity-40 hover:bg-opacity-100 focus:bg-opacity-100 shadow-inner w-full" aria-label="With textarea" placeholder="Optional if you have a link or an image." rows="7" name="body" oninput="markdown();charLimit('post-text','character-count-submit-text-form');checkForRequired()" maxlength="10000" required></textarea>
 			</div>
 		</div>
 
