@@ -407,12 +407,12 @@
 						</div>
 
 						{% if v and (v.id==p.author_id or v.admin_level==6 and v.id in [1,28,995,2513]) and not v.is_suspended %}
-						<div id="edit-post-body-{{p.id}}" class="hidden comment-write collapsed child">
-							<form id="post-edit-form-{{p.id}}" class="d-flex flex-column input-group" action="/edit_post/{{p.id}}" method="post">
+						<div id="edit-post-body-{{p.id}}" class="hidden">
+							<form id="post-edit-form-{{p.id}}" class="flex flex-col w-full" action="/edit_post/{{p.id}}" method="post">
 								<input type="hidden" name="formkey" value="{{v.formkey}}">
 								<input type="hidden" name="current_page" value="{{request.path}}">
 								<input name="title" class="shadow-inner rounded mb-2 p-2 bg-gray-800 border border-gray-700 border-dashed text-gray-200" required placeholder="title" value="{{p.title}}" >
-								<textarea name="body" maxlength="10000" id="post-edit-box-{{p.id}}" form="post-edit-form-{{p.id}}" class="comment-box shadow-inner rounded p-2 bg-gray-800 border border-gray-700 border-dashed text-gray-200" aria-label="With textarea" placeholder="Add text to your post..." rows="10">{{p.body}}</textarea> 
+								<textarea name="body" maxlength="10000" id="post-edit-box-{{p.id}}" form="post-edit-form-{{p.id}}" class="shadow-inner rounded-lg p-2 bg-gray-900 focus:bg-white border border-gray-700 border-dashed text-gray-200 focus:text-gray-900" aria-label="With textarea" placeholder="Add text to your post..." rows="10">{{p.body}}</textarea> 
 								<div class="flex justify-between mt-2"> 
 									<small class="format pl-0"><i class="fas fa-bold" aria-hidden="true" onclick="makeBold('post-edit-box-{{p.id}}')" data-bs-toggle="tooltip" data-bs-placement="bottom" title="" data-bs-original-title="Bold"></i></small> 
 									<a class="format" href="javascript:void(0)"><i class="fas fa-italic" aria-hidden="true" onclick="makeItalics('post-edit-box-{{p.id}}')" data-bs-toggle="tooltip" data-bs-placement="bottom" title="" data-bs-original-title="Italicize"></i></a> 
@@ -423,7 +423,7 @@
 									<button type="button" onclick="togglePostEdit('{{p.id}}')" class="ml-auto px-4 py-2 rounded font-bold text-white text-sm text-shadow">
 										Cancel
 									</button> 
-									<button form="post-edit-form-{{p.id}}" class="ml-2 px-4 py-2 rounded font-bold text-white text-sm text-shadow bg-gradient-to-t from-pink-700 to-pink-500 border border-pink-600">
+									<button form="post-edit-form-{{p.id}}" class="ml-2 px-4 py-2 bg-gradient-to-t from-pink-800 to-pink-700 hover:from-pink-700 hover:to-pink-800 active:shadow-inner border border-gray-900 rounded-md text-shadow-t shadow-inset-t-white-10 text-sm font-bold text-gray-300 focus:text-gray-500 focus:outline-none">
 										Save changes
 									</button>
 								</div>
