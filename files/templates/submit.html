@@ -126,6 +126,9 @@
 		</div>
 		<div id="preview" class="my-3"></div>
 
+		{% if error %}<span class="text-danger mr-2">{{error}}</span>{% endif %}
+		<button class="btn btn-outline-purple" id="create_button" type="submit" disabled>Post</button>
+
 	</form>
 </div>
 {% endblock %}
