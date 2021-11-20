@@ -28,12 +28,12 @@
 		<ul class="flex flex-col space-y-2 text-gray-400">
 			<li>
 				<p class="text-sm">
-					<strong>{{ p.views }}</strong> {{ 'view' if p.views == 1 else 'views' }} on this post
+					This post has been viewed <strong>{{ p.views }}</strong> {{ 'time' if p.views == 1 else 'times' }}
 				</p>
 			</li>
 			<li>
 				<p class="text-sm">
-					<strong>{{ p.views }}</strong> {{ 'member' if p.views == 1 else 'members' }} subscribed to this post
+					<strong>{{ p.views }}</strong> {{ 'member' if p.views == 1 else 'members' }} are subscribed to this post
 				</p>
 			</li>
 		</ul>
