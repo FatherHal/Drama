@@ -24,24 +24,6 @@
 	<hr class="mt-8 mb-4 h-0.5 border-b border-gray-900 shadow-inset-t-white-05"/>
 	<div>
 		<h2 class="ml-2 font-bold text-xl font-heading leading-normal mb-2">
-			DramaMetric™
-		</h2>
-		<ul class="flex flex-col space-y-2 text-gray-400">
-			<li>
-				<p class="text-sm">
-					<strong>{{ p.views }}</strong> {{ 'view' if p.views == 1 else 'views' }} on this post
-				</p>
-			</li>
-			<li>
-				<p class="text-sm">
-					<strong>{{ p.views }}</strong> {{ 'member' if p.views == 1 else 'members' }} are subscribed to this post
-				</p>
-			</li>
-		</ul>
-	</div>
-	<hr class="mt-8 mb-4 h-0.5 border-b border-gray-900 shadow-inset-t-white-05"/>
-	<div>
-		<h2 class="ml-2 font-bold text-xl font-heading leading-normal mb-2">
 			Awards
 		</h2>
 		<!-- Icons -->
@@ -109,6 +91,29 @@
 				<img src="/assets/images/icons/twitter.gif" class="w-7 h-7 object-contain" alt="Share this post on Twitter"/>
 			</a>
 		</div>
+	</div>
+	<hr class="mt-8 mb-4 h-0.5 border-b border-gray-900 shadow-inset-t-white-05"/>
+	<div>
+		<h2 class="ml-2 font-bold text-xl font-heading leading-normal mb-2">
+			DramaMetric™
+		</h2>
+		<ul class="flex flex-col space-y-2 text-gray-400">
+			<li>
+				<p class="text-sm">
+					<strong class="text-pink-600">{{ p.views }}</strong> {{ 'view' if p.views == 1 else 'views' }} on this post
+				</p>
+			</li>
+			<li>
+				<p class="text-sm">
+					<strong class="text-pink-600">{{ ups + downs }}</strong>{{ 'vote' if ups + downs == 1 else 'votes' }} on this post
+				</p>
+			</li>
+			<li>
+				<p class="text-sm">
+					<strong class="text-pink-600">{{ p.views }}</strong> {{ 'member' if p.views == 1 else 'members' }} are subscribed to this post
+				</p>
+			</li>
+		</ul>
 	</div>
 </div>
 
