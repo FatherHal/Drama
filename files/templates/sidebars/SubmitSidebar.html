@@ -1,0 +1,19 @@
+<div class="hidden xl:block xl:col-start-10 xl:col-end-13 flex-shrink-0 py-4">
+	<div class="mb-4">
+		<div class="custom-control custom-checkbox">
+			<input type="checkbox" class="custom-control-input" id="nsfwCheck" name="over_18">
+			<label class="custom-control-label" for="nsfwCheck">+18</label>
+		</div>
+		<div class="custom-control custom-checkbox">
+			<input type="checkbox" class="custom-control-input" id="privateCheck" name="private">
+			<label class="custom-control-label" for="privateCheck">Draft</label>
+		</div>
+
+		{% if v.admin_level == 6 or (v.coins >= 750 and not v.club_banned) %}
+		<div class="custom-control custom-checkbox">
+			<input type="checkbox" class="custom-control-input" id="clubCheck" name="club">
+			<label class="custom-control-label" for="clubCheck">Country Club thread</label>
+		</div>
+		{% endif %}
+	</div>
+</div>

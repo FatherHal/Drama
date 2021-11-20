@@ -53,7 +53,7 @@
 
 		<!-- Attachment field section -->
 		<div class="flex flex-col">
-			<label for="post-URL" class="font-bold text-lg font-heading leading-normal mb-2">
+			<label for="file-upload" class="font-bold text-lg font-heading leading-normal mb-2">
 				Image or Video
 				<span class="italic text-sm font-normal text-gray-500">(optional)</span>
 			</label>
@@ -75,7 +75,7 @@
 
 		<!-- Link field section -->
 		<div class="flex flex-col">
-			<label for="post-URL" class="font-bold text-lg font-heading leading-normal mb-2">
+			<label for="body" class="font-bold text-lg font-heading leading-normal mb-2">
 				Post
 				<span class="italic text-sm font-normal text-gray-500">(optional if you have a link)</span>
 			</label>
@@ -112,75 +112,10 @@
 			<a href="/formatting" target="_blank" class="block mt-2 text-xs text-gray-500 hover:text-gray-400">Formatting help</a>
 		</div>
 
-				<div class="row justify-content-center mb-5">
-
-						<div class="col p-3 py-md-0">
-
-								<div class="body">
-
-
-
-										<p></p>
-										<small class="btn btn-secondary format d-inline-block m-0">
-										<i class="fas fa-bold" aria-hidden="true" onclick="makeBold('post-text')" data-bs-toggle="tooltip" data-bs-placement="bottom" title="" data-bs-original-title="Bold"></i>
-										</small>
-										&nbsp; 
-										<small class="btn btn-secondary format d-inline-block m-0">
-										<i class="fas fa-italic" aria-hidden="true" onclick="makeItalics('post-text')" data-bs-toggle="tooltip" data-bs-placement="bottom" title="" data-bs-original-title="Italicize"></i>
-										</small>
-										&nbsp; 
-										<small class="btn btn-secondary format d-inline-block m-0">
-										<i class="fas fa-quote-right" aria-hidden="true" onclick="makeQuote('post-text')" data-bs-toggle="tooltip" data-bs-placement="bottom" title="" data-bs-original-title="Quote"></i>
-										</small>
-										&nbsp;
-										<small class="btn btn-secondary format d-inline-block m-0"><span class="font-weight-bolder text-uppercase" aria-hidden="true" onclick="getGif();commentForm('post-text')" data-bs-toggle="modal" data-bs-target="#gifModal" data-bs-toggle="tooltip" data-bs-placement="bottom"  title="" data-bs-original-title="Add GIF">GIF</span></small>
-										&nbsp;
-										<label class="btn btn-secondary format d-inline-block m-0" for="emoji-reply-btn">
-											<div id="emoji-reply-btn" onclick="loadEmojis('post-text')" aria-hidden="true" data-bs-toggle="modal" data-bs-target="#emojiModal" data-bs-toggle="tooltip" data-bs-placement="bottom" title="" data-bs-original-title="Add Emoji"><i class="fas fa-smile-beam"></i></div>
-										</label>
-																					
-										<pre></pre>
-										<div class="form-text text-small"><a href="/formatting" target="_blank">Formatting help</a></div>
-										<pre></pre>
-
-										<div class="custom-control custom-checkbox">
-												<input type="checkbox" class="custom-control-input" id="nsfwCheck" name="over_18">
-												<label class="custom-control-label" for="nsfwCheck">+18</label>
-										</div>
-										<div class="custom-control custom-checkbox">
-												<input type="checkbox" class="custom-control-input" id="privateCheck" name="private">
-												<label class="custom-control-label" for="privateCheck">Draft</label>
-										</div>
-
-										{% if v.admin_level == 6 or (v.coins >= 750 and not v.club_banned) %}
-											<div class="custom-control custom-checkbox">
-												<input type="checkbox" class="custom-control-input" id="clubCheck" name="club">
-												<label class="custom-control-label" for="clubCheck">Country Club thread</label>
-											</div>
-										{% endif %}
-										<pre>
-
-
-
-
-
-
-										</pre>
-								</div>
-
-						</div>
-
-		<div class="container">
-				<div class="row fixed-bottom bg-white border-top p-3" id="" style="z-index: 100; bottom: 0px; transition: bottom 220ms cubic-bezier(0, 0, 0.2, 1) 0s;">
-						<div class="col">
-								<a href="/" class="btn btn-secondary">Cancel</a>
-						</div>
-						<div class="col text-right">
-								{% if error %}<span class="text-danger mr-2">{{error}}</span>{% endif %}
-								<button class="btn btn-outline-purple" id="create_button" type="submit" disabled>Post</button>
-						</div>
-				</div>
+		<div class="btn btn-secondary" onclick="document.getElementById('preview').classList.toggle('d-none');" style="float: right;">
+			Toggle preview
 		</div>
+		<div id="preview" class="my-3"></div>
 
 	</form>
 </div>
