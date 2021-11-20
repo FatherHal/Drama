@@ -81,7 +81,7 @@
 	<hr class="mt-8 mb-4 h-0.5 border-b border-gray-900 shadow-inset-t-white-05"/>
 	<div>
 		<h2 class="ml-2 font-bold text-xl font-heading leading-normal mb-2">
-			Share
+			Share this post
 		</h2>
 		<div class="flex flex-wrap items-center space-x-2">
 			<a class="leading-4 text-gray-400 hover:text-gray-300" href="">
@@ -100,17 +100,17 @@
 		<ul class="flex flex-col space-y-2 text-gray-400">
 			<li>
 				<p class="text-sm">
-					<strong class="text-pink-600">{{ p.views }}</strong> {{ 'view' if p.views == 1 else 'views' }} on this post
+					<strong>{{ p.views }}</strong> {{ 'view' if p.views == 1 else 'views' }} on this post
 				</p>
 			</li>
 			<li>
 				<p class="text-sm">
-					<strong class="text-pink-600">{{ ups + downs }}</strong>{{ 'vote' if ups + downs == 1 else 'votes' }} on this post
+					<strong class="text-pink-600">{{ ups + downs }}</strong> {{ 'vote' if ups + downs == 1 else 'votes' }} on this post
 				</p>
 			</li>
 			<li>
 				<p class="text-sm">
-					<strong class="text-pink-600">{{ p.views }}</strong> {{ 'member' if p.views == 1 else 'members' }} are subscribed to this post
+					<strong class="text-pink-600">{{ p.views }}</strong> {{ 'member' if p.views == 1 else 'members' }} following this post
 				</p>
 			</li>
 		</ul>
