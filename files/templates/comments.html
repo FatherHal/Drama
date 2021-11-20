@@ -436,7 +436,7 @@
 			{% if c.parent_submission %}
 
 				{% if v and v.id==c.author_id %}
-				<div id="comment-edit-{{c.id}}" class="comment-write collapsed child">
+				<div id="comment-edit-{{c.id}}" class="hidden comment-write collapsed child">
 					<form id="comment-edit-form-{{c.id}}" action="/edit_comment/{{c.id}}" method="post" class="input-group" enctype="multipart/form-data"> 
 						<input type="hidden" name="formkey" value="{{v.formkey}}">
 						<textarea maxlength="10000" id="comment-edit-body-{{c.id}}" data-id="{{c.id}}" name="body" form="comment-edit-form-{{c.id}}" class="comment-box form-control rounded" aria-label="With textarea" placeholder="Add your comment..." rows="3">{{c.body}}</textarea> 
