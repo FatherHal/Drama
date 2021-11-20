@@ -52,13 +52,10 @@ function charLimit(form, text) {
     var length = input.value.length;
     var maxLength = input.getAttribute("maxlength");
     if (length >= maxLength) {
-        text.style.color = "#E53E3E";
+        text.style.color = "#DC2626";
     }
-    else if (length >= maxLength * .72) {
-        text.style.color = "#FFC107";
-    }
-    else {
-        text.style.color = "#A0AEC0";
+    if (length >= maxLength * .72) {
+        text.style.color = "#F59E0B";
     }
     text.innerText = maxLength - length;
 }
