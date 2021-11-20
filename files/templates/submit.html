@@ -41,7 +41,7 @@
 			<label for="post-URL" class="font-bold text-lg font-heading leading-normal mb-2">Link</label>
 			<div>
 				<!-- Input field -->
-				<input class="form-control" id="post-URL" aria-describedby="URLHelp" name="url" placeholder="https://www.youtube.com/watch?v=iik25wqIuFo" value="{{request.values.get('url','')}}" required oninput="checkForRequired();autoSuggestTitle();hide_image()">
+				<input class="rounded shadow-inner w-full px-2 py-1.5 text-gray-700 bg-gray-900 border border-gray-900 focus:bg-white focus:text-gray-900" id="post-URL" aria-describedby="URLHelp" name="url" placeholder="https://www.youtube.com/watch?v=iik25wqIuFo" value="{{request.values.get('url','')}}" required oninput="checkForRequired();autoSuggestTitle();hide_image()">
 				<small class="block mt-1 text-gray-400">
 					To post an image, use a direct image link such as i.imgur.com
 				</small>
