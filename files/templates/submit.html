@@ -153,6 +153,12 @@
 </div>
 {% endblock %}
 
+
+{% block modals %}
+	{% include "emoji_modal.html" %}
+	{% include "gif_modal.html" %}
+{% endblock %}
+
 {% block scripts %}
 <script src="/assets/js/submit.js?v=64"></script>
 {% endblock %}
