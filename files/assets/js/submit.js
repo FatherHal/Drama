@@ -177,4 +177,3 @@ document.getElementById('file-upload').addEventListener('change', function() {
         checkForRequired();
     }
 })
-
