@@ -28,7 +28,7 @@
 		<ul class="flex flex-col space-y-2 text-gray-400">
 			<li>
 				<p class="text-sm">
-					This post has been viewed <strong>{{ p.views }}</strong> {{ 'time' if p.views == 1 else 'times' }}
+					<strong>{{ p.views }}</strong> {{ 'view' if p.views == 1 else 'views' }} on this post
 				</p>
 			</li>
 			<li>
