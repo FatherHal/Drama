@@ -155,17 +155,25 @@
 
 
 	{% if v and v.admin_level>=3 %}
-	{% if "/reported/" in request.path %}
-	<li class="hidden md:block">
-		<a onclick="approveComment('{{c.id}}')">
-			<i class="fas fa-check text-green-500 fa-fw mr-2"></i>Approve
-		</a>
-	</li>
-	<a class="list-inline-item text-muted hidden md:inline-block text-danger" href="javascript:void(0)" onclick="removeComment('{{c.id}}')"><i class="fas fa-ban text-danger fa-fw mr-2"></i>Remove</a>
-	{% else %}
-	<a id="approve-{{c.id}}" class="list-inline-item text-success hidden {% if c.is_banned %}md:inline-block{% endif %} text-success" href="javascript:void(0)" onclick="approveComment('{{c.id}}','approve-{{c.id}}','remove-{{c.id}}')"><i class="fas fa-check text-success fa-fw mr-2"></i>Approve</a>
-	<a id="remove-{{c.id}}" class="list-inline-item text-danger hidden {% if not c.is_banned %}md:inline-block{% endif %} text-danger" href="javascript:void(0)" onclick="removeComment('{{c.id}}','approve-{{c.id}}','remove-{{c.id}}')"><i class="fas fa-ban text-danger fa-fw mr-2"></i>Remove</a>
-	{% endif %}
+		{% if "/reported/" in request.path %}
+		<li class="hidden md:block">
+			<button onclick="approveComment('{{c.id}}')"><i class="fas fa-check text-green-600 fa-fw mr-2"></i>Approve</button>
+		</li>
+		<li class="hidden md:block">
+			<button onclick="removeComment('{{c.id}}')"><i class="fas fa-ban text-red-600 fa-fw mr-2"></i>Remove</button>
+		</li>
+		{% else %}
+		<li id="approve-{{c.id}}" class="hidden {% if c.is_banned %}md:block{% endif %}">
+			<button onclick="approveComment('{{c.id}}','approve-{{c.id}}','remove-{{c.id}}')">
+				<i class="fas fa-check text-green-600 fa-fw mr-2"></i>Approve
+			</button>
+		</li>
+		<li id="remove-{{c.id}}" class="hidden {% if not c.is_banned %}md:block{% endif %}"> 
+			<button onclick="removeComment('{{c.id}}','approve-{{c.id}}','remove-{{c.id}}')">
+				<i class="fas fa-ban text-red-600 fa-fw mr-2"></i>Remove
+			</button>
+		</li>
+		{% endif %}
 	{% endif %}
 
 	{% if v and c.parent_submission and (c.author_id==v.id or v.admin_level > 0) %}
