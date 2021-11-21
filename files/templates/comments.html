@@ -442,7 +442,7 @@
 					{% include "/comments/CommentEditForm.html" %}
 				{% endif %}
 				<!-- Comment actions -->
-				<div id="comment-{{c.id}}-actions" class="comment-actions{% if voted==1 %} upvoted{% elif voted==-1 %} downvoted{% endif %}">
+				<div id="comment-{{c.id}}-actions" class="{% if voted==1 %} upvoted{% elif voted==-1 %} downvoted{% endif %}">
 					{% include "/comments/CommentActions.html" %}
 				</div>
 			{% endif %}
