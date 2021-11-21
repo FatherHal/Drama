@@ -85,7 +85,7 @@
 				<!-- Requires author -->
 				{% if v and v.id==p.author_id %}
 				<li>
-					<hr class="my-2 -mx-2 border-t border-gray-800 border-opacity-40"/>
+					<hr class="mt-2 mb-1.5 border-t border-black h-1 shadow-inset-t-white-05"/>
 				</li>
 				<li class="{% if p.is_stickied %}hidden{% endif %}">
 					<button id="pin-profile-{{p.id}}" class="dropdown-item block w-full text-left px-4 py-2 text-sm text-gray-200 bg-gradient-to-t hover:from-pink-800 hover:to-pink-700 hover:shadow-inner focus:shadow-inner focus:bg-gradient-to-t focus:from-pink-800 focus:to-pink-700" onclick="post_toast2('/pin/{{p.id}}','unpin-profile-{{p.id}}','pin-profile-{{p.id}}')">
@@ -114,7 +114,7 @@
 				<!-- Requires auth and admin -->
 				{% if v and v.admin_level>=3 %}
 				<li>
-					<hr class="my-2 -mx-2 border-t border-gray-800 border-opacity-40"/>
+					<hr class="mt-2 mb-1.5 border-t border-black h-1 shadow-inset-t-white-05"/>
 				</li>
 				<li class="{% if p.stickied %}hidden{% endif %}">
 					<button id="pin-{{p.id}}" class="dropdown-item block w-full text-left px-4 py-2 text-sm text-gray-200 bg-gradient-to-t hover:from-pink-800 hover:to-pink-700 hover:shadow-inner focus:shadow-inner focus:bg-gradient-to-t focus:from-pink-800 focus:to-pink-700" onclick="post_toast2('/sticky/{{p.id}}','pin-{{p.id}}','unpin-{{p.id}}')">
@@ -144,7 +144,7 @@
 				<!-- Requires auth and admin and author -->
 				{% if v.admin_level >=3 or v.id == p.author.id and v.paid_dues %}
 				<li>
-					<hr class="my-2 -mx-2 border-t border-gray-800 border-opacity-40"/>
+					<hr class="mt-2 mb-1.5 border-t border-black h-1 shadow-inset-t-white-05"/>
 				</li>
 				<li class="{% if p.club %}hidden{% endif %}">
 					<button id="club-{{p.id}}" class="dropdown-item block w-full text-left px-4 py-2 text-sm text-gray-200 bg-gradient-to-t hover:from-pink-800 hover:to-pink-700 hover:shadow-inner focus:shadow-inner focus:bg-gradient-to-t focus:from-pink-800 focus:to-pink-700" onclick="post_toast2('/toggle_club/{{p.id}}','club-{{p.id}}','unclub-{{p.id}}')">
