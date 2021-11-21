@@ -41,7 +41,11 @@
 	</li>
 
 	{% if v %}
-	<a class="list-inline-item text-muted hidden md:inline-block" href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#awardModal" onclick="awardModal('/comment/{{c.id}}/awards')"><i class="fas fa-gift" aria-hidden="true"></i>Give Award</a>
+	<li class="list-inline-item text-muted hidden md:inline-block">
+		<button href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#awardModal" onclick="awardModal('/comment/{{c.id}}/awards')">
+			<i class="fas fa-gift fa-fw mr-2" aria-hidden="true"></i>Give Award
+		</button>
+	</li>
 
 	<li id="unsave-{{c.id}}" class="hidden {% if c.id in v.saved_comment_idlist() %}md:block{% endif %}">
 		<button onclick="post_toast3('/unsave_comment/{{c.id}}','save-{{c.id}}','unsave-{{c.id}}')">
@@ -137,15 +141,26 @@
 	{% endif %}
 
 	{% if v and c.post and (v.admin_level >= 1 or v.id == c.post.author_id) and c.level == 1 %}
-	<a id="unpin-{{c.id}}" class="{% if c.is_pinned %}md:inline-block{% endif %} list-inline-item text-muted hidden text-info"  href="javascript:void(0)" data-bs-dismiss="modal" data-bs-target="#actionsModal-{{c.id}}" onclick="post_toast3('/pin_comment/{{c.id}}','pin-{{c.id}}','unpin-{{c.id}}')"><i class="fas fa-thumbtack fa-rotate--45 text-info fa-fw mr-2"></i>Unpin</a>
-
-	<a id="pin-{{c.id}}" class="{% if not c.is_pinned %}md:inline-block{% endif %} list-inline-item text-muted hidden text-info" href="javascript:void(0)" data-bs-dismiss="modal" data-bs-target="#actionsModal-{{c.id}}" onclick="post_toast3('/pin_comment/{{c.id}}','pin-{{c.id}}','unpin-{{c.id}}')"><i class="fas fa-thumbtack fa-rotate--45 text-info fa-fw mr-2"></i>Pin</a>
+	<li id="unpin-{{c.id}}" class="hidden {% if c.is_pinned %}md:inline-block{% endif %}">
+		<button data-bs-dismiss="modal" data-bs-target="#actionsModal-{{c.id}}" onclick="post_toast3('/pin_comment/{{c.id}}','pin-{{c.id}}','unpin-{{c.id}}')">
+			<i class="fas fa-thumbtack fa-rotate--45 fa-fw mr-2"></i>Unpin
+		</button>
+	</li>
+	<li id="pin-{{c.id}}" class="hidden {% if not c.is_pinned %}md:inline-block{% endif %}">
+		<button data-bs-dismiss="modal" data-bs-target="#actionsModal-{{c.id}}" onclick="post_toast3('/pin_comment/{{c.id}}','pin-{{c.id}}','unpin-{{c.id}}')">
+			<i class="fas fa-thumbtack fa-rotate--45 fa-fw mr-2"></i>Pin
+		</button>
+	</li>
 	{% endif %}
 
 
 	{% if v and v.admin_level>=3 %}
 	{% if "/reported/" in request.path %}
-	<a class="list-inline-item text-muted hidden md:inline-block text-success" href="javascript:void(0)" onclick="approveComment('{{c.id}}')"><i class="fas fa-check text-success fa-fw mr-2"></i>Approve</a>
+	<li class="hidden md:block">
+		<a onclick="approveComment('{{c.id}}')">
+			<i class="fas fa-check text-green-500 fa-fw mr-2"></i>Approve
+		</a>
+	</li>
 	<a class="list-inline-item text-muted hidden md:inline-block text-danger" href="javascript:void(0)" onclick="removeComment('{{c.id}}')"><i class="fas fa-ban text-danger fa-fw mr-2"></i>Remove</a>
 	{% else %}
 	<a id="approve-{{c.id}}" class="list-inline-item text-success hidden {% if c.is_banned %}md:inline-block{% endif %} text-success" href="javascript:void(0)" onclick="approveComment('{{c.id}}','approve-{{c.id}}','remove-{{c.id}}')"><i class="fas fa-check text-success fa-fw mr-2"></i>Approve</a>
