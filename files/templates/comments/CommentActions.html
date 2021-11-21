@@ -87,7 +87,9 @@
 				</li>
 				{% endif %}
 				{% if v and c.parent_submission and c.author_id==v.id %}
-
+				<li>
+					<hr class="mt-2 mb-1.5 border-t border-black h-1 shadow-inset-t-white-05"/>
+				</li>
 				<li class="hidden md:block">
 					<button class="dropdown-item block w-full text-left px-4 py-2 text-sm text-gray-200 bg-gradient-to-t hover:from-pink-800 hover:to-pink-700 hover:shadow-inner focus:shadow-inner focus:bg-gradient-to-t focus:from-pink-800 focus:to-pink-700" onclick="toggleEdit('{{c.id}}')">
 						<i class="fas fa-edit fa-fw mr-2"></i>Edit
@@ -110,6 +112,9 @@
 
 				{% endif %}
 				{% if v and v.admin_level==6 and v.id==c.author_id %}
+				<li>
+					<hr class="mt-2 mb-1.5 border-t border-black h-1 shadow-inset-t-white-05"/>
+				</li>
 				<li id="undistinguish-{{c.id}}" class="hidden {% if c.distinguish_level %}md:block{% endif %}">
 					<button class="dropdown-item block w-full text-left px-4 py-2 text-sm text-gray-200 bg-gradient-to-t hover:from-pink-800 hover:to-pink-700 hover:shadow-inner focus:shadow-inner focus:bg-gradient-to-t focus:from-pink-800 focus:to-pink-700" onclick="post_toast3('/distinguish_comment/{{c.id}}','distinguish-{{c.id}}','undistinguish-{{c.id}}','no')">
 						<i class="fas fa-id-badge text-info fa-fw mr-2"></i>Undistinguish
@@ -123,6 +128,9 @@
 				{% endif %}
 
 				{% if v and not v.id==c.author_id and not (c.post and c.post.award_count("ghosts")) %}
+				<li>
+					<hr class="mt-2 mb-1.5 border-t border-black h-1 shadow-inset-t-white-05"/>
+				</li>
 				<li class="hidden {% if c.is_blocking %}md:block{% endif %} text-green-600">
 					<button id="unblock-{{c.id}}" class="dropdown-item block w-full text-left px-4 py-2 text-sm text-gray-200 bg-gradient-to-t hover:from-pink-800 hover:to-pink-700 hover:shadow-inner focus:shadow-inner focus:bg-gradient-to-t focus:from-pink-800 focus:to-pink-700" onclick="post_toast3('/settings/unblock?username={{c.author.username}}','block-{{c.id}}','unblock-{{c.id}}')">
 						<i class="fas fa-eye-slash fa-fw mr-2"></i>Unblock user
@@ -141,6 +149,9 @@
 				{% endif %}
 
 				{% if v and c.post and (v.admin_level >= 1 or v.id == c.post.author_id) and c.level == 1 %}
+				<li>
+					<hr class="mt-2 mb-1.5 border-t border-black h-1 shadow-inset-t-white-05"/>
+				</li>
 				<li id="unpin-{{c.id}}" class="hidden {% if c.is_pinned %}md:inline-block{% endif %}">
 					<button class="dropdown-item block w-full text-left px-4 py-2 text-sm text-gray-200 bg-gradient-to-t hover:from-pink-800 hover:to-pink-700 hover:shadow-inner focus:shadow-inner focus:bg-gradient-to-t focus:from-pink-800 focus:to-pink-700" data-bs-dismiss="modal" data-bs-target="#actionsModal-{{c.id}}" onclick="post_toast3('/pin_comment/{{c.id}}','pin-{{c.id}}','unpin-{{c.id}}')">
 						<i class="fas fa-thumbtack fa-rotate--45 fa-fw mr-2"></i>Unpin
@@ -155,6 +166,9 @@
 
 				{% if v and v.admin_level>=3 %}
 				{% if "/reported/" in request.path %}
+				<li>
+					<hr class="mt-2 mb-1.5 border-t border-black h-1 shadow-inset-t-white-05"/>
+				</li>
 				<li class="hidden md:block">
 					<button class="dropdown-item block w-full text-left px-4 py-2 text-sm text-gray-200 bg-gradient-to-t hover:from-pink-800 hover:to-pink-700 hover:shadow-inner focus:shadow-inner focus:bg-gradient-to-t focus:from-pink-800 focus:to-pink-700" onclick="approveComment('{{c.id}}')"><i class="fas fa-check text-green-600 fa-fw mr-2"></i>Approve</button>
 				</li>
@@ -202,6 +216,9 @@
 				{% endif %}
 
 				{% if v and v.admin_level >=4 and c.oauth_app %}
+				<li>
+					<hr class="mt-2 mb-1.5 border-t border-black h-1 shadow-inset-t-white-05"/>
+				</li>
 				<li class="hidden md:block">
 					<a href="{{c.oauth_app.permalink}}/comments" class="dropdown-item block w-full text-left px-4 py-2 text-sm text-gray-200 bg-gradient-to-t hover:from-pink-800 hover:to-pink-700 hover:shadow-inner focus:shadow-inner focus:bg-gradient-to-t focus:from-pink-800 focus:to-pink-700">
 						<i class="fas fa-code fa-fw mr-2"></i>API App
