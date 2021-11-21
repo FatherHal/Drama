@@ -43,9 +43,17 @@
 	{% if v %}
 	<a class="list-inline-item text-muted hidden md:inline-block" href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#awardModal" onclick="awardModal('/comment/{{c.id}}/awards')"><i class="fas fa-gift" aria-hidden="true"></i>Give Award</a>
 
-	<a id="unsave-{{c.id}}" class="{% if c.id in v.saved_comment_idlist() %}md:inline-block{% endif %} list-inline-item text-muted hidden" href="javascript:void(0)" onclick="post_toast3('/unsave_comment/{{c.id}}','save-{{c.id}}','unsave-{{c.id}}')"><i class="fas fa-save"></i>Unsave</a>
+	<li id="unsave-{{c.id}}" class="hidden {% if c.id in v.saved_comment_idlist() %}md:block{% endif %}">
+		<button onclick="post_toast3('/unsave_comment/{{c.id}}','save-{{c.id}}','unsave-{{c.id}}')">
+			<i class="fas fa-save"></i>Unsave
+		</button>
+	</li>
 
-	<a id="save-{{c.id}}" class="{% if c.id not in v.saved_comment_idlist() %}md:inline-block{% endif %} list-inline-item text-muted hidden" href="javascript:void(0)" onclick="post_toast3('/save_comment/{{c.id}}','save-{{c.id}}','unsave-{{c.id}}')"><i class="fas fa-save"></i>Save</a>
+	<li id="save-{{c.id}}" class="hidden {% if c.id not in v.saved_comment_idlist() %}md:block{% endif %}">
+		<button onclick="post_toast3('/save_comment/{{c.id}}','save-{{c.id}}','unsave-{{c.id}}')">
+			<i class="fas fa-save"></i>Save
+		</button>
+	</li>
 
 	<li>
 		<button onclick="openReplyBox('{{c.id}}')">
@@ -98,13 +106,13 @@
 
 	{% endif %}
 	{% if v and v.admin_level==6 and v.id==c.author_id %}
-	<li class="hidden {% if c.distinguish_level %}md:block{% endif %}">
-		<button id="undistinguish-{{c.id}}" onclick="post_toast3('/distinguish_comment/{{c.id}}','distinguish-{{c.id}}','undistinguish-{{c.id}}','no')">
+	<li id="undistinguish-{{c.id}}" class="hidden {% if c.distinguish_level %}md:block{% endif %}">
+		<button onclick="post_toast3('/distinguish_comment/{{c.id}}','distinguish-{{c.id}}','undistinguish-{{c.id}}','no')">
 			<i class="fas fa-id-badge text-info fa-fw mr-2"></i>Undistinguish
 		</button>
 	</li>
-	<li class="hidden {% if not c.distinguish_level %}md:block{% endif %}">
-		<button id="distinguish-{{c.id}}" onclick="post_toast3('/distinguish_comment/{{c.id}}','distinguish-{{c.id}}','undistinguish-{{c.id}}','yes')">
+	<li id="distinguish-{{c.id}}" class="hidden {% if not c.distinguish_level %}md:block{% endif %}">
+		<button onclick="post_toast3('/distinguish_comment/{{c.id}}','distinguish-{{c.id}}','undistinguish-{{c.id}}','yes')">
 			<i class="fas fa-id-badge text-info fa-fw mr-2"></i>Distinguish
 		</button>
 	</li>
