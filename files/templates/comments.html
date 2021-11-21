@@ -436,16 +436,7 @@
 					</div>
 				{% endif %}
 			</div>
-			{% if c.parent_submission %}
-				<!-- Author's edit comment form -->
-				{% if v and v.id==c.author_id %}
-					{% include "/comments/CommentEditForm.html" %}
-				{% endif %}
-				<!-- Comment actions -->
-				<!-- <div id="comment-{{c.id}}-actions" class="comment-actions{% if voted==1 %} upvoted{% elif voted==-1 %} downvoted{% endif %}">
-					{% include "/comments/CommentActions.html" %}
-				</div> -->
-			{% endif %}
+			
 		</div>
 
 		<div id="reply-to-{{c.id}}" class="hidden">
