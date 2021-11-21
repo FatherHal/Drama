@@ -174,14 +174,14 @@
 	{% endif %}
 
 	{% if v and c.parent_submission and (c.author_id==v.id or v.admin_level > 0) %}
-	<li id="unmark-{{c.id}}" class="hidden {% if c.over_18 %}md:block{% endif %}">
+	<li id="unmark-{{c.id}}" class="hidden {% if c.over_18 %}md:block{% endif %} text-red-600">
 		<button onclick="post_toast3('/toggle_comment_nsfw/{{c.id}}','mark-{{c.id}}','unmark-{{c.id}}')">
 			<i class="fas fa-eye-evil text-red-600 fa-fw mr-2"></i>Unmark +18
 		</button>
 	</li>
-	<li id="mark-{{c.id}}" class="hidden {% if not c.over_18 %}md:block{% endif %}">
+	<li id="mark-{{c.id}}" class="hidden {% if not c.over_18 %}md:block{% endif %} text-red-600">
 		<button onclick="post_toast3('/toggle_comment_nsfw/{{c.id}}','mark-{{c.id}}','unmark-{{c.id}}')">
-			<i class="fas fa-eye-evil text-red-600 fa-fw mr-2"></i>Mark +18
+			<i class="fas fa-eye-evil fa-fw mr-2"></i>Mark +18
 		</button>
 	</li>
 	{% endif %}
