@@ -439,30 +439,9 @@
 			{% if c.parent_submission %}
 
 				{% if v and v.id==c.author_id %}
-				<div id="comment-edit-{{c.id}}" class="hidden comment-write collapsed child">
-					<form id="comment-edit-form-{{c.id}}" action="/edit_comment/{{c.id}}" method="post" class="input-group" enctype="multipart/form-data"> 
-						<input type="hidden" name="formkey" value="{{v.formkey}}">
-						<textarea maxlength="10000" id="comment-edit-body-{{c.id}}" data-id="{{c.id}}" name="body" form="comment-edit-form-{{c.id}}" class="comment-box form-control rounded" aria-label="With textarea" placeholder="Add your comment..." rows="3">{{c.body}}</textarea> 
-						<div class="comment-format"> 
-							<small class="btn btn-secondary format d-inline-block m-0"><span class="font-weight-bolder text-uppercase" aria-hidden="true" onclick="commentForm('comment-edit-body-{{c.id}}');getGif()" data-bs-toggle="modal" data-bs-target="#gifModal" data-bs-toggle="tooltip" data-bs-placement="bottom"  title="" data-bs-original-title="Add GIF">GIF</span></small>
-							&nbsp;
-							<small class="btn btn-secondary format d-inline-block m-0"><i class="fas fa-smile-beam" aria-hidden="true" onclick="loadEmojis('comment-edit-body-{{c.id}}')" data-bs-toggle="modal" data-bs-target="#emojiModal" data-bs-toggle="tooltip" data-bs-placement="bottom"  title="" data-bs-original-title="Add Emoji"></i></small>
-							&nbsp;
-							<label class="btn btn-secondary format d-inline-block m-0" for="file-edit-reply-{{c.id}}">
-								<div id="filename-edit-reply-{{c.id}}"><i class="far fa-image"></i></div>
-								<input id="file-edit-reply-{{c.id}}" type="file" name="file" accept="image/*" onchange="document.getElementById('filename-edit-reply-{{c.id}}').innerHTML='image';" hidden>
-							</label>
-
-							<a id="cancel-edit-{{c.id}}" href="javascript:void(0)" onclick="toggleEdit('{{c.id}}')" class="hidden d-md-block btn btn-link text-muted ml-auto cancel-form">Cancel</a> 
-							<a href="javascript:void(0)" form="comment-edit-form-{{c.id}}" class="hidden d-md-block btn btn-primary ml-2" onclick="comment_edit('{{c.id}}')">Save Edit</a> 
-						</div>
-						<a id="cancel-edit-{{c.id}}" href="javascript:void(0)" onclick="toggleEdit('{{c.id}}')" class="md:hidden btn btn-link text-muted ml-auto cancel-form">Cancel</a> 
-						<a href="javascript:void(0)" form="comment-edit-form-{{c.id}}" class="md:hidden btn btn-primary ml-2" onclick="comment_edit('{{c.id}}')">Save Edit</a> 
-					</form>
-
-					<div class="form-text text-small p-0 m-0"><a href="/formatting" target="_blank">Formatting help</a></div>
-				</div>
+					{% include "/comments/CommentEditForm.html" %}
 				{% endif %}
+				
 				<div id="comment-{{c.id}}-actions" class="comment-actions{% if voted==1 %} upvoted{% elif voted==-1 %} downvoted{% endif %}">
 					<ul class="list-inline text-right text-md-left">
 
