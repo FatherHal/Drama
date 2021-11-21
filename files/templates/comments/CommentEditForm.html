@@ -1,4 +1,4 @@
-<div id="comment-edit-{{c.id}}" class="hidden comment-write collapsed child">
+<div id="comment-edit-{{c.id}}" class="hidden flex flex-wrap w-full">
 	<form id="comment-edit-form-{{c.id}}" action="/edit_comment/{{c.id}}" method="post" class="input-group" enctype="multipart/form-data"> 
 		<input type="hidden" name="formkey" value="{{v.formkey}}">
 		<div class="comment-box rounded-lg border border-gray-900 bg-gray-900 shadow-inner w-full">
@@ -45,10 +45,10 @@
 				Formatting help
 			</a>
 			<div class="ml-auto flex">
-				<button id="cancel-edit-{{c.id}}" class="px-4 py-2 text-gray-300 focus:text-gray-500" onclick="toggleEdit('{{c.id}}')">
+				<button type="button" id="cancel-edit-{{c.id}}" class="px-4 py-2 text-gray-300 focus:text-gray-500" onclick="toggleEdit('{{c.id}}')">
 					Cancel
 				</button>
-				<button id="save-reply-to-{{p.fullname}}" form="reply-to-{{p.fullname}}" class="ml-2 block px-4 py-2 bg-gradient-to-t from-pink-800 to-pink-700 hover:from-pink-700 hover:to-pink-800 active:shadow-inner border border-gray-900 rounded-md text-shadow-t shadow-inset-t-white-10 text-sm font-bold text-gray-300 focus:text-gray-500 focus:outline-none" onclick="comment_edit('{{c.id}}')">
+				<button type="button" id="save-reply-to-{{p.fullname}}" form="reply-to-{{p.fullname}}" class="ml-2 block px-4 py-2 bg-gradient-to-t from-pink-800 to-pink-700 hover:from-pink-700 hover:to-pink-800 active:shadow-inner border border-gray-900 rounded-md text-shadow-t shadow-inset-t-white-10 text-sm font-bold text-gray-300 focus:text-gray-500 focus:outline-none" onclick="comment_edit('{{c.id}}')">
 					Save edit
 				</button>
 			</div>
