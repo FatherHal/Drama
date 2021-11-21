@@ -414,7 +414,7 @@
 							<form id="post-edit-form-{{p.id}}" class="flex flex-col w-full" action="/edit_post/{{p.id}}" method="post">
 								<input type="hidden" name="formkey" value="{{v.formkey}}">
 								<input type="hidden" name="current_page" value="{{request.path}}">
-								<input name="title" class="shadow-inner rounded mb-2 p-2 bg-gray-800 border border-gray-700 border-dashed text-gray-200" required placeholder="title" value="{{p.title}}" >
+								<input name="title" class="shadow-inner rounded-lg p-2 bg-gray-900 focus:bg-white border border-gray-700 border-dashed text-gray-200 focus:text-gray-900" required placeholder="title" value="{{p.title}}" >
 								<textarea name="body" maxlength="10000" id="post-edit-box-{{p.id}}" form="post-edit-form-{{p.id}}" class="shadow-inner rounded-lg p-2 bg-gray-900 focus:bg-white border border-gray-700 border-dashed text-gray-200 focus:text-gray-900" aria-label="With textarea" placeholder="Add text to your post..." rows="10">{{p.body}}</textarea> 
 								<div class="flex justify-between mt-2"> 
 									<small class="format pl-0"><i class="fas fa-bold" aria-hidden="true" onclick="makeBold('post-edit-box-{{p.id}}')" data-bs-toggle="tooltip" data-bs-placement="bottom" title="" data-bs-original-title="Bold"></i></small> 
