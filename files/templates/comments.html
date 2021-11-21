@@ -353,8 +353,11 @@
 				{% if c.parent_comment_id and not standalone and level<=7 %}
 				<a href="#comment-{{ c.parent_comment_id }}-only" class="text-gray-500 user-name-reply">
 					<i class="fas fa-reply fa-sm fa-fw fa-flip-horizontal mr-1"></i>
-					<span>{% if c.post and c.post.award_count("ghosts") %}
-							👻{% else %}
+					replying to
+					<span class="font-heading font-bold">
+						{% if c.post and c.post.award_count("ghosts") %}
+							👻
+						{% else %}
 						{{ c.parent_comment.author.username }}{% endif %}
 					</span>
 				</a>
