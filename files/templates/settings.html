@@ -76,8 +76,8 @@
 	<div class="flex h-screen pt-12 sm:pt-16 bg-gray-700">
 		<div class="w-full overflow-y-auto">
 
-			<div class="bg-gray-900" id="sub-header-row">
-				<div class="container mx-auto px-4 py-4 grid grid-cols-12 rounded-t-md bg-gradient-to-t from-gray-800 to-gray-700 sub-header-shadow">
+			<div class="px-4 bg-gray-900" id="sub-header-row">
+				<div class="w-full max-w-screen-2xl mx-auto px-4 py-4 grid grid-cols-12 rounded-t-md bg-gradient-to-t from-gray-800 to-gray-700 sub-header-shadow">
 					<div class="col-span-full flex items-center">
 						<div>
 							<h1 class="font-bold text-xl font-heading leading-normal">
@@ -91,38 +91,40 @@
 				</div>
 			</div>
 
-			<div class="container mx-auto mb-4 px-4 grid grid-cols-12 gap-6 bg-gray-800 rounded-b-xl" id="main-content-row">
+			<div class="w-full px-4">
+				<div class="w-full max-w-screen-2xl mx-auto mb-4 px-4 grid grid-cols-12 gap-6 bg-gray-800 rounded-b-xl" id="main-content-row">
 
-				<div class="col-span-full xl:col-span-9">
-					{% if error %}
-					<div class="mt-4 mb-0 alert show fade rounded-lg shadow-lg p-3 text-gray-200 bg-red-600 border border-gray-900 shadow-inset-t-white-10" role="alert">
-						<i class="fas fa-exclamation-circle fa-fw mr-1"></i>
-						<span class="font-medium font-heading">
-							{{error}}
-						</span>
-						<button type="button" class="close" data-bs-dismiss="alert" aria-label="Close">
-							<span aria-hidden="true"><i class="far fa-times"></i></span>
-						</button>
-					</div>
-					{% endif %}
-					{% if msg %}
-					<div class="mt-4 mb-0 alert show fade rounded-lg shadow-lg p-3 text-gray-200 bg-green-600 border border-gray-900 shadow-inset-t-white-10" role="alert">
-						<i class="fas fa-check-circle fa-fw mr-1"></i>
-						<span class="font-medium font-heading">
-							{{msg}}
-						</span>
-						<button type="button" class="close" data-bs-dismiss="alert" aria-label="Close">
-							<span aria-hidden="true"><i class="far fa-times"></i></span>
-						</button>
-					</div>
-					{% endif %}
+					<div class="col-span-full xl:col-span-9">
+						{% if error %}
+						<div class="mt-4 mb-0 alert show fade rounded-lg shadow-lg p-3 text-gray-200 bg-red-600 border border-gray-900 shadow-inset-t-white-10" role="alert">
+							<i class="fas fa-exclamation-circle fa-fw mr-1"></i>
+							<span class="font-medium font-heading">
+								{{error}}
+							</span>
+							<button type="button" class="close" data-bs-dismiss="alert" aria-label="Close">
+								<span aria-hidden="true"><i class="far fa-times"></i></span>
+							</button>
+						</div>
+						{% endif %}
+						{% if msg %}
+						<div class="mt-4 mb-0 alert show fade rounded-lg shadow-lg p-3 text-gray-200 bg-green-600 border border-gray-900 shadow-inset-t-white-10" role="alert">
+							<i class="fas fa-check-circle fa-fw mr-1"></i>
+							<span class="font-medium font-heading">
+								{{msg}}
+							</span>
+							<button type="button" class="close" data-bs-dismiss="alert" aria-label="Close">
+								<span aria-hidden="true"><i class="far fa-times"></i></span>
+							</button>
+						</div>
+						{% endif %}
 
-					{% block content %}
-					{% endblock %}
+						{% block content %}
+						{% endblock %}
+					</div>
+
+					{% include "/sidebars/SettingsSidebar.html" %}
+
 				</div>
-
-				{% include "/sidebars/SettingsSidebar.html" %}
-
 			</div>
 
 			{% include "footer.html" %}
