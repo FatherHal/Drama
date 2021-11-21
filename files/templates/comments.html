@@ -644,6 +644,8 @@
 	{% endif %}
 	</div>
 
+	{% include "/modals/ModalCommentActions.html" %}
+
 </div>
 
 {% endif %}
@@ -657,7 +659,6 @@
 {% endfor %}
 
 {% if v %}
-	<!-- {% include "/modals/ModalCommentActions.html" %} -->
 	{% include "gif_modal.html" %}
 	{% include "emoji_modal.html" %}
 	{% if v.admin_level == 6 %}
