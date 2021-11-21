@@ -41,13 +41,30 @@
 
 	<a id="save-{{c.id}}" class="{% if c.id not in v.saved_comment_idlist() %}md:inline-block{% endif %} list-inline-item text-muted hidden" href="javascript:void(0)" onclick="post_toast3('/save_comment/{{c.id}}','save-{{c.id}}','unsave-{{c.id}}')"><i class="fas fa-save"></i>Save</a>
 
-	<a class="list-inline-item text-muted" href="javascript:void(0)" onclick="openReplyBox('{{c.id}}')"><i class="fas fa-reply" aria-hidden="true"></i><span class="hidden md:inline-block">Reply</span></a>
+	<li>
+		<button onclick="openReplyBox('{{c.id}}')">
+			<i class="fas fa-reply" aria-hidden="true"></i>
+			<span class="hidden md:inline-block">Reply</span>
+		</button>
+	</li>
 	{% endif %}
 
-	<a class="list-inline-item text-muted hidden md:inline-block" {% if v %}href="{{c.permalink}}?context=10#context"{% else %}href="/logged_out{{c.permalink}}?context=10#context"{% endif %}><i class="fas fa-book-open"></i>Context</a>
-	<a class="list-inline-item text-muted hidden md:inline-block copy-link" href="javascript:void(0);" role="button" data-clipboard-text="{% if 'rama' in request.host %}https://dogpill.life{{c.permalink}}{% else %}{{c.permalink | full_link}}{% endif %}?context=10#context"><i class="fas fa-copy"></i>Copy link</a>
+	<li class="hidden md:block">
+		<a {% if v %}href="{{c.permalink}}?context=10#context"{% else %}href="/logged_out{{c.permalink}}?context=10#context"{% endif %}>
+			<i class="fas fa-book-open fa-fw mr-2"></i>Context
+		</a>
+	</li>
+	<li class="hidden md:block">
+		<button class="copy-link" data-clipboard-text="{% if 'rama' in request.host %}https://dogpill.life{{c.permalink}}{% else %}{{c.permalink | full_link}}{% endif %}?context=10#context">
+			<i class="fas fa-copy fa-fw mr-2"></i>Copy link
+		</button>
+	</li>
 	{% if v %}
-	<a class="list-inline-item text-muted hidden md:inline-block" href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#reportCommentModal" onclick="report_commentModal('{{c.id}}','{{c.author.username}}',)"><i class="fas fa-flag fa-fw mr-2"></i>Report</a>
+	<li class="hidden md:block">
+		<button data-bs-toggle="modal" data-bs-target="#reportCommentModal" onclick="report_commentModal('{{c.id}}','{{c.author.username}}',)">
+			<i class="fas fa-flag fa-fw mr-2"></i>Report
+		</button>
+	</li>
 	{% endif %}
 
 
@@ -60,9 +77,17 @@
 	</li>
 
 	{% if c.deleted_utc > 0 %}
-	<a class="list-inline-item text-muted hidden md:inline-block" href="javascript:void(0)" onclick="post_toast('/undelete/comment/{{c.id}}')"><i class="fas fa-trash-alt fa-fw mr-2"></i>Undelete</a>
+	<li class="hidden md:block">
+		<button onclick="post_toast('/undelete/comment/{{c.id}}')">
+			<i class="fas fa-trash-alt fa-fw mr-2"></i>Undelete
+		</button>
+	</li>
 	{% else %}
-	<a class="list-inline-item text-muted hidden md:inline-block" href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#deleteCommentModal" onclick="delete_commentModal('{{c.id}}')"><i class="fas fa-trash-alt fa-fw mr-2"></i>Delete</a>
+	<li class="hidden md:block">
+		<button data-bs-toggle="modal" data-bs-target="#deleteCommentModal" onclick="delete_commentModal('{{c.id}}')">
+			<i class="fas fa-trash-alt fa-fw mr-2"></i>Delete
+		</button>
+	</li>
 	{% endif %}
 
 	{% endif %}
