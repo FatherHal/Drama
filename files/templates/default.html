@@ -247,24 +247,26 @@
 			{% block desktopBanner %}
 			{% endblock %}
 
-		<div class="bg-gray-900" id="sub-header-row">
+		<div class="px-4 bg-gray-900" id="sub-header-row">
 			{% block subHeader %}
 			{% endblock %}
 		</div>
 
-		<div class="container mx-auto mb-4 px-4 grid grid-cols-12 gap-6 bg-gray-800 rounded-b-xl" id="main-content-row">
+		<div class="w-full px-4">
+			<div class="w-full max-w-screen-2xl mx-auto mb-4 px-4 grid grid-cols-12 gap-6 bg-gray-800 rounded-b-xl" id="main-content-row">
 
-			{% block searchText %}
-			{% endblock %}
+				{% block searchText %}
+				{% endblock %}
 
-			{% block content %}
-			{% endblock %}
+				{% block content %}
+				{% endblock %}
 
-			{% block pagenav %}
-			{% endblock %}
+				{% block pagenav %}
+				{% endblock %}
 
-			{% block sidebar %}
-			{% endblock %}
+				{% block sidebar %}
+				{% endblock %}
+			</div>
 		</div>
 
 		{% include "footer.html" %}
