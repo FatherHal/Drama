@@ -12,32 +12,32 @@
 		<ul class="dropdown-menu w-56 bg-gray-900 rounded-md shadow-lg" aria-labelledby="dropdownSearchSortsButton" x-placement="bottom-start">
 			<li class="{% if t=='hour' %}hidden{% endif %}">
 				<a class="dropdown-item block w-full text-left px-4 py-2 text-sm text-gray-200 bg-gradient-to-t hover:from-pink-800 hover:to-pink-700 hover:shadow-inner focus:shadow-inner focus:bg-gradient-to-t focus:from-pink-800 focus:to-pink-700" href="?sort={{sort}}&t=hour">
-					<i class="fas fa-clock text-gray-500 fa-sm fa-fw mr-2"></i>Hour
+					<i class="fas fa-clock fa-sm fa-fw mr-4"></i>Hour
 				</a>
 			</li>
 			<li class="{% if t=='day' %}hidden{% endif %}">
 				<a class="dropdown-item block w-full text-left px-4 py-2 text-sm text-gray-200 bg-gradient-to-t hover:from-pink-800 hover:to-pink-700 hover:shadow-inner focus:shadow-inner focus:bg-gradient-to-t focus:from-pink-800 focus:to-pink-700" href="?sort={{sort}}&t=day">
-					<i class="fas fa-calendar-day text-gray-500 fa-sm fa-fw mr-2"></i>Day
+					<i class="fas fa-calendar-day fa-sm fa-fw mr-4"></i>Day
 				</a>
 			</li>
 			<li class="{% if t=='week' %}hidden{% endif %}">
 				<a class="dropdown-item block w-full text-left px-4 py-2 text-sm text-gray-200 bg-gradient-to-t hover:from-pink-800 hover:to-pink-700 hover:shadow-inner focus:shadow-inner focus:bg-gradient-to-t focus:from-pink-800 focus:to-pink-700" href="?sort={{sort}}&t=week">
-					<i class="fas fa-calendar-week text-gray-500 fa-sm fa-fw mr-2"></i>Week
+					<i class="fas fa-calendar-week fa-sm fa-fw mr-4"></i>Week
 				</a>
 			</li>
 			<li class="{% if t=='month' %}hidden{% endif %}">
 				<a class="dropdown-item block w-full text-left px-4 py-2 text-sm text-gray-200 bg-gradient-to-t hover:from-pink-800 hover:to-pink-700 hover:shadow-inner focus:shadow-inner focus:bg-gradient-to-t focus:from-pink-800 focus:to-pink-700" href="?sort={{sort}}&t=month">
-					<i class="fas fa-calendar-alt text-gray-500 fa-sm fa-fw mr-2"></i>Month
+					<i class="fas fa-calendar-alt fa-sm fa-fw mr-4"></i>Month
 				</a>
 			</li>
 			<li class="{% if t=='year' %}hidden{% endif %}">
 				<a class="dropdown-item block w-full text-left px-4 py-2 text-sm text-gray-200 bg-gradient-to-t hover:from-pink-800 hover:to-pink-700 hover:shadow-inner focus:shadow-inner focus:bg-gradient-to-t focus:from-pink-800 focus:to-pink-700" href="?sort={{sort}}&t=year">
-					<i class="fas fa-calendar text-gray-500 fa-sm fa-fw mr-2"></i>Year
+					<i class="fas fa-calendar fa-sm fa-fw mr-4"></i>Year
 				</a>
 			</li>
 			<li class="{% if t=='all' %}hidden{% endif %}">
 				<a class="dropdown-item block w-full text-left px-4 py-2 text-sm text-gray-200 bg-gradient-to-t hover:from-pink-800 hover:to-pink-700 hover:shadow-inner focus:shadow-inner focus:bg-gradient-to-t focus:from-pink-800 focus:to-pink-700" href="?sort={{sort}}&t=all">
-					<i class="fas fa-infinity text-gray-500 fa-sm fa-fw mr-2"></i>All
+					<i class="fas fa-infinity fa-sm fa-fw mr-4"></i>All
 				</a>
 			</li>
 		</ul>
@@ -56,37 +56,37 @@
 		<ul class="dropdown-menu w-56 bg-gray-900 rounded-md shadow-lg" aria-labelledby="dropdownSearchSortsTypeButton" x-placement="bottom-start">
 			<li class="{% if sort == 'top' %}hidden{% endif %}">
 				<a class="dropdown-item block w-full text-left px-4 py-2 text-sm text-gray-200 bg-gradient-to-t hover:from-pink-800 hover:to-pink-700 hover:shadow-inner focus:shadow-inner focus:bg-gradient-to-t focus:from-pink-800 focus:to-pink-700" href="?sort=top&q={{query | urlencode}}&t={{t}}">
-					<i class="fas fa-arrow-alt-circle-up text-gray-500 fa-sm fa-fw mr-2"></i>Top
+					<i class="fas fa-arrow-alt-circle-up fa-sm fa-fw mr-4"></i>Top
 				</a>
 			</li>
 			<li class="{% if sort == 'bottom' %}hidden{% endif %}">
 				<a class="dropdown-item block w-full text-left px-4 py-2 text-sm text-gray-200 bg-gradient-to-t hover:from-pink-800 hover:to-pink-700 hover:shadow-inner focus:shadow-inner focus:bg-gradient-to-t focus:from-pink-800 focus:to-pink-700" href="?sort=bottom&q={{query | urlencode}}&t={{t}}}">
-					<i class="fas fa-arrow-alt-circle-down text-gray-500 fa-sm fa-fw mr-2"></i>Bottom
+					<i class="fas fa-arrow-alt-circle-down fa-sm fa-fw mr-4"></i>Bottom
 				</a>
 			</li>
 			<li class="{% if sort == 'new' %}hidden{% endif %}">
 				<a class="dropdown-item block w-full text-left px-4 py-2 text-sm text-gray-200 bg-gradient-to-t hover:from-pink-800 hover:to-pink-700 hover:shadow-inner focus:shadow-inner focus:bg-gradient-to-t focus:from-pink-800 focus:to-pink-700" href="?sort=new&q={{query | urlencode}}&t={{t}}">
-					<i class="fas fa-sparkles text-gray-500 fa-sm fa-fw mr-2"></i>New
+					<i class="fas fa-sparkles fa-sm fa-fw mr-4"></i>New
 				</a>
 			</li>
 			<li class="{% if sort == 'old' %}hidden{% endif %}">
 				<a class="dropdown-item block w-full text-left px-4 py-2 text-sm text-gray-200 bg-gradient-to-t hover:from-pink-800 hover:to-pink-700 hover:shadow-inner focus:shadow-inner focus:bg-gradient-to-t focus:from-pink-800 focus:to-pink-700" href="?sort=old&q={{query | urlencode}}&t={{t}}">
-					<i class="fas fa-book text-gray-500 fa-sm fa-fw mr-2"></i>Old
+					<i class="fas fa-book fa-sm fa-fw mr-4"></i>Old
 				</a>
 			</li>
 			<li class="{% if sort == 'controversial' %}hidden{% endif %}">
 				<a class="dropdown-item block w-full text-left px-4 py-2 text-sm text-gray-200 bg-gradient-to-t hover:from-pink-800 hover:to-pink-700 hover:shadow-inner focus:shadow-inner focus:bg-gradient-to-t focus:from-pink-800 focus:to-pink-700" href="?sort=fiery&q={{query | urlencode}}&t={{t}}">
-					<i class="fas fa-bullhorn text-gray-500 fa-sm fa-fw mr-2"></i>Controversial
+					<i class="fas fa-bullhorn fa-sm fa-fw mr-4"></i>Controversial
 				</a>
 			</li>
 			<li class="{% if sort == 'comments' %}hidden{% endif %}">
 				<a class="dropdown-item block w-full text-left px-4 py-2 text-sm text-gray-200 bg-gradient-to-t hover:from-pink-800 hover:to-pink-700 hover:shadow-inner focus:shadow-inner focus:bg-gradient-to-t focus:from-pink-800 focus:to-pink-700" href="?sort=comments&q={{query | urlencode}}&t={{t}}">
-					<i class="fas fa-comments text-gray-500 fa-sm fa-fw mr-2"></i>Comments
+					<i class="fas fa-comments fa-sm fa-fw mr-4"></i>Comments
 				</a>
 			</li>
 			<li class="{% if sort == 'random' %}hidden{% endif %}">
 				<a class="dropdown-item block w-full text-left px-4 py-2 text-sm text-gray-200 bg-gradient-to-t hover:from-pink-800 hover:to-pink-700 hover:shadow-inner focus:shadow-inner focus:bg-gradient-to-t focus:from-pink-800 focus:to-pink-700" href="?sort=random&q={{query | urlencode}}&t={{t}}">
-					<i class="fas fa-question text-gray-500 fa-sm fa-fw mr-2"></i>Random
+					<i class="fas fa-question fa-sm fa-fw mr-4"></i>Random
 				</a>
 			</li>
 		</ul>
