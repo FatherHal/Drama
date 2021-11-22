@@ -11,7 +11,7 @@ site = environ.get("DOMAIN").strip()
 site_name = environ.get("SITE_NAME").strip()
 
 @app.get('/dist/<path:path>')
-def get_dist():
+def get_dist(path):
 	resp = make_response(send_from_directory('dist', path))
 	resp.headers.add("Content-Type", "text/css")
 	return resp
