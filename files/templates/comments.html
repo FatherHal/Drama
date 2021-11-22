@@ -134,7 +134,7 @@
 	<div class="popover-user-profile" role="tooltip">
 	<img class="w-100 h-64 object-cover" src="{{c.author.banner_url}}">
 	<div class="d-flex align-items-end px-3 mt-n6 mb-3">
-		<img class="avatar-72 rounded img-thumbnail shadow-sm" src="{{c.author.profile_url}}">
+		<img class="w-16 h-16 p-[3px] bg-white border border-gray-900" src="{{c.author.profile_url}}">
 		<div class="px-3 text-truncate">
 		<h5 class="text-truncate text-black">{{c.author.username}}</h5>
 		</div>
@@ -292,7 +292,7 @@
 				{% else %}
 				<div class="flex items-center space-x-2 md:-ml-2 mb-1 text-sm text-gray-500 leading-tight">
 
-				<img loading="lazy" src="{{ c.author.profile_url }}" class="md:hidden w-8 h-8 object-cover rounded-sm" alt="{{ c.author.username }} avatar"/>
+				<img loading="lazy" src="{{ c.author.profile_url }}" class="md:hidden w-9 h-9 p-[3px] bg-white border border-gray-900 object-cover" alt="{{ c.author.username }} avatar"/>
 
 				<a class="text-base font-bold font-heading" data-bs-placement="bottom" data-bs-toggle="popover" data-bs-trigger="focus" data-content-id="popover-{{c.id}}" tabindex="0" style="color:#{{c.author.namecolor}};">
 					{% if c.author.patron and not c.distinguish_level %}
