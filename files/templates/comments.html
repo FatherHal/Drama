@@ -264,9 +264,9 @@
 	<span class="comment-collapse-desktop hidden" {% if not c.unread %}style="border-left: 2px solid #{{c.author.namecolor}};"{% endif %} onclick="collapse_comment('{{c.id}}')"></span>
 
 	{% if not c.parent_comment_id or standalone %}
-	<img loading="lazy" src="{{ c.author.profile_url }}" class="hidden md:block w-14 h-14 object-cover rounded-sm mr-4" alt="{{ c.author.username }} avatar"/>
+	<img loading="lazy" src="{{ c.author.profile_url }}" class="hidden md:block w-14 h-14 p-[3px] bg-white border border-gray-900 object-cover mr-4" alt="{{ c.author.username }} avatar"/>
 	{% else %}
-	<img loading="lazy" src="{{ c.author.profile_url }}" class="hidden md:block w-8 h-8 object-cover rounded-sm mr-3" alt="{{ c.author.username }} avatar"/>
+	<img loading="lazy" src="{{ c.author.profile_url }}" class="hidden md:block w-9 h-9 p-[3px] bg-white border border-gray-900 object-cover mr-3" alt="{{ c.author.username }} avatar"/>
 	{% endif %}
 
 	<div class="w-full">
