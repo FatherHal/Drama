@@ -32,9 +32,7 @@
 	</ul>
 
 </div>
-{% endblock %}
 
-{% block pagenav %}
 {% if listing %}
 <nav aria-label="Page navigation">
 	<ul class="pagination pagination-sm mb-0">
@@ -55,6 +53,16 @@
 	</ul>
 </nav>
 {% endif %}
+{% endblock %}
+
+{% endblock %}
+
+<!-- Sidebar -->
+{% block sidebar %}
+	{% include "/sidebars/HomeSidebar.html" %}
+{% endblock %}
+
+{% block scripts %}
 
 {% if v %}
 	<script src="https://js.pusher.com/beams/1.0/push-notifications-cdn.js"></script>
@@ -91,9 +99,4 @@
 	</script>
 {% endif %}
 
-{% endblock %}
-
-<!-- Sidebar -->
-{% block sidebar %}
-	{% include "/sidebars/HomeSidebar.html" %}
 {% endblock %}
