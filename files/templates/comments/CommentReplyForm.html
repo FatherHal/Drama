@@ -47,7 +47,7 @@
 				Formatting help
 			</a>
 			<div class="ml-auto flex">
-				<button type="button" class="px-4 py-2 text-sm font-bold text-gray-300 focus:text-gray-500" onclick="document.getElementById('reply-to-{{c.id}}').classList.add('hidden')">
+				<button type="button" class="px-4 py-2 text-sm font-bold text-gray-500 focus:text-gray-400" onclick="document.getElementById('reply-to-{{c.id}}').classList.add('hidden')">
 					Cancel
 				</button>
 				<button type="button" id="save-reply-to-{{c.fullname}}" class="ml-2 block px-4 py-2 bg-gradient-to-t from-pink-800 to-pink-700 hover:from-pink-700 hover:to-pink-800 active:shadow-inner border border-gray-900 rounded-md text-shadow-t shadow-inset-t-white-10 text-sm font-bold text-gray-300 focus:text-gray-500 focus:outline-none" onclick="post_comment('{{c.fullname}}', '{{c.post.id}}');">
