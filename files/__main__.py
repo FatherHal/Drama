@@ -72,11 +72,11 @@ app.config['MAIL_PASSWORD'] = environ.get("MAIL_PASSWORD", "").strip()
 r=redis.Redis(host=environ.get("REDIS_URL", "redis://127.0.0.1"),  decode_responses=True, ssl_cert_reqs=None)
 
 # Bundling src/main.css files into dist/main.css'
-#css = Bundle('assets/css/main.css', output='dist/main.css', filters='postcss')
+css = Bundle('assets/css/main.css', output='dist/main.css', filters='postcss')
 
-#assets = Environment(app)
-#assets.register('main_css', css)
-#css.build()
+assets = Environment(app)
+assets.register('main_css', css)
+css.build()
 
 limiter = Limiter(
 	app,
