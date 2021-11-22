@@ -60,6 +60,12 @@
 	{% include "/sidebars/HomeSidebar.html" %}
 {% endblock %}
 
+{% block modals %}
+	{% if v %}
+		{% include "award_modal.html" %}
+	{% endif %}
+{% endblock %}
+
 {% block scripts %}
 
 <script src="/assets/js/submission_listing.js?v=1"></script>
