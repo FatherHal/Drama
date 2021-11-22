@@ -11,32 +11,32 @@
 					</button>
 					<ul class="dropdown-menu w-56 bg-gray-900 rounded-md shadow-lg" aria-labelledby="dropdownMenuButton" x-placement="bottom-start">
 						<li class="{% if t=='hour' %}hidden{% endif %}">
-							<a class="dropdown-item block w-full text-left p-2 text-sm hover:bg-gray-800 hover:shadow-inner focus:bg-gray-800 focus:shadow-inner rounded" href="?sort={{sort}}&t=hour">
+							<a class="dropdown-item block w-full text-left px-4 py-2 text-sm text-gray-200 bg-gradient-to-t hover:from-pink-800 hover:to-pink-700 hover:shadow-inner focus:shadow-inner focus:bg-gradient-to-t focus:from-pink-800 focus:to-pink-700" href="?sort={{sort}}&t=hour">
 								<i class="fas fa-clock text-gray-500 fa-sm fa-fw mr-2"></i>Hour
 							</a>
 						</li>
 						<li class="{% if t=='day' %}hidden{% endif %}">
-							<a class="dropdown-item block w-full text-left p-2 text-sm hover:bg-gray-800 hover:shadow-inner focus:bg-gray-800 focus:shadow-inner rounded" href="?sort={{sort}}&t=day">
+							<a class="dropdown-item block w-full text-left px-4 py-2 text-sm text-gray-200 bg-gradient-to-t hover:from-pink-800 hover:to-pink-700 hover:shadow-inner focus:shadow-inner focus:bg-gradient-to-t focus:from-pink-800 focus:to-pink-700" href="?sort={{sort}}&t=day">
 								<i class="fas fa-calendar-day text-gray-500 fa-sm fa-fw mr-2"></i>Day
 							</a>
 						</li>
 						<li class="{% if t=='week' %}hidden{% endif %}">
-							<a class="dropdown-item block w-full text-left p-2 text-sm hover:bg-gray-800 hover:shadow-inner focus:bg-gray-800 focus:shadow-inner rounded" href="?sort={{sort}}&t=week">
+							<a class="dropdown-item block w-full text-left px-4 py-2 text-sm text-gray-200 bg-gradient-to-t hover:from-pink-800 hover:to-pink-700 hover:shadow-inner focus:shadow-inner focus:bg-gradient-to-t focus:from-pink-800 focus:to-pink-700" href="?sort={{sort}}&t=week">
 								<i class="fas fa-calendar-week text-gray-500 fa-sm fa-fw mr-2"></i>Week
 							</a>
 						</li>
 						<li class="{% if t=='month' %}hidden{% endif %}">
-							<a class="dropdown-item block w-full text-left p-2 text-sm hover:bg-gray-800 hover:shadow-inner focus:bg-gray-800 focus:shadow-inner rounded" href="?sort={{sort}}&t=month">
+							<a class="dropdown-item block w-full text-left px-4 py-2 text-sm text-gray-200 bg-gradient-to-t hover:from-pink-800 hover:to-pink-700 hover:shadow-inner focus:shadow-inner focus:bg-gradient-to-t focus:from-pink-800 focus:to-pink-700" href="?sort={{sort}}&t=month">
 								<i class="fas fa-calendar-alt text-gray-500 fa-sm fa-fw mr-2"></i>Month
 							</a>
 						</li>
 						<li class="{% if t=='year' %}hidden{% endif %}">
-							<a class="dropdown-item block w-full text-left p-2 text-sm hover:bg-gray-800 hover:shadow-inner focus:bg-gray-800 focus:shadow-inner rounded" href="?sort={{sort}}&t=year">
+							<a class="dropdown-item block w-full text-left px-4 py-2 text-sm text-gray-200 bg-gradient-to-t hover:from-pink-800 hover:to-pink-700 hover:shadow-inner focus:shadow-inner focus:bg-gradient-to-t focus:from-pink-800 focus:to-pink-700" href="?sort={{sort}}&t=year">
 								<i class="fas fa-calendar text-gray-500 fa-sm fa-fw mr-2"></i>Year
 							</a>
 						</li>
 						<li class="{% if t=='all' %}hidden{% endif %}">
-							<a class="dropdown-item block w-full text-left p-2 text-sm hover:bg-gray-800 hover:shadow-inner focus:bg-gray-800 focus:shadow-inner rounded" href="?sort={{sort}}&t=all">
+							<a class="dropdown-item block w-full text-left px-4 py-2 text-sm text-gray-200 bg-gradient-to-t hover:from-pink-800 hover:to-pink-700 hover:shadow-inner focus:shadow-inner focus:bg-gradient-to-t focus:from-pink-800 focus:to-pink-700" href="?sort={{sort}}&t=all">
 								<i class="fas fa-infinity text-gray-500 fa-sm fa-fw mr-2"></i>All
 							</a>
 						</li>
@@ -55,37 +55,37 @@
 					</button>
 					<ul class="dropdown-menu w-56 bg-gray-900 rounded-md shadow-lg" aria-labelledby="dropdownMenuButton" x-placement="bottom-start">
 						<li class="{% if sort == 'hot' %}hidden{% endif %}">
-							<a class="dropdown-item block w-full text-left p-2 text-sm hover:bg-gray-800 hover:shadow-inner focus:bg-gray-800 focus:shadow-inner rounded" href="?sort=hot&t={{t}}">
+							<a class="dropdown-item block w-full text-left px-4 py-2 text-sm text-gray-200 bg-gradient-to-t hover:from-pink-800 hover:to-pink-700 hover:shadow-inner focus:shadow-inner focus:bg-gradient-to-t focus:from-pink-800 focus:to-pink-700" href="?sort=hot&t={{t}}">
 								<i class="fas fa-fire text-gray-500 fa-sm fa-fw mr-2"></i>Hot
 							</a>
 						</li>
 						<li class="{% if sort == 'top' %}hidden{% endif %}">
-							<a class="dropdown-item block w-full text-left p-2 text-sm hover:bg-gray-800 hover:shadow-inner focus:bg-gray-800 focus:shadow-inner rounded" href="?sort=top&t={{t}}">
+							<a class="dropdown-item block w-full text-left px-4 py-2 text-sm text-gray-200 bg-gradient-to-t hover:from-pink-800 hover:to-pink-700 hover:shadow-inner focus:shadow-inner focus:bg-gradient-to-t focus:from-pink-800 focus:to-pink-700" href="?sort=top&t={{t}}">
 								<i class="fas fa-arrow-alt-circle-up text-gray-500 fa-sm fa-fw mr-2"></i>Top
 							</a>
 						</li>
 						<li class="{% if sort == 'bottom' %}hidden{% endif %}">
-							<a class="dropdown-item block w-full text-left p-2 text-sm hover:bg-gray-800 hover:shadow-inner focus:bg-gray-800 focus:shadow-inner rounded" href="?sort=bottom&t={{t}}">
+							<a class="dropdown-item block w-full text-left px-4 py-2 text-sm text-gray-200 bg-gradient-to-t hover:from-pink-800 hover:to-pink-700 hover:shadow-inner focus:shadow-inner focus:bg-gradient-to-t focus:from-pink-800 focus:to-pink-700" href="?sort=bottom&t={{t}}">
 								<i class="fas fa-arrow-alt-circle-down text-gray-500 fa-sm fa-fw mr-2"></i>Bottom
 							</a>
 						</li>
 						<li class="{% if sort == 'new' %}hidden{% endif %}">
-							<a class="dropdown-item block w-full text-left p-2 text-sm hover:bg-gray-800 hover:shadow-inner focus:bg-gray-800 focus:shadow-inner rounded" href="?sort=new&t={{t}}">
+							<a class="dropdown-item block w-full text-left px-4 py-2 text-sm text-gray-200 bg-gradient-to-t hover:from-pink-800 hover:to-pink-700 hover:shadow-inner focus:shadow-inner focus:bg-gradient-to-t focus:from-pink-800 focus:to-pink-700" href="?sort=new&t={{t}}">
 								<i class="fas fa-sparkles text-gray-500 fa-sm fa-fw mr-2"></i>New
 							</a>
 						</li>
 						<li class="{% if sort == 'old' %}hidden{% endif %}">
-							<a class="dropdown-item block w-full text-left p-2 text-sm hover:bg-gray-800 hover:shadow-inner focus:bg-gray-800 focus:shadow-inner rounded" href="?sort=old&t={{t}}">
+							<a class="dropdown-item block w-full text-left px-4 py-2 text-sm text-gray-200 bg-gradient-to-t hover:from-pink-800 hover:to-pink-700 hover:shadow-inner focus:shadow-inner focus:bg-gradient-to-t focus:from-pink-800 focus:to-pink-700" href="?sort=old&t={{t}}">
 								<i class="fas fa-book text-gray-500 fa-sm fa-fw mr-2"></i>Old
 							</a>
 						</li>
 						<li class="{% if sort == 'controversial' %}hidden{% endif %}">
-							<a class="dropdown-item block w-full text-left p-2 text-sm hover:bg-gray-800 hover:shadow-inner focus:bg-gray-800 focus:shadow-inner rounded" href="?sort=controversial&t={{t}}">
+							<a class="dropdown-item block w-full text-left px-4 py-2 text-sm text-gray-200 bg-gradient-to-t hover:from-pink-800 hover:to-pink-700 hover:shadow-inner focus:shadow-inner focus:bg-gradient-to-t focus:from-pink-800 focus:to-pink-700" href="?sort=controversial&t={{t}}">
 								<i class="fas fa-bullhorn text-gray-500 fa-sm fa-fw mr-2"></i>Controversial
 							</a>
 						</li>
 						<li class="{% if sort == 'comments' %}hidden{% endif %}">
-							<a class="dropdown-item block w-full text-left p-2 text-sm hover:bg-gray-800 hover:shadow-inner focus:bg-gray-800 focus:shadow-inner rounded" href="?sort=comments&t={{t}}">
+							<a class="dropdown-item block w-full text-left px-4 py-2 text-sm text-gray-200 bg-gradient-to-t hover:from-pink-800 hover:to-pink-700 hover:shadow-inner focus:shadow-inner focus:bg-gradient-to-t focus:from-pink-800 focus:to-pink-700" href="?sort=comments&t={{t}}">
 								<i class="fas fa-comments text-gray-500 fa-sm fa-fw mr-2"></i>Comments
 							</a>
 						</li>
