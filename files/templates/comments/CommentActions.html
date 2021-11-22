@@ -34,12 +34,6 @@
 
 	{% endif %}
 
-	<li class="hidden md:block">
-		<a href="/votes?link={{c.fullname}}">
-			<i class="fas fa-arrows-v fa-fw mr-2"></i>Votes
-		</a>
-	</li>
-
 	{% if v %}
 	<li class="list-inline-item text-muted hidden md:inline-block">
 		<button href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#awardModal" onclick="awardModal('/comment/{{c.id}}/awards')">
@@ -69,6 +63,11 @@
 				<i class="fas fa-ellipsis-h fa-fw"></i>
 			</button>
 			<ul class="dropdown-menu w-56 bg-gray-900 rounded-md shadow-lg" aria-labelledby="dropdownComment-{{c.id}}Actions">
+				<li class="hidden md:block">
+					<a href="/votes?link={{c.fullname}}">
+						<i class="fas fa-arrows-v fa-fw mr-2"></i>Votes
+					</a>
+				</li>
 				<li class="hidden md:block">
 					<a class="dropdown-item block w-full text-left px-4 py-2 text-sm text-gray-200 bg-gradient-to-t hover:from-pink-800 hover:to-pink-700 hover:shadow-inner focus:shadow-inner focus:bg-gradient-to-t focus:from-pink-800 focus:to-pink-700" {% if v %}href="{{c.permalink}}?context=10#context"{% else %}href="/logged_out{{c.permalink}}?context=10#context"{% endif %}>
 						<i class="fas fa-book-open fa-sm fa-fw mr-4"></i>Context
