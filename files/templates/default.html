@@ -197,26 +197,6 @@
 		href="/assets/images/{{'SITE_NAME' | app_config}}/icon.gif"
 		>
 
-		<!-- Include CDN JavaScript -->
-		<script src="https://unpkg.com/tailwindcss-jit-cdn"></script>
-
-		<!-- Specify a custom TailwindCSS configuration -->
-		<script type="tailwind-config">
-		module.exports = {
-			theme: {
-				colors: {
-				transparent: 'transparent',
-				gray: colors.gray,
-				yellow: colors.amber,
-				blue: colors.lightBlue,
-				green: colors.green,
-				red: colors.rose,
-				pink: colors.pink
-				}
-			}
-		}
-		</script>
-
 		{% block stylesheets %}
 
 		{% if v %}
