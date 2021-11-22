@@ -123,7 +123,7 @@ def before_request():
 	elif "Mobile/" in ua: g.system="ios/webview"
 	else: g.system="other/other"
 
-@app.get('/_tw')
+@app.get('/tailwind')
 def test_tailwind():
 	return render_template('tailwind.html')
 
