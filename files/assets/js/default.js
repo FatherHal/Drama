@@ -134,3 +134,14 @@ function post_toast2(url, button1, button2) {
 	document.getElementById(button1).classList.toggle("d-none");
 	document.getElementById(button2).classList.toggle("d-none");
 }
+
+const popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'));
+
+const popoverList = popoverTriggerList.map(function(popoverTriggerEl) {
+	const popoverId = popoverTriggerEl.getAttribute('data-content-id');
+	const contentEl = document.getElementById(popoverId).innerHTML;
+	return new bootstrap.Popover(popoverTriggerEl, {
+		content: contentEl,
+		html: true,
+	});
+})
