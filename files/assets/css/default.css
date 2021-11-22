@@ -11,8 +11,8 @@ p:last-of-type {
 }
 
 .font-heading {
-	font-family: 'Trebuchet MS';
-	letter-spacing: -0.05rem;
+	font-family: 'Helvetica Neue';
+	/*letter-spacing: -0.05rem;*/
 }
 
 .font-serif {
