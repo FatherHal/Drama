@@ -301,8 +301,46 @@
 {% block scripts %}
 {% endblock %}
 
+<!-- Scripts -->
+
+<!-- Clipboard JS -->
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.8/dist/clipboard.min.js"></script>
+<script>
+	var clipboard = new ClipboardJS('.copy-link');
+	clipboard.on('success', function(e) {
+			var myToast = new bootstrap.Toast(document.getElementById('toast-success'));
+			myToast.show();
+			console.log(e);
+	});
+
+	const popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'));
+
+	const popoverList = popoverTriggerList.map(function(popoverTriggerEl) {
+		const popoverId = popoverTriggerEl.getAttribute('data-content-id');
+		const contentEl = document.getElementById(popoverId).innerHTML;
+		return new bootstrap.Popover(popoverTriggerEl, {
+			content: contentEl,
+			html: true,
+		});
+	})
+</script>
+
+<!-- Push notifications -->
+{% if v %}
+	<script src="https://js.pusher.com/beams/1.0/push-notifications-cdn.js"></script>
+	<script>
+		const beamsClient = new PusherPushNotifications.Client({
+			instanceId: '02ddcc80-b8db-42be-9022-44c546b4dce6',
+		});		
+		beamsClient.start()
+		.then((beamsClient) => beamsClient.getDeviceId())
+		.then(() => beamsClient.addDeviceInterest('{{v.strid}}'))
+		.then(() => beamsClient.getDeviceInterests())
+		.catch(console.error);
+	</script>
+{% endif %}
+
 <script src="/assets/js/header.js?v=54"></script>
 
 </body>
-
 </html>

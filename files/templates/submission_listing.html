@@ -545,38 +545,6 @@
 
 {% endblock %}
 
-{% block scripts %}
-
-<script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.8/dist/clipboard.min.js"></script>
-
-<script src="/assets/js/new_comments_count.js?v=53"></script>
-
-<script>
-	function expandText(id) {
-		document.getElementById('post-text-'+id).classList.toggle('d-none');
-		document.getElementsByClassName('text-expand-icon-'+id)[0].classList.toggle('fa-expand-alt');
-		document.getElementsByClassName('text-expand-icon-'+id)[0].classList.toggle('fa-compress-alt');
-	};
-
-	var clipboard = new ClipboardJS('.copy-link');
-	clipboard.on('success', function(e) {
-			var myToast = new bootstrap.Toast(document.getElementById('toast-success'));
-			myToast.show();
-			console.log(e);
-	});
-
-	const popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'));
-
-	const popoverList = popoverTriggerList.map(function(popoverTriggerEl) {
-		const popoverId = popoverTriggerEl.getAttribute('data-content-id');
-		const contentEl = document.getElementById(popoverId).innerHTML;
-		return new bootstrap.Popover(popoverTriggerEl, {
-			content: contentEl,
-			html: true,
-		});
-	})
-</script>
-
 {% for p in listing %}
 <script>
 	(() => {
@@ -602,8 +570,6 @@
 	})()
 </script>
 {% endfor %}
-
-{% endblock %}
 
 <style>
 	.popover {
