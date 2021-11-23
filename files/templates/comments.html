@@ -263,11 +263,14 @@
 
 	<span class="comment-collapse-desktop hidden" {% if not c.unread %}style="border-left: 2px solid #{{c.author.namecolor}};"{% endif %} onclick="collapse_comment('{{c.id}}')"></span>
 
-	{% if not c.parent_comment_id or standalone %}
-	<img loading="lazy" src="{{ c.author.profile_url }}" class="hidden md:block w-16 h-16 p-[3px] bg-white border border-gray-900 object-cover mr-4" alt="{{ c.author.username }} avatar"/>
-	{% else %}
-	<img loading="lazy" src="{{ c.author.profile_url }}" class="hidden md:block w-9 h-9 p-[3px] bg-white border border-gray-900 object-cover mr-3" alt="{{ c.author.username }} avatar"/>
-	{% endif %}
+	<div class="flex flex-col flex-shrink-0 items-center {{ 'mr-4' if not c.parent_comment_id or standalone else 'mr-3' }}">
+		{% if not c.parent_comment_id or standalone %}
+		<img loading="lazy" src="{{ c.author.profile_url }}" class="hidden md:block w-16 h-16 p-[3px] bg-white border border-gray-900 object-cover" alt="{{ c.author.username }} avatar"/>
+		{% else %}
+		<img loading="lazy" src="{{ c.author.profile_url }}" class="hidden md:block w-9 h-9 p-[3px] bg-white border border-gray-900 object-cover" alt="{{ c.author.username }} avatar"/>
+		{% endif %}
+		<div class="w-0.5 h-full border-l border-gray-700 mb-2"></div>
+	</div>
 
 	<div class="w-full">
 		<!-- <div class="relative rounded-lg w-full bg-gray-800 md:border md:border-gray-900 md:border-opacity-60 md:p-3"> -->
