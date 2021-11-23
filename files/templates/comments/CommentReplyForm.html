@@ -32,11 +32,11 @@
 				</li>
 				{% if v %}
 				<li>
-					<label for="file-edit-reply-{{c.id}}" class="text-gray-500 hover:text-gray-400">
+					<label for="file-upload-reply-{{c.fullname}}" class="text-gray-500 hover:text-gray-400">
 						<div id="filename-show-reply-{{c.fullname}}">
 							<i class="fas fa-camera fa-fw fa-sm"></i>
 						</div>
-						<input id="file-edit-reply-{{c.id}}" type="file" name="file" accept="image/*" onchange="document.getElementById('filename-show-reply-{{c.fullname}}').innerHTML='image';" hidden>
+						<input id="file-upload-reply-{{c.fullname}}" type="file" name="file" accept="image/*" onchange="document.getElementById('filename-show-reply-{{c.fullname}}').innerHTML='image';" hidden>
 					</label>
 				</li>
 				{% endif %}
