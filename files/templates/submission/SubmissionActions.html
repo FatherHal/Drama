@@ -6,6 +6,14 @@
 		<button {% if environ.get('DISABLE_DOWNVOTES') == '1' %}style="display:None!important"{% endif %} id="post-{{p.id}}-down" tabindex="0" href="javascript:void(0)" onclick="vote('post', '{{p.id}}', '-1')" class="text-muted mx-auto arrow-down downvote-button post-{{p.id}}-down {% if voted==-1 %}active{% endif %}"></button>
 	</li> -->
 
+	{% if p.realbody(v) %}
+	<li>
+		<button onclick="expandText('{{p.id}}')">
+			<i class="fas fa-expand-alt mr-0 text-expand-icon-{{p.id}}"></i>
+		</button>
+	</li>
+	{% endif %}
+
 	<li>
 		<a {% if v %}href="{{p.permalink}}"{% else %}href="/logged_out{{p.permalink}}"{% endif %}>
 			<i class="fas fa-comment-dots fa-fw mr-2"></i>{{p.comment_count}}
