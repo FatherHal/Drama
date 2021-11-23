@@ -17,7 +17,7 @@
 	<li>
 		<a {% if v %}href="{{p.permalink}}"{% else %}href="/logged_out{{p.permalink}}"{% endif %}>
 			<i class="fas fa-comment-dots fa-fw mr-2"></i>
-			{{ p.comment_count }} comment{{ '' if p.comment_count === 1 else 's' }}
+			{{ p.comment_count }} comment{{ '' if p.comment_count == 1 else 's' }}
 			<span class="text-info hidden new-comments"></span>
 		</a>
 	</li>
