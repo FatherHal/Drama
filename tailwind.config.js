@@ -1,4 +1,4 @@
-const colors = require('tailwindcss/colors')
+const colors = require('/node_modules/tailwindcss/colors')
 
 module.exports = {
 	mode: 'jit',
