@@ -269,7 +269,9 @@
 		{% else %}
 		<img loading="lazy" src="{{ c.author.profile_url }}" class="hidden md:block flex-shrink-0 w-9 h-9 mb-2 p-[3px] bg-white border border-gray-900 object-cover" alt="{{ c.author.username }} avatar"/>
 		{% endif %}
+		{% if replies %}
 		<div class="w-0.5 h-full border-l border-gray-700 mb-2"></div>
+		{% endif %}
 	</div>
 
 	<div class="w-full">
