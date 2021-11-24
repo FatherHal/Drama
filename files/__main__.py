@@ -17,7 +17,7 @@ import gevent
 from werkzeug.middleware.proxy_fix import ProxyFix
 import redis
 
-app = Flask(__name__, template_folder='./templates', static_folder='./assets/css')
+app = Flask(__name__, template_folder='./templates')
 app.wsgi_app = ProxyFix(app.wsgi_app, x_for=3)
 app.url_map.strict_slashes = False
 app.jinja_env.cache = {}
@@ -72,7 +72,7 @@ app.config['MAIL_PASSWORD'] = environ.get("MAIL_PASSWORD", "").strip()
 r=redis.Redis(host=environ.get("REDIS_URL", "redis://127.0.0.1"),  decode_responses=True, ssl_cert_reqs=None)
 
 # Bundling src/main.css files into dist/main.css'
-css = Bundle('main.css', output='dist/main.css', filters='postcss')
+css = Bundle('src/main.css', output='dist/main.css', filters='postcss')
 
 assets = Environment(app)
 assets.register('css', css)
