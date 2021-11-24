@@ -2,40 +2,40 @@
 
 	{% if v and request.path.startswith('/@') and v.admin_level == 0%}
 	{% if voted==1 %}
-	<li class="list-inline-item arrow-up hidden md:inline-block px-2 mx-0 comment-{{c.id}}-up active"></li>
+	<li class="list-inline-item arrow-up hidden md:block px-2 mx-0 comment-{{c.id}}-up active"></li>
 	{% endif %}
 	{% elif v %}
 
-	<li id="comment-{{c.id}}-up" tabindex="0" href="javascript:void(0)" onclick="vote('comment', '{{c.id}}', '1')" class="list-inline-item arrow-up upvote-button hidden md:inline-block px-2 mx-0 comment-{{c.id}}-up {% if voted==1 %}active{% endif %}"></li>
+	<li id="comment-{{c.id}}-up" tabindex="0" href="javascript:void(0)" onclick="vote('comment', '{{c.id}}', '1')" class="list-inline-item arrow-up upvote-button hidden md:block px-2 mx-0 comment-{{c.id}}-up {% if voted==1 %}active{% endif %}"></li>
 
 	{% else %}
-	<li id="comment-{{c.id}}-up" tabindex="0" href="javascript:void(0)" onclick="vote('comment', '{{c.id}}', '1')" class="list-inline-item arrow-up hidden md:inline-block mr-2" onclick="location.href='/login';">
+	<li id="comment-{{c.id}}-up" tabindex="0" href="javascript:void(0)" onclick="vote('comment', '{{c.id}}', '1')" class="list-inline-item arrow-up hidden md:block mr-2" onclick="location.href='/login';">
 	</li>
 
 	{% endif %}
 
-	<li class="list-inline-item hidden md:inline-block m-0">
+	<li class="list-inline-item hidden md:block m-0">
 		<span class="points" data-bs-toggle="tooltip" data-bs-placement="top" title="" data-bs-original-title="+{{ups}} | -{{downs}}"><span id="comment-score-{{c.id}}" class="score comment-score-{{c.id}} {% if voted==1 %}score-up{% elif voted==-1%}score-down{% endif %}">{{score}}</span></span>
 	</li>
 
 	{% if v and request.path.startswith('/@') and v.admin_level == 0 %}
 	{% if voted==-1 %}
-	<li class="list-inline-item arrow-down hidden md:inline-block px-2 mx-0 comment-{{c.id}}-down active"></li>
+	<li class="list-inline-item arrow-down hidden md:block px-2 mx-0 comment-{{c.id}}-down active"></li>
 	{% endif %}
 	{% elif v %}
-	<li {% if environ.get('DISABLE_DOWNVOTES') == '1' %}style="display:None!important"{% endif %} id="comment-{{c.id}}-down" tabindex="0" href="javascript:void(0)" onclick="vote('comment', '{{c.id}}', '-1')" class="list-inline-item arrow-down downvote-button hidden md:inline-block px-2 mx-0 comment-{{c.id}}-down {% if voted==-1 %}active{% endif %}"></li>
+	<li {% if environ.get('DISABLE_DOWNVOTES') == '1' %}style="display:None!important"{% endif %} id="comment-{{c.id}}-down" tabindex="0" href="javascript:void(0)" onclick="vote('comment', '{{c.id}}', '-1')" class="list-inline-item arrow-down downvote-button hidden md:block px-2 mx-0 comment-{{c.id}}-down {% if voted==-1 %}active{% endif %}"></li>
 
 	{% else %}
 
 	{% if environ.get('DISABLE_DOWNVOTES') != '1' %}
-	<li id="comment-{{c.id}}-down" tabindex="0" href="javascript:void(0)" onclick="vote('comment', '{{c.id}}', '-1')" class="list-inline-item arrow-down hidden md:inline-block" onclick="location.href='/login';">
+	<li id="comment-{{c.id}}-down" tabindex="0" href="javascript:void(0)" onclick="vote('comment', '{{c.id}}', '-1')" class="list-inline-item arrow-down hidden md:block" onclick="location.href='/login';">
 	</li>
 	{% endif %}
 
 	{% endif %}
 
 	{% if v %}
-	<li class="list-inline-item text-muted hidden md:inline-block">
+	<li class="list-inline-item text-muted hidden md:block">
 		<button href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#awardModal" onclick="awardModal('/comment/{{c.id}}/awards')">
 			<i class="fas fa-gift fa-fw mr-2" aria-hidden="true"></i>Give Award
 		</button>
@@ -141,7 +141,7 @@
 					</button>
 				</li>
 				<li class="hidden {% if not c.is_blocking %}md:block{% endif %} text-red-600">
-					<button class="dropdown-item block w-full text-left px-4 py-2 text-sm text-gray-200 bg-gradient-to-t hover:from-pink-800 hover:to-pink-700 hover:shadow-inner focus:shadow-inner focus:bg-gradient-to-t focus:from-pink-800 focus:to-pink-700" id="block-{{c.id}}" onclick="document.getElementById('block-{{c.id}}').classList.toggle('md:block');document.getElementById('prompt-{{c.id}}').classList.toggle('md:inline-block');">
+					<button class="dropdown-item block w-full text-left px-4 py-2 text-sm text-gray-200 bg-gradient-to-t hover:from-pink-800 hover:to-pink-700 hover:shadow-inner focus:shadow-inner focus:bg-gradient-to-t focus:from-pink-800 focus:to-pink-700" id="block-{{c.id}}" onclick="document.getElementById('block-{{c.id}}').classList.toggle('md:block');document.getElementById('prompt-{{c.id}}').classList.toggle('md:block');">
 						<i class="fas fa-eye-slash fa-sm fa-fw mr-4"></i>Block user
 					</button>
 				</li>
@@ -151,12 +151,12 @@
 				<li>
 					<hr class="mt-2 mb-1.5 border-t border-black h-1 shadow-inset-t-white-05"/>
 				</li>
-				<li id="unpin-{{c.id}}" class="hidden {% if c.is_pinned %}md:inline-block{% endif %}">
+				<li id="unpin-{{c.id}}" class="hidden {% if c.is_pinned %}md:block{% endif %}">
 					<button class="dropdown-item block w-full text-left px-4 py-2 text-sm text-gray-200 bg-gradient-to-t hover:from-pink-800 hover:to-pink-700 hover:shadow-inner focus:shadow-inner focus:bg-gradient-to-t focus:from-pink-800 focus:to-pink-700" data-bs-dismiss="modal" data-bs-target="#actionsModal-{{c.id}}" onclick="post_toast3('/pin_comment/{{c.id}}','pin-{{c.id}}','unpin-{{c.id}}')">
 						<i class="fas fa-thumbtack fa-rotate--45 fa-sm fa-fw mr-4"></i>Unpin
 					</button>
 				</li>
-				<li id="pin-{{c.id}}" class="hidden {% if not c.is_pinned %}md:inline-block{% endif %}">
+				<li id="pin-{{c.id}}" class="hidden {% if not c.is_pinned %}md:block{% endif %}">
 					<button class="dropdown-item block w-full text-left px-4 py-2 text-sm text-gray-200 bg-gradient-to-t hover:from-pink-800 hover:to-pink-700 hover:shadow-inner focus:shadow-inner focus:bg-gradient-to-t focus:from-pink-800 focus:to-pink-700" data-bs-dismiss="modal" data-bs-target="#actionsModal-{{c.id}}" onclick="post_toast3('/pin_comment/{{c.id}}','pin-{{c.id}}','unpin-{{c.id}}')">
 						<i class="fas fa-thumbtack fa-rotate--45 fa-sm fa-fw mr-4"></i>Pin
 					</button>
@@ -202,12 +202,12 @@
 				{% endif %}
 
 				{% if v and v.admin_level==6 and v.id != c.author_id %}
-				<li id="unban-{{c.id}}" class="hidden {% if c.author.is_suspended %}md:inline-block{% endif %}">
+				<li id="unban-{{c.id}}" class="hidden {% if c.author.is_suspended %}md:block{% endif %}">
 					<button class="dropdown-item block w-full text-left px-4 py-2 text-sm text-gray-200 bg-gradient-to-t hover:from-pink-800 hover:to-pink-700 hover:shadow-inner focus:shadow-inner focus:bg-gradient-to-t focus:from-pink-800 focus:to-pink-700" onclick="post_toast3('/unban_user/{{c.author_id}}','ban-{{c.id}}','unban-{{c.id}}')">
 						<i class="fas fa-user-slash text-green-600 fa-sm fa-fw mr-4"></i>Unban user
 					</button>
 				</li>
-				<li id="ban-{{c.id}}" class="hidden {% if not c.author.is_suspended %}md:inline-block{% endif %}">
+				<li id="ban-{{c.id}}" class="hidden {% if not c.author.is_suspended %}md:block{% endif %}">
 					<button class="dropdown-item block w-full text-left px-4 py-2 text-sm text-gray-200 bg-gradient-to-t hover:from-pink-800 hover:to-pink-700 hover:shadow-inner focus:shadow-inner focus:bg-gradient-to-t focus:from-pink-800 focus:to-pink-700" data-bs-toggle="modal" data-bs-target="#banModal" onclick="banModal('/comment/{{c.id}}', '{{ c.author.id }}', '{{c.author.username}}')">
 						<i class="fas fa-user-slash text-red-600 fa-sm fa-fw mr-4"></i>Ban user
 					</button>

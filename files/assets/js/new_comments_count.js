@@ -8,7 +8,7 @@ if (typeof showNewCommentCounts === 'undefined') {
 			if (newComments > 0) {
 				document.querySelectorAll(`#post-${postId} .new-comments`).forEach(elem => {
 					elem.textContent = ` (+${newComments})`
-					elem.classList.remove("d-none")
+					elem.classList.remove("hidden")
 				})
 			}
 		}

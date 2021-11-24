@@ -131,8 +131,8 @@ function post_toast2(url, button1, button2) {
 
 	xhr.send(form);
 
-	document.getElementById(button1).classList.toggle("d-none");
-	document.getElementById(button2).classList.toggle("d-none");
+	document.getElementById(button1).classList.toggle("hidden");
+	document.getElementById(button2).classList.toggle("hidden");
 }
 
 const popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'));
