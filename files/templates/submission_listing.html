@@ -26,16 +26,12 @@
 	</div>
 {% endif %}
 
-<li id="post-{{p.id}}" class="card{% if p.is_banned %} banned{% endif %}{% if p.deleted_utc %} deleted{% endif %}{% if p.stickied %} stickied{% endif %}{% if voted==1 %} upvoted{% elif voted==-1 %} downvoted{% endif %}{% if p.over_18 %} nsfw{% endif %}{% if p.award_count('stab') %} blood{% endif %}{% if p.award_count('upsidedown') %} upsidedown{% endif %}{% if p.award_count('haunt') %} haunt{% endif %}">
+<li id="post-{{p.id}}" class="{% if p.is_banned %} banned{% endif %}{% if p.deleted_utc %} deleted{% endif %}{% if p.stickied %} stickied{% endif %}{% if voted==1 %} upvoted{% elif voted==-1 %} downvoted{% endif %}{% if p.over_18 %} nsfw{% endif %}">
 
-	{% if p.award_count('upsidedown') %}
-		<div class="lights"></div>
-	{% endif %}
-
-	<div class="d-flex flex-row-reverse flex-md-row flex-nowrap justify-content-end">
+	<div class="flex flex-row-reverse md:flex-row flex-nowrap">
 
 		{% if not postembed %}
-			<div class="voting my-2 hidden d-md-block pr-2">
+			<div class="voting my-2 hidden md:block pr-2">
 				{% if v and request.path.startswith('/@') and not v.admin_level %}
 
 					{% if voted==1 %}
@@ -69,7 +65,7 @@
 			</div>
 		{% endif %}
 
-		<div class="card-header bg-transparent border-0 d-flex flex-row flex-nowrap pl-2 pl-md-0 p-0 mr-md-2">
+		<div class="card-header bg-transparent border-0 flex flex-row flex-nowrap pl-2 pl-md-0 p-0 mr-md-2">
 
 			<div style="z-index: 3;">
 				{% if p.club and not (v and v.paid_dues) %}
@@ -144,7 +140,7 @@
 
 <div class="card-footer md:hidden mt-2 {% if request.path == '/changelog' %}px-0{% endif %}">
 	<div class="post-actions">
-		<ul class="list-inline text-right d-flex">
+		<ul class="list-inline text-right flex">
 			<li class="list-inline-item mr-auto">
 				<a {% if v and v.newtab %}target="_blank"{% endif %} {% if v %}href="{{p.permalink}}"{% else %}href="/logged_out{{p.permalink}}"{% endif %}>
 					<i class="fas fa-comment-dots"></i>{{p.comment_count}}
@@ -324,7 +320,7 @@
 <div style="display:none" id="popover-{{p.id}}">
 	<div class="popover-user-profile" role="tooltip">
 	  <img class="w-100 h-64 object-cover" src="{{p.author.banner_url}}">
-	  <div class="d-flex align-items-end px-3 mt-n6 mb-3">
+	  <div class="flex align-items-end px-3 mt-n6 mb-3">
 		<img class="avatar-72 rounded img-thumbnail shadow-sm" src="{{p.author.profile_url}}">
 		<div class="px-3 text-truncate">
 		  <h5 class="text-truncate text-black">{{p.author.username}}</h5>
@@ -333,7 +329,7 @@
 	  <div class="px-3">
 		<span class="popover-bio text-black">{% if p.author.bio_html %}{{p.author.bio_html_eager | safe}}{% endif %}</span>
 	  </div>
-	  <div class="border-top d-flex align-items-center p-3 gap-3 smol">
+	  <div class="border-top flex align-items-center p-3 gap-3 smol">
 		<span>
 		  <strong class="text-black">{{p.author.post_count}}</strong>
 		  <span class="text-black">posts</span>
