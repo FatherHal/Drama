@@ -75,13 +75,13 @@
 						<img loading="lazy" src="{{p.thumb_url}}" class="post-img">
 					</a>
 				{% elif p.is_image %}
-					<a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#expandImageModal" data-bs-url="{{p.realurl(v)}}" onclick="expandDesktopImage('{{ p.realurl(v) }}')">
+					<button data-bs-toggle="modal" data-bs-target="#expandImageModal" data-bs-url="{{p.realurl(v)}}" onclick="expandDesktopImage('{{ p.realurl(v) }}')">
 						<img loading="lazy" src="{{p.thumb_url}}" class="post-img">
-					</a>
+					</button>
 				{% elif (p.url and p.url.lower().endswith('.mp4')) or (p.embed_url and "youtu" in p.domain) or (p.url and "streamable.com/e/" in p.url) %}
-					<a href="javascript:void(0)" onclick="document.getElementById('video-{{p.id}}').classList.toggle('hidden')">
+					<button onclick="document.getElementById('video-{{p.id}}').classList.toggle('hidden')">
 						<img loading="lazy" src="{{p.thumb_url}}" class="post-img">
-					</a>
+					</button>
 				{% else %}
 					<a {% if not v or v.newtabexternal %}target="_blank"{% endif %} rel="nofollow noopener noreferrer" href="{{p.realurl(v)}}">
 						<img loading="lazy" src="{{p.thumb_url}}" class="post-img">
@@ -138,7 +138,7 @@
 	</div>
 </div>
 
-<div class="card-footer md:hidden mt-2 {% if request.path == '/changelog' %}px-0{% endif %}">
+<!-- <div class="card-footer md:hidden mt-2 {% if request.path == '/changelog' %}px-0{% endif %}">
 	<div class="post-actions">
 		<ul class="list-inline text-right flex">
 			<li class="list-inline-item mr-auto">
@@ -206,7 +206,7 @@
 			{% endif %}
 		</ul>
 	</div>
-</div>
+</div> -->
 
 {% include "/modals/ModalSubmissionListingActions.html" %}
 
