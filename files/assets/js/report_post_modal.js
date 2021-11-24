@@ -1,6 +1,6 @@
 report_postModal = function(id) {
 
-	submitbutton=document.getElementById("reportPostButton");
+	const submitbutton = document.getElementById("reportPostButton");
 
 	submitbutton.onclick = function() {
 
