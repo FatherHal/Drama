@@ -77,6 +77,7 @@ css = Bundle('src/main.css', output='dist/main.css', filters='postcss')
 assets = Environment(app)
 assets.register('css', css)
 print(css.resolve_contents())
+print(css._get_filters())
 css.build()
 
 limiter = Limiter(
