@@ -73,6 +73,7 @@ r=redis.Redis(host=environ.get("REDIS_URL", "redis://127.0.0.1"),  decode_respon
 
 # Bundling src/main.css files into dist/main.css'
 css = Bundle('src/main.css', output='dist/main.css', filters='postcss')
+print(css.resolve_contents())
 
 assets = Environment(app)
 assets.register('css', css)
